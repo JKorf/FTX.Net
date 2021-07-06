@@ -17,8 +17,8 @@ namespace FTX.Net
 {
     public class FTXClient : RestClient
     {
-        private static FTXOptions defaultOptions = new FTXOptions();
-        private static FTXOptions DefaultOptions => defaultOptions.Copy<FTXOptions>();
+        private static FTXClientOptions defaultOptions = new FTXClientOptions();
+        private static FTXClientOptions DefaultOptions => defaultOptions.Copy<FTXClientOptions>();
 
         #region constructor/destructor
         /// <summary>
@@ -32,7 +32,7 @@ namespace FTX.Net
         /// Create a new instance of BitfinexClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public FTXClient(FTXOptions options) : base("FTX", options, options.ApiCredentials == null ? null : new FTXAuthenticationProvider(options.ApiCredentials))
+        public FTXClient(FTXClientOptions options) : base("FTX", options, options.ApiCredentials == null ? null : new FTXAuthenticationProvider(options.ApiCredentials))
         {
             if (options == null)
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
@@ -41,6 +41,14 @@ namespace FTX.Net
         #endregion
 
         #region methods
+        /// <summary>
+        /// set the default options used when creating a client without specifying options
+        /// </summary>
+        /// <param name="newDefaultOptions"></param>
+        public static void SetDefaultOptions(FTXClientOptions newDefaultOptions)
+        {
+            defaultOptions = newDefaultOptions;
+        }
 
         /// <summary>
         /// Get the list of supported symbols

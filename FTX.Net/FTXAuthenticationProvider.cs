@@ -48,5 +48,10 @@ namespace FTX.Net
 
             return result;
         }
+
+        public override string Sign(string toSign)
+        {
+            return ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant();
+        }
     }
 }
