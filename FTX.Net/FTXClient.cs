@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
@@ -15,9 +16,13 @@ using System.Threading.Tasks;
 
 namespace FTX.Net
 {
-    public class FTXClient : RestClient
+    public class FTXClient : RestClient, IExchangeClient
     {
         private static FTXClientOptions defaultOptions = new FTXClientOptions();
+
+        public event Action<ICommonOrderId> OnOrderPlaced;
+        public event Action<ICommonOrderId> OnOrderCanceled;
+
         private static FTXClientOptions DefaultOptions => defaultOptions.Copy<FTXClientOptions>();
 
         #region constructor/destructor
@@ -117,6 +122,78 @@ namespace FTX.Net
 
             return new ServerError(error["error"].ToString());
         }
+
+        #region common interface
+        public string GetSymbolName(string baseAsset, string quoteAsset)
+        {
+            return baseAsset + "/" + quoteAsset;
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonSymbol>>> GetSymbolsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonTicker>>> GetTickersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<ICommonTicker>> GetTickerAsync(string symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonKline>>> GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<ICommonOrderBook>> GetOrderBookAsync(string symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> GetRecentTradesAsync(string symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<ICommonOrderId>> PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<ICommonOrder>> GetOrderAsync(string orderId, string? symbol = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonTrade>>> GetTradesAsync(string orderId, string? symbol = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonOrder>>> GetOpenOrdersAsync(string? symbol = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonOrder>>> GetClosedOrdersAsync(string? symbol = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<ICommonOrderId>> CancelOrderAsync(string orderId, string? symbol = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WebCallResult<IEnumerable<ICommonBalance>>> GetBalancesAsync(string? accountId = null)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
         #endregion
     }
 }

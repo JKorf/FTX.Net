@@ -1,7 +1,9 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
+using FTX.Net.Objects;
 using FTX.Net.Objects.SocketObjects;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,7 @@ namespace FTX.Net
             SendPeriodic(TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
 
             AddGenericHandler("PongHandler", (a) => { });
+            AddGenericHandler("InfoHandler", InfoHandler);
         }
         #endregion
 
@@ -67,9 +70,9 @@ namespace FTX.Net
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="handler">The handler for the data</param>
         /// <returns></returns>
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<FTXStreamTicker>> handler)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<FTXOrder>> handler)
         {
-            return await SubscribeAsync(new SubscribeRequest("fills", null), true, handler).ConfigureAwait(false);
+            return await SubscribeAsync(new SubscribeRequest("orders", null), true, handler).ConfigureAwait(false);
         }
 
         public async Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(object request, bool authenticated, Action<DataEvent<T>> handler)
@@ -90,6 +93,16 @@ namespace FTX.Net
                 handler?.Invoke(data.As(deserializeResult.Data));
             });
             return await Subscribe(request, null, authenticated, internalHandler).ConfigureAwait(false);
+        }
+
+        private void InfoHandler(MessageEvent messageEvent)
+        {
+            var code = messageEvent.JsonData["code"];
+            if (code?.ToString() == "20001")
+            {
+                log.Write(LogLevel.Information, $"Code {code} received. Reconnecting/Resubscribing socket.");
+                messageEvent.Connection.Socket.Close(); // Closing it via socket will automatically reconnect
+            }
         }
 
         protected override async Task<CallResult<bool>> AuthenticateSocket(SocketConnection socketConnection)
@@ -130,15 +143,30 @@ namespace FTX.Net
             var channel = data["channel"];
             var market = data["market"];
             var type = data["type"];
-            if (channel == null)
-                return false;
 
-            if (channel.ToString() != ftxRequest.Channel || market?.ToString() != ftxRequest.Market)
+            if (channel?.ToString() != ftxRequest.Channel || market?.ToString() != ftxRequest.Market)
+            {
+                // Error response don't contain channel/market so this message might still be for this subscription if the subscription resulted in an error
+                // We can only check this if the market is not null
+                if(type?.ToString() == "error" && ftxRequest.Market != null)
+                {
+                    var message = data["msg"];
+                    if(message != null && message.ToString().ToLowerInvariant().Contains(ftxRequest.Market.ToLowerInvariant()))
+                    {
+                        // It is an error and the error message contains the market we sent, assuming its for this request
+                        var code = data["code"];
+                        var errorCode = code == null ? 0 : (int)code;
+                        callResult = new CallResult<object>(null, new ServerError(errorCode, message.ToString()));
+                        return true;
+                    }
+                }
+
                 return false;
+            }
 
             if(type == null)
             {
-                // ?
+                log.Write(LogLevel.Warning, "Received subscribe response without type. Data received: " + data);
                 return true;
             }
 
@@ -148,7 +176,7 @@ namespace FTX.Net
                 return true;
             }
 
-            callResult = new CallResult<object>(null, new ServerError("Unexpected suscribe request answer: " + type));
+            callResult = new CallResult<object>(null, new ServerError("Unexpected subscribe request answer: " + type));
             return true;
         }
 
@@ -168,6 +196,8 @@ namespace FTX.Net
                 return false;
 
             if (identifier == "PongHandler" && type.ToString() == "pong")
+                return true;
+            if (identifier == "InfoHandler" && type.ToString() == "info")
                 return true;
 
             return false;

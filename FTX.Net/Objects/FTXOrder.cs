@@ -11,6 +11,10 @@ namespace FTX.Net.Objects
     public class FTXOrder
     {
         /// <summary>
+        /// Id of the order
+        /// </summary>
+        public long Id { get; set; }
+        /// <summary>
         /// When the order was created
         /// </summary>
         public DateTime CreatedAt { get; set; }
@@ -69,5 +73,10 @@ namespace FTX.Net.Objects
         /// Client id
         /// </summary>
         public string? ClientId { get; set; }
+        /// <summary>
+        /// Average execution price
+        /// </summary>
+        [JsonProperty("avgFillPrice")]
+        public decimal? AverageFillPrice { get; set; }
     }
 }

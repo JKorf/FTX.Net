@@ -17,7 +17,7 @@ namespace FTX.Net
     {
         public FTXSocketClientOptions(): base("wss://ftx.com/ws/")
         {
-
+            SocketSubscriptionsCombineTarget = 10;
         }
     }
 }
