@@ -26,11 +26,11 @@ namespace FTX.Net.Objects
         /// <summary>
         /// The future the order is for
         /// </summary>
-        public string Future { get; set; }
+        public string Future { get; set; } = string.Empty;
         /// <summary>
         /// The market to order is for
         /// </summary>
-        public string Market { get; set; }
+        public string Market { get; set; } = string.Empty;
         /// <summary>
         /// The price of the order
         /// </summary>

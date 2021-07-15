@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Objects
+﻿namespace FTX.Net.Objects
 {
     /// <summary>
     /// Balance info
@@ -12,7 +8,7 @@ namespace FTX.Net.Objects
         /// <summary>
         /// The coin the balance info is for
         /// </summary>
-        public string Coin { get; set; }
+        public string Coin { get; set; } = string.Empty;
         /// <summary>
         /// Amount free
         /// </summary>

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Objects
+﻿namespace FTX.Net.Objects
 {
     internal class FTXResult<T>
     {
         public bool Success { get; set; }
-        public T Result { get; set; }
-        public string Error { get; set; }
+        public T Result { get; set; } = default!;
+        public string Error { get; set; } = string.Empty;
     }
 }

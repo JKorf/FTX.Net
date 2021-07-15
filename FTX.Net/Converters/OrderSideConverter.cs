@@ -1,8 +1,6 @@
 ﻿using CryptoExchange.Net.Converters;
 using FTX.Net.Enums;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FTX.Net.Converters
 {

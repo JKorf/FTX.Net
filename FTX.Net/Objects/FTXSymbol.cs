@@ -1,9 +1,6 @@
 ﻿using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FTX.Net.Objects
 {
@@ -15,7 +12,7 @@ namespace FTX.Net.Objects
         /// <summary>
         /// The name of the symbol
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// The base currency
         /// </summary>
@@ -32,7 +29,7 @@ namespace FTX.Net.Objects
         /// <summary>
         /// The underlying asset
         /// </summary>
-        public string Underlying { get; set; }
+        public string Underlying { get; set; } = string.Empty;
         /// <summary>
         /// Whether the symbol is enabled or not
         /// </summary>

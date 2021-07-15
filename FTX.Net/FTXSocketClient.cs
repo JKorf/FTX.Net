@@ -6,8 +6,6 @@ using FTX.Net.Objects.SocketObjects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FTX.Net

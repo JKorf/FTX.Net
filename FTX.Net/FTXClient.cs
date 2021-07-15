@@ -1,5 +1,4 @@
 ﻿using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
@@ -20,8 +19,8 @@ namespace FTX.Net
     {
         private static FTXClientOptions defaultOptions = new FTXClientOptions();
 
-        public event Action<ICommonOrderId> OnOrderPlaced;
-        public event Action<ICommonOrderId> OnOrderCanceled;
+        public event Action<ICommonOrderId>? OnOrderPlaced;
+        public event Action<ICommonOrderId>? OnOrderCanceled;
 
         private static FTXClientOptions DefaultOptions => defaultOptions.Copy<FTXClientOptions>();
 
