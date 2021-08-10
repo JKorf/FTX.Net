@@ -38,18 +38,22 @@ namespace FTX.Net.Objects
         /// <summary>
         /// The remaining quantity
         /// </summary>
+        [JsonProperty("remainingSize")]
         public decimal RemainingQuantity { get; set; }
         /// <summary>
         /// The side
         /// </summary>
+        [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
         /// <summary>
         /// The order type
         /// </summary>
+        [JsonConverter(typeof(OrderTypeConverter))]
         public OrderType Type { get; set; }
         /// <summary>
         /// The total quantity of the order
         /// </summary>
+        [JsonProperty("size")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// The status of the order

@@ -1,9 +1,13 @@
 ﻿namespace FTX.Net.Objects
 {
-    internal class FTXResult<T>
+    internal class FTXResult
     {
         public bool Success { get; set; }
-        public T Result { get; set; } = default!;
         public string Error { get; set; } = string.Empty;
+    }
+
+    internal class FTXResult<T>: FTXResult
+    {
+        public T Result { get; set; } = default!;
     }
 }

@@ -4,6 +4,8 @@ namespace FTX.Net
 {
     public class FTXClientOptions : RestClientOptions
     {
+        public string AffiliateCode { get; set; } = "jkorf-net";
+
         public FTXClientOptions(): base("https://ftx.com/api")
         {
 

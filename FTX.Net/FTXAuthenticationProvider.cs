@@ -38,7 +38,7 @@ namespace FTX.Net
             result.Add("FTX-TS", timestamp.ToString());
             var requestUri = new Uri(uri);
             var toSign = timestamp + method.ToString() + requestUri.PathAndQuery;
-            if(method == HttpMethod.Post)
+            if(method == HttpMethod.Post || method == HttpMethod.Delete)
             {
                 toSign += JsonConvert.SerializeObject(parameters.OrderBy(p => p.Key).ToDictionary(p => p.Key, p => p.Value));
             }
