@@ -3,9 +3,12 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using FTX.Net.Objects;
 using FTX.Net.Objects.SocketObjects;
+using FTX.Net.Objects.Spot;
+using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FTX.Net
@@ -63,9 +66,61 @@ namespace FTX.Net
         }
 
         /// <summary>
-        /// Subscribes to ticker updates for a symbol
+        /// Subscribes to trade updates for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<FTXTrade>>> handler)
+        {
+            return await SubscribeAsync(new SubscribeRequest("trades", symbol), false, handler).ConfigureAwait(false);
+        }
+
+
+        /// <summary>
+        /// Subscribes to order book updates for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<FTXStreamOrderBook>> handler)
+        {
+            return await SubscribeAsync(new SubscribeRequest("orderbook", symbol), false, handler).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Subscribes to order book updates for a symbol
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToGroupedOrderBookUpdatesAsync(string symbol, int grouping, Action<DataEvent<FTXStreamOrderBook>> handler)
+        {
+            var innerHandler = new Action<DataEvent<JToken>>((data) =>
+            {
+                var actualData = data.Data["data"];
+                if (actualData == null)
+                    return;
+
+                var deserializeResult = Deserialize<FTXStreamOrderBook>(actualData);
+                if (!deserializeResult)
+                {
+                    // log
+                    return;
+                }
+
+                var resultObject = deserializeResult.Data;
+                resultObject.Action = data.Data["type"].ToString();
+                resultObject.Time = DateTime.UtcNow;
+
+                handler?.Invoke(data.As(resultObject));
+            });
+            return await SubscribeAsync(new GroupedOrderBookSubscribeRequest("orderbookGrouped", symbol, grouping), null, false, innerHandler).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Subscribes to order updates
+        /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <returns></returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEvent<FTXOrder>> handler)
@@ -73,7 +128,28 @@ namespace FTX.Net
             return await SubscribeAsync(new SubscribeRequest("orders", null), true, handler).ConfigureAwait(false);
         }
 
-        public async Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(object request, bool authenticated, Action<DataEvent<T>> handler)
+        /// <summary>
+        /// Subscribes to trade updates
+        /// </summary>
+        /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<FTXUserTrade>> handler)
+        {
+            return await SubscribeAsync(new SubscribeRequest("fills", null), true, handler).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Subscribes to FTX-pay updates
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToFTXPayUpdatesAsync(Action<DataEvent<FTXUserTrade>> handler)
+        {
+            return await SubscribeAsync(new SubscribeRequest("ftxpay", null), true, handler).ConfigureAwait(false);
+        }
+
+        private async Task<CallResult<UpdateSubscription>> SubscribeAsync<T>(object request, bool authenticated, Action<DataEvent<T>> handler)
         {
             var internalHandler = new Action<DataEvent<JToken>>(data =>
             {

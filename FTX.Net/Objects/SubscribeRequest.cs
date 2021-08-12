@@ -8,12 +8,24 @@ namespace FTX.Net.Objects.SocketObjects
         public string Channel { get; set; }
 
         [JsonProperty("market")]
-        public string Market { get; set; }
+        public string? Market { get; set; }
 
-        public SubscribeRequest(string channel, string symbol): base("subscribe")
+        public SubscribeRequest(string channel, string? symbol): base("subscribe")
         {
             Channel = channel;
             Market = symbol;
         }
     }
+
+    public class GroupedOrderBookSubscribeRequest : SubscribeRequest 
+    {
+        [JsonProperty("grouping")]
+        public int Grouping { get; set; }
+
+        public GroupedOrderBookSubscribeRequest(string channel, string? symbol, int grouping) : base(channel, symbol)
+        {
+            Grouping = grouping;
+        }
+    }
+
 }

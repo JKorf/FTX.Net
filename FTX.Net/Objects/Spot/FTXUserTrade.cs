@@ -79,6 +79,6 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Type
         /// </summary>
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
     }
 }
