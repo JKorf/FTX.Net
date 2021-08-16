@@ -6,10 +6,13 @@ using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
 using FTX.Net.Objects;
+using FTX.Net.Objects.Convert;
 using FTX.Net.Objects.Futures;
 using FTX.Net.Objects.LeveragedTokens;
 using FTX.Net.Objects.Options;
 using FTX.Net.Objects.Spot;
+using FTX.Net.Objects.Staking;
+using FTX.Net.SubClients;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -33,6 +36,13 @@ namespace FTX.Net
 
         private string _affiliateCode;
 
+        public FTXSubClientConvert Convert { get; }
+        public FTXSubClientOptions Options { get; }
+        public FTXSubClientLeveragedTokens LeveragedTokens { get; }
+        public FTXSubClientStaking Staking { get; }
+        public FTXSubClientMargin Margin { get; }
+        public FTXSubClientNFT NFT { get; }
+
         #region constructor/destructor
         /// <summary>
         /// Create a new instance of BitfinexClient using the default options
@@ -51,6 +61,13 @@ namespace FTX.Net
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
 
             _affiliateCode = options.AffiliateCode;
+
+            Convert = new FTXSubClientConvert(this);
+            Options = new FTXSubClientOptions(this);
+            Margin = new FTXSubClientMargin(this);
+            Staking = new FTXSubClientStaking(this);
+            LeveragedTokens = new FTXSubClientLeveragedTokens(this);
+            NFT = new FTXSubClientNFT(this);
         }
         #endregion
 
@@ -694,327 +711,26 @@ namespace FTX.Net
 
         #endregion
 
-        #region Leveraged tokens
+        #region Spot Margin
 
-        /// <summary>
-        /// Get list of funding payments
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLeveragedToken>>> GetLeveragedTokensAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXLeveragedToken>>(GetUri("lt/tokens"), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get info on a token
-        /// </summary>
-        /// <param name="tokenName">Name of the token</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXLeveragedToken>> GetLeveragedTokenAsync(string tokenName, CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXLeveragedToken>(GetUri("lt/" + tokenName), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get token balances
-        /// </summary>
-        /// <param name="tokenName">Name of the token</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenBalance>>> GetLeveragedTokenBalancesAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXLeveragedTokenBalance>>(GetUri("lt/balances"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get creation requests
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenCreationRequest>>> GetLeveragedTokenCreationRequestsAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXLeveragedTokenCreationRequest>>(GetUri("lt/creations"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Request leveraged token creation
-        /// </summary>
-        /// <param name="tokenName">Name of the token</param>
-        /// <param name="size">Number of tokens to create</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenCreationRequest>>> RequestLeveragedTokenCreationAsync(string tokenName, decimal size, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddParameter("size", size.ToString(CultureInfo.InvariantCulture));
-            return await SendFTXRequest<IEnumerable<FTXLeveragedTokenCreationRequest>>(GetUri($"lt/{tokenName}/create"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get redemption requests
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenRedemption>>> GetLeveragedTokenRedemptionRequestsAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXLeveragedTokenRedemption>>(GetUri("lt/redemptions"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Request leveraged token creation
-        /// </summary>
-        /// <param name="tokenName">Name of the token</param>
-        /// <param name="size">Number of tokens to create</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenRedeemRequest>>> RequestLeveragedTokenRedemptionAsync(string tokenName, decimal size, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddParameter("size", size.ToString(CultureInfo.InvariantCulture));
-            return await SendFTXRequest<IEnumerable<FTXLeveragedTokenRedeemRequest>>(GetUri($"lt/{tokenName}/redeem"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        ///Provides information about the most recent rebalance of each ETF.
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<Dictionary<string, FTXETFRebalanceEntry>>> GetETFRebalanceInfoAsync(CancellationToken ct = default)
-        {
-            // This call returns internal data with additional quotes which make direct deserialization fail. So first get the string value and then deserialize that
-            var data = await SendFTXRequest<string>(GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-            if (!data)
-                return data.As<Dictionary<string, FTXETFRebalanceEntry>>(null);
-            
-            var deserializeResult = Deserialize<Dictionary<string, FTXETFRebalanceEntry>>(data.Data);
-            if(!deserializeResult)
-                return data.As<Dictionary<string, FTXETFRebalanceEntry>>(null);
-
-            return data.As(deserializeResult.Data);
-        }
+        // TODO
 
         #endregion
 
-        #region Options
+        #region NFTs
 
-        /// <summary>
-        /// Get list of quote requests
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetQuoteRequestsAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXQuoteRequest>>(GetUri("options/requests"), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get list of quote requests for the user
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetUserQuoteRequestsAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXQuoteRequest>>(GetUri("options/my_requests"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-
-        /// <summary>
-        /// Create quote request
-        /// </summary>
-        /// <param name="underlying">Underlying</param>
-        /// <param name="type">Type</param>
-        /// <param name="strike">Strike</param>
-        /// <param name="expiry">Must be in the future and at 03:00 UTC.</param>
-        /// <param name="side">Side</param>
-        /// <param name="size">Size</param>
-        /// <param name="limitPrice">Limit price</param>
-        /// <param name="hideLimitPrice">Whether or not to hide your limit price from potential quoters, default true</param>
-        /// <param name="requestExpiry">Request expiry</param>
-        /// <param name="counterPartyId">When specified, makes the request private to the specified counterparty</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.AddParameter("underlying", underlying);
-            parameters.AddParameter("type", JsonConvert.SerializeObject(type, new OptionTypeConverter(false)));
-            parameters.AddParameter("strike", strike.ToString(CultureInfo.InvariantCulture));
-            parameters.AddParameter("expiry", JsonConvert.SerializeObject(expiry, new TimestampConverter()));
-            parameters.AddParameter("side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)));
-            parameters.AddParameter("size", size.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("limitPrice", limitPrice?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("hideLimitPrice", hideLimitPrice);
-            parameters.AddOptionalParameter("requestExpiry", requestExpiry.HasValue ? JsonConvert.SerializeObject(expiry, new TimestampConverter()): null);
-            parameters.AddOptionalParameter("counterPartyId", counterPartyId);
-            return await SendFTXRequest<FTXUserQuoteRequest>(GetUri("options/requests"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Cancel a quote request
-        /// </summary>
-        /// <param name="requestId">Request id to cancel</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXUserQuoteRequest>> CancelQuoteRequestAsync(long requestId, CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXUserQuoteRequest>(GetUri("options/requests/" + requestId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get quotes for your quote request
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetQuotesForQuoteRequestAsync(long requestId, CancellationToken ct = default)
-        {
-            return await SendFTXRequest< IEnumerable<FTXQuoteRequestQuote>>(GetUri($"options/requests/{requestId}/quotes"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Create quote
-        /// </summary>
-        /// <param name="requestId">Request id</param>
-        /// <param name="price">Price of the quote</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteAsync(long requestId, decimal price, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            parameters.Add("price", price.ToString(CultureInfo.InvariantCulture));
-            return await SendFTXRequest<FTXUserQuoteRequest>(GetUri($"options/requests/{requestId}/quotes"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get quotes for user
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetUserQuotesAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXQuoteRequestQuote>>(GetUri($"options/my_quotes"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-
-        /// <summary>
-        /// Cancel a quote
-        /// </summary>
-        /// <param name="quoteId">Quote id</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXQuoteRequestQuote>> CancelQuoteAsync(long quoteId, CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXQuoteRequestQuote>(GetUri($"options/quotes/" + quoteId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Accept options quote
-        /// </summary>
-        /// <param name="quoteId">Quote id</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXQuoteRequestQuote>> AcceptQuoteAsync(long quoteId, CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXQuoteRequestQuote>(GetUri($"options/quotes/{quoteId}/accept"), HttpMethod.Post, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get account options info
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXOptionsAccountInfo>> GetAccountOptionsInfoAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXOptionsAccountInfo>(GetUri($"options/account_info"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get options positions
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<IEnumerable<FTXOptionsPosition>>(GetUri($"options/positions"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get public options positions
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOptionTrade>>> GetOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXOptionTrade>>(GetUri($"options/trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get options fills
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXUserOptionTrade>>> GetUserOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXUserOptionTrade>> (GetUri($"options/fills"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get 24H option volume
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXOptionsVolume>> GetOptionVolumeAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXOptionsVolume>(GetUri($"stats/24h_options_volume"), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get historical option volume
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOptionsHistoricalVolume>>> GetOptionsHistoricalVolumeAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXOptionsHistoricalVolume>>(GetUri($"options/historical_volumes/BTC"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get open interest
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXOptionOpenInterest>> GetOptionsOpenInterestAsync(CancellationToken ct = default)
-        {
-            return await SendFTXRequest<FTXOptionOpenInterest>(GetUri($"options/open_interest/BTC"), HttpMethod.Get, ct).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get open interest history
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOptionHistoricalOpenInterest>>> GetOptionHistoricalOpenInterestAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
-        {
-            var parameters = new Dictionary<string, object>();
-            AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXOptionHistoricalOpenInterest>>(GetUri($"options/historical_open_interest/BTC"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
-        }
+        // TODO
 
         #endregion
 
-        #region Staking
+        #region FTX pay
+
+        // TODO
 
         #endregion
 
         #region private
-        private async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null) where T : class
+        internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null) where T : class
         {
             var result = await SendRequestAsync<FTXResult<T>>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer).ConfigureAwait(false);
             if (result)
@@ -1023,7 +739,7 @@ namespace FTX.Net
             return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
         }
 
-        private async Task<WebCallResult> SendFTXRequest(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null)
+        internal async Task<WebCallResult> SendFTXRequest(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null)
         {
             var result = await SendRequestAsync<FTXResult>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer).ConfigureAwait(false);
             if (result)
@@ -1032,8 +748,12 @@ namespace FTX.Net
             return WebCallResult.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
         }
 
+        internal CallResult<T> DeserializeInternal<T>(string data)
+        {
+            return base.Deserialize<T>(data);
+        }
 
-        private Uri GetUri(string path)
+        internal Uri GetUri(string path)
         {
             return new Uri(BaseAddress + path);
         }
@@ -1046,7 +766,7 @@ namespace FTX.Net
             return new ServerError(error["error"].ToString());
         }
 
-        private void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
+        internal void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
         {
             parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampConverter()));
             parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampConverter()));

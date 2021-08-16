@@ -5,18 +5,26 @@ using System.Text;
 namespace FTX.Net.Enums
 {
     /// <summary>
-    /// Deposit status
+    /// Withdraw status
     /// </summary>
-    public enum DepositStatus
+    public enum NFTWithdrawalStatus
     {
         /// <summary>
-        /// Confirmed
+        /// Requested
         /// </summary>
-        Confirmed,
+        Requested,
         /// <summary>
-        /// Unconfirmed
+        /// Processing
         /// </summary>
-        Unconfirmed,
+        Processing,
+        /// <summary>
+        /// Sent
+        /// </summary>
+        Sent,
+        /// <summary>
+        /// Completed
+        /// </summary>
+        Completed,
         /// <summary>
         /// Cancelled
         /// </summary>

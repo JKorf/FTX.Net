@@ -22,7 +22,7 @@ namespace FTX.Net.Objects
 
     public class FTXSymbolOrderBookOptions: OrderBookOptions
     {
-        public int Grouping { get; set; }
+        public int? Grouping { get; set; } = null;
 
         public FTXSymbolOrderBookOptions(int? grouping = null): base("FTX", false, false)
         {

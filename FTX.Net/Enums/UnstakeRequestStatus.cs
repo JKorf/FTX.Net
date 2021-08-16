@@ -5,21 +5,21 @@ using System.Text;
 namespace FTX.Net.Enums
 {
     /// <summary>
-    /// Deposit status
+    /// Unstake request status
     /// </summary>
-    public enum DepositStatus
+    public enum UnstakeRequestStatus
     {
         /// <summary>
-        /// Confirmed
+        /// Pending
         /// </summary>
-        Confirmed,
-        /// <summary>
-        /// Unconfirmed
-        /// </summary>
-        Unconfirmed,
+        Pending,
         /// <summary>
         /// Cancelled
         /// </summary>
-        Cancelled
+        Cancelled,
+        /// <summary>
+        /// Processed
+        /// </summary>
+        Processed
     }
 }
