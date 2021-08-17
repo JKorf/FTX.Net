@@ -5,25 +5,17 @@ using System.Text;
 namespace FTX.Net.Enums
 {
     /// <summary>
-    /// Withdrawal status
+    /// FTXPay order status
     /// </summary>
-    public enum WithdrawalStatus
+    public enum FTXPayOrderStatus
     {
-        /// <summary>
-        /// Requested
-        /// </summary>
-        Requested,
-        /// <summary>
-        /// Processing
-        /// </summary>
-        Processing,
         /// <summary>
         /// Complete
         /// </summary>
         Complete,
         /// <summary>
-        /// Cancelled
+        /// Incomplete
         /// </summary>
-        Cancelled
+        Incomplete
     }
 }

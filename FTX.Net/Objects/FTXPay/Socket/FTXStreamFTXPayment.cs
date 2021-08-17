@@ -12,14 +12,14 @@ namespace FTX.Net.Objects.FTXPay.Socket
         /// <summary>
         /// Payment info
         /// </summary>
-        public FTXAppPayment Payment { get; set; }
+        public FTXAppPayment Payment { get; set; } = default!;
         /// <summary>
         /// App details
         /// </summary>
-        public FTXAppDetails App { get; set; }
+        public FTXAppDetails App { get; set; } = default!;
         /// <summary>
         /// Status
         /// </summary>
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
     }
 }

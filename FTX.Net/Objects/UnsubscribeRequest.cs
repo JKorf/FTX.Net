@@ -2,7 +2,7 @@
 
 namespace FTX.Net.Objects.SocketObjects
 {
-    public class UnsubscribeRequest: SocketRequest
+    internal class UnsubscribeRequest: SocketRequest
     {
         [JsonProperty("channel")]
         public string Channel { get; set; }

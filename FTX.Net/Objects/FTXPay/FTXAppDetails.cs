@@ -64,8 +64,12 @@ namespace FTX.Net.Objects.FTXPay
         [JsonProperty("numPayments")]
         public int NumberOfPayments { get; set; }
         /// <summary>
+        /// Exists
+        /// </summary>
+        public bool Exists { get; set; } = true;
+        /// <summary>
         /// Payments
         /// </summary>
-        public IEnumerable<FTXAppPayment> FTXAppPayment { get; set; } = Array.Empty<FTXAppPayment>();
+        public IEnumerable<FTXAppPayment> Payments { get; set; } = Array.Empty<FTXAppPayment>();
     }
 }

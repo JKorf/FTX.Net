@@ -2,7 +2,7 @@
 
 namespace FTX.Net.Objects.SocketObjects
 {
-    public class SocketRequest
+    internal class SocketRequest
     {
         [JsonProperty("op")]
         public string Operation { get; set; }

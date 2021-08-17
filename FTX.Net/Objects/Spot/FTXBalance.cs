@@ -1,14 +1,18 @@
-﻿namespace FTX.Net.Objects
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
+
+namespace FTX.Net.Objects
 {
     /// <summary>
     /// Balance info
     /// </summary>
-    public class FTXBalance
+    public class FTXBalance: ICommonBalance
     {
         /// <summary>
-        /// The coin the balance info is for
+        /// The asset the balance info is for
         /// </summary>
-        public string Coin { get; set; } = string.Empty;
+        [JsonProperty("coin")]
+        public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Amount free
         /// </summary>
@@ -29,5 +33,11 @@
         /// Amount available without borrowing
         /// </summary>
         public decimal AvailableWithoutBorrow { get; set; }
+
+        string ICommonBalance.CommonAsset => Asset;
+
+        decimal ICommonBalance.CommonAvailable => Free;
+
+        decimal ICommonBalance.CommonTotal => Total;
     }
 }

@@ -27,7 +27,7 @@ namespace FTX.Net.Objects.Staking
         /// <summary>
         /// Status
         /// </summary>
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         /// <summary>
         /// Timestamp
         /// </summary>

@@ -25,23 +25,54 @@ using System.Threading.Tasks;
 
 namespace FTX.Net
 {
+    /// <summary>
+    /// Client for interacting with the FTX API
+    /// </summary>
     public class FTXClient : RestClient, IExchangeClient
     {
         private static FTXClientOptions defaultOptions = new FTXClientOptions();
 
+        /// <inheritDoc />
         public event Action<ICommonOrderId>? OnOrderPlaced;
+        /// <inheritDoc />
         public event Action<ICommonOrderId>? OnOrderCanceled;
 
         private static FTXClientOptions DefaultOptions => defaultOptions.Copy<FTXClientOptions>();
 
         private string _affiliateCode;
 
+        /// <summary>
+        /// Convert endpoints
+        /// </summary>
         public FTXSubClientConvert Convert { get; }
+        /// <summary>
+        /// Options endpoints
+        /// </summary>
         public FTXSubClientOptions Options { get; }
+        /// <summary>
+        /// Leveraged token endpoints
+        /// </summary>
         public FTXSubClientLeveragedTokens LeveragedTokens { get; }
+        /// <summary>
+        /// Staking endpoints
+        /// </summary>
         public FTXSubClientStaking Staking { get; }
+        /// <summary>
+        /// Spot margin endpoints
+        /// </summary>
         public FTXSubClientMargin Margin { get; }
+        /// <summary>
+        /// NFT endpoints
+        /// </summary>
         public FTXSubClientNFT NFT { get; }
+        /// <summary>
+        /// FTXPay endpoints
+        /// </summary>
+        public FTXSubClientPay FTXPay { get; }
+        /// <summary>
+        /// Subaccount endpoints
+        /// </summary>
+        public FTXSubClientSubaccounts Subaccounts { get; }
 
         #region constructor/destructor
         /// <summary>
@@ -68,6 +99,8 @@ namespace FTX.Net
             Staking = new FTXSubClientStaking(this);
             LeveragedTokens = new FTXSubClientLeveragedTokens(this);
             NFT = new FTXSubClientNFT(this);
+            FTXPay = new FTXSubClientPay(this);
+            Subaccounts = new FTXSubClientSubaccounts(this);
         }
         #endregion
 
@@ -94,13 +127,14 @@ namespace FTX.Net
         }
 
         /// <summary>
-        /// Get market info
+        /// Get symbol info
         /// </summary>
+        /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXSymbol>> GetSymbolAsync(string market, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXSymbol>> GetSymbolAsync(string symbol, CancellationToken ct = default)
         {
-            return await SendFTXRequest<FTXSymbol>(GetUri("markets/" + market), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await SendFTXRequest<FTXSymbol>(GetUri("markets/" + symbol), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -194,7 +228,7 @@ namespace FTX.Net
         #region Wallet
 
         /// <summary>
-        /// Get the list asset
+        /// Get the list of assets
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -226,7 +260,7 @@ namespace FTX.Net
         /// <summary>
         /// Get deposit address for an asset
         /// </summary>
-        /// <param name="asset">Asset to get address for/param>
+        /// <param name="asset">Asset to get address for</param>
         /// <param name="network">The network to use</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -275,6 +309,7 @@ namespace FTX.Net
         /// <param name="network">Network to us</param>
         /// <param name="password">Withdrawal password if required</param>
         /// <param name="code">Two factor authentication code if required</param>
+        /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<FTXWithdrawal>> WithdrawAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? password = null, string? code = null, CancellationToken ct = default)
         {
@@ -306,6 +341,10 @@ namespace FTX.Net
         /// <summary>
         /// Get withdrawal fees
         /// </summary>
+        /// <param name="asset">Asset</param>
+        /// <param name="quantity">Quantity</param>
+        /// <param name="address">Address</param>
+        /// <param name="tag">Tag</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, CancellationToken ct = default)
@@ -402,7 +441,10 @@ namespace FTX.Net
             parameters.AddOptionalParameter("rejectOnPriceBand", rejectOnPriceBand);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
-            return await SendFTXRequest<FTXOrder>(GetUri("orders"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            var result = await SendFTXRequest<FTXOrder>(GetUri("orders"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            if (result)
+                OnOrderPlaced?.Invoke(result.Data);
+            return result;
         }
 
         /// <summary>
@@ -478,10 +520,11 @@ namespace FTX.Net
         /// <summary>
         /// Modify a trigger order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
         /// </summary>
-        /// <param name="orderId">Id of order to modify</param>
-        /// <param name="price">New price of the order</param>
-        /// <param name="quantity">New quantity of the order</param>
-        /// <param name="clientOrderID">New client order id</param>
+        /// <param name="orderId">Order id</param>
+        /// <param name="quantity">New quantity</param>
+        /// <param name="triggerPrice">New trigger price</param>
+        /// <param name="orderPrice">New order price</param>
+        /// <param name="trailingValue">New trailing value</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<FTXTriggerOrder>> ModifyTriggerOrderAsync(long orderId, decimal? quantity = null, decimal ? triggerPrice = null, decimal? orderPrice = null, decimal? trailingValue = null, CancellationToken ct = default)
@@ -539,9 +582,9 @@ namespace FTX.Net
         }
 
         /// <summary>
-        /// Get a list of open trigger orders
+        /// Get a list triggers for a trigger order
         /// </summary>
-        /// <param name="symbol">Filter by symbol</param>
+        /// <param name="orderId">Id of the trigger order</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggers(long orderId, CancellationToken ct = default)
@@ -555,7 +598,7 @@ namespace FTX.Net
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOrder>>> GetOpenOrderAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXOrder>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
@@ -566,9 +609,10 @@ namespace FTX.Net
         /// Get a list of open trigger orders
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
+        /// <param name="type">Filter by type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetOpenTriggerOrderAsync(string? symbol = null, TriggerOrderType? type = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetOpenTriggerOrdersAsync(string? symbol = null, TriggerOrderType? type = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
@@ -622,7 +666,10 @@ namespace FTX.Net
         /// <returns></returns>
         public async Task<WebCallResult<string>> CancelOrderAsync(long orderId, CancellationToken ct = default)
         {
-            return await SendFTXRequest<string>(GetUri("orders/" + orderId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            var result = await SendFTXRequest<string>(GetUri("orders/" + orderId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);            
+            if (result)
+                OnOrderCanceled?.Invoke(new FTXOrder() { Id = orderId });
+            return result;
         }
 
         /// <summary>
@@ -711,24 +758,6 @@ namespace FTX.Net
 
         #endregion
 
-        #region Spot Margin
-
-        // TODO
-
-        #endregion
-
-        #region NFTs
-
-        // TODO
-
-        #endregion
-
-        #region FTX pay
-
-        // TODO
-
-        #endregion
-
         #region private
         internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null) where T : class
         {
@@ -758,6 +787,7 @@ namespace FTX.Net
             return new Uri(BaseAddress + path);
         }
 
+        /// <inheritdoc />
         protected override Error ParseErrorResponse(JToken error)
         {
             if(error["error"] == null)
@@ -773,6 +803,7 @@ namespace FTX.Net
         }
 
         // Override because FTX requires HttpMethod.Delete requests to have the parameters in the request body instead of uri
+        /// <inheritdoc />
         protected override IRequest ConstructRequest(Uri uri, HttpMethod method, Dictionary<string, object>? parameters, bool signed, PostParameters postPosition, ArrayParametersSerialization arraySerialization, int requestId)
         {
             if (parameters == null)
@@ -816,7 +847,7 @@ namespace FTX.Net
                 case KlineInterval.FiveMinutes: return 300;
                 case KlineInterval.FifteenMinutes: return 900;
                 case KlineInterval.OneHour: return 3600;
-                case KlineInterval.FourHour: return 14400;
+                case KlineInterval.FourHours: return 14400;
                 case KlineInterval.OneDay: return 86400;
                 case KlineInterval.OneWeek: return 86400 * 7;
                 case KlineInterval.OneMonth: return 86400 * 30;
@@ -826,74 +857,129 @@ namespace FTX.Net
         #endregion
 
         #region common interface
+        /// <inheritdoc />
         public string GetSymbolName(string baseAsset, string quoteAsset)
         {
             return baseAsset + "/" + quoteAsset;
         }
 
-        Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
+        async Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
         {
-            throw new NotImplementedException();
+            var symbols = await GetSymbolsAsync().ConfigureAwait(false);
+            return symbols.As<IEnumerable<ICommonSymbol>>(symbols.Data);
         }
 
         Task<WebCallResult<IEnumerable<ICommonTicker>>> IExchangeClient.GetTickersAsync()
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("FTX API has no support for getting High/Low/Volume stats for all symbols in a call");
         }
 
-        Task<WebCallResult<ICommonTicker>> IExchangeClient.GetTickerAsync(string symbol)
+        async Task<WebCallResult<ICommonTicker>> IExchangeClient.GetTickerAsync(string symbol)
         {
-            throw new NotImplementedException();
+            var klines = await GetKlinesAsync(symbol, KlineInterval.OneHour).ConfigureAwait(false);
+            if (!klines)
+                return klines.As((ICommonTicker)null);
+
+            return klines.As(GetTickerFromKlines(symbol, klines.Data));
         }
 
-        Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        private ICommonTicker GetTickerFromKlines(string symbol, IEnumerable<FTXKline> klines)
         {
-            throw new NotImplementedException();
+            var data = klines.OrderByDescending(d => d.StartTime).Take(24).ToList();
+            if (!data.Any())
+                return new FTXTick
+                {
+                    Symbol = symbol
+                };
+
+            return new FTXTick
+            {
+                Symbol = symbol,
+                High = data.Max(d => d.High),
+                Low = data.Min(d => d.Low),
+                Volume = data.Sum(d => d.Volume)
+            };
         }
 
-        Task<WebCallResult<ICommonOrderBook>> IExchangeClient.GetOrderBookAsync(string symbol)
+        async Task<WebCallResult<IEnumerable<ICommonKline>>> IExchangeClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
         {
-            throw new NotImplementedException();
+            var klines = await GetKlinesAsync(symbol, GetKlineIntervalFromTimeSpan(timespan), startTime, endTime).ConfigureAwait(false);
+            return klines.As<IEnumerable<ICommonKline>>(klines.Data);
         }
 
-        Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> IExchangeClient.GetRecentTradesAsync(string symbol)
+        async Task<WebCallResult<ICommonOrderBook>> IExchangeClient.GetOrderBookAsync(string symbol)
         {
-            throw new NotImplementedException();
+            var book = await GetOrderBookAsync(symbol, 100).ConfigureAwait(false);
+            return book.As<ICommonOrderBook>(book.Data);
         }
 
-        Task<WebCallResult<ICommonOrderId>> IExchangeClient.PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        async Task<WebCallResult<IEnumerable<ICommonRecentTrade>>> IExchangeClient.GetRecentTradesAsync(string symbol)
         {
-            throw new NotImplementedException();
+            var trades = await GetTradeHistoryAsync(symbol).ConfigureAwait(false);
+            return trades.As<IEnumerable<ICommonRecentTrade>>(trades.Data);
         }
 
-        Task<WebCallResult<ICommonOrder>> IExchangeClient.GetOrderAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<ICommonOrderId>> IExchangeClient.PlaceOrderAsync(string symbol, IExchangeClient.OrderSide side, IExchangeClient.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
         {
-            throw new NotImplementedException();
+            var trades = await PlaceOrderAsync(
+                symbol,
+                side == IExchangeClient.OrderSide.Buy ? OrderSide.Buy: OrderSide.Sell,
+                type == IExchangeClient.OrderType.Limit ? OrderType.Limit : OrderType.Market,
+                quantity,
+                price                
+                ).ConfigureAwait(false);
+            return trades.As<ICommonOrderId>(trades.Data);
         }
 
-        Task<WebCallResult<IEnumerable<ICommonTrade>>> IExchangeClient.GetTradesAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<ICommonOrder>> IExchangeClient.GetOrderAsync(string orderId, string? symbol = null)
         {
-            throw new NotImplementedException();
+            var trades = await GetOrderAsync(long.Parse(orderId)).ConfigureAwait(false);
+            return trades.As<ICommonOrder>(trades.Data);
         }
 
-        Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetOpenOrdersAsync(string? symbol = null)
+        async Task<WebCallResult<IEnumerable<ICommonTrade>>> IExchangeClient.GetTradesAsync(string orderId, string? symbol = null)
         {
-            throw new NotImplementedException();
+            var trades = await GetUserTradesAsync(orderId: long.Parse(orderId)).ConfigureAwait(false);
+            return trades.As<IEnumerable<ICommonTrade>>(trades.Data);
         }
 
-        Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetClosedOrdersAsync(string? symbol = null)
+        async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetOpenOrdersAsync(string? symbol = null)
         {
-            throw new NotImplementedException();
+            var trades = await GetOpenOrdersAsync(symbol).ConfigureAwait(false);
+            return trades.As<IEnumerable<ICommonOrder>>(trades.Data);
         }
 
-        Task<WebCallResult<ICommonOrderId>> IExchangeClient.CancelOrderAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetClosedOrdersAsync(string? symbol = null)
         {
-            throw new NotImplementedException();
+            var trades = await GetOrdersAsync(symbol).ConfigureAwait(false);
+            return trades.As<IEnumerable<ICommonOrder>>(trades.Data.Where(o => o.Status == OrderStatus.Closed));
         }
 
-        Task<WebCallResult<IEnumerable<ICommonBalance>>> IExchangeClient.GetBalancesAsync(string? accountId = null)
+        async Task<WebCallResult<ICommonOrderId>> IExchangeClient.CancelOrderAsync(string orderId, string? symbol = null)
         {
-            throw new NotImplementedException();
+            var trades = await CancelOrderAsync(long.Parse(orderId)).ConfigureAwait(false);
+            return trades.As<ICommonOrderId>(new FTXOrder { Id = long.Parse(orderId) });
+        }
+
+        async Task<WebCallResult<IEnumerable<ICommonBalance>>> IExchangeClient.GetBalancesAsync(string? accountId = null)
+        {
+            var balances = await GetBalancesAsync().ConfigureAwait(false);
+            return balances.As<IEnumerable<ICommonBalance>>(balances.Data);
+        }
+
+        private KlineInterval GetKlineIntervalFromTimeSpan(TimeSpan timeSpan)
+        {
+            if (timeSpan == TimeSpan.FromSeconds(15)) return KlineInterval.FifteenSeconds;
+            if (timeSpan == TimeSpan.FromMinutes(1)) return KlineInterval.OneMinute;
+            if (timeSpan == TimeSpan.FromMinutes(5)) return KlineInterval.FiveMinutes;
+            if (timeSpan == TimeSpan.FromMinutes(15)) return KlineInterval.FifteenMinutes;
+            if (timeSpan == TimeSpan.FromHours(1)) return KlineInterval.OneHour;
+            if (timeSpan == TimeSpan.FromHours(4)) return KlineInterval.FourHours;
+            if (timeSpan == TimeSpan.FromDays(1)) return KlineInterval.OneDay;
+            if (timeSpan == TimeSpan.FromDays(7)) return KlineInterval.OneWeek;
+            if (timeSpan == TimeSpan.FromDays(30) || timeSpan == TimeSpan.FromDays(31)) return KlineInterval.OneMonth;
+
+            throw new ArgumentException("Unsupported timespan for FTX Klines, check supported intervals using FTX.Net.Enums.KlineInterval");
         }
         #endregion
         #endregion

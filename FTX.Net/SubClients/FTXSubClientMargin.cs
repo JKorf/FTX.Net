@@ -12,9 +12,12 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.SubClients
 {
+    /// <summary>
+    /// Spot margin endpoints
+    /// </summary>
     public class FTXSubClientMargin
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
         internal FTXSubClientMargin(FTXClient baseClient)
         {

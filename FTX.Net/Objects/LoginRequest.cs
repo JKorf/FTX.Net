@@ -2,7 +2,7 @@
 
 namespace FTX.Net.Objects.SocketObjects
 {
-    public class LoginRequest : SocketRequest
+    internal class LoginRequest : SocketRequest
     {
         [JsonProperty("args")]
         public LoginParams Parameters { get; set; }
@@ -18,7 +18,7 @@ namespace FTX.Net.Objects.SocketObjects
         }
     }
 
-    public class LoginParams
+    internal class LoginParams
     {
         [JsonProperty("key")]
         public string Key { get; set; } = string.Empty;

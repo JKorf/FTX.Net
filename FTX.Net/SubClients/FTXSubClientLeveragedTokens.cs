@@ -11,9 +11,12 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.SubClients
 {
+    /// <summary>
+    /// Leveraged token endpoints
+    /// </summary>
     public class FTXSubClientLeveragedTokens
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
         internal FTXSubClientLeveragedTokens(FTXClient baseClient)
         {
@@ -44,7 +47,6 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get token balances
         /// </summary>
-        /// <param name="tokenName">Name of the token</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenBalance>>> GetLeveragedTokenBalancesAsync(CancellationToken ct = default)

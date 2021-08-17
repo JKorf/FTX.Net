@@ -13,7 +13,7 @@ namespace FTX.Net
 {
     internal class FTXAuthenticationProvider : AuthenticationProvider
     {
-        private HMACSHA256 _encryptor;
+        private readonly HMACSHA256 _encryptor;
 
         public FTXAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {

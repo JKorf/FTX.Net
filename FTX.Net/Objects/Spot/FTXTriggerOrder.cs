@@ -103,6 +103,6 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Cancellation reason
         /// </summary>
-        public string CancelReason { get; set; }
+        public string? CancelReason { get; set; }
     }
 }

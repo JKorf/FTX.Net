@@ -1,0 +1,4431 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FTX.Net</name>
+    </assembly>
+    <members>
+        <member name="T:FTX.Net.Enums.AirdropStatus">
+            <summary>
+            Status of an airdrop
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.AirdropStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.AirdropStatus.Confirmed">
+            <summary>
+            Confirmed
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.DepositStatus">
+            <summary>
+            Deposit status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.DepositStatus.Confirmed">
+            <summary>
+            Confirmed
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.DepositStatus.Unconfirmed">
+            <summary>
+            Unconfirmed
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.DepositStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.FTXPayOrderStatus">
+            <summary>
+            FTXPay order status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.FTXPayOrderStatus.Complete">
+            <summary>
+            Complete
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.FTXPayOrderStatus.Incomplete">
+            <summary>
+            Incomplete
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.KlineInterval">
+            <summary>
+            Kline intervals
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.FifteenSeconds">
+            <summary>
+            15s
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.OneMinute">
+            <summary>
+            1m
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.FiveMinutes">
+            <summary>
+            5m
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.FifteenMinutes">
+            <summary>
+            15m
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.OneHour">
+            <summary>
+            1h
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.FourHours">
+            <summary>
+            4h
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.OneDay">
+            <summary>
+            1d
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.OneWeek">
+            <summary>
+            1w
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.KlineInterval.OneMonth">
+            <summary>
+            1M
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.LiquidityType">
+            <summary>
+            Liquidity type
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.LiquidityType.Maker">
+            <summary>
+            Maker
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.LiquidityType.Taker">
+            <summary>
+            Taker
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.NFTDepositStatus">
+            <summary>
+            Deposit status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTDepositStatus.Unconfirmed">
+            <summary>
+            Unconfirmed
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTDepositStatus.Confirmed">
+            <summary>
+            Confirmed
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTDepositStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.NFTRedeemStatus">
+            <summary>
+            Redeem status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.Requested">
+            <summary>
+            Requested
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.PendingReview">
+            <summary>
+            Pending review
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.Processing">
+            <summary>
+            Processing
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.Sent">
+            <summary>
+            Sent
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.Completed">
+            <summary>
+            Completed
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTRedeemStatus.Failed">
+            <summary>
+            Failed
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.NFTWithdrawalStatus">
+            <summary>
+            Withdraw status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTWithdrawalStatus.Requested">
+            <summary>
+            Requested
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTWithdrawalStatus.Processing">
+            <summary>
+            Processing
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTWithdrawalStatus.Sent">
+            <summary>
+            Sent
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTWithdrawalStatus.Completed">
+            <summary>
+            Completed
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.NFTWithdrawalStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.OptionType">
+            <summary>
+            Option type
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OptionType.Call">
+            <summary>
+            Call
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OptionType.Put">
+            <summary>
+            Put
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.OrderSide">
+            <summary>
+            The side of an order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderSide.Buy">
+            <summary>
+            Buy order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderSide.Sell">
+            <summary>
+            Sell order
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.OrderStatus">
+            <summary>
+            The status of an order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderStatus.New">
+            <summary>
+            New order, not processed yet
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderStatus.Open">
+            <summary>
+            Open order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderStatus.Closed">
+            <summary>
+            Closed order, either cancelled or filled
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.OrderType">
+            <summary>
+            The type of an order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderType.Limit">
+            <summary>
+            Limit order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.OrderType.Market">
+            <summary>
+            Market order
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.QuoteRequestStatus">
+            <summary>
+            Request status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.QuoteRequestStatus.Open">
+            <summary>
+            Open
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.QuoteRequestStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.QuoteRequestStatus.Filled">
+            <summary>
+            Filled
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.SymbolType">
+            <summary>
+            The type of symbol
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.SymbolType.Future">
+            <summary>
+            A futures symbol
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.SymbolType.Spot">
+            <summary>
+            A spot symbol
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.TriggerOrderType">
+            <summary>
+            The type of a trigger order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.TriggerOrderType.Stop">
+            <summary>
+            Stop order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.TriggerOrderType.TrailingStop">
+            <summary>
+            Trailing stop order
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.TriggerOrderType.TakeProfit">
+            <summary>
+            Take profit order
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.UnstakeRequestStatus">
+            <summary>
+            Unstake request status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.UnstakeRequestStatus.Pending">
+            <summary>
+            Pending
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.UnstakeRequestStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.UnstakeRequestStatus.Processed">
+            <summary>
+            Processed
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Enums.WithdrawalStatus">
+            <summary>
+            Withdrawal status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.WithdrawalStatus.Requested">
+            <summary>
+            Requested
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.WithdrawalStatus.Processing">
+            <summary>
+            Processing
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.WithdrawalStatus.Complete">
+            <summary>
+            Complete
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.WithdrawalStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="T:FTX.Net.FTXClient">
+            <summary>
+            Client for interacting with the FTX API
+            </summary>
+        </member>
+        <member name="E:FTX.Net.FTXClient.OnOrderPlaced">
+            <inheritDoc />
+        </member>
+        <member name="E:FTX.Net.FTXClient.OnOrderCanceled">
+            <inheritDoc />
+        </member>
+        <member name="P:FTX.Net.FTXClient.Convert">
+            <summary>
+            Convert endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.Options">
+            <summary>
+            Options endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.LeveragedTokens">
+            <summary>
+            Leveraged token endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.Staking">
+            <summary>
+            Staking endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.Margin">
+            <summary>
+            Spot margin endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.NFT">
+            <summary>
+            NFT endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.FTXPay">
+            <summary>
+            FTXPay endpoints
+            </summary>
+        </member>
+        <member name="P:FTX.Net.FTXClient.Subaccounts">
+            <summary>
+            Subaccount endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.FTXClient.#ctor">
+            <summary>
+            Create a new instance of BitfinexClient using the default options
+            </summary>
+        </member>
+        <member name="M:FTX.Net.FTXClient.#ctor(FTX.Net.Objects.FTXClientOptions)">
+            <summary>
+            Create a new instance of BitfinexClient using provided options
+            </summary>
+            <param name="options">The options to use for this client</param>
+        </member>
+        <member name="M:FTX.Net.FTXClient.SetDefaultOptions(FTX.Net.Objects.FTXClientOptions)">
+            <summary>
+            set the default options used when creating a client without specifying options
+            </summary>
+            <param name="newDefaultOptions"></param>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetSymbolsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of supported symbols
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetSymbolAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get symbol info
+            </summary>
+            <param name="symbol">Symbol name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetOrderBookAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Get the orderbook for a symbol
+            </summary>
+            <param name="symbol">Symbol to get the book for</param>
+            <param name="depth">Depth of the book</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get trades for a symbol
+            </summary>
+            <param name="symbol">Symbol to get trades for</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetKlinesAsync(System.String,FTX.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get klines for a symbol
+            </summary>
+            <param name="symbol">Symbol to get trades for</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetAccountInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get account info
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetPositionsAsync(System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Get positions
+            </summary>
+            <param name="showAveragePrice"></param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.ChangeAccountLeverageAsync(System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Change account leverage
+            </summary>
+            <param name="leverage">Desired acccount-wide leverage setting</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetAssetsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of assets
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of balances
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetAllAccountBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get a list of balances, including master and subaccounts
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get deposit address for an asset
+            </summary>
+            <param name="asset">Asset to get address for</param>
+            <param name="network">The network to use</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetDepositHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get deposit history
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetWithdrawalHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get withdrawal history
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.WithdrawAsync(System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Submit a withdraw request
+            </summary>
+            <param name="asset">Asset to withdraw</param>
+            <param name="quantity">Quantity to withdraw</param>
+            <param name="address">Address to withdraw to</param>
+            <param name="tag">Address tag</param>
+            <param name="network">Network to us</param>
+            <param name="password">Withdrawal password if required</param>
+            <param name="code">Two factor authentication code if required</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetAirdropsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get airdrops
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetWithdrawalFeesAsync(System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get withdrawal fees
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="quantity">Quantity</param>
+            <param name="address">Address</param>
+            <param name="tag">Tag</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetSavedAddressesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get saved addresses
+            </summary>
+            <param name="asset">Filter by asset</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.CreateSavedAddressAsync(System.String,System.String,System.String,System.Boolean,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a saved address
+            </summary>
+            <param name="asset">Asset the address is for</param>
+            <param name="address">The address</param>
+            <param name="addressName">Name of the address</param>
+            <param name="isPrimeTrust">Is prime trust</param>
+            <param name="tag">Address tag</param>
+            <param name="code">2FA code if needed</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.DeleteSavedAddressAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete a saved address
+            </summary>
+            <param name="savedAddressId">Id of the saved address to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.PlaceOrderAsync(System.String,FTX.Net.Enums.OrderSide,FTX.Net.Enums.OrderType,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Place a new order
+            </summary>
+            <param name="symbol">The symbol to place on</param>
+            <param name="side">The side of the order</param>
+            <param name="type">The type of order</param>
+            <param name="quantity">The quantity to buy or sell</param>
+            <param name="price">The price of the order (null for market orders)</param>
+            <param name="reduceOnly">Reduce only</param>
+            <param name="immediateOrCancel">Immediate or cancel</param>
+            <param name="postOnly">Post only</param>
+            <param name="clientOrderId">Client order id</param>
+            <param name="rejectOnPriceBand">If the order should be rejected if its price would instead be adjusted due to price bands</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.PlaceTriggerOrderAsync(System.String,FTX.Net.Enums.OrderSide,FTX.Net.Enums.TriggerOrderType,System.Decimal,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Place a new trigger order
+            </summary>
+            <param name="symbol">The symbol to place on</param>
+            <param name="side">The side of the order</param>
+            <param name="type">The trigger type</param>
+            <param name="quantity">The quantity to buy or sell</param>
+            <param name="triggerPrice">Trigger price for stop loss/take profit</param>
+            <param name="orderPrice">Order price, specifying this makes the order a limit order</param>
+            <param name="trailValue">Tailing value for trailing stop orders, negative for sell, positive for buy</param>
+            <param name="reduceOnly">Reduce only</param>
+            <param name="retryUntilFilled">Whether or not to keep re-triggering until filled. optional, default true for market orders</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.ModifyOrderAsync(System.Int64,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
+            </summary>
+            <param name="orderId">Id of order to modify</param>
+            <param name="price">New price of the order</param>
+            <param name="quantity">New quantity of the order</param>
+            <param name="clientOrderID">New client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.ModifyTriggerOrderAsync(System.Int64,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Modify a trigger order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
+            </summary>
+            <param name="orderId">Order id</param>
+            <param name="quantity">New quantity</param>
+            <param name="triggerPrice">New trigger price</param>
+            <param name="orderPrice">New order price</param>
+            <param name="trailingValue">New trailing value</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.ModifyOrderByClientOrderIdAsync(System.Int64,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
+            </summary>
+            <param name="clientOrderId">Client order id of order to modify</param>
+            <param name="price">New price of the order</param>
+            <param name="quantity">New quantity of the order</param>
+            <param name="clientOrderID">New client order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetOrderAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get the status of an order
+            </summary>
+            <param name="orderId">Id of the order</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetOrderByClientOrderIdAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the status of an order
+            </summary>
+            <param name="clientOrderId">Client order id of the order</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetTriggerOrderTriggers(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get a list triggers for a trigger order
+            </summary>
+            <param name="orderId">Id of the trigger order</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetOpenOrdersAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of open orders
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetOpenTriggerOrdersAsync(System.String,System.Nullable{FTX.Net.Enums.TriggerOrderType},System.Threading.CancellationToken)">
+            <summary>
+            Get a list of open trigger orders
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="type">Filter by type</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get list of orders
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetTriggerOrdersAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{FTX.Net.Enums.OrderSide},System.Nullable{FTX.Net.Enums.TriggerOrderType},System.Nullable{FTX.Net.Enums.OrderType},System.Threading.CancellationToken)">
+            <summary>
+            Get list of trigger orders
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="side">Filter by side</param>
+            <param name="type">Filter by trigger type</param>
+            <param name="orderType">Filter by order type</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.CancelOrderAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancel an order
+            </summary>
+            <param name="orderId">Id of the order</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.CancelTriggerOrderAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a trigger order
+            </summary>
+            <param name="orderId">Id of the order</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.CancelOrderByClientIdAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Cancel an order
+            </summary>
+            <param name="clientOrderId">Client order id of the order</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.CancelAllOrdersAsync(System.String,System.Nullable{FTX.Net.Enums.OrderSide},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Cancel all orders matching the parameters
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="side">Filter by side</param>
+            <param name="conditionalOrdersOnly">Only cancel conditional orders</param>
+            <param name="limitOrdersOnly">Only cancel limit orders</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetUserTradesAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get list of trades based on the input parameters
+            </summary>
+            <param name="symbol">Filter by symbol</param>
+            <param name="orderId">Filter by order id</param>
+            <param name="ascendingOrder">Return results in ascending order in time</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetFundingPaymentsAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get list of funding payments
+            </summary>
+            <param name="future">Filter by future</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.ParseErrorResponse(Newtonsoft.Json.Linq.JToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXClient.ConstructRequest(System.Uri,System.Net.Http.HttpMethod,System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean,CryptoExchange.Net.Objects.PostParameters,CryptoExchange.Net.Objects.ArrayParametersSerialization,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetSymbolName(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:FTX.Net.FTXSocketClient">
+            <summary>
+            Client for interacting with the FTX websocket API
+            </summary>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.#ctor">
+            <summary>
+            Create a new instance of BitfinexSocketClient using the default options
+            </summary>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.#ctor(FTX.Net.Objects.FTXSocketClientOptions)">
+            <summary>
+            Create a new instance of BitfinexSocketClient using provided options
+            </summary>
+            <param name="options">The options to use for this client</param>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SetDefaultOptions(FTX.Net.Objects.FTXSocketClientOptions)">
+            <summary>
+            set the default options used when creating a client without specifying options
+            </summary>
+            <param name="newDefaultOptions"></param>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.SocketObjects.FTXStreamTicker}})">
+            <summary>
+            Subscribes to ticker updates for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{FTX.Net.Objects.Spot.FTXTrade}}})">
+            <summary>
+            Subscribes to trade updates for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}})">
+            <summary>
+            Subscribes to order book updates for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe to</param>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToGroupedOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}})">
+            <summary>
+            Subscribes to order book updates for a symbol
+            </summary>
+            <param name="symbol">Symbol for the order book</param>
+            <param name="grouping">Grouping of the data</param>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.FTXOrder}})">
+            <summary>
+            Subscribes to order updates
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}})">
+            <summary>
+            Subscribes to trade updates
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToFTXPayUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}})">
+            <summary>
+            Subscribes to FTX-pay updates
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.HandleQueryResponse``1(CryptoExchange.Net.Sockets.SocketConnection,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.HandleSubscriptionResponse(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription,System.Object,Newtonsoft.Json.Linq.JToken,CryptoExchange.Net.Objects.CallResult{System.Object}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.MessageMatchesHandler(Newtonsoft.Json.Linq.JToken,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.MessageMatchesHandler(Newtonsoft.Json.Linq.JToken,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.UnsubscribeAsync(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Sockets.SocketSubscription)">
+            <inheritdoc />
+        </member>
+        <member name="T:FTX.Net.Objects.Convert.FTXConvertQuote">
+            <summary>
+            Convert quote
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.BaseAsset">
+            <summary>
+            From asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.FromAsset">
+            <summary>
+            To asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.QuoteAsset">
+            <summary>
+            To asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.ToAsset">
+            <summary>
+            To asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Cost">
+            <summary>
+            Cost of accepting the quote in units of fromCoin
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Expired">
+            <summary>
+            If the quote is expired (if so, cannot accept it)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Filled">
+            <summary>
+            If the quote is already accepted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Price">
+            <summary>
+            Price in units of quoteCoin
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Proceeds">
+            <summary>
+            Proceeds of accepting the quote in units of toCoin
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuote.Side">
+            <summary>
+            "sell" if FromAsset is BaseAsset, otherwise "buy"
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Convert.FTXConvertQuoteResult">
+            <summary>
+            Quote request result
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Convert.FTXConvertQuoteResult.QuoteId">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXClientOptions">
+            <summary>
+            Options for the FTX client
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXClientOptions.AffiliateCode">
+            <summary>
+            Affiliate code which will be sent when placing orders
+            </summary>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXClientOptions.#ctor">
+            <summary>
+            Create new client options
+            </summary>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXClientOptions.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Create new client options
+            </summary>
+            <param name="httpClient">HttpClient to use for requests from this client</param>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXClientOptions.#ctor(System.String)">
+            <summary>
+            Create new client options
+            </summary>
+            <param name="apiAddress">Custom API address to use</param>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXClientOptions.#ctor(System.String,System.Net.Http.HttpClient)">
+            <summary>
+            Create new client options
+            </summary>
+            <param name="httpClient">HttpClient to use for requests from this client</param>
+            <param name="apiAddress">Custom API address to use</param>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXClientOptions.Copy">
+            <summary>
+            Copy
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXSocketClientOptions">
+            <summary>
+            Options for the FTX socket client
+            </summary>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXSocketClientOptions.#ctor">
+            <summary>
+            Create new client options
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXSymbolOrderBookOptions">
+            <summary>
+            Options the FTX symbol order book
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolOrderBookOptions.Grouping">
+            <summary>
+            Grouping of the order book entries
+            </summary>
+        </member>
+        <member name="M:FTX.Net.Objects.FTXSymbolOrderBookOptions.#ctor(System.Nullable{System.Int32})">
+            <summary>
+            Create new book options
+            </summary>
+            <param name="grouping"></param>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXPay.FTXAppDetails">
+            <summary>
+            App details
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Email">
+            <summary>
+            Email to receive confirmations
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.UserId">
+            <summary>
+            User specific ID
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.AcceptedCoin">
+            <summary>
+            Coin that all payments must be in
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.WithdrawalAddress">
+            <summary>
+            Address to auto-withdraw funds to
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.WithdarwalWallet">
+            <summary>
+            Wallet type for auto-withdrawal
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.WithdrawalPeriod">
+            <summary>
+            Auto-withdrawal period (in hours)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Disabled">
+            <summary>
+            Disabled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Deleted">
+            <summary>
+            Deleted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.CreatedAt">
+            <summary>
+            Time the app was created
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.TotalValue">
+            <summary>
+            Total value of all fetched payments
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.NumberOfPayments">
+            <summary>
+            Quantity of fetched payments
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Exists">
+            <summary>
+            Exists
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppDetails.Payments">
+            <summary>
+            Payments
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXPay.FTXAppOrder">
+            <summary>
+            App order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.Asset">
+            <summary>
+            The currency of the payment
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.Notes">
+            <summary>
+            Notes about this order that are private to the merchant
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.Quantity">
+            <summary>
+            Size of the desired payment
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.AllowTip">
+            <summary>
+            Whether or not tips are allowed for the payment
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.ClientId">
+            <summary>
+            ID for you to track the order with (must be unique to your FTX Pay app)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.Payment">
+            <summary>
+            Payment
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXPay.FTXAppPayment">
+            <summary>
+            Payment info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.Id">
+            <summary>
+            Id of the payment
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.Fee">
+            <summary>
+            Fee amount
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.NetQuantity">
+            <summary>
+            Received amount
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.TipQuantity">
+            <summary>
+            Tipped amount
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.Asset">
+            <summary>
+            Asset received
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.CreatedAt">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.Memo">
+            <summary>
+            Payer-provided info for payment identification
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.Notes">
+            <summary>
+            Payer-provided notes
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppPayment.SenderEmail">
+            <summary>
+            Email of the sender
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXPay.Socket.FTXStreamFTXPayment">
+            <summary>
+            Payment update
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.Socket.FTXStreamFTXPayment.Payment">
+            <summary>
+            Payment info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.Socket.FTXStreamFTXPayment.App">
+            <summary>
+            App details
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXPay.Socket.FTXStreamFTXPayment.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXTick">
+            <summary>
+            FTX tick
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXTick.High">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXTick.Low">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXTick.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXTick.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Futures.FTXFundingPayment">
+            <summary>
+            Funding payment info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingPayment.Future">
+            <summary>
+            Future
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingPayment.Id">
+            <summary>
+            Payment id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingPayment.Payment">
+            <summary>
+            Amount payed
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingPayment.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingPayment.Rate">
+            <summary>
+            Rate
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Futures.FTXPosition">
+            <summary>
+            Position info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.Cost">
+            <summary>
+            Amount that was paid to enter this position, equal to size * entry_price. Positive if long, negative if short.
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.EntryPrice">
+            <summary>
+            Average cost of this position after pnl was last realized: whenever unrealized pnl gets realized, this field gets set to mark price, unrealizedPnL is set to 0, and realizedPnl changes by the previous value for unrealizedPnl.
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.EstimatedLiquidationPrice">
+            <summary>
+            Estimated liquidation price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.Future">
+            <summary>
+            Name of the future
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.InitialMarginRequirement">
+            <summary>
+            Minimum margin fraction for opening new positions
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.LongOrderQuantity">
+            <summary>
+            Cumulative size of all open bids
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.MaintenanceMarginRequirement">
+            <summary>
+            Minimum margin fraction to avoid liquidations
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.NetQuantity">
+            <summary>
+            Size of position. Positive if long, negative if short.
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.OpenQuantity">
+            <summary>
+            Maximum possible absolute position size if some subset of open orders are filled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.RealizedPnl">
+            <summary>
+            Realized profit and loss
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.ShortOrderQuantity">
+            <summary>
+            Cumulative size of all open offers
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.Side">
+            <summary>
+            Side, sell for short, buy for long
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.Quantity">
+            <summary>
+            Absolute value of netSize
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXPosition.CollateralUsed">
+            <summary>
+            For PRESIDENT: initialMarginRequirement* openSize * (risk price), 
+            For MOVE: initialMarginRequirement* openSize * (index price), 
+            Otherwise: initialMarginRequirement* openSize * (mark price)
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.LeveragedTokens.FTXETFRebalanceEntry">
+            <summary>
+            ETF rebalance info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXETFRebalanceEntry.OrderSizeList">
+            <summary>
+            List of order sizes in the rebalance
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXETFRebalanceEntry.Side">
+            <summary>
+            "buy" or "sell" depending on whether the rebalance involves buying or selling
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXETFRebalanceEntry.Time">
+            <summary>
+            Time of the rebalance
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken">
+            <summary>
+            Leveraged token info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Name">
+            <summary>
+            Name of the token
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Underlying">
+            <summary>
+            Name of the underlying futures contract used by this token
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Leverage">
+            <summary>
+            Target leverage
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Outstanding">
+            <summary>
+            Number of outstanding tokens
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.PricePerShare">
+            <summary>
+            TotalNav divided by outstanding
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.PositionsPerShare">
+            <summary>
+            Futures positions per share: one element for each item in targetComponents
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Basket">
+            <summary>
+            Holdings per share
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.TargetComponents">
+            <summary>
+            Futures to be included in the basket of the leverage token. For BVOL and IBVOL futures, this contains multiple entries
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.TotalNav">
+            <summary>
+            Total value of the leveraged token holdings (basket holdings marked to market times outstanding)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.TotalCollateral">
+            <summary>
+            Total collateral in the leveraged token account
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.CurrentLeverage">
+            <summary>
+            Current leverage
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.PositionPerShare">
+            <summary>
+            Underlying futures position held by each token
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.UnderlyingMark">
+            <summary>
+            Current mark price of the underlying future
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.ContractAddress">
+            <summary>
+            ERC20 smart contract address of the token
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Bep2AssetName">
+            <summary>
+            Bep2 asset name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Change1Hour">
+            <summary>
+            Change in the price of the token over the past hour
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.Change24Hour">
+            <summary>
+            Change in the price of the token over the past day
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedToken.ChangeBeginingOfDay">
+            <summary>
+            Change in price since 00:00 UTC
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenBalance">
+            <summary>
+            Balance info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenBalance.Token">
+            <summary>
+            Token name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenBalance.Balance">
+            <summary>
+            Balance
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest">
+            <summary>
+            Leveraged token creation request
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.Id">
+            <summary>
+            Id of the request
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.Token">
+            <summary>
+            Token name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.RequestedSize">
+            <summary>
+            Number of tokens originally requested
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.Pending">
+            <summary>
+            Is pending
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.CreatedSize">
+            <summary>
+            Number of tokens created; may be less than the requested number
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.Price">
+            <summary>
+            Price at which the creation request was fulfilled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.Cost">
+            <summary>
+            Cost of creating the tokens, not including fees
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.Fee">
+            <summary>
+            Fee for creating the tokens
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.RequestedAt">
+            <summary>
+            Time the request was submitted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenCreationRequest.FullFilledAt">
+            <summary>
+            Time the request was processed
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest">
+            <summary>
+            Redeem request result
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest.Id">
+            <summary>
+            Redeem request id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest.Token">
+            <summary>
+            Token name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest.Size">
+            <summary>
+            Number of tokens requsted to be redeemed
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest.ProjectedProceeds">
+            <summary>
+            Estimated proceeds from the redemption
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest.Pending">
+            <summary>
+            Is pending
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedeemRequest.RequestedAt">
+            <summary>
+            Time the request was submitted
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption">
+            <summary>
+            Redemption info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Id">
+            <summary>
+            Redemption id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Token">
+            <summary>
+            Token name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Size">
+            <summary>
+            Number of tokens redeemed
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Pending">
+            <summary>
+            Is pending
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Price">
+            <summary>
+            Price at which the redemption request was fulfilled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Proceeds">
+            <summary>
+            Proceeds from the redemption, before fees
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.Fee">
+            <summary>
+            Fee for redeeming the tokens
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.RequestedAt">
+            <summary>
+            Time the request was submitted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.LeveragedTokens.FTXLeveragedTokenRedemption.FulFilledAt">
+            <summary>
+            Time the request was processed
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.SocketObjects.FTXStreamTicker">
+            <summary>
+            Stream tick
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.BestAsk">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.BestBid">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.LastTrade">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXBorrowRate">
+            <summary>
+            Borrow rate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXBorrowRate.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXBorrowRate.Estimate">
+            <summary>
+            Estimate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXBorrowRate.Previous">
+            <summary>
+            Previous
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXBorrowSummary">
+            <summary>
+            Borrow summary
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXBorrowSummary.Asset">
+            <summary>
+            Asset 
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXBorrowSummary.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXLend">
+            <summary>
+            Lending info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLend.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLend.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLend.Rate">
+            <summary>
+            Rate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLend.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXUserLend">
+            <summary>
+            User lend info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXUserLend.Cost">
+            <summary>
+            Amount of coin you paid or got paid as interest on the borrow
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXLendingInfo">
+            <summary>
+            Lending info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingInfo.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingInfo.Lendable">
+            <summary>
+            Additional size you can lend
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingInfo.Locked">
+            <summary>
+            Size either in lending offers or not yet unlocked from lending offers
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingInfo.MinRate">
+            <summary>
+            Minimum rate at which your offers will lend
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingInfo.Offered">
+            <summary>
+            Size in your lending offers
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXLendingOffer">
+            <summary>
+            Lending offer
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingOffer.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingOffer.Rate">
+            <summary>
+            Hourly rate at which you will lend, if matched
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXLendingOffer.Quantity">
+            <summary>
+            Amount you will lend, if matched
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Margin.FTXMarginMarketInfo">
+            <summary>
+            Margin market info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXMarginMarketInfo.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXMarginMarketInfo.Borrowed">
+            <summary>
+            Amount of coin currently borrowed
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXMarginMarketInfo.Free">
+            <summary>
+            Amount of coin that can be spent buying the other coin in the supplied market, including what's borrowable with margin
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXMarginMarketInfo.EstimatedRate">
+            <summary>
+            Estimated hourly borrow rate for the next spot margin cycle
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Margin.FTXMarginMarketInfo.PreviousRate">
+            <summary>
+            Hourly borrow rate in the previous spot margin cycle
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNft">
+            <summary>
+            NFT info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Id">
+            <summary>
+            NFT id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Issuer">
+            <summary>
+            entity issuing NFT
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Collection">
+            <summary>
+            NFT collection name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Series">
+            <summary>
+            NFT series
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.SolMintAddress">
+            <summary>
+            SOL mint address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.EthContractAddress">
+            <summary>
+            Eth contract address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.ImageUrl">
+            <summary>
+            Url to image
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.VideoUrl">
+            <summary>
+            Url to video
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Attributes">
+            <summary>
+            Attributes
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Redeemable">
+            <summary>
+            True if NFT is redeemable for goods
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Redeemed">
+            <summary>
+            True if NFT is redeemable and has been redeemed
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.OfferPrice">
+            <summary>
+            Offer price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNft.Auction">
+            <summary>
+            Action info
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftAuction">
+            <summary>
+            NFT auction
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftAuction.BestBid">
+            <summary>
+            Current best bid
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftAuction.MinNextBid">
+            <summary>
+            Minimal overbid
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftAuction.EndTime">
+            <summary>
+            Auction end time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftAuction.Bids">
+            <summary>
+            Current amount of bids
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftCollection">
+            <summary>
+            Collection
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftCollection.Issuer">
+            <summary>
+            Issuer
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftCollection.Collection">
+            <summary>
+            Collection
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftDeposit">
+            <summary>
+            Deposit info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.Id">
+            <summary>
+            Deposit id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.Nft">
+            <summary>
+            NFT info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.Status">
+            <summary>
+            Deposit status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.Time">
+            <summary>
+            NFT Creation time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.SentTime">
+            <summary>
+            Sent time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.ConfirmedTime">
+            <summary>
+            Confirmed time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftDeposit.Confirmations">
+            <summary>
+            Confirmation count
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftGallery">
+            <summary>
+            Gallery info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftGallery.Name">
+            <summary>
+            Gallery name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftGallery.Nfts">
+            <summary>
+            Nfts
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftGallerySettings">
+            <summary>
+            Settings
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftGallerySettings.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftGallerySettings.Public">
+            <summary>
+            Is public
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftGallerySettings.DonationsPublic">
+            <summary>
+            Donations public
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftRedeem">
+            <summary>
+            Redeem id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.Nft">
+            <summary>
+            NFT details
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.Time">
+            <summary>
+            Timstamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.Notes">
+            <summary>
+            Notes
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.Address">
+            <summary>
+            Address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftRedeem.SupportTicketId">
+            <summary>
+            Support ticket id
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftTrade">
+            <summary>
+            NFT trade info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftTrade.Id">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftTrade.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftTrade.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftTradeAll">
+            <summary>
+            NFT trade info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftTradeAll.Nft">
+            <summary>
+            NFT details
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftUserTrade">
+            <summary>
+            User trade
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftUserTrade.Id">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftUserTrade.Nft">
+            <summary>
+            NFT details
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftUserTrade.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftUserTrade.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftUserTrade.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftUserTrade.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.FTXNftWithdrawal">
+            <summary>
+            Nft withdrawal
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Id">
+            <summary>
+            Withdrawal id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Nft">
+            <summary>
+            NFT info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Address">
+            <summary>
+            Withdraw address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Network">
+            <summary>
+            Network used
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.FTXNftWithdrawal.Notes">
+            <summary>
+            Notes
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.NFT.NFTUserInfo">
+            <summary>
+            User info for NFT
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.NFTUserInfo.Bid">
+            <summary>
+            Current bid on the NFT
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.NFTUserInfo.BuyFee">
+            <summary>
+            Buy fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.NFTUserInfo.IsBestBid">
+            <summary>
+            Do you have the best bid
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.NFT.NFTUserInfo.Owned">
+            <summary>
+            Do you own the NFT
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOption">
+            <summary>
+            Option info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOption.Underlying">
+            <summary>
+            Underlying
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOption.Type">
+            <summary>
+            Option type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOption.Strike">
+            <summary>
+            Strike
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOption.Expiry">
+            <summary>
+            Expiry time
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionHistoricalOpenInterest">
+            <summary>
+            Interest
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionHistoricalOpenInterest.NumberOfContracts">
+            <summary>
+            Open interest (in BTC)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionHistoricalOpenInterest.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionOpenInterest">
+            <summary>
+            Open interest
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionOpenInterest.OpenInterest">
+            <summary>
+            Open interest
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionQuote">
+            <summary>
+            Quote info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionQuote.Id">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionQuote.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionQuote.Collateral">
+            <summary>
+            Collateral locked by the quote
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionQuote.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionQuote.QuoteExpiry">
+            <summary>
+            Expiry
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionQuote.Time">
+            <summary>
+            When the quote was created
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionsAccountInfo">
+            <summary>
+            Account info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsAccountInfo.UsdBalance">
+            <summary>
+            Usd balance
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsAccountInfo.LiquidationPrice">
+            <summary>
+            Estimated liquidation price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsAccountInfo.Liquidated">
+            <summary>
+            If the account is currently liquidating
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsAccountInfo.MaintenanceMarginRequirement">
+            <summary>
+            You will be liquidated if your account collateral + options usdBalance drops below this number
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsAccountInfo.InitialMarginRequirement">
+            <summary>
+            Initial margin requirement
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionsHistoricalVolume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsHistoricalVolume.NumberOfContract">
+            <summary>
+            Volume (in BTC)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsHistoricalVolume.StartTime">
+            <summary>
+            Start time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsHistoricalVolume.EndTime">
+            <summary>
+            End time
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionsPosition">
+            <summary>
+            Options position info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.EntryPrice">
+            <summary>
+            Entry price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.NetSize">
+            <summary>
+            Net amount, positive for long, negative for short
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.Size">
+            <summary>
+            Absolute value of NetSize
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.Option">
+            <summary>
+            Option
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.Side">
+            <summary>
+            Side, buy for long, sell for short
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.PessimisticValuation">
+            <summary>
+            Pessimistic valuation of this position used for margin purposes
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.PessimisticIndexPrice">
+            <summary>
+            Index price corresponding to pessimistic valuation
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsPosition.PessimisticVol">
+            <summary>
+            Vol corresponding to pessimistic valuation
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionsVolume">
+            <summary>
+            24 hours options volume
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsVolume.Contracts">
+            <summary>
+            Number of contracts traded over the last 24 hours
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionsVolume.UnderlyingTotal">
+            <summary>
+            Notional value of the contracts traded over the last 24 hours
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXOptionTrade">
+            <summary>
+            Option trade
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionTrade.Id">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionTrade.Size">
+            <summary>
+            Size of trade
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionTrade.Price">
+            <summary>
+            Price of trade
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionTrade.Option">
+            <summary>
+            Option
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXOptionTrade.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXQuoteRequest">
+            <summary>
+            Quote request
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.Id">
+            <summary>
+            Id of the option
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.Option">
+            <summary>
+            The option
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.Size">
+            <summary>
+            Size
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.Side">
+            <summary>
+            Side 
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.RequestExpiry">
+            <summary>
+            When the request expires
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequest.LimitPrice">
+            <summary>
+            Limit price
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXQuoteRequestQuote">
+            <summary>
+            Quote info for quote request
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Collateral">
+            <summary>
+            Collateral locked by the quote
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Id">
+            <summary>
+            Quote id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Option">
+            <summary>
+            Option
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.QuoteExpiry">
+            <summary>
+            Quote expiry
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.QuoterSide">
+            <summary>
+            Quoter side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.RequestId">
+            <summary>
+            Request id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.RequestSide">
+            <summary>
+            Request side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Size">
+            <summary>
+            Size
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXQuoteRequestQuote.Time">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXUserOptionTrade">
+            <summary>
+            Option fill
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXUserOptionTrade.Liquidity">
+            <summary>
+            Liquidity 
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXUserOptionTrade.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXUserOptionTrade.FeeRate">
+            <summary>
+            Fee rate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXUserOptionTrade.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Options.FTXUserQuoteRequest">
+            <summary>
+            Quote request
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXUserQuoteRequest.HideLimitPrice">
+            <summary>
+            Whether or not to hide your limit price if it exists
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Options.FTXUserQuoteRequest.Quotes">
+            <summary>
+            List of quotes for your quote request
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXAccountInfo">
+            <summary>
+            Account info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.BackstopProvider">
+            <summary>
+            Whether or not the account is a registered backstop liquidity provider
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.Collateral">
+            <summary>
+            Amount of collateral
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.FreeCollateral">
+            <summary>
+            Amount of free collateral
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.InitialMarginRequirement">
+            <summary>
+            Average of initialMarginRequirement for individual futures, weighed by position notional. Cannot open new positions if openMarginFraction falls below this value.
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.Liquidating">
+            <summary>
+            True if the account is currently being liquidated
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.MaintenanceMarginRequirement">
+            <summary>
+            Average of maintenanceMarginRequirement for individual futures, weighed by position notional. Account enters liquidation mode if margin fraction falls below this value.
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.MakerFee">
+            <summary>
+            Maker fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.MarginFraction">
+            <summary>
+            Ratio between total account value and total account position notional.
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.OpenMarginFraction">
+            <summary>
+            Ratio between total realized account value and total open position notional
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.TakerFee">
+            <summary>
+            Taker fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.TotalAccountValue">
+            <summary>
+            Total value of the account, using mark price for positions
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.TotalPositionSize">
+            <summary>
+            Total size of positions held by the account, using mark price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.Username">
+            <summary>
+            User name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.Leverage">
+            <summary>
+            Max account leverage
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.PositionLimit">
+            <summary>
+            Position limit
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.PositionLimitUsed">
+            <summary>
+            Position limit used
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.UseFttCollateral">
+            <summary>
+            Use FTT as collateral
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.ChargeInterestOnNegativeUsd">
+            <summary>
+            Charge interest on negative USD
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.SpotMarginEnabled">
+            <summary>
+            Margin enabled for spot
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.SpotLendingEnabled">
+            <summary>
+            Lending enabled for spot
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAccountInfo.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXAirdrop">
+            <summary>
+            Airdrop info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAirdrop.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAirdrop.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAirdrop.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAirdrop.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAirdrop.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXAsset">
+            <summary>
+            Asset info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.CanDeposit">
+            <summary>
+            Deposit enabled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.CanWithdraw">
+            <summary>
+            Withdraw enabled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.HasTag">
+            <summary>
+            True if addresses for this coin have a tag
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Id">
+            <summary>
+            Identifier
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Name">
+            <summary>
+            Full name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Bep2Asset">
+            <summary>
+            Bep2 asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.CanConvert">
+            <summary>
+            Can convert
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Collateral">
+            <summary>
+            Collateral
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.CollateralWeight">
+            <summary>
+            Collateral weight
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.CreditTo">
+            <summary>
+            Credit to
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Erc20Contract">
+            <summary>
+            Erc20 contract
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Fiat">
+            <summary>
+            Is fiat
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.IsToken">
+            <summary>
+            Is token
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Networks">
+            <summary>
+            Networks for withdrawing/depositing
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.SplMint">
+            <summary>
+            Spl mint
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.Trc20Contract">
+            <summary>
+            Trc20 contract
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXAsset.UsdFungible">
+            <summary>
+            Usd fungible
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXDeposit">
+            <summary>
+            Deposit info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Asset">
+            <summary>
+            Deposit asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Confirmations">
+            <summary>
+            Confimations
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.ConfirmationTime">
+            <summary>
+            Time of confirmation
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.SentTime">
+            <summary>
+            Sent time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Quantity">
+            <summary>
+            Quantity of the deposit
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Status">
+            <summary>
+            Status of the deposit
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDeposit.Notes">
+            <summary>
+            Notes
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXDepositAddress">
+            <summary>
+            Deposit address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDepositAddress.Address">
+            <summary>
+            Deposit address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXDepositAddress.Tag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXKline">
+            <summary>
+            Kline info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXKline.Close">
+            <summary>
+            Close price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXKline.Open">
+            <summary>
+            Open price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXKline.High">
+            <summary>
+            High price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXKline.Low">
+            <summary>
+            Low price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXKline.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXKline.StartTime">
+            <summary>
+            Start time
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXOrderbook">
+            <summary>
+            Order book
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderbook.Asks">
+            <summary>
+            Asks
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderbook.Bids">
+            <summary>
+            Bids
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXOrderBookEntry">
+            <summary>
+            Order book entry
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBookEntry.Price">
+            <summary>
+            Price of the entry
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBookEntry.Quantity">
+            <summary>
+            Quantity of the entry
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXSavedAddress">
+            <summary>
+            Saved address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.Address">
+            <summary>
+            The address
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.Asset">
+            <summary>
+            The asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.Fiat">
+            <summary>
+            Is fiat
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.IsPrimeTrust">
+            <summary>
+            Is prime trust
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.LastUsedAt">
+            <summary>
+            Last used time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.Tag">
+            <summary>
+            Address tag
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.Whitelisted">
+            <summary>
+            True if address is currently whitelisted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXSavedAddress.WhitelistedAfter">
+            <summary>
+            Time the address was whitelisted
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXTrade">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTrade.Id">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTrade.Liquidation">
+            <summary>
+            If this trade involved a liquidation order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTrade.Price">
+            <summary>
+            Trade price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTrade.Quantity">
+            <summary>
+            Trade quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTrade.Side">
+            <summary>
+            Side of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTrade.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXTriggerOrder">
+            <summary>
+            Trigger order info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderId">
+            <summary>
+            Id of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.CreatedAt">
+            <summary>
+            When the order was created
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Future">
+            <summary>
+            The future the order is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Market">
+            <summary>
+            The market to order is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderPrice">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TriggerPrice">
+            <summary>
+            The trigger price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Side">
+            <summary>
+            The side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Type">
+            <summary>
+            The trigger type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Quantity">
+            <summary>
+            The total quantity of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Status">
+            <summary>
+            The status of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.ReduceOnly">
+            <summary>
+            Reduce only order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Error">
+            <summary>
+            Error message for orrder placing
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TriggeredAt">
+            <summary>
+            Time at which the order was triggered
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderType">
+            <summary>
+            The order type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.RetryUntilFilled">
+            <summary>
+            Whether or not to keep re-triggering until filled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TrailStart">
+            <summary>
+            Tail start
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.FilledQuantity">
+            <summary>
+            Filled quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.AverageFillPrice">
+            <summary>
+            Average fill price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.CancelledAt">
+            <summary>
+            Time at which the order was cancelled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.CancelReason">
+            <summary>
+            Cancellation reason
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXTriggerOrderTrigger">
+            <summary>
+            Trigger info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrderTrigger.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrderTrigger.OrderQuantity">
+            <summary>
+            Size of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrderTrigger.FilledQuantity">
+            <summary>
+            Filled order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrderTrigger.OrderId">
+            <summary>
+            Order id, null if failed to place
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrderTrigger.Error">
+            <summary>
+            Error if order failed
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXUserTrade">
+            <summary>
+            User trade info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Id">
+            <summary>
+            Fill id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Fee">
+            <summary>
+            Fee paid
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.FeeRate">
+            <summary>
+            Fee rate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.FeeCurrency">
+            <summary>
+            Fee currency
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Future">
+            <summary>
+            Future
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Liquidity">
+            <summary>
+            Liquidity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.BaseCurrency">
+            <summary>
+            Base currency
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.QuoteCurrency">
+            <summary>
+            Quote currency
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.TradeId">
+            <summary>
+            Trade id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Price">
+            <summary>
+            Order price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Quantity">
+            <summary>
+            Order quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Side">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXUserTrade.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXWithdrawal">
+            <summary>
+            Withdrawal info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Address">
+            <summary>
+            Address the withdrawal was to
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Tag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Fee">
+            <summary>
+            Fee
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Quantity">
+            <summary>
+            Quantity of the withdrawal
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Status">
+            <summary>
+            Status of the withdrawal
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.TransactionId">
+            <summary>
+            Transaction id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawal.Notes">
+            <summary>
+            Notes
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXWithdrawalFee">
+            <summary>
+            Withdrawal fee info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawalFee.Network">
+            <summary>
+            Network
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawalFee.Fee">
+            <summary>
+            Fee that will be charged on the withdrawal (size - fee will be sent to the destination)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXWithdrawalFee.Congested">
+            <summary>
+            If this blockchain is currently congested
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook">
+            <summary>
+            Stream order book update
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook.Action">
+            <summary>
+            Update action, `partial` for the initial snapshot, `update` for updates to that snapshot
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook.Bids">
+            <summary>
+            Changed bids
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook.Asks">
+            <summary>
+            Changed asks
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook.Checksum">
+            <summary>
+            Checksum
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXBalance">
+            <summary>
+            Balance info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXBalance.Asset">
+            <summary>
+            The asset the balance info is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXBalance.Free">
+            <summary>
+            Amount free
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXBalance.SpotBorrow">
+            <summary>
+            Amount borrowed with spot margin
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXBalance.Total">
+            <summary>
+            Total amount
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXBalance.UsdValue">
+            <summary>
+            Approximate total USD value
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXBalance.AvailableWithoutBorrow">
+            <summary>
+            Amount available without borrowing
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXOrder">
+            <summary>
+            Order info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Id">
+            <summary>
+            Id of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.CreatedAt">
+            <summary>
+            When the order was created
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.FilledQuantity">
+            <summary>
+            The quantity that is filled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Future">
+            <summary>
+            The future the order is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Symbol">
+            <summary>
+            The symbol to order is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Price">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.RemainingQuantity">
+            <summary>
+            The remaining quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Side">
+            <summary>
+            The side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Type">
+            <summary>
+            The order type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Quantity">
+            <summary>
+            The total quantity of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.Status">
+            <summary>
+            The status of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.ReduceOnly">
+            <summary>
+            Reduce only order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.ImmediateOrCancel">
+            <summary>
+            Immediate or cancel order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.PostOnly">
+            <summary>
+            Post only order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.ClientId">
+            <summary>
+            Client id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXOrder.AverageFillPrice">
+            <summary>
+            Average execution price
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.FTXSymbol">
+            <summary>
+            Symbol information
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Name">
+            <summary>
+            The name of the symbol
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.BaseCurrency">
+            <summary>
+            The base currency
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.QuoteCurrency">
+            <summary>
+            The quote currency
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Type">
+            <summary>
+            The type of symbol
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Underlying">
+            <summary>
+            The underlying asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Enabled">
+            <summary>
+            Whether the symbol is enabled or not
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.BestAsk">
+            <summary>
+            Best current ask price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.BestBid">
+            <summary>
+            Best current bid price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.PostOnly">
+            <summary>
+            If the market is in post-only mode
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.PriceStep">
+            <summary>
+            Price step
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.MinProviderSzie">
+            <summary>
+            Minimum maker order size (if >10 orders per hour fall below this size)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.QuantityStep">
+            <summary>
+            Quantity step
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Restricted">
+            <summary>
+            If the market has nonstandard restrictions on which jurisdictions can trade it
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.HighLeverageFeeExempt">
+            <summary>
+            High leverage fee exempt
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Staking.FTXStake">
+            <summary>
+            Stake info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStake.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStake.CreatedAt">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStake.Id">
+            <summary>
+            Stake id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStake.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Staking.FTXStakeBalance">
+            <summary>
+            Stake balance
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeBalance.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeBalance.LifetimeRewards">
+            <summary>
+            Total rewards
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeBalance.ScheduledToUnstake">
+            <summary>
+            Quantity scheduled to unstake
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeBalance.Staked">
+            <summary>
+            Quantity staked
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Staking.FTXStakeReward">
+            <summary>
+            Stake reward info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeReward.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeReward.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeReward.Quantity">
+            <summary>
+            Reward quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeReward.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXStakeReward.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Staking.FTXUnstakeRequest">
+            <summary>
+            Unstake request
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXUnstakeRequest.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXUnstakeRequest.CreatedAt">
+            <summary>
+            Creation time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXUnstakeRequest.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXUnstakeRequest.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXUnstakeRequest.Status">
+            <summary>
+            Request status
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Staking.FTXUnstakeRequest.UnlockAt">
+            <summary>
+            Unlock at
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Subaccounts.FTXSubaccount">
+            <summary>
+            Sub account info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccount.Nickname">
+            <summary>
+            Subaccount name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccount.Deletable">
+            <summary>
+            Whether the subaccount can be deleted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccount.Editable">
+            <summary>
+            Whether the nickname of the subaccount can be changed
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccount.Competition">
+            <summary>
+            Whether the subaccount was created for a competition
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer">
+            <summary>
+            Subaccount transfer
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer.Asset">
+            <summary>
+            Asset transfered
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer.Quantity">
+            <summary>
+            Quantity transfered
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer.Time">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer.Notes">
+            <summary>
+            Notes
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Subaccounts.FTXSubaccountTransfer.Status">
+            <summary>
+            Status; always `completed`
+            </summary>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientConvert">
+            <summary>
+            Convert endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientConvert.CreateQuoteRequestAsync(System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Create a new quote request
+            </summary>
+            <param name="fromAsset">From asset</param>
+            <param name="toAsset">To asset</param>
+            <param name="quantity">Quantity</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientConvert.GetQuoteStatusAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get quote status
+            </summary>
+            <param name="quoteId">Quote id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientConvert.AcceptQuoteAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Accept a convert quote
+            </summary>
+            <param name="quoteId">Id of quote to accept</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientLeveragedTokens">
+            <summary>
+            Leveraged token endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.GetLeveragedTokensAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of funding payments
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.GetLeveragedTokenAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get info on a token
+            </summary>
+            <param name="tokenName">Name of the token</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.GetLeveragedTokenBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get token balances
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.GetLeveragedTokenCreationRequestsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get creation requests
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.RequestLeveragedTokenCreationAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Request leveraged token creation
+            </summary>
+            <param name="tokenName">Name of the token</param>
+            <param name="size">Number of tokens to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.GetLeveragedTokenRedemptionRequestsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get redemption requests
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.RequestLeveragedTokenRedemptionAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Request leveraged token creation
+            </summary>
+            <param name="tokenName">Name of the token</param>
+            <param name="size">Number of tokens to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientLeveragedTokens.GetETFRebalanceInfoAsync(System.Threading.CancellationToken)">
+             <summary>
+            Provides information about the most recent rebalance of each ETF.
+             </summary>
+             <param name="ct">Cancellation token</param>
+             <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientMargin">
+            <summary>
+            Spot margin endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetLendingHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get lending history
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetBorrowRatesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get borrow rates
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetLendingRatesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get lending rates
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetDailyBorrowedAmountAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get daily borrowed amount
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetSymbolSummaryAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get symbol info
+            </summary>
+            <param name="symbol">Symbol to get info on</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetUserBorrowHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get user borrow history
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetUserLendingHistoryAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get user lending history
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetLendingOffersAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get lending offers
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.GetLendingInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get lending info
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientMargin.PlaceLendingOfferAsync(System.String,System.Decimal,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Submit a lending offer
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="quantity">Quantity</param>
+            <param name="rate">Rate</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientNFT">
+            <summary>
+            NFT endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNftsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of NFTs
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNftAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get info on a NFT
+            </summary>
+            <param name="nftId">Id of the NFT</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTTradesAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get info on the trades of a NFT
+            </summary>
+            <param name="nftId">Id of the NFT</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTAllTradesAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get all NFT trades
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTUserInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get details on a NFT for the user
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTCollectionsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all collections
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get user balances
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.CreateNFTOfferAsync(System.Int64,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Create an offer of an NFT
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="price">Price</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.BuyNFTAsync(System.Int64,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Buy a NFT
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="price">Price</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.CreateAuctionAsync(System.Int64,System.Decimal,System.Decimal,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Create a new auction
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="initialPrice">Initial price</param>
+            <param name="reservationPrice">Reservation price</param>
+            <param name="duration">Duration of the auction</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.EditAuctionAsync(System.Int64,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Edit an auction
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="reservationPrice">Reservation price</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.CancelAuctionAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancel an auction
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetBidsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get bids
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.PlaceBidAsync(System.Int64,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Place a bid on an NFT auction
+            </summary>
+            <param name="nftId">NFT id</param>
+            <param name="price">Bid price</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTDepositsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT deposits
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTWithdrawalsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT withdrawals
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNFTUserTradesAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get NFT trades
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.RedeemNftAsync(System.Int64,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Redeem a NFT
+            </summary>
+            <param name="nftId">NFT id to redeem</param>
+            <param name="address">Address to redeem to</param>
+            <param name="notes">Notes</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetNftGalleryAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get NFT gallery
+            </summary>
+            <param name="galleryId">Id of the gallery</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.GetGallerySettingsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get NFT gallery settings
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientNFT.EditGallerySettingsAsync(System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Edit NFT gallery settings
+            </summary>
+            <param name="isPublic">Gallery is public or not</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientOptions">
+            <summary>
+            Options endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetQuoteRequestsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of quote requests
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetUserQuoteRequestsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of quote requests for the user
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.CreateQuoteRequestAsync(System.String,FTX.Net.Enums.OptionType,System.Decimal,System.DateTime,FTX.Net.Enums.OrderSide,System.Decimal,System.Nullable{System.Decimal},System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            Create quote request
+            </summary>
+            <param name="underlying">Underlying</param>
+            <param name="type">Type</param>
+            <param name="strike">Strike</param>
+            <param name="expiry">Must be in the future and at 03:00 UTC.</param>
+            <param name="side">Side</param>
+            <param name="size">Size</param>
+            <param name="limitPrice">Limit price</param>
+            <param name="hideLimitPrice">Whether or not to hide your limit price from potential quoters, default true</param>
+            <param name="requestExpiry">Request expiry</param>
+            <param name="counterPartyId">When specified, makes the request private to the specified counterparty</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.CancelQuoteRequestAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a quote request
+            </summary>
+            <param name="requestId">Request id to cancel</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetQuotesForQuoteRequestAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get quotes for your quote request
+            </summary>
+            <param name="requestId">Request id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.CreateQuoteAsync(System.Int64,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Create quote
+            </summary>
+            <param name="requestId">Request id</param>
+            <param name="price">Price of the quote</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetUserQuotesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get quotes for user
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.CancelQuoteAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancel a quote
+            </summary>
+            <param name="quoteId">Quote id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.AcceptQuoteAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Accept options quote
+            </summary>
+            <param name="quoteId">Quote id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetAccountOptionsInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get account options info
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetOptionsPositionsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get options positions
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetOptionTradesAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get public options positions
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetUserOptionTradesAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get options fills
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetOptionVolumeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get 24H option volume
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetOptionsHistoricalVolumeAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get historical option volume
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetOptionsOpenInterestAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get open interest
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientOptions.GetOptionHistoricalOpenInterestAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get open interest history
+            </summary>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientPay">
+            <summary>
+            FTX Pay endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientPay.GetAppAndPaymentsAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Get the details of an FTXPay app, along with a list of payments to that app. Note that UserId is the id of this app specific to your account as a merchant.
+            </summary>
+            <param name="appId">App id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="limit">Maximum results</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:FTX.Net.SubClients.FTXSubClientPay.CreateOrderAsync(System.Int64,System.String,System.Decimal,System.Boolean,System.String,System.String,System.Threading.CancellationToken)" -->
+        <member name="M:FTX.Net.SubClients.FTXSubClientPay.GetOrdersAsync(System.Int64,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get orders for an app
+            </summary>
+            <param name="appId">App id</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientPay.CancelOrderAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancels an order, preventing it from being filled by a future FTX Pay payment. Can only be used on orders that have not already been filled or cancelled.
+            </summary>
+            <param name="appId">App id</param>
+            <param name="orderId">Order id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientPay.ReturnPaymentAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            You can return a payment by specifying your app ID and the payment ID. The amount paid to you (includig the tip, but without the fee that was already applied) will be returned to the payer.
+            </summary>
+            <param name="appId">App id</param>
+            <param name="paymentId">Payment id</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientStaking">
+            <summary>
+            Staking endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.GetStakesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of stakes for the user
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.GetUnstakeRequestsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of unstake requests for the user
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.GetStakeBalancesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of stake balances
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.RequestUnstakeAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Create a new unstake request
+            </summary>
+            <param name="asset">Asset</param>
+            <param name="quantity">Quantity to unstake</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.CancelUnstakeRequestAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Cancel an unstake request
+            </summary>
+            <param name="requestId">Id of request to unstake</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.GetStakingRewardsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of staking rewards
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientStaking.StakeAsync(System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Create a new stake request
+            </summary>
+            <param name="asset">Asset to stake</param>
+            <param name="quantity">Quantity to stake</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SubClients.FTXSubClientSubaccounts">
+            <summary>
+            Sub account endpoints
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientSubaccounts.GetSubaccountsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get list of sub accounts
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientSubaccounts.CreateSubaccountAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new sub client
+            </summary>
+            <param name="nickname">Name of the subaccount</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientSubaccounts.ChangeSubaccountNameAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Change the name of a sub account
+            </summary>
+            <param name="oldName">Old name</param>
+            <param name="newName">New name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientSubaccounts.DeleteSubaccountAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete a subaccount
+            </summary>
+            <param name="nickname">Nickname of account to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientSubaccounts.GetSubaccountBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get subaccount balances
+            </summary>
+            <param name="nickname">Nickname to get</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.SubClients.FTXSubClientSubaccounts.TransferAsync(System.String,System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Transfer funds between subaccounts
+            </summary>
+            <param name="source">Name of the source subaccount. Use 'main' for the main account</param>
+            <param name="destination">Name of the destination subaccount. Use 'main' for the main account</param>
+            <param name="asset">Asset to move</param>
+            <param name="quantity">Quantity to move</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook">
+            <summary>
+            Symbol order book
+            </summary>
+        </member>
+        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.#ctor(System.String,FTX.Net.Objects.FTXSymbolOrderBookOptions)">
+            <summary>
+            Create a new order book
+            </summary>
+            <param name="symbol">Symbol the book is for</param>
+            <param name="options">Options for the book</param>
+        </member>
+        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.DoStartAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.DoChecksum(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.DoResyncAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.Dispose">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

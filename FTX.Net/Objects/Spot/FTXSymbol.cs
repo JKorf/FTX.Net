@@ -1,4 +1,5 @@
-﻿using FTX.Net.Converters;
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 
@@ -7,7 +8,7 @@ namespace FTX.Net.Objects
     /// <summary>
     /// Symbol information
     /// </summary>
-    public class FTXSymbol
+    public class FTXSymbol: ICommonSymbol
     {
         /// <summary>
         /// The name of the symbol
@@ -59,6 +60,10 @@ namespace FTX.Net.Objects
         [JsonProperty("priceIncrement")]
         public decimal PriceStep { get; set; }
         /// <summary>
+        /// Minimum maker order size (if >10 orders per hour fall below this size)
+        /// </summary>
+        public decimal MinProviderSzie { get; set; }
+        /// <summary>
         /// Quantity step
         /// </summary>
         [JsonProperty("sizeIncrement")]
@@ -67,5 +72,13 @@ namespace FTX.Net.Objects
         /// If the market has nonstandard restrictions on which jurisdictions can trade it
         /// </summary>
         public bool Restricted { get; set; }
+        /// <summary>
+        /// High leverage fee exempt
+        /// </summary>
+        public bool HighLeverageFeeExempt { get; set; }
+
+        string ICommonSymbol.CommonName => Name;
+
+        decimal ICommonSymbol.CommonMinimumTradeSize => MinProviderSzie;
     }
 }

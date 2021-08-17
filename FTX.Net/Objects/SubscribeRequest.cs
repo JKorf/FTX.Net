@@ -2,7 +2,7 @@
 
 namespace FTX.Net.Objects.SocketObjects
 {
-    public class SubscribeRequest: SocketRequest
+    internal class SubscribeRequest: SocketRequest
     {
         [JsonProperty("channel")]
         public string Channel { get; set; }
@@ -17,7 +17,7 @@ namespace FTX.Net.Objects.SocketObjects
         }
     }
 
-    public class GroupedOrderBookSubscribeRequest : SubscribeRequest 
+    internal class GroupedOrderBookSubscribeRequest : SubscribeRequest 
     {
         [JsonProperty("grouping")]
         public int Grouping { get; set; }

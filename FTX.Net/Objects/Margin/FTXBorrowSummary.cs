@@ -5,6 +5,9 @@ using System.Text;
 
 namespace FTX.Net.Objects.Margin
 {
+    /// <summary>
+    /// Borrow summary
+    /// </summary>
     public class FTXBorrowSummary
     {
         /// <summary>

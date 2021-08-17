@@ -10,14 +10,6 @@ namespace FTX.Net.Objects.LeveragedTokens
     /// <summary>
     /// ETF rebalance info
     /// </summary>
-    //public class FTXETFRebalance
-    //{
-    //    public Dictionary<string, FTXETFRebalanceEntry> 
-    //}
-
-    /// <summary>
-    /// ETF rebalance info
-    /// </summary>
     public class FTXETFRebalanceEntry
     {
         /// <summary>

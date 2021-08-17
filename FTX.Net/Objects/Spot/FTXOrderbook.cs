@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
 using System;
@@ -7,7 +8,10 @@ using System.Text;
 
 namespace FTX.Net.Objects.Spot
 {
-    public class FTXOrderbook
+    /// <summary>
+    /// Order book
+    /// </summary>
+    public class FTXOrderbook: ICommonOrderBook
     {
         /// <summary>
         /// Asks
@@ -17,8 +21,15 @@ namespace FTX.Net.Objects.Spot
         /// Bids
         /// </summary>
         public IEnumerable<FTXOrderBookEntry> Bids { get; set; } = Array.Empty<FTXOrderBookEntry>();
+
+        IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonBids => Bids;
+
+        IEnumerable<ISymbolOrderBookEntry> ICommonOrderBook.CommonAsks => Asks;
     }
 
+    /// <summary>
+    /// Order book entry
+    /// </summary>
     [JsonConverter(typeof(ArrayConverter))]
     public class FTXOrderBookEntry: ISymbolOrderBookEntry
     {

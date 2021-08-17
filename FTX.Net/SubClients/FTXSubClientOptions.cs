@@ -15,9 +15,12 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.SubClients
 {
+    /// <summary>
+    /// Options endpoints
+    /// </summary>
     public class FTXSubClientOptions
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
         internal FTXSubClientOptions(FTXClient baseClient)
         {
             _baseClient = baseClient;
@@ -89,6 +92,7 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get quotes for your quote request
         /// </summary>
+        /// <param name="requestId">Request id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetQuotesForQuoteRequestAsync(long requestId, CancellationToken ct = default)
@@ -166,6 +170,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get public options positions
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXOptionTrade>>> GetOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
@@ -178,6 +184,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get options fills
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXUserOptionTrade>>> GetUserOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
@@ -200,6 +208,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get historical option volume
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXOptionsHistoricalVolume>>> GetOptionsHistoricalVolumeAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
@@ -222,6 +232,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get open interest history
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXOptionHistoricalOpenInterest>>> GetOptionHistoricalOpenInterestAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)

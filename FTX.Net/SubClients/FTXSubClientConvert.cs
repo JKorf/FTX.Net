@@ -11,11 +11,14 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.SubClients
 {
+    /// <summary>
+    /// Convert endpoints
+    /// </summary>
     public class FTXSubClientConvert
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
-        public FTXSubClientConvert(FTXClient baseClient)
+        internal FTXSubClientConvert(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }
@@ -41,6 +44,7 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get quote status
         /// </summary>
+        /// <param name="quoteId">Quote id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXConvertQuote>>> GetQuoteStatusAsync(long quoteId, CancellationToken ct = default)

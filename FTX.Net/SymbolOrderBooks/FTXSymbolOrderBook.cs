@@ -3,7 +3,6 @@ using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
 using Force.Crc32;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Spot;
 using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -15,9 +14,14 @@ namespace FTX.Net.SymbolOrderBooks
     /// </summary>
     public class FTXSymbolOrderBook : SymbolOrderBook
     {
-        private FTXSocketClient _socketClient;
-        private int? _grouping;
+        private readonly FTXSocketClient _socketClient;
+        private readonly int? _grouping;
 
+        /// <summary>
+        /// Create a new order book
+        /// </summary>
+        /// <param name="symbol">Symbol the book is for</param>
+        /// <param name="options">Options for the book</param>
         public FTXSymbolOrderBook(string symbol, FTXSymbolOrderBookOptions? options = null) : base(symbol, options ?? new FTXSymbolOrderBookOptions())
         {
             _socketClient = new FTXSocketClient(new FTXSocketClientOptions
@@ -27,6 +31,7 @@ namespace FTX.Net.SymbolOrderBooks
             _grouping = options?.Grouping;
         }
 
+        /// <inheritdoc />
         protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
         {
             CallResult<UpdateSubscription> subResult;
@@ -63,6 +68,7 @@ namespace FTX.Net.SymbolOrderBooks
             }
         }
 
+        /// <inheritdoc />
         protected override bool DoChecksum(int checksum)
         {
             //var checksumString = "";
@@ -87,11 +93,13 @@ namespace FTX.Net.SymbolOrderBooks
             return true;
         }
 
+        /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResyncAsync()
         {
             return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             processBuffer.Clear();

@@ -73,7 +73,7 @@ namespace FTX.Net.Objects.LeveragedTokens
         /// <summary>
         /// Bep2 asset name
         /// </summary>
-        public string Bep2AssetName { get; set; }
+        public string? Bep2AssetName { get; set; }
         /// <summary>
         /// Change in the price of the token over the past hour
         /// </summary>

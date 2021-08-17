@@ -1,4 +1,5 @@
-﻿using FTX.Net.Converters;
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 using System;
@@ -10,7 +11,7 @@ namespace FTX.Net.Objects.Spot
     /// <summary>
     /// Trade info
     /// </summary>
-    public class FTXTrade
+    public class FTXTrade: ICommonRecentTrade
     {
         /// <summary>
         /// Trade id
@@ -38,5 +39,11 @@ namespace FTX.Net.Objects.Spot
         /// Timestamp
         /// </summary>
         public DateTime Time { get; set; }
+
+        decimal ICommonRecentTrade.CommonPrice => Price;
+
+        decimal ICommonRecentTrade.CommonQuantity => Quantity;
+
+        DateTime ICommonRecentTrade.CommonTradeTime => Time;
     }
 }

@@ -1,4 +1,5 @@
-﻿using FTX.Net.Converters;
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +9,7 @@ namespace FTX.Net.Objects
     /// <summary>
     /// Order info
     /// </summary>
-    public class FTXOrder
+    public class FTXOrder: ICommonOrderId, ICommonOrder
     {
         /// <summary>
         /// Id of the order
@@ -28,9 +29,10 @@ namespace FTX.Net.Objects
         /// </summary>
         public string Future { get; set; } = string.Empty;
         /// <summary>
-        /// The market to order is for
+        /// The symbol to order is for
         /// </summary>
-        public string Market { get; set; } = string.Empty;
+        [JsonProperty("market")]
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// The price of the order
         /// </summary>
@@ -82,5 +84,38 @@ namespace FTX.Net.Objects
         /// </summary>
         [JsonProperty("avgFillPrice")]
         public decimal? AverageFillPrice { get; set; }
+
+        string ICommonOrder.CommonSymbol => Symbol;
+
+        decimal ICommonOrder.CommonPrice => Price;
+
+        decimal ICommonOrder.CommonQuantity => Quantity;
+
+        IExchangeClient.OrderStatus ICommonOrder.CommonStatus
+        {
+            get
+            {
+                if (Status == OrderStatus.New)
+                    return IExchangeClient.OrderStatus.Active;
+                
+                if (Status == OrderStatus.Open)
+                    return IExchangeClient.OrderStatus.Active;
+
+                if (RemainingQuantity > 0)
+                    return IExchangeClient.OrderStatus.Canceled;
+
+                return IExchangeClient.OrderStatus.Filled;
+            }
+        }
+
+        bool ICommonOrder.IsActive => Status == OrderStatus.New || Status == OrderStatus.Open;
+
+        IExchangeClient.OrderSide ICommonOrder.CommonSide => Side == OrderSide.Buy ? IExchangeClient.OrderSide.Buy : IExchangeClient.OrderSide.Sell;
+
+        IExchangeClient.OrderType ICommonOrder.CommonType => Type == OrderType.Limit ? IExchangeClient.OrderType.Limit : IExchangeClient.OrderType.Market;
+
+        DateTime ICommonOrder.CommonOrderTime => CreatedAt;
+
+        string ICommonOrderId.CommonId => Id.ToString();
     }
 }

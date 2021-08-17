@@ -11,9 +11,12 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.SubClients
 {
+    /// <summary>
+    /// Staking endpoints
+    /// </summary>
     public class FTXSubClientStaking
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
         internal FTXSubClientStaking(FTXClient baseClient)
         {

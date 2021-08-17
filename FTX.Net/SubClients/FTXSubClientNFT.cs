@@ -12,11 +12,14 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.SubClients
 {
+    /// <summary>
+    /// NFT endpoints
+    /// </summary>
     public class FTXSubClientNFT
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
-        public FTXSubClientNFT(FTXClient baseClient)
+        internal FTXSubClientNFT(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }
@@ -208,6 +211,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get NFT deposits
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXNftDeposit>>> GetNFTDepositsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
@@ -220,6 +225,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get NFT withdrawals
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXNftWithdrawal>>> GetNFTWithdrawalsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
@@ -232,6 +239,8 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get NFT trades
         /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXNftUserTrade>>> GetNFTUserTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
@@ -282,6 +291,7 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Edit NFT gallery settings
         /// </summary>
+        /// <param name="isPublic">Gallery is public or not</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult> EditGallerySettingsAsync(bool isPublic, CancellationToken ct = default)

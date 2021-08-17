@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace FTX.Net
 {
+    /// <summary>
+    /// Client for interacting with the FTX websocket API
+    /// </summary>
     public class FTXSocketClient : SocketClient
     {
         #region fields
@@ -91,7 +94,8 @@ namespace FTX.Net
         /// <summary>
         /// Subscribes to order book updates for a symbol
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe to</param>
+        /// <param name="symbol">Symbol for the order book</param>
+        /// <param name="grouping">Grouping of the data</param>
         /// <param name="handler">The handler for the data</param>
         /// <returns></returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToGroupedOrderBookUpdatesAsync(string symbol, int grouping, Action<DataEvent<FTXStreamOrderBook>> handler)
@@ -131,7 +135,6 @@ namespace FTX.Net
         /// <summary>
         /// Subscribes to trade updates
         /// </summary>
-        /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="handler">The handler for the data</param>
         /// <returns></returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserTradeUpdatesAsync(Action<DataEvent<FTXUserTrade>> handler)
@@ -179,6 +182,7 @@ namespace FTX.Net
             }
         }
 
+        /// <inheritdoc />
         protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
         {
             var time = (long)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
@@ -205,11 +209,13 @@ namespace FTX.Net
             return result;
         }
 
-        protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T>? callResult)
+        /// <inheritdoc />
+        protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T> callResult)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         protected override bool HandleSubscriptionResponse(SocketConnection socketConnection, SocketSubscription subscription, object request, JToken data, out CallResult<object>? callResult)
         {
             callResult = null;
@@ -254,6 +260,7 @@ namespace FTX.Net
             return true;
         }
 
+        /// <inheritdoc />
         protected override bool MessageMatchesHandler(JToken message, object request)
         {
             var ftxRequest = (SubscribeRequest)request;
@@ -263,6 +270,7 @@ namespace FTX.Net
             return (type?.ToString() == "update" || type?.ToString() == "partial") && channel?.ToString() == ftxRequest.Channel && market?.ToString() == ftxRequest.Market;
         }
 
+        /// <inheritdoc />
         protected override bool MessageMatchesHandler(JToken message, string identifier)
         {
             var type = message["type"];
@@ -277,6 +285,7 @@ namespace FTX.Net
             return false;
         }
 
+        /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
             var ftxRequest = (SubscribeRequest)subscriptionToUnsub.Request;

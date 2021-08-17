@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CryptoExchange.Net.ExchangeInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,7 +8,7 @@ namespace FTX.Net.Objects.Spot
     /// <summary>
     /// Kline info
     /// </summary>
-    public class FTXKline
+    public class FTXKline: ICommonKline
     {
         /// <summary>
         /// Close price
@@ -33,5 +34,17 @@ namespace FTX.Net.Objects.Spot
         /// Start time
         /// </summary>
         public DateTime StartTime { get; set; }
+
+        decimal ICommonKline.CommonHigh => High;
+
+        decimal ICommonKline.CommonLow => Low;
+
+        decimal ICommonKline.CommonOpen => Open;
+
+        decimal ICommonKline.CommonClose => Close;
+
+        DateTime ICommonKline.CommonOpenTime => StartTime;
+
+        decimal ICommonKline.CommonVolume => Volume;
     }
 }
