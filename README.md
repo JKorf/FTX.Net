@@ -1,5 +1,5 @@
 # FTX.Net
-![Build status](https://travis-ci.com/JKorf/FTX.Net.svg?branch=master) ![Nuget version](https://img.shields.io/nuget/v/FTX.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/FTX.Net.svg)
+![Build status](https://app.travis-ci.com/JKorf/FTX.Net.svg?token=2PbyJrjvDDpys8nuT4Xb&branch=main) ![Nuget version](https://img.shields.io/nuget/v/FTX.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/FTX.Net.svg)
 
 FTX.Net is a wrapper around the FTX API as described on [FTX](https://docs.ftx.com/), including all features the API provides using clear and readable objects, both for the REST  as the websocket API's.
 
