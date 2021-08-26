@@ -97,3 +97,5 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 
 ## Release notes
 
+* Version 0.0.1-beta1 - 26 Aug 2021
+    * Initial release

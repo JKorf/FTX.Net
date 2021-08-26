@@ -25,7 +25,7 @@ namespace FTX.Net.Objects
         /// <summary>
         /// Symbol
         /// </summary>
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = string.Empty;
 
         string ICommonTicker.CommonSymbol => Symbol;
 
