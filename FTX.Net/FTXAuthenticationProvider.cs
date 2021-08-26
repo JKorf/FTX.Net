@@ -32,7 +32,7 @@ namespace FTX.Net
             if (Credentials.Key == null)
                 throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
 
-            var timestamp = Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
+            var timestamp = (int)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
 
             result.Add("FTX-KEY", Credentials.Key.GetString());
             result.Add("FTX-TS", timestamp.ToString());

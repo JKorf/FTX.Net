@@ -9,17 +9,18 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net.SubClients
 {
     /// <summary>
     /// NFT endpoints
     /// </summary>
-    public class FTXSubClientNFT
+    public class FTXSubClientNft : IFTXSubClientNft
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientNFT(FTXClient baseClient)
+        internal FTXSubClientNft(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }
@@ -53,7 +54,7 @@ namespace FTX.Net.SubClients
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNftTrade>>> GetNFTTradesAsync(long nftId, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNftTrade>>> GetNftTradesAsync(long nftId, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
@@ -67,7 +68,7 @@ namespace FTX.Net.SubClients
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNftTradeAll>>> GetNFTAllTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNftTradeAll>>> GetNftAllTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
@@ -80,7 +81,7 @@ namespace FTX.Net.SubClients
         /// <param name="nftId">NFT id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<NFTUserInfo>> GetNFTUserInfoAsync(long nftId, CancellationToken ct = default)
+        public async Task<WebCallResult<NFTUserInfo>> GetNftUserInfoAsync(long nftId, CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<NFTUserInfo>(_baseClient.GetUri($"nft/nft/{nftId}/account_info"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
@@ -90,7 +91,7 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNftCollection>>> GetNFTCollectionsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNftCollection>>> GetNftCollectionsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<IEnumerable<FTXNftCollection>>(_baseClient.GetUri($"nft/collections"), HttpMethod.Get, ct).ConfigureAwait(false);
         }
@@ -100,7 +101,7 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNft>>> GetNFTBalancesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNft>>> GetNftBalancesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<IEnumerable<FTXNft>>(_baseClient.GetUri($"nft/balances"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
@@ -112,7 +113,7 @@ namespace FTX.Net.SubClients
         /// <param name="price">Price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXNft>> CreateNFTOfferAsync(long nftId, decimal price, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXNft>> CreateNftOfferAsync(long nftId, decimal price, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
@@ -127,7 +128,7 @@ namespace FTX.Net.SubClients
         /// <param name="price">Price</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXNft>> BuyNFTAsync(long nftId, decimal price, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXNft>> BuyNftAsync(long nftId, decimal price, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
@@ -215,7 +216,7 @@ namespace FTX.Net.SubClients
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNftDeposit>>> GetNFTDepositsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNftDeposit>>> GetNftDepositsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
@@ -229,7 +230,7 @@ namespace FTX.Net.SubClients
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNftWithdrawal>>> GetNFTWithdrawalsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNftWithdrawal>>> GetNftWithdrawalsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
@@ -243,7 +244,7 @@ namespace FTX.Net.SubClients
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXNftUserTrade>>> GetNFTUserTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXNftUserTrade>>> GetNftUserTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);

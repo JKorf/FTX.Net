@@ -1,5 +1,6 @@
 ﻿using CryptoExchange.Net.Objects;
 using System.Net.Http;
+using FTX.Net.Interfaces;
 
 namespace FTX.Net.Objects
 {
@@ -80,16 +81,22 @@ namespace FTX.Net.Objects
         /// <summary>
         /// Grouping of the order book entries
         /// </summary>
-        public int? Grouping { get; set; } = null;
+        public int? Grouping { get; set; }
+
+        /// <summary>
+        /// Client to use for connecting
+        /// </summary>
+        public IFTXSocketClient? Client { get; set; }
 
         /// <summary>
         /// Create new book options
         /// </summary>
-        /// <param name="grouping"></param>
-        public FTXSymbolOrderBookOptions(int? grouping = null): base("FTX", false, false)
+        /// <param name="grouping">Grouping of the order book entries</param>
+        /// <param name="client">Client to use for connecting</param>
+        public FTXSymbolOrderBookOptions(IFTXSocketClient? client = null, int? grouping = null): base("FTX", false, false)
         {
-            if (grouping.HasValue)
-                Grouping = grouping.Value;
+            Client = client;
+            Grouping = grouping;
         }
     }
 }

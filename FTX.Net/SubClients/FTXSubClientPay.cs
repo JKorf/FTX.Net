@@ -5,16 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net.SubClients
 {
     /// <summary>
     /// FTX Pay endpoints
     /// </summary>
-    public class FTXSubClientPay
+    public class FTXSubClientPay : IFTXSubClientPay
     {
         private readonly FTXClient _baseClient;
 
@@ -51,6 +51,7 @@ namespace FTX.Net.SubClients
         /// you can pre-register an order, specifying its size and currency, and track its status. When you supply an ID identifying the order to an FTX Pay popup, completion of the payment will also update the status of the order.
         /// To supply an ID, the link you should send payers to(or spawn in a popup for them) is: https://ftx.com/pay/request?id=APP_ID&orderId=ORDER_ID or https://ftx.com/pay/request?id=APP_ID&clientOrderId=CLIENT_ORDER_ID
         /// </summary>
+        /// <param name="appId">Application id</param>
         /// <param name="asset">The currency of the payment</param>
         /// <param name="notes">Notes about this order that are private to the merchant</param>
         /// <param name="quantity">Size of the desired payment</param>

@@ -9,16 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net.SubClients
 {
     /// <summary>
     /// Options endpoints
     /// </summary>
-    public class FTXSubClientOptions
+    public class FTXSubClientOptions : IFTXSubClientOptions
     {
         private readonly FTXClient _baseClient;
         internal FTXSubClientOptions(FTXClient baseClient)

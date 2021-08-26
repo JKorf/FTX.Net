@@ -6,6 +6,7 @@ using FTX.Net.Objects;
 using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces;
 
 namespace FTX.Net.SymbolOrderBooks
 {
@@ -14,7 +15,7 @@ namespace FTX.Net.SymbolOrderBooks
     /// </summary>
     public class FTXSymbolOrderBook : SymbolOrderBook
     {
-        private readonly FTXSocketClient _socketClient;
+        private readonly IFTXSocketClient _socketClient;
         private readonly int? _grouping;
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace FTX.Net.SymbolOrderBooks
         /// <param name="options">Options for the book</param>
         public FTXSymbolOrderBook(string symbol, FTXSymbolOrderBookOptions? options = null) : base(symbol, options ?? new FTXSymbolOrderBookOptions())
         {
-            _socketClient = new FTXSocketClient(new FTXSocketClientOptions
+            _socketClient = options?.Client ?? new FTXSocketClient(new FTXSocketClientOptions
             {
                 LogLevel = options?.LogLevel ?? LogLevel.Information
             });

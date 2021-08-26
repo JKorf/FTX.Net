@@ -10,29 +10,30 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces;
 
 namespace FTX.Net
 {
     /// <summary>
     /// Client for interacting with the FTX websocket API
     /// </summary>
-    public class FTXSocketClient : SocketClient
+    public class FTXSocketClient : SocketClient, IFTXSocketClient
     {
         #region fields
-        private static FTXSocketClientOptions defaultOptions = new FTXSocketClientOptions();
-        private static FTXSocketClientOptions DefaultOptions => defaultOptions.Copy<FTXSocketClientOptions>();
+        private static FTXSocketClientOptions _defaultOptions = new FTXSocketClientOptions();
+        private static FTXSocketClientOptions DefaultOptions => _defaultOptions.Copy<FTXSocketClientOptions>();
         #endregion
 
         #region ctor
         /// <summary>
-        /// Create a new instance of BitfinexSocketClient using the default options
+        /// Create a new instance of FTXSocketClient using the default options
         /// </summary>
         public FTXSocketClient() : this(DefaultOptions)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BitfinexSocketClient using provided options
+        /// Create a new instance of FTXSocketClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public FTXSocketClient(FTXSocketClientOptions options) : base("FTX", options, options.ApiCredentials == null ? null : new FTXAuthenticationProvider(options.ApiCredentials))
@@ -53,7 +54,7 @@ namespace FTX.Net
         /// <param name="newDefaultOptions"></param>
         public static void SetDefaultOptions(FTXSocketClientOptions newDefaultOptions)
         {
-            defaultOptions = newDefaultOptions;
+            _defaultOptions = newDefaultOptions;
         }
 
 

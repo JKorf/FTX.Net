@@ -6,12 +6,8 @@ using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Convert;
 using FTX.Net.Objects.Futures;
-using FTX.Net.Objects.LeveragedTokens;
-using FTX.Net.Objects.Options;
 using FTX.Net.Objects.Spot;
-using FTX.Net.Objects.Staking;
 using FTX.Net.SubClients;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -22,68 +18,70 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net
 {
     /// <summary>
     /// Client for interacting with the FTX API
     /// </summary>
-    public class FTXClient : RestClient, IExchangeClient
+    public class FTXClient : RestClient, IExchangeClient, IFTXClient
     {
-        private static FTXClientOptions defaultOptions = new FTXClientOptions();
+        private static FTXClientOptions _defaultOptions = new FTXClientOptions();
 
         /// <inheritDoc />
         public event Action<ICommonOrderId>? OnOrderPlaced;
         /// <inheritDoc />
         public event Action<ICommonOrderId>? OnOrderCanceled;
 
-        private static FTXClientOptions DefaultOptions => defaultOptions.Copy<FTXClientOptions>();
+        private static FTXClientOptions DefaultOptions => _defaultOptions.Copy<FTXClientOptions>();
 
-        private string _affiliateCode;
+        private readonly string _affiliateCode;
 
         /// <summary>
         /// Convert endpoints
         /// </summary>
-        public FTXSubClientConvert Convert { get; }
+        public IFTXSubClientConvert Convert { get; }
         /// <summary>
         /// Options endpoints
         /// </summary>
-        public FTXSubClientOptions Options { get; }
+        public IFTXSubClientOptions Options { get; }
         /// <summary>
         /// Leveraged token endpoints
         /// </summary>
-        public FTXSubClientLeveragedTokens LeveragedTokens { get; }
+        public IFTXSubClientLeveragedTokens LeveragedTokens { get; }
         /// <summary>
         /// Staking endpoints
         /// </summary>
-        public FTXSubClientStaking Staking { get; }
+        public IFTXSubClientStaking Staking { get; }
         /// <summary>
         /// Spot margin endpoints
         /// </summary>
-        public FTXSubClientMargin Margin { get; }
+        public IFTXSubClientMargin Margin { get; }
         /// <summary>
         /// NFT endpoints
         /// </summary>
-        public FTXSubClientNFT NFT { get; }
+        public IFTXSubClientNft NFT { get; }
         /// <summary>
         /// FTXPay endpoints
         /// </summary>
-        public FTXSubClientPay FTXPay { get; }
+        public IFTXSubClientPay FTXPay { get; }
         /// <summary>
         /// Subaccount endpoints
         /// </summary>
-        public FTXSubClientSubaccounts Subaccounts { get; }
+        public IFTXSubClientSubaccounts Subaccounts { get; }
 
         #region constructor/destructor
         /// <summary>
-        /// Create a new instance of BitfinexClient using the default options
+        /// Create a new instance of FTXClient using the default options
         /// </summary>
         public FTXClient() : this(DefaultOptions)
         {
         }
 
         /// <summary>
-        /// Create a new instance of BitfinexClient using provided options
+        /// Create a new instance of FTXClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
         public FTXClient(FTXClientOptions options) : base("FTX", options, options.ApiCredentials == null ? null : new FTXAuthenticationProvider(options.ApiCredentials))
@@ -98,7 +96,7 @@ namespace FTX.Net
             Margin = new FTXSubClientMargin(this);
             Staking = new FTXSubClientStaking(this);
             LeveragedTokens = new FTXSubClientLeveragedTokens(this);
-            NFT = new FTXSubClientNFT(this);
+            NFT = new FTXSubClientNft(this);
             FTXPay = new FTXSubClientPay(this);
             Subaccounts = new FTXSubClientSubaccounts(this);
         }
@@ -111,7 +109,7 @@ namespace FTX.Net
         /// <param name="newDefaultOptions"></param>
         public static void SetDefaultOptions(FTXClientOptions newDefaultOptions)
         {
-            defaultOptions = newDefaultOptions;
+            _defaultOptions = newDefaultOptions;
         }
 
         #region Markets
@@ -503,15 +501,15 @@ namespace FTX.Net
         /// <param name="orderId">Id of order to modify</param>
         /// <param name="price">New price of the order</param>
         /// <param name="quantity">New quantity of the order</param>
-        /// <param name="clientOrderID">New client order id</param>
+        /// <param name="clientOrderId">New client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderID = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("clientId", clientOrderID);
+            parameters.AddOptionalParameter("clientId", clientOrderId);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
             return await SendFTXRequest<FTXOrder>(GetUri($"orders/{orderId}/modify"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
@@ -545,15 +543,15 @@ namespace FTX.Net
         /// <param name="clientOrderId">Client order id of order to modify</param>
         /// <param name="price">New price of the order</param>
         /// <param name="quantity">New quantity of the order</param>
-        /// <param name="clientOrderID">New client order id</param>
+        /// <param name="newClientOrderId">New client order id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? clientOrderID = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("size", quantity?.ToString(CultureInfo.InvariantCulture));
-            parameters.AddOptionalParameter("clientId", clientOrderID);
+            parameters.AddOptionalParameter("clientId", newClientOrderId);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
             return await SendFTXRequest<FTXOrder>(GetUri($"orders/by_client_id/{clientOrderId}/modify"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
@@ -757,7 +755,6 @@ namespace FTX.Net
         }
 
         #endregion
-
         #region private
         internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null) where T : class
         {

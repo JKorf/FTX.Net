@@ -1,20 +1,19 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.LeveragedTokens;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net.SubClients
 {
     /// <summary>
     /// Leveraged token endpoints
     /// </summary>
-    public class FTXSubClientLeveragedTokens
+    public class FTXSubClientLeveragedTokens : IFTXSubClientLeveragedTokens
     {
         private readonly FTXClient _baseClient;
 

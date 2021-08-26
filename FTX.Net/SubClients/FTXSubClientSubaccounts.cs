@@ -1,22 +1,20 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Staking;
 using FTX.Net.Objects.Subaccounts;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net.SubClients
 {
     /// <summary>
     /// Sub account endpoints
     /// </summary>
-    public class FTXSubClientSubaccounts
+    public class FTXSubClientSubaccounts : IFTXSubClientSubaccounts
     {
         private readonly FTXClient _baseClient;
 

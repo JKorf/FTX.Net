@@ -1,21 +1,20 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.Margin;
-using FTX.Net.Objects.Staking;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Interfaces.SubClients;
 
 namespace FTX.Net.SubClients
 {
     /// <summary>
     /// Spot margin endpoints
     /// </summary>
-    public class FTXSubClientMargin
+    public class FTXSubClientMargin : IFTXSubClientMargin
     {
         private readonly FTXClient _baseClient;
 
