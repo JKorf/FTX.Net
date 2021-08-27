@@ -1,57 +1,56 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-	  <Nullable>enable</Nullable>
-	  <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
-	<PropertyGroup>
-		<PackageId>FTX.Net</PackageId>
-		<Authors>JKorf</Authors>
-		<PackageVersion>0.0.1-beta1</PackageVersion>
-		<AssemblyVersion>0.0.1</AssemblyVersion>
-		<FileVersion>0.0.1-beta1</FileVersion>
-		<Description>FTX.Net is a .Net wrapper for the FTX API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
-		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-		<PackageTags>FTX FTX.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/JKorf/FTX.Net.git</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/JKorf/FTX.Net</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageIcon>icon.png</PackageIcon>
-		<NeutralLanguage>en</NeutralLanguage>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageReleaseNotes>0.0.1-beta1 - Initial release</PackageReleaseNotes>
-	</PropertyGroup>
-	<PropertyGroup>
-		<DocumentationFile>FTX.Net.xml</DocumentationFile>
-	</PropertyGroup>
-	<PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	</PropertyGroup>
-	<ItemGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-	<ItemGroup>
-		<None Include="Icon\icon.png" Pack="true" PackagePath="\" />
-	</ItemGroup>
-	<ItemGroup>
+  <PropertyGroup>
+    <PackageId>FTX.Net</PackageId>
+    <Authors>JKorf</Authors>
+    <PackageVersion>0.0.1-beta2</PackageVersion>
+    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <FileVersion>0.0.1-beta2</FileVersion>
+    <Description>FTX.Net is a .Net wrapper for the FTX API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>FTX FTX.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/JKorf/FTX.Net.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/JKorf/FTX.Net</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>0.0.1-beta2 - Fixed request signing, Added FTXSymbolOrderBook checksum validation</PackageReleaseNotes>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DocumentationFile>FTX.Net.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <ItemGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Icon\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="CryptoExchange.Net" Version="4.0.8" />
-	<PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0">
-		<PrivateAssets>all</PrivateAssets>
-		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	</PackageReference>
-	<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-		<PrivateAssets>all</PrivateAssets>
-		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	</PackageReference>
-	<PackageReference Include="Crc32.NET" Version="1.2.0" />
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Crc32.NET" Version="1.2.0" />
   </ItemGroup>
 </Project>
