@@ -96,6 +96,10 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.0.1-beta3 - 27 Aug 2021
+    * Fixed order book parsing
+    * Updated Symbol model
+
 * Version 0.0.1-beta2 - 27 Aug 2021
     * Fixed request signing
     * Added FTXSymbolOrderBook checksum validation
