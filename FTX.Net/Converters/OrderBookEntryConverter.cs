@@ -26,13 +26,12 @@ namespace FTX.Net.Converters
             // Not pretty, but it works.
             // I've not found any other way to consistently get the correct string value from a decimal
             // which keeps the trailing zero in for example `2543.0`
-            var split_old = data.ToString().Replace("\r\n", "").Replace(" ", "").Replace("[", "").Replace("]", "").Split(',');
             var split = Regex.Replace(data.ToString(), @"(\s+|\r|\n| |\[|\]|)", "").Split(',');
 
             var result = new FTXOrderBookEntry()
             {
-                Price = decimal.Parse(split[0]),
-                Quantity = decimal.Parse(split[1]),
+                Price = (decimal)data[0],
+                Quantity = (decimal)data[1],
                 RawPrice = split[0],
                 RawQuantity = split[1]
             };

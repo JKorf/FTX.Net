@@ -4645,6 +4645,16 @@
             The quote currency
             </summary>
         </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.QuoteVolume24H">
+            <summary>
+            The volume in quote
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.USDVolume24H">
+            <summary>
+            The volume in quote
+            </summary>
+        </member>
         <member name="P:FTX.Net.Objects.FTXSymbol.Type">
             <summary>
             The type of symbol
@@ -4685,7 +4695,7 @@
             Price step
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.MinProviderSzie">
+        <member name="P:FTX.Net.Objects.FTXSymbol.MinProvideSize">
             <summary>
             Minimum maker order size (if >10 orders per hour fall below this size)
             </summary>
@@ -4703,6 +4713,21 @@
         <member name="P:FTX.Net.Objects.FTXSymbol.HighLeverageFeeExempt">
             <summary>
             High leverage fee exempt
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Change1Hour">
+            <summary>
+            Change in the price of the token over the past hour
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.Change24Hour">
+            <summary>
+            Change in the price of the token over the past day
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbol.ChangeBeginingOfDay">
+            <summary>
+            Change in price since 00:00 UTC
             </summary>
         </member>
         <member name="T:FTX.Net.Objects.Staking.FTXStake">

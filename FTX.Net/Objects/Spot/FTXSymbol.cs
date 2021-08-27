@@ -23,6 +23,15 @@ namespace FTX.Net.Objects
         /// </summary>
         public string? QuoteCurrency { get; set; }
         /// <summary>
+        /// The volume in quote
+        /// </summary>
+        public decimal QuoteVolume24H { get; set; }
+        /// <summary>
+        /// The volume in quote
+        /// </summary>
+        [JsonProperty("volumeUsd24h")]
+        public decimal USDVolume24H { get; set; }
+        /// <summary>
         /// The type of symbol
         /// </summary>
         [JsonConverter(typeof(SymbolTypeConverter))]
@@ -62,7 +71,7 @@ namespace FTX.Net.Objects
         /// <summary>
         /// Minimum maker order size (if >10 orders per hour fall below this size)
         /// </summary>
-        public decimal MinProviderSzie { get; set; }
+        public decimal MinProvideSize { get; set; }
         /// <summary>
         /// Quantity step
         /// </summary>
@@ -77,8 +86,25 @@ namespace FTX.Net.Objects
         /// </summary>
         public bool HighLeverageFeeExempt { get; set; }
 
+        /// <summary>
+        /// Change in the price of the token over the past hour
+        /// </summary>
+        [JsonProperty("change1h")]
+        public decimal Change1Hour { get; set; }
+        /// <summary>
+        /// Change in the price of the token over the past day
+        /// </summary>
+        [JsonProperty("change24h")]
+        public decimal Change24Hour { get; set; }
+        /// <summary>
+        /// Change in price since 00:00 UTC
+        /// </summary>
+        [JsonProperty("changeBod")]
+        public decimal ChangeBeginingOfDay { get; set; }
+
+
         string ICommonSymbol.CommonName => Name;
 
-        decimal ICommonSymbol.CommonMinimumTradeSize => MinProviderSzie;
+        decimal ICommonSymbol.CommonMinimumTradeSize => MinProvideSize;
     }
 }
