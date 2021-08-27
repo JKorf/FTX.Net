@@ -36,7 +36,7 @@ namespace FTX.Net.Objects
         /// <summary>
         /// The price of the order
         /// </summary>
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         /// <summary>
         /// The remaining quantity
         /// </summary>
@@ -87,7 +87,7 @@ namespace FTX.Net.Objects
 
         string ICommonOrder.CommonSymbol => Symbol;
 
-        decimal ICommonOrder.CommonPrice => Price;
+        decimal ICommonOrder.CommonPrice => Price ?? 0;
 
         decimal ICommonOrder.CommonQuantity => Quantity;
 
