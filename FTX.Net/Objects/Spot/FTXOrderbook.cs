@@ -43,5 +43,10 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         [ArrayProperty(1)]
         public decimal Quantity { get; set; }
+
+        [JsonIgnore]
+        internal string RawPrice { get; set; } = string.Empty;
+        [JsonIgnore]
+        internal string RawQuantity{get;set; } = string.Empty;
     }
 }

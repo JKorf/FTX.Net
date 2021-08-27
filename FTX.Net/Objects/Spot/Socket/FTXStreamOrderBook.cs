@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Converters;
+using FTX.Net.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,12 @@ namespace FTX.Net.Objects.Spot.Socket
         /// <summary>
         /// Changed bids
         /// </summary>
+        [JsonProperty(ItemConverterType = typeof(OrderBookEntryConverter))]
         public IEnumerable<FTXOrderBookEntry> Bids { get; set; } = Array.Empty<FTXOrderBookEntry>();
         /// <summary>
         /// Changed asks
         /// </summary>
+        [JsonProperty(ItemConverterType = typeof(OrderBookEntryConverter))]
         public IEnumerable<FTXOrderBookEntry> Asks { get; set; } = Array.Empty<FTXOrderBookEntry>();
         /// <summary>
         /// Checksum

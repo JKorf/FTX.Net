@@ -7,6 +7,10 @@ using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using FTX.Net.Interfaces;
+using System.Linq;
+using System.Globalization;
+using System.Text;
+using FTX.Net.Objects.Spot;
 
 namespace FTX.Net.SymbolOrderBooks
 {
@@ -72,24 +76,30 @@ namespace FTX.Net.SymbolOrderBooks
         /// <inheritdoc />
         protected override bool DoChecksum(int checksum)
         {
-            //var checksumString = "";
-            //for(var i = 0; i < 100; i++)
-            //{
-            //    if (bids.Count > i)
-            //    {
-            //        var bid = bids.ElementAt(i).Value;
-            //        checksumString += $"{bid.Price.ToString(CultureInfo.InvariantCulture)}:{bid.Quantity.ToString(CultureInfo.InvariantCulture)}:";
-            //    }
-            //    if (asks.Count > i)
-            //    {
-            //        var ask = asks.ElementAt(i).Value;
-            //        checksumString += $"{ask.Price.ToString(CultureInfo.InvariantCulture)}:{ask.Quantity.ToString(CultureInfo.InvariantCulture)}:";
-            //    }
-            //}
+            var checksumString = "";
+            for (var i = 0; i < 100; i++)
+            {
+                if (bids.Count > i)
+                {
+                    var bid = (FTXOrderBookEntry)bids.ElementAt(i).Value;
+                    checksumString += $"{bid.RawPrice}:{bid.RawQuantity}:";
+                }
+                if (asks.Count > i)
+                {
+                    var ask = (FTXOrderBookEntry)asks.ElementAt(i).Value;
+                    checksumString += $"{ask.RawPrice}:{ask.RawQuantity}:";
+                }
+            }
 
-            //checksumString = checksumString.TrimEnd(':');
+            checksumString = checksumString.TrimEnd(':');
 
-            // TODO Can't seem to be able to calculate the correct checksum..
+            var ourChecksumUtf = (int)Crc32Algorithm.Compute(Encoding.UTF8.GetBytes(checksumString));
+
+            if (ourChecksumUtf != checksum)
+            {
+                log.Write(LogLevel.Warning, $"{Symbol} Invalid checksum. Received from server: {checksum}, calculated local: {ourChecksumUtf}");
+                return false;
+            }
 
             return true;
         }
