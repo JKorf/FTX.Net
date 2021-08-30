@@ -11,7 +11,7 @@ namespace FTX.Net.Converters
 
         protected override List<KeyValuePair<SymbolType, string>> Mapping => new List<KeyValuePair<SymbolType, string>>
         {
-            new KeyValuePair<SymbolType, string>(SymbolType.Future, "futures"),
+            new KeyValuePair<SymbolType, string>(SymbolType.Future, "future"),
             new KeyValuePair<SymbolType, string>(SymbolType.Spot, "spot"),
         };
     }
