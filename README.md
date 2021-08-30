@@ -96,6 +96,9 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.0.1-beta5 - 30 Aug 2021
+    * Fixed GetSymbolsAsync deserialization
+
 * Version 0.0.1-beta4 - 27 Aug 2021
     * Fixed market order deserialization
 
