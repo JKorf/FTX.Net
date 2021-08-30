@@ -309,6 +309,26 @@
             A spot symbol
             </summary>
         </member>
+        <member name="T:FTX.Net.Enums.TriggerOrderStatus">
+            <summary>
+            Trigger order status
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.TriggerOrderStatus.Open">
+            <summary>
+            Open
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.TriggerOrderStatus.Cancelled">
+            <summary>
+            Cancelled
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.TriggerOrderStatus.Triggered">
+            <summary>
+            Triggered
+            </summary>
+        </member>
         <member name="T:FTX.Net.Enums.TriggerOrderType">
             <summary>
             The type of a trigger order
@@ -4232,7 +4252,7 @@
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Status">
             <summary>
-            The status of the order
+            Status of the trigger order
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.ReduceOnly">
@@ -4262,7 +4282,12 @@
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TrailStart">
             <summary>
-            Tail start
+            Trail start
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TrailValue">
+            <summary>
+            Trail start
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.FilledQuantity">

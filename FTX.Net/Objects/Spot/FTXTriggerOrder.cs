@@ -57,10 +57,10 @@ namespace FTX.Net.Objects.Spot
         [JsonProperty("size")]
         public decimal Quantity { get; set; }
         /// <summary>
-        /// The status of the order
+        /// Status of the trigger order
         /// </summary>
-        [JsonConverter(typeof(OrderStatusConverter))]
-        public OrderStatus Status { get; set; }
+        [JsonConverter(typeof(TriggerOrderStatusConverter))]
+        public TriggerOrderStatus Status { get; set; }
         /// <summary>
         /// Reduce only order
         /// </summary>
@@ -83,9 +83,13 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         public bool RetryUntilFilled { get; set; }
         /// <summary>
-        /// Tail start
+        /// Trail start
         /// </summary>
         public decimal? TrailStart { get; set; }
+        /// <summary>
+        /// Trail start
+        /// </summary>
+        public decimal? TrailValue { get; set; }
         /// <summary>
         /// Filled quantity
         /// </summary>
