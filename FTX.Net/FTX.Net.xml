@@ -4080,6 +4080,66 @@
             Start time
             </summary>
         </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXOrderBase">
+            <summary>
+            Base class for order/trigger order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.CreatedAt">
+            <summary>
+            When the order was created
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.Future">
+            <summary>
+            The future the order is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.Symbol">
+            <summary>
+            The symbol to order is for
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.OrderPrice">
+            <summary>
+            The price of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.OrderType">
+            <summary>
+            The order type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.Side">
+            <summary>
+            The side
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.Quantity">
+            <summary>
+            The total quantity of the order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.ReduceOnly">
+            <summary>
+            Reduce only order
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.AverageFillPrice">
+            <summary>
+            Average fill price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXOrderBase.FilledQuantity">
+            <summary>
+            Filled quantity
+            </summary>
+        </member>
         <member name="T:FTX.Net.Objects.Spot.FTXOrderbook">
             <summary>
             Order book
@@ -4200,29 +4260,9 @@
             Trigger order info
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Id">
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderType">
             <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderId">
-            <summary>
-            Id of the order
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.CreatedAt">
-            <summary>
-            When the order was created
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Future">
-            <summary>
-            The future the order is for
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Market">
-            <summary>
-            The market to order is for
+            The order type
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderPrice">
@@ -4230,14 +4270,14 @@
             The price of the order
             </summary>
         </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderId">
+            <summary>
+            Id of the order
+            </summary>
+        </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TriggerPrice">
             <summary>
             The trigger price
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Side">
-            <summary>
-            The side
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Type">
@@ -4245,19 +4285,9 @@
             The trigger type
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Quantity">
-            <summary>
-            The total quantity of the order
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Status">
             <summary>
             Status of the trigger order
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.ReduceOnly">
-            <summary>
-            Reduce only order
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Error">
@@ -4268,11 +4298,6 @@
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TriggeredAt">
             <summary>
             Time at which the order was triggered
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.OrderType">
-            <summary>
-            The order type
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.RetryUntilFilled">
@@ -4288,16 +4313,6 @@
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TrailValue">
             <summary>
             Trail start
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.FilledQuantity">
-            <summary>
-            Filled quantity
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.AverageFillPrice">
-            <summary>
-            Average fill price
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.CancelledAt">
@@ -4570,32 +4585,12 @@
             Order info
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Id">
+        <member name="P:FTX.Net.Objects.FTXOrder.OrderType">
             <summary>
-            Id of the order
+            The order type
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.CreatedAt">
-            <summary>
-            When the order was created
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.FilledQuantity">
-            <summary>
-            The quantity that is filled
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Future">
-            <summary>
-            The future the order is for
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Symbol">
-            <summary>
-            The symbol to order is for
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Price">
+        <member name="P:FTX.Net.Objects.FTXOrder.OrderPrice">
             <summary>
             The price of the order
             </summary>
@@ -4605,29 +4600,9 @@
             The remaining quantity
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Side">
-            <summary>
-            The side
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Type">
-            <summary>
-            The order type
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.Quantity">
-            <summary>
-            The total quantity of the order
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.FTXOrder.Status">
             <summary>
             The status of the order
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.ReduceOnly">
-            <summary>
-            Reduce only order
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.FTXOrder.ImmediateOrCancel">
@@ -4643,11 +4618,6 @@
         <member name="P:FTX.Net.Objects.FTXOrder.ClientId">
             <summary>
             Client id
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXOrder.AverageFillPrice">
-            <summary>
-            Average execution price
             </summary>
         </member>
         <member name="T:FTX.Net.Objects.FTXSymbol">
