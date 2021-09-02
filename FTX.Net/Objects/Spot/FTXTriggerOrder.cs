@@ -42,7 +42,7 @@ namespace FTX.Net.Objects.Spot
         [JsonConverter(typeof(TriggerOrderStatusConverter))]
         public TriggerOrderStatus Status { get; set; }
         /// <summary>
-        /// Error message for orrder placing
+        /// Error message for order placing
         /// </summary>
         public string? Error { get; set; }
         /// <summary>

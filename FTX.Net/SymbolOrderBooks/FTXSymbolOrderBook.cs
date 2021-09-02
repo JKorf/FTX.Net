@@ -20,6 +20,7 @@ namespace FTX.Net.SymbolOrderBooks
     public class FTXSymbolOrderBook : SymbolOrderBook
     {
         private readonly IFTXSocketClient _socketClient;
+        private readonly bool _socketOwner;
         private readonly int? _grouping;
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace FTX.Net.SymbolOrderBooks
             {
                 LogLevel = options?.LogLevel ?? LogLevel.Information
             });
+            _socketOwner = options?.Client == null;
             _grouping = options?.Grouping;
         }
 
@@ -117,7 +119,8 @@ namespace FTX.Net.SymbolOrderBooks
             asks.Clear();
             bids.Clear();
 
-            _socketClient?.Dispose();
+            if(_socketOwner)
+                _socketClient?.Dispose();
         }
     }
 }

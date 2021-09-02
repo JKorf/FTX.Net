@@ -4292,7 +4292,7 @@
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.Error">
             <summary>
-            Error message for orrder placing
+            Error message for order placing
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Spot.FTXTriggerOrder.TriggeredAt">
