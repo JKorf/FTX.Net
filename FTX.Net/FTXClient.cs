@@ -428,10 +428,10 @@ namespace FTX.Net
                 { "market", symbol },
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
-                { "size", quantity.ToString(CultureInfo.InvariantCulture) }
+                { "size", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "price", price?.ToString(CultureInfo.InvariantCulture) } // Should still be send even when it's null
             };
 
-            parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("reduceOnly", reduceOnly);
             parameters.AddOptionalParameter("ioc", immediateOrCancel);
             parameters.AddOptionalParameter("postOnly", postOnly);
