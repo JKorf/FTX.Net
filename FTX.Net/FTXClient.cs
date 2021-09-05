@@ -205,7 +205,7 @@ namespace FTX.Net
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("showAvgPrice", showAveragePrice);
-            return await SendFTXRequest<IEnumerable<FTXPosition>>(GetUri("positions"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXPosition>>(GetUri("positions"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -600,7 +600,7 @@ namespace FTX.Net
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
-            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -615,7 +615,7 @@ namespace FTX.Net
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
             parameters.AddOptionalParameter("type", type == null ? null: JsonConvert.SerializeObject(type, new TriggerOrderTypeConverter(false)));
-            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -631,7 +631,7 @@ namespace FTX.Net
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders/history"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders/history"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -653,7 +653,7 @@ namespace FTX.Net
             parameters.AddOptionalParameter("type", type == null ? null : JsonConvert.SerializeObject(type, new TriggerOrderTypeConverter(false)));
             parameters.AddOptionalParameter("orderType", orderType == null ? null : JsonConvert.SerializeObject(orderType, new OrderTypeConverter(false)));
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders/history"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders/history"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -755,6 +755,7 @@ namespace FTX.Net
         }
 
         #endregion
+
         #region private
         internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null) where T : class
         {

@@ -82,7 +82,7 @@ namespace FTX.Net.SubClients
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXAppOrder>>(_baseClient.GetUri($"ftxpay/apps/{appId}/orders"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);     
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXAppOrder>>(_baseClient.GetUri($"ftxpay/apps/{appId}/orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);     
         }
 
         /// <summary>
