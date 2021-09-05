@@ -96,6 +96,18 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.0.1 - 03 Sep 2021
+    * Fixed placing market order
+
+* Version 0.0.1-beta9 - 02 Sep 2021
+    * Fix for position deserialization
+
+* Version 0.0.1-beta8 - 02 Sep 2021
+    * Fix for disposing order book closing socket even if there are other connections
+
+* Version 0.0.1-beta7 - 02 Sep 2021
+    * Added shared base class for FTXOrder and FTXTriggerOrder
+
 * Version 0.0.1-beta6 - 30 Aug 2021
     * Fixed trigger order deserialization
 

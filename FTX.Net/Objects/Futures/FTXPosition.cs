@@ -18,11 +18,11 @@ namespace FTX.Net.Objects.Futures
         /// <summary>
         /// Average cost of this position after pnl was last realized: whenever unrealized pnl gets realized, this field gets set to mark price, unrealizedPnL is set to 0, and realizedPnl changes by the previous value for unrealizedPnl.
         /// </summary>
-        public decimal EntryPrice { get; set; }
+        public decimal? EntryPrice { get; set; }
         /// <summary>
         /// Estimated liquidation price
         /// </summary>
-        public decimal EstimatedLiquidationPrice { get; set; }
+        public decimal? EstimatedLiquidationPrice { get; set; }
         /// <summary>
         /// Name of the future
         /// </summary>
