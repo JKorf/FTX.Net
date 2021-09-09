@@ -96,6 +96,10 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.0.3 - 09 Sep 2021
+    * Updated stream ticker model
+    * Added Topic for socket subscriptions
+
 * Version 0.0.2 - 05 Sep 2021
     * Fixed multiple calls not being passed the input parameters
 
