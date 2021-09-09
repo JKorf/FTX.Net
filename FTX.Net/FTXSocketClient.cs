@@ -161,14 +161,16 @@ namespace FTX.Net
                 if (actualData == null)
                     return;
 
+
                 var deserializeResult = Deserialize<T>(actualData);
                 if (!deserializeResult)
                 {
-                    // log
+                    log.Write(LogLevel.Warning, "Failed to deserialize stream data: " + deserializeResult.Error);
                     return;
                 }
 
-                handler?.Invoke(data.As(deserializeResult.Data));
+                var market = data.Data["market"]?.ToString();
+                handler?.Invoke(data.As(deserializeResult.Data, market));
             });
             return await SubscribeAsync(request, null, authenticated, internalHandler).ConfigureAwait(false);
         }

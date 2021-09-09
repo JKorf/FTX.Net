@@ -2835,9 +2835,19 @@
             Best ask price
             </summary>
         </member>
+        <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
         <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.BestBid">
             <summary>
             Best bid price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.BestAskQuantity">
+            <summary>
+            Best ask quantity
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.SocketObjects.FTXStreamTicker.LastTrade">
