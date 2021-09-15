@@ -32,8 +32,8 @@ namespace FTX.Net.Converters
             {
                 Price = (decimal)data[0],
                 Quantity = (decimal)data[1],
-                RawPrice = split[0],
-                RawQuantity = split[1]
+                RawPrice = split[0].ToLower(),
+                RawQuantity = split[1].ToLower()
             };
             return result;
         }

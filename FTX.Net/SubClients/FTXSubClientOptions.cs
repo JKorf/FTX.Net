@@ -39,11 +39,12 @@ namespace FTX.Net.SubClients
         /// <summary>
         /// Get list of quote requests for the user
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetUserQuoteRequestsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetUserQuoteRequestsAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequest>>(_baseClient.GetUri("options/my_requests"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequest>>(_baseClient.GetUri("options/my_requests"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
 
@@ -60,9 +61,10 @@ namespace FTX.Net.SubClients
         /// <param name="hideLimitPrice">Whether or not to hide your limit price from potential quoters, default true</param>
         /// <param name="requestExpiry">Request expiry</param>
         /// <param name="counterPartyId">When specified, makes the request private to the specified counterparty</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("underlying", underlying);
@@ -75,29 +77,31 @@ namespace FTX.Net.SubClients
             parameters.AddOptionalParameter("hideLimitPrice", hideLimitPrice);
             parameters.AddOptionalParameter("requestExpiry", requestExpiry.HasValue ? JsonConvert.SerializeObject(expiry, new TimestampConverter()) : null);
             parameters.AddOptionalParameter("counterPartyId", counterPartyId);
-            return await _baseClient.SendFTXRequest<FTXUserQuoteRequest>(_baseClient.GetUri("options/requests"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXUserQuoteRequest>(_baseClient.GetUri("options/requests"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Cancel a quote request
         /// </summary>
         /// <param name="requestId">Request id to cancel</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXUserQuoteRequest>> CancelQuoteRequestAsync(long requestId, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXUserQuoteRequest>> CancelQuoteRequestAsync(long requestId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXUserQuoteRequest>(_baseClient.GetUri("options/requests/" + requestId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXUserQuoteRequest>(_baseClient.GetUri("options/requests/" + requestId), HttpMethod.Delete, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get quotes for your quote request
         /// </summary>
         /// <param name="requestId">Request id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetQuotesForQuoteRequestAsync(long requestId, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetQuotesForQuoteRequestAsync(long requestId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequestQuote>>(_baseClient.GetUri($"options/requests/{requestId}/quotes"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequestQuote>>(_baseClient.GetUri($"options/requests/{requestId}/quotes"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,23 +109,25 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="requestId">Request id</param>
         /// <param name="price">Price of the quote</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteAsync(long requestId, decimal price, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteAsync(long requestId, decimal price, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.Add("price", price.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest<FTXUserQuoteRequest>(_baseClient.GetUri($"options/requests/{requestId}/quotes"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXUserQuoteRequest>(_baseClient.GetUri($"options/requests/{requestId}/quotes"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get quotes for user
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetUserQuotesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetUserQuotesAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequestQuote>>(_baseClient.GetUri($"options/my_quotes"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequestQuote>>(_baseClient.GetUri($"options/my_quotes"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
 
@@ -129,42 +135,46 @@ namespace FTX.Net.SubClients
         /// Cancel a quote
         /// </summary>
         /// <param name="quoteId">Quote id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXQuoteRequestQuote>> CancelQuoteAsync(long quoteId, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXQuoteRequestQuote>> CancelQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXQuoteRequestQuote>(_baseClient.GetUri($"options/quotes/" + quoteId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXQuoteRequestQuote>(_baseClient.GetUri($"options/quotes/" + quoteId), HttpMethod.Delete, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Accept options quote
         /// </summary>
         /// <param name="quoteId">Quote id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXQuoteRequestQuote>> AcceptQuoteAsync(long quoteId, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXQuoteRequestQuote>> AcceptQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXQuoteRequestQuote>(_baseClient.GetUri($"options/quotes/{quoteId}/accept"), HttpMethod.Post, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXQuoteRequestQuote>(_baseClient.GetUri($"options/quotes/{quoteId}/accept"), HttpMethod.Post, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get account options info
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOptionsAccountInfo>> GetAccountOptionsInfoAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOptionsAccountInfo>> GetAccountOptionsInfoAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXOptionsAccountInfo>(_baseClient.GetUri($"options/account_info"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXOptionsAccountInfo>(_baseClient.GetUri($"options/account_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get options positions
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsPosition>>(_baseClient.GetUri($"options/positions"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsPosition>>(_baseClient.GetUri($"options/positions"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -186,13 +196,14 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXUserOptionTrade>>> GetUserOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXUserOptionTrade>>> GetUserOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserOptionTrade>>(_baseClient.GetUri($"options/fills"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserOptionTrade>>(_baseClient.GetUri($"options/fills"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>

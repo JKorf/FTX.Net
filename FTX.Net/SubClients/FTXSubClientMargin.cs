@@ -28,13 +28,14 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLend>>> GetLendingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXLend>>> GetLendingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLend>>(_baseClient.GetUri("spot_margin/history"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLend>>(_baseClient.GetUri("spot_margin/history"), HttpMethod.Get, ct, parameters, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -44,7 +45,7 @@ namespace FTX.Net.SubClients
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXBorrowRate>>> GetBorrowRatesAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXBorrowRate>>(_baseClient.GetUri("spot_margin/borrow_rates"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXBorrowRate>>(_baseClient.GetUri("spot_margin/borrow_rates"), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace FTX.Net.SubClients
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXBorrowRate>>> GetLendingRatesAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXBorrowRate>>(_baseClient.GetUri("spot_margin/lending_rates"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXBorrowRate>>(_baseClient.GetUri("spot_margin/lending_rates"), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -71,13 +72,14 @@ namespace FTX.Net.SubClients
         /// Get symbol info
         /// </summary>
         /// <param name="symbol">Symbol to get info on</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXMarginMarketInfo>>> GetSymbolSummaryAsync(string symbol, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXMarginMarketInfo>>> GetSymbolSummaryAsync(string symbol, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("market", symbol);
-            var result = await _baseClient.SendFTXRequest<IEnumerable<FTXMarginMarketInfo>>(_baseClient.GetUri("spot_margin/market_info"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            var result = await _baseClient.SendFTXRequest<IEnumerable<FTXMarginMarketInfo>>(_baseClient.GetUri("spot_margin/market_info"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
             if (result && result.Data == null)
                 return new WebCallResult<IEnumerable<FTXMarginMarketInfo>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("No data returned"));
 
@@ -89,13 +91,14 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXUserLend>>> GetUserBorrowHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXUserLend>>> GetUserBorrowHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/borrow_history"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/borrow_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -103,33 +106,36 @@ namespace FTX.Net.SubClients
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXUserLend>>> GetUserLendingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXUserLend>>> GetUserLendingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             _baseClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/lending_history"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/lending_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get lending offers
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLendingOffer>>> GetLendingOffersAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXLendingOffer>>> GetLendingOffersAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingOffer>>(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingOffer>>(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get lending info
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXLendingInfo>>> GetLendingInfoAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXLendingInfo>>> GetLendingInfoAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingInfo>>(_baseClient.GetUri("spot_margin/lending_info"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingInfo>>(_baseClient.GetUri("spot_margin/lending_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -138,15 +144,16 @@ namespace FTX.Net.SubClients
         /// <param name="asset">Asset</param>
         /// <param name="quantity">Quantity</param>
         /// <param name="rate">Rate</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult> PlaceLendingOfferAsync(string asset, decimal quantity, decimal rate, CancellationToken ct = default)
+        public async Task<WebCallResult> PlaceLendingOfferAsync(string asset, decimal quantity, decimal rate, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("coin", asset);
             parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
             parameters.AddParameter("rate", rate.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
     }
 }

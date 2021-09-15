@@ -22,6 +22,8 @@ namespace FTX.Net
         #region fields
         private static FTXSocketClientOptions _defaultOptions = new FTXSocketClientOptions();
         private static FTXSocketClientOptions DefaultOptions => _defaultOptions.Copy<FTXSocketClientOptions>();
+
+        private string _subaccount;
         #endregion
 
         #region ctor
@@ -41,6 +43,8 @@ namespace FTX.Net
             if (options == null)
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
 
+            _subaccount = options.SubaccountName;
+
             SendPeriodic(TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
 
             AddGenericHandler("PongHandler", (a) => { });
@@ -56,7 +60,6 @@ namespace FTX.Net
         {
             _defaultOptions = newDefaultOptions;
         }
-
 
         /// <summary>
         /// Subscribes to ticker updates for a symbol
@@ -189,7 +192,7 @@ namespace FTX.Net
         protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
         {
             var time = (long)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
-            var loginRequest = new LoginRequest(authProvider.Credentials.Key.GetString(), authProvider.Sign(time.ToString() + "websocket_login"), time);
+            var loginRequest = new LoginRequest(authProvider.Credentials.Key.GetString(), authProvider.Sign(time.ToString() + "websocket_login"), time, _subaccount);
             // If we don't get a response it's okay
             var result = new CallResult<bool>(true, null);
 

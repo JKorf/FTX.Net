@@ -20,6 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Interfaces;
 using FTX.Net.Interfaces.SubClients;
+using System.Net;
 
 namespace FTX.Net
 {
@@ -29,6 +30,8 @@ namespace FTX.Net
     public class FTXClient : RestClient, IExchangeClient, IFTXClient
     {
         private static FTXClientOptions _defaultOptions = new FTXClientOptions();
+
+        private const string SubaccountHeaderName = "FTX-SUBACCOUNT";
 
         /// <inheritDoc />
         public event Action<ICommonOrderId>? OnOrderPlaced;
@@ -90,6 +93,14 @@ namespace FTX.Net
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
 
             _affiliateCode = options.AffiliateCode;
+            if (!string.IsNullOrEmpty(options.SubaccountName)) 
+            {
+                StandardRequestHeaders = new Dictionary<string, string>
+                {
+                    { SubaccountHeaderName, WebUtility.UrlEncode(options.SubaccountName) }
+                };
+            }
+            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
 
             Convert = new FTXSubClientConvert(this);
             Options = new FTXSubClientOptions(this);
@@ -111,6 +122,12 @@ namespace FTX.Net
         {
             _defaultOptions = newDefaultOptions;
         }
+
+        internal static Dictionary<string, string>? GetSubaccountHeader(string? subaccountName) => subaccountName == null? null: new Dictionary<string, string>
+            {
+                { SubaccountHeaderName, WebUtility.UrlEncode(subaccountName) }
+            };
+
 
         #region Markets
 
@@ -184,41 +201,43 @@ namespace FTX.Net
         #endregion
 
         #region Account
-
         /// <summary>
         /// Get account info
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXAccountInfo>> GetAccountInfoAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<FTXAccountInfo>> GetAccountInfoAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<FTXAccountInfo>(GetUri("account"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXAccountInfo>(GetUri("account"), HttpMethod.Get, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get positions
         /// </summary>
         /// <param name="showAveragePrice"></param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXPosition>>> GetPositionsAsync(bool? showAveragePrice = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXPosition>>> GetPositionsAsync(bool? showAveragePrice = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("showAvgPrice", showAveragePrice);
-            return await SendFTXRequest<IEnumerable<FTXPosition>>(GetUri("positions"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXPosition>>(GetUri("positions"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Change account leverage
         /// </summary>
         /// <param name="leverage">Desired acccount-wide leverage setting</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult> ChangeAccountLeverageAsync(decimal leverage, CancellationToken ct = default)
+        public async Task<WebCallResult> ChangeAccountLeverageAsync(decimal leverage, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("leverage", leverage.ToString(CultureInfo.InvariantCulture));
-            return await SendFTXRequest(GetUri("account/leverage"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest(GetUri("account/leverage"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #endregion
@@ -238,11 +257,12 @@ namespace FTX.Net
         /// <summary>
         /// Get a list of balances
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXBalance>>> GetBalancesAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXBalance>>> GetBalancesAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<IEnumerable<FTXBalance>>(GetUri("wallet/balances"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXBalance>>(GetUri("wallet/balances"), HttpMethod.Get, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -260,13 +280,14 @@ namespace FTX.Net
         /// </summary>
         /// <param name="asset">Asset to get address for</param>
         /// <param name="network">The network to use</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("method", network);
-            return await SendFTXRequest<FTXDepositAddress>(GetUri("wallet/deposit_address/" + asset), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXDepositAddress>(GetUri("wallet/deposit_address/" + asset), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -274,13 +295,14 @@ namespace FTX.Net
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXDeposit>>> GetDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXDeposit>>> GetDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXDeposit>>(GetUri("wallet/deposits"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXDeposit>>(GetUri("wallet/deposits"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -288,13 +310,14 @@ namespace FTX.Net
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXWithdrawal>>> GetWithdrawalHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXWithdrawal>>> GetWithdrawalHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXWithdrawal>>(GetUri("wallet/withdrawals"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXWithdrawal>>(GetUri("wallet/withdrawals"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -307,9 +330,10 @@ namespace FTX.Net
         /// <param name="network">Network to us</param>
         /// <param name="password">Withdrawal password if required</param>
         /// <param name="code">Two factor authentication code if required</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXWithdrawal>> WithdrawAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? password = null, string? code = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXWithdrawal>> WithdrawAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? password = null, string? code = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("coin", asset);
@@ -319,7 +343,7 @@ namespace FTX.Net
             parameters.AddOptionalParameter("method", network);
             parameters.AddOptionalParameter("password", password);
             parameters.AddOptionalParameter("code", code);
-            return await SendFTXRequest<FTXWithdrawal>(GetUri("wallet/withdrawals"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXWithdrawal>(GetUri("wallet/withdrawals"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -327,13 +351,14 @@ namespace FTX.Net
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXAirdrop>>> GetAirdropsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXAirdrop>>> GetAirdropsAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXAirdrop>>(GetUri("wallet/airdrops"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXAirdrop>>(GetUri("wallet/airdrops"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -343,29 +368,31 @@ namespace FTX.Net
         /// <param name="quantity">Quantity</param>
         /// <param name="address">Address</param>
         /// <param name="tag">Tag</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("coin", asset);
             parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
             parameters.AddParameter("address", address);
             parameters.AddOptionalParameter("tag", tag);
-            return await SendFTXRequest<FTXWithdrawalFee>(GetUri("wallet/withdrawal_fee"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXWithdrawalFee>(GetUri("wallet/withdrawal_fee"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get saved addresses
         /// </summary>
         /// <param name="asset">Filter by asset</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXSavedAddress>>> GetSavedAddressesAsync(string? asset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXSavedAddress>>> GetSavedAddressesAsync(string? asset = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
-            return await SendFTXRequest<IEnumerable<FTXSavedAddress>>(GetUri("wallet/saved_addresses"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXSavedAddress>>(GetUri("wallet/saved_addresses"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -377,9 +404,10 @@ namespace FTX.Net
         /// <param name="isPrimeTrust">Is prime trust</param>
         /// <param name="tag">Address tag</param>
         /// <param name="code">2FA code if needed</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXSavedAddress>> CreateSavedAddressAsync(string asset, string address, string addressName, bool isPrimeTrust, string? tag = null, string? code = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXSavedAddress>> CreateSavedAddressAsync(string asset, string address, string addressName, bool isPrimeTrust, string? tag = null, string? code = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("coin", asset);
@@ -388,18 +416,19 @@ namespace FTX.Net
             parameters.AddParameter("isPrimeTrust", isPrimeTrust);
             parameters.AddOptionalParameter("tag", tag);
             parameters.AddOptionalParameter("code", code);
-            return await SendFTXRequest<FTXSavedAddress>(GetUri("wallet/saved_addresses"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXSavedAddress>(GetUri("wallet/saved_addresses"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Delete a saved address
         /// </summary>
         /// <param name="savedAddressId">Id of the saved address to delete</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<string>> DeleteSavedAddressAsync(long savedAddressId, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> DeleteSavedAddressAsync(long savedAddressId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<string>(GetUri("wallet/saved_addresses/" + savedAddressId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<string>(GetUri("wallet/saved_addresses/" + savedAddressId), HttpMethod.Delete, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #endregion
@@ -419,9 +448,10 @@ namespace FTX.Net
         /// <param name="postOnly">Post only</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="rejectOnPriceBand">If the order should be rejected if its price would instead be adjusted due to price bands</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, bool? reduceOnly = null, bool? immediateOrCancel = null, bool? postOnly = null, string? clientOrderId = null, bool? rejectOnPriceBand = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, bool? reduceOnly = null, bool? immediateOrCancel = null, bool? postOnly = null, string? clientOrderId = null, bool? rejectOnPriceBand = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -439,7 +469,7 @@ namespace FTX.Net
             parameters.AddOptionalParameter("rejectOnPriceBand", rejectOnPriceBand);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
-            var result = await SendFTXRequest<FTXOrder>(GetUri("orders"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            var result = await SendFTXRequest<FTXOrder>(GetUri("orders"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
             if (result)
                 OnOrderPlaced?.Invoke(result.Data);
             return result;
@@ -457,6 +487,7 @@ namespace FTX.Net
         /// <param name="trailValue">Tailing value for trailing stop orders, negative for sell, positive for buy</param>
         /// <param name="reduceOnly">Reduce only</param>
         /// <param name="retryUntilFilled">Whether or not to keep re-triggering until filled. optional, default true for market orders</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         public async Task<WebCallResult<FTXTriggerOrder>> PlaceTriggerOrderAsync(
@@ -475,6 +506,7 @@ namespace FTX.Net
             // Trailing stop params
             decimal? trailValue = null,
 
+            string? subaccountName = null,
             CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
@@ -492,7 +524,7 @@ namespace FTX.Net
             parameters.AddOptionalParameter("retryUntilFilled", retryUntilFilled);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
-            return await SendFTXRequest<FTXTriggerOrder>(GetUri("conditional_orders"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXTriggerOrder>(GetUri("conditional_orders"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -502,9 +534,10 @@ namespace FTX.Net
         /// <param name="price">New price of the order</param>
         /// <param name="quantity">New quantity of the order</param>
         /// <param name="clientOrderId">New client order id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderId = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
@@ -512,7 +545,7 @@ namespace FTX.Net
             parameters.AddOptionalParameter("clientId", clientOrderId);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
-            return await SendFTXRequest<FTXOrder>(GetUri($"orders/{orderId}/modify"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXOrder>(GetUri($"orders/{orderId}/modify"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -523,9 +556,10 @@ namespace FTX.Net
         /// <param name="triggerPrice">New trigger price</param>
         /// <param name="orderPrice">New order price</param>
         /// <param name="trailingValue">New trailing value</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXTriggerOrder>> ModifyTriggerOrderAsync(long orderId, decimal? quantity = null, decimal ? triggerPrice = null, decimal? orderPrice = null, decimal? trailingValue = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXTriggerOrder>> ModifyTriggerOrderAsync(long orderId, decimal? quantity = null, decimal ? triggerPrice = null, decimal? orderPrice = null, decimal? trailingValue = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("triggerPrice", triggerPrice?.ToString(CultureInfo.InvariantCulture));
@@ -534,7 +568,7 @@ namespace FTX.Net
             parameters.AddOptionalParameter("trailValue", trailingValue?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
-            return await SendFTXRequest<FTXTriggerOrder>(GetUri($"conditional_orders/{orderId}/modify"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXTriggerOrder>(GetUri($"conditional_orders/{orderId}/modify"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -544,9 +578,10 @@ namespace FTX.Net
         /// <param name="price">New price of the order</param>
         /// <param name="quantity">New quantity of the order</param>
         /// <param name="newClientOrderId">New client order id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
@@ -554,53 +589,57 @@ namespace FTX.Net
             parameters.AddOptionalParameter("clientId", newClientOrderId);
             parameters.AddOptionalParameter("externalReferralProgram", _affiliateCode);
 
-            return await SendFTXRequest<FTXOrder>(GetUri($"orders/by_client_id/{clientOrderId}/modify"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXOrder>(GetUri($"orders/by_client_id/{clientOrderId}/modify"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get the status of an order
         /// </summary>
         /// <param name="orderId">Id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> GetOrderAsync(long orderId, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> GetOrderAsync(long orderId, string? subaccountName = null, CancellationToken ct = default)
         {           
-            return await SendFTXRequest<FTXOrder>(GetUri("orders/" + orderId), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXOrder>(GetUri("orders/" + orderId), HttpMethod.Get, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get the status of an order
         /// </summary>
         /// <param name="clientOrderId">Client order id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<FTXOrder>> GetOrderByClientOrderIdAsync(string clientOrderId, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> GetOrderByClientOrderIdAsync(string clientOrderId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<FTXOrder>(GetUri("orders/by_client_id/" + clientOrderId), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<FTXOrder>(GetUri("orders/by_client_id/" + clientOrderId), HttpMethod.Get, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get a list triggers for a trigger order
         /// </summary>
         /// <param name="orderId">Id of the trigger order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggers(long orderId, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggers(long orderId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<IEnumerable<FTXTriggerOrderTrigger>>(GetUri($"conditional_orders/{orderId}/triggers"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXTriggerOrderTrigger>>(GetUri($"conditional_orders/{orderId}/triggers"), HttpMethod.Get, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Get a list of open orders
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOrder>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXOrder>>> GetOpenOrdersAsync(string? symbol = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
-            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -608,14 +647,15 @@ namespace FTX.Net
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="type">Filter by type</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetOpenTriggerOrdersAsync(string? symbol = null, TriggerOrderType? type = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetOpenTriggerOrdersAsync(string? symbol = null, TriggerOrderType? type = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
             parameters.AddOptionalParameter("type", type == null ? null: JsonConvert.SerializeObject(type, new TriggerOrderTypeConverter(false)));
-            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -624,14 +664,15 @@ namespace FTX.Net
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXOrder>>> GetOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXOrder>>> GetOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders/history"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXOrder>>(GetUri("orders/history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -643,9 +684,10 @@ namespace FTX.Net
         /// <param name="orderType">Filter by order type</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetTriggerOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, OrderSide? side = null, TriggerOrderType? type = null, OrderType? orderType = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetTriggerOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, OrderSide? side = null, TriggerOrderType? type = null, OrderType? orderType = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
@@ -653,18 +695,19 @@ namespace FTX.Net
             parameters.AddOptionalParameter("type", type == null ? null : JsonConvert.SerializeObject(type, new TriggerOrderTypeConverter(false)));
             parameters.AddOptionalParameter("orderType", orderType == null ? null : JsonConvert.SerializeObject(orderType, new OrderTypeConverter(false)));
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders/history"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXTriggerOrder>>(GetUri("conditional_orders/history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Cancel an order
         /// </summary>
         /// <param name="orderId">Id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<string>> CancelOrderAsync(long orderId, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> CancelOrderAsync(long orderId, string? subaccountName = null, CancellationToken ct = default)
         {
-            var result = await SendFTXRequest<string>(GetUri("orders/" + orderId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);            
+            var result = await SendFTXRequest<string>(GetUri("orders/" + orderId), HttpMethod.Delete, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);            
             if (result)
                 OnOrderCanceled?.Invoke(new FTXOrder() { Id = orderId });
             return result;
@@ -674,22 +717,24 @@ namespace FTX.Net
         /// Cancel a trigger order
         /// </summary>
         /// <param name="orderId">Id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<string>> CancelTriggerOrderAsync(long orderId, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> CancelTriggerOrderAsync(long orderId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<string>(GetUri("conditional_orders/" + orderId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<string>(GetUri("conditional_orders/" + orderId), HttpMethod.Delete, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Cancel an order
         /// </summary>
         /// <param name="clientOrderId">Client order id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<string>> CancelOrderByClientIdAsync(string clientOrderId, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> CancelOrderByClientIdAsync(string clientOrderId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await SendFTXRequest<string>(GetUri("orders/by_client_id/" + clientOrderId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<string>(GetUri("orders/by_client_id/" + clientOrderId), HttpMethod.Delete, ct, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -699,16 +744,17 @@ namespace FTX.Net
         /// <param name="side">Filter by side</param>
         /// <param name="conditionalOrdersOnly">Only cancel conditional orders</param>
         /// <param name="limitOrdersOnly">Only cancel limit orders</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<string>> CancelAllOrdersAsync(string? symbol = null, OrderSide? side = null, bool? conditionalOrdersOnly = null, bool? limitOrdersOnly = null, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> CancelAllOrdersAsync(string? symbol = null, OrderSide? side = null, bool? conditionalOrdersOnly = null, bool? limitOrdersOnly = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
             parameters.AddOptionalParameter("side", side == null ? null : JsonConvert.SerializeObject(side, new OrderSideConverter(false)));
             parameters.AddOptionalParameter("conditionalOrdersOnly", conditionalOrdersOnly);
             parameters.AddOptionalParameter("limitOrdersOnly", limitOrdersOnly);
-            return await SendFTXRequest<string>(GetUri("orders"), HttpMethod.Delete, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<string>(GetUri("orders"), HttpMethod.Delete, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
         #endregion
 
@@ -722,16 +768,17 @@ namespace FTX.Net
         /// <param name="ascendingOrder">Return results in ascending order in time</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXUserTrade>>> GetUserTradesAsync(string? symbol = null, long? orderId = null, bool? ascendingOrder = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXUserTrade>>> GetUserTradesAsync(string? symbol = null, long? orderId = null, bool? ascendingOrder = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
             parameters.AddOptionalParameter("order", ascendingOrder == true ? "asc": null);
             parameters.AddOptionalParameter("orderId", orderId);
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXUserTrade>>(GetUri("fills"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXUserTrade>>(GetUri("fills"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #endregion
@@ -744,31 +791,32 @@ namespace FTX.Net
         /// <param name="future">Filter by future</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        public async Task<WebCallResult<IEnumerable<FTXFundingPayment>>> GetFundingPaymentsAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXFundingPayment>>> GetFundingPaymentsAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("future", future);
             AddFilter(parameters, startTime, endTime);
-            return await SendFTXRequest<IEnumerable<FTXFundingPayment>>(GetUri("funding_payments"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await SendFTXRequest<IEnumerable<FTXFundingPayment>>(GetUri("funding_payments"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #endregion
 
         #region private
-        internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null) where T : class
+        internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null) where T : class
         {
-            var result = await SendRequestAsync<FTXResult<T>>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer).ConfigureAwait(false);
+            var result = await SendRequestAsync<FTXResult<T>>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
             if (result)
                 return result.As(result.Data.Result);
 
             return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
         }
 
-        internal async Task<WebCallResult> SendFTXRequest(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, PostParameters? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null)
+        internal async Task<WebCallResult> SendFTXRequest(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
         {
-            var result = await SendRequestAsync<FTXResult>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer).ConfigureAwait(false);
+            var result = await SendRequestAsync<FTXResult>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
             if (result)
                 return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
 
@@ -798,42 +846,6 @@ namespace FTX.Net
         {
             parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampConverter()));
             parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampConverter()));
-        }
-
-        // Override because FTX requires HttpMethod.Delete requests to have the parameters in the request body instead of uri
-        /// <inheritdoc />
-        protected override IRequest ConstructRequest(Uri uri, HttpMethod method, Dictionary<string, object>? parameters, bool signed, PostParameters postPosition, ArrayParametersSerialization arraySerialization, int requestId)
-        {
-            if (parameters == null)
-                parameters = new Dictionary<string, object>();
-
-            var uriString = uri.ToString();
-            if (authProvider != null)
-                parameters = authProvider.AddAuthenticationToParameters(uriString, method, parameters, signed, postPosition, arraySerialization);
-
-            if ((method == HttpMethod.Get || postPosition == PostParameters.InUri) && parameters?.Any() == true)
-                uriString += "?" + parameters.CreateParamString(true, arraySerialization);
-
-            var contentType = requestBodyFormat == RequestBodyFormat.Json ? Constants.JsonContentHeader : Constants.FormContentHeader;
-            var request = RequestFactory.Create(method, uriString, requestId);
-            request.Accept = Constants.JsonContentHeader;
-
-            var headers = new Dictionary<string, string>();
-            if (authProvider != null)
-                headers = authProvider.AddAuthenticationToHeaders(uriString, method, parameters!, signed, postPosition, arraySerialization);
-
-            foreach (var header in headers)
-                request.AddHeader(header.Key, header.Value);
-
-            if ((method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Delete) && postPosition != PostParameters.InUri)
-            {
-                if (parameters?.Any() == true)
-                    WriteParamBody(request, parameters, contentType);
-                else
-                    request.SetContent(requestBodyEmptyContent, contentType);
-            }
-
-            return request;
         }
 
         private int GetResolutionFromKlineInterval(KlineInterval interval)

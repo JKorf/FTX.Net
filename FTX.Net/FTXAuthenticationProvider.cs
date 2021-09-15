@@ -23,7 +23,7 @@ namespace FTX.Net
             _encryptor = new HMACSHA256(Encoding.ASCII.GetBytes(credentials.Secret.GetString()));
         }
 
-        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, PostParameters postParameterPosition, ArrayParametersSerialization arraySerialization)
+        public override Dictionary<string, string> AddAuthenticationToHeaders(string uri, HttpMethod method, Dictionary<string, object> parameters, bool signed, HttpMethodParameterPosition parameterPosition, ArrayParametersSerialization arraySerialization)
         {
             var result = new Dictionary<string, string>();
             if (!signed)
@@ -38,7 +38,7 @@ namespace FTX.Net
             result.Add("FTX-TS", timestamp.ToString());
             var requestUri = new Uri(uri);
             var toSign = timestamp + method.ToString() + requestUri.PathAndQuery;
-            if(method == HttpMethod.Post || method == HttpMethod.Delete)
+            if(parameterPosition == HttpMethodParameterPosition.InBody)
             {
                 toSign += JsonConvert.SerializeObject(parameters.OrderBy(p => p.Key).ToDictionary(p => p.Key, p => p.Value));
             }

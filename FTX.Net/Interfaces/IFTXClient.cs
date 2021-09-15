@@ -56,7 +56,7 @@ namespace FTX.Net.Interfaces
         /// Subaccount endpoints
         /// </summary>
         IFTXSubClientSubaccounts Subaccounts { get; }
-        
+
         /// <summary>
         /// Get the list of supported symbols
         /// </summary>
@@ -105,25 +105,28 @@ namespace FTX.Net.Interfaces
         /// <summary>
         /// Get account info
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXAccountInfo>> GetAccountInfoAsync(CancellationToken ct = default);
+        Task<WebCallResult<FTXAccountInfo>> GetAccountInfoAsync(string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get positions
         /// </summary>
         /// <param name="showAveragePrice"></param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXPosition>>> GetPositionsAsync(bool? showAveragePrice = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXPosition>>> GetPositionsAsync(bool? showAveragePrice = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Change account leverage
         /// </summary>
         /// <param name="leverage">Desired acccount-wide leverage setting</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult> ChangeAccountLeverageAsync(decimal leverage, CancellationToken ct = default);
+        Task<WebCallResult> ChangeAccountLeverageAsync(decimal leverage, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the list of assets
@@ -135,9 +138,10 @@ namespace FTX.Net.Interfaces
         /// <summary>
         /// Get a list of balances
         /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXBalance>>> GetBalancesAsync(CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXBalance>>> GetBalancesAsync(string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of balances, including master and subaccounts
@@ -151,27 +155,30 @@ namespace FTX.Net.Interfaces
         /// </summary>
         /// <param name="asset">Asset to get address for</param>
         /// <param name="network">The network to use</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXDepositAddress>> GetDepositAddressAsync(string asset, string? network = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get deposit history
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXDeposit>>> GetDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXDeposit>>> GetDepositHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get withdrawal history
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXWithdrawal>>> GetWithdrawalHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXWithdrawal>>> GetWithdrawalHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Submit a withdraw request
@@ -183,18 +190,20 @@ namespace FTX.Net.Interfaces
         /// <param name="network">Network to us</param>
         /// <param name="password">Withdrawal password if required</param>
         /// <param name="code">Two factor authentication code if required</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXWithdrawal>> WithdrawAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? password = null, string? code = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXWithdrawal>> WithdrawAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? password = null, string? code = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get airdrops
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXAirdrop>>> GetAirdropsAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXAirdrop>>> GetAirdropsAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get withdrawal fees
@@ -203,17 +212,19 @@ namespace FTX.Net.Interfaces
         /// <param name="quantity">Quantity</param>
         /// <param name="address">Address</param>
         /// <param name="tag">Tag</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get saved addresses
         /// </summary>
         /// <param name="asset">Filter by asset</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXSavedAddress>>> GetSavedAddressesAsync(string? asset = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXSavedAddress>>> GetSavedAddressesAsync(string? asset = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Create a saved address
@@ -224,17 +235,19 @@ namespace FTX.Net.Interfaces
         /// <param name="isPrimeTrust">Is prime trust</param>
         /// <param name="tag">Address tag</param>
         /// <param name="code">2FA code if needed</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXSavedAddress>> CreateSavedAddressAsync(string asset, string address, string addressName, bool isPrimeTrust, string? tag = null, string? code = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXSavedAddress>> CreateSavedAddressAsync(string asset, string address, string addressName, bool isPrimeTrust, string? tag = null, string? code = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Delete a saved address
         /// </summary>
         /// <param name="savedAddressId">Id of the saved address to delete</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<string>> DeleteSavedAddressAsync(long savedAddressId, CancellationToken ct = default);
+        Task<WebCallResult<string>> DeleteSavedAddressAsync(long savedAddressId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new order
@@ -249,9 +262,10 @@ namespace FTX.Net.Interfaces
         /// <param name="postOnly">Post only</param>
         /// <param name="clientOrderId">Client order id</param>
         /// <param name="rejectOnPriceBand">If the order should be rejected if its price would instead be adjusted due to price bands</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, bool? reduceOnly = null, bool? immediateOrCancel = null, bool? postOnly = null, string? clientOrderId = null, bool? rejectOnPriceBand = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, bool? reduceOnly = null, bool? immediateOrCancel = null, bool? postOnly = null, string? clientOrderId = null, bool? rejectOnPriceBand = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Place a new trigger order
@@ -265,6 +279,7 @@ namespace FTX.Net.Interfaces
         /// <param name="trailValue">Tailing value for trailing stop orders, negative for sell, positive for buy</param>
         /// <param name="reduceOnly">Reduce only</param>
         /// <param name="retryUntilFilled">Whether or not to keep re-triggering until filled. optional, default true for market orders</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<FTXTriggerOrder>> PlaceTriggerOrderAsync(
@@ -283,6 +298,7 @@ namespace FTX.Net.Interfaces
             // Trailing stop params
             decimal? trailValue = null,
 
+            string? subaccountName = null,
             CancellationToken ct = default);
 
         /// <summary>
@@ -292,9 +308,10 @@ namespace FTX.Net.Interfaces
         /// <param name="price">New price of the order</param>
         /// <param name="quantity">New quantity of the order</param>
         /// <param name="clientOrderId">New client order id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderId = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Modify a trigger order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
@@ -304,9 +321,10 @@ namespace FTX.Net.Interfaces
         /// <param name="triggerPrice">New trigger price</param>
         /// <param name="orderPrice">New order price</param>
         /// <param name="trailingValue">New trailing value</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXTriggerOrder>> ModifyTriggerOrderAsync(long orderId, decimal? quantity = null, decimal ? triggerPrice = null, decimal? orderPrice = null, decimal? trailingValue = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXTriggerOrder>> ModifyTriggerOrderAsync(long orderId, decimal? quantity = null, decimal ? triggerPrice = null, decimal? orderPrice = null, decimal? trailingValue = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
@@ -315,50 +333,56 @@ namespace FTX.Net.Interfaces
         /// <param name="price">New price of the order</param>
         /// <param name="quantity">New quantity of the order</param>
         /// <param name="newClientOrderId">New client order id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the status of an order
         /// </summary>
         /// <param name="orderId">Id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXOrder>> GetOrderAsync(long orderId, CancellationToken ct = default);
+        Task<WebCallResult<FTXOrder>> GetOrderAsync(long orderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the status of an order
         /// </summary>
         /// <param name="clientOrderId">Client order id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXOrder>> GetOrderByClientOrderIdAsync(string clientOrderId, CancellationToken ct = default);
+        Task<WebCallResult<FTXOrder>> GetOrderByClientOrderIdAsync(string clientOrderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list triggers for a trigger order
         /// </summary>
         /// <param name="orderId">Id of the trigger order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggers(long orderId, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggers(long orderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of open orders
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXOrder>>> GetOpenOrdersAsync(string? symbol = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXOrder>>> GetOpenOrdersAsync(string? symbol = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of open trigger orders
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="type">Filter by type</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetOpenTriggerOrdersAsync(string? symbol = null, TriggerOrderType? type = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetOpenTriggerOrdersAsync(string? symbol = null, TriggerOrderType? type = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of orders
@@ -366,9 +390,10 @@ namespace FTX.Net.Interfaces
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXOrder>>> GetOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXOrder>>> GetOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of trigger orders
@@ -379,33 +404,37 @@ namespace FTX.Net.Interfaces
         /// <param name="orderType">Filter by order type</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetTriggerOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, OrderSide? side = null, TriggerOrderType? type = null, OrderType? orderType = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetTriggerOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, OrderSide? side = null, TriggerOrderType? type = null, OrderType? orderType = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an order
         /// </summary>
         /// <param name="orderId">Id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<string>> CancelOrderAsync(long orderId, CancellationToken ct = default);
+        Task<WebCallResult<string>> CancelOrderAsync(long orderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel a trigger order
         /// </summary>
         /// <param name="orderId">Id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<string>> CancelTriggerOrderAsync(long orderId, CancellationToken ct = default);
+        Task<WebCallResult<string>> CancelTriggerOrderAsync(long orderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an order
         /// </summary>
         /// <param name="clientOrderId">Client order id of the order</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<string>> CancelOrderByClientIdAsync(string clientOrderId, CancellationToken ct = default);
+        Task<WebCallResult<string>> CancelOrderByClientIdAsync(string clientOrderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel all orders matching the parameters
@@ -414,9 +443,10 @@ namespace FTX.Net.Interfaces
         /// <param name="side">Filter by side</param>
         /// <param name="conditionalOrdersOnly">Only cancel conditional orders</param>
         /// <param name="limitOrdersOnly">Only cancel limit orders</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<string>> CancelAllOrdersAsync(string? symbol = null, OrderSide? side = null, bool? conditionalOrdersOnly = null, bool? limitOrdersOnly = null, CancellationToken ct = default);
+        Task<WebCallResult<string>> CancelAllOrdersAsync(string? symbol = null, OrderSide? side = null, bool? conditionalOrdersOnly = null, bool? limitOrdersOnly = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of trades based on the input parameters
@@ -426,9 +456,10 @@ namespace FTX.Net.Interfaces
         /// <param name="ascendingOrder">Return results in ascending order in time</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXUserTrade>>> GetUserTradesAsync(string? symbol = null, long? orderId = null, bool? ascendingOrder = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXUserTrade>>> GetUserTradesAsync(string? symbol = null, long? orderId = null, bool? ascendingOrder = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of funding payments
@@ -436,9 +467,10 @@ namespace FTX.Net.Interfaces
         /// <param name="future">Filter by future</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXFundingPayment>>> GetFundingPaymentsAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXFundingPayment>>> GetFundingPaymentsAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
     }
 }

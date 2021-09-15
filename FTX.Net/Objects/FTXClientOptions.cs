@@ -14,6 +14,10 @@ namespace FTX.Net.Objects
         /// </summary>
         public string AffiliateCode { get; set; } = "jkorf-net";
 
+        /// <summary>
+        /// Bind this client to a subaccount. All requests send from this account will be associated with the provided sub account
+        /// </summary>
+        public string? SubaccountName { get; set; }
 
         /// <summary>
         /// Create new client options
@@ -55,6 +59,7 @@ namespace FTX.Net.Objects
         {
             var copy = Copy<FTXClientOptions>();
             copy.AffiliateCode = AffiliateCode;
+            copy.SubaccountName = SubaccountName;
             return copy;
         }
     }
@@ -65,11 +70,36 @@ namespace FTX.Net.Objects
     public class FTXSocketClientOptions: SocketClientOptions
     {
         /// <summary>
+        /// Bind this client to a subaccount. All private subscriptions (orders/fills etc) will be for the bound subaccount instead of the main account.
+        /// </summary>
+        public string? SubaccountName { get; set; }
+
+        /// <summary>
         /// Create new client options
         /// </summary>
-        public FTXSocketClientOptions(): base("wss://ftx.com/ws/")
+        public FTXSocketClientOptions() : this(null)
+        { 
+        }
+
+        /// <summary>
+        /// Create new client options
+        /// </summary>
+        /// <param name="subaccountName">Name of the subaccount to subscribe private endpoints for. Null for master account</param>
+        public FTXSocketClientOptions(string? subaccountName = null) : base("wss://ftx.com/ws/")
         {
+            SubaccountName = subaccountName;
             SocketSubscriptionsCombineTarget = 10;
+        }
+
+        /// <summary>
+        /// Copy
+        /// </summary>
+        /// <returns></returns>
+        public FTXSocketClientOptions Copy()
+        {
+            var copy = Copy<FTXSocketClientOptions>();
+            copy.SubaccountName = SubaccountName;
+            return copy;
         }
     }
 
