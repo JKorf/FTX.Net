@@ -96,6 +96,11 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.0.4 - 15 Sep 2021
+    * Added support for subaccount requests/subscriptions
+    * Updated CryptoExchange.Net
+    * Fixed checksum issue FTXSymbolOrderBook
+
 * Version 0.0.3 - 09 Sep 2021
     * Updated stream ticker model
     * Added Topic for socket subscriptions
