@@ -58,7 +58,7 @@ namespace FTX.Net.Objects
         /// Last trade price
         /// </summary>
         [JsonProperty("last")]
-        public decimal LastPrice { get; set; }
+        public decimal? LastPrice { get; set; }
         /// <summary>
         /// If the market is in post-only mode
         /// </summary>
