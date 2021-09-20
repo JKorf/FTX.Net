@@ -17,6 +17,13 @@ namespace FTX.Net.Interfaces
     public interface IFTXSocketClient: ISocketClient
     {
         /// <summary>
+        /// Set the API key and secret
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="apiSecret">The api secret</param>
+        void SetApiCredentials(string apiKey, string apiSecret);
+
+        /// <summary>
         /// Subscribes to ticker updates for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>

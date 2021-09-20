@@ -96,6 +96,10 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.1.0 - 20 Sep 2021
+    * Added missing SetApiCredentials methods
+    * Updated CryptoExchange.Net
+
 * Version 0.0.5 - 17 Sep 2021
     * Fix deserialization issue GetSymbolsAsync because Last property returning null
 

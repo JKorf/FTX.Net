@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FTX.Net.Interfaces;
+using CryptoExchange.Net.Authentication;
 
 namespace FTX.Net
 {
@@ -51,6 +52,16 @@ namespace FTX.Net
             AddGenericHandler("InfoHandler", InfoHandler);
         }
         #endregion
+
+        /// <summary>
+        /// Set the API key and secret
+        /// </summary>
+        /// <param name="apiKey">The api key</param>
+        /// <param name="apiSecret">The api secret</param>
+        public void SetApiCredentials(string apiKey, string apiSecret)
+        {
+            SetAuthenticationProvider(new FTXAuthenticationProvider(new ApiCredentials(apiKey, apiSecret)));
+        }
 
         /// <summary>
         /// set the default options used when creating a client without specifying options
@@ -163,7 +174,6 @@ namespace FTX.Net
                 var actualData = data.Data["data"];
                 if (actualData == null)
                     return;
-
 
                 var deserializeResult = Deserialize<T>(actualData);
                 if (!deserializeResult)

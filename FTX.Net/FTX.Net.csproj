@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>FTX.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>0.0.5</PackageVersion>
-    <AssemblyVersion>0.0.1</AssemblyVersion>
-    <FileVersion>0.0.5</FileVersion>
+    <PackageVersion>0.1.0</PackageVersion>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
+    <FileVersion>0.1.0</FileVersion>
     <Description>FTX.Net is a .Net wrapper for the FTX API. It includes all features the API provides, REST API and Websocket, using clear and readable objects including but not limited to Reading market info, Placing and managing orders and Reading balances and funds</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>FTX FTX.Net C# .Net CryptoCurrency Exchange API wrapper</PackageTags>
@@ -20,7 +20,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReleaseNotes>0.0.5 - Fix deserialization issue GetSymbolsAsync because Last property returning null</PackageReleaseNotes>
+    <PackageReleaseNotes>0.1.0 - Added missing SetApiCredentials methods, Updated CryptoExchange.Net</PackageReleaseNotes>
   </PropertyGroup>
   <PropertyGroup>
     <DocumentationFile>FTX.Net.xml</DocumentationFile>
@@ -51,6 +51,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Crc32.NET" Version="1.2.0" />
-    <PackageReference Include="CryptoExchange.Net" Version="4.1.0" />
+    <PackageReference Include="CryptoExchange.Net" Version="4.2.0" />
   </ItemGroup>
 </Project>
