@@ -24,7 +24,7 @@ namespace FTX.Net
         private static FTXSocketClientOptions _defaultOptions = new FTXSocketClientOptions();
         private static FTXSocketClientOptions DefaultOptions => _defaultOptions.Copy<FTXSocketClientOptions>();
 
-        private string _subaccount;
+        private string? _subaccount;
         #endregion
 
         #region ctor
@@ -124,12 +124,12 @@ namespace FTX.Net
                 var deserializeResult = Deserialize<FTXStreamOrderBook>(actualData);
                 if (!deserializeResult)
                 {
-                    // log
+                    log.Write(LogLevel.Warning, "Failed to deserialize grouped orderbook data: " + deserializeResult.Error);
                     return;
                 }
 
                 var resultObject = deserializeResult.Data;
-                resultObject.Action = data.Data["type"].ToString();
+                resultObject.Action = data.Data["type"]!.ToString();
                 resultObject.Time = DateTime.UtcNow;
 
                 handler?.Invoke(data.As(resultObject));
@@ -202,7 +202,10 @@ namespace FTX.Net
         protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
         {
             var time = (long)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
-            var loginRequest = new LoginRequest(authProvider.Credentials.Key.GetString(), authProvider.Sign(time.ToString() + "websocket_login"), time, _subaccount);
+            if (authProvider == null)
+                return new CallResult<bool>(false, new NoApiCredentialsError());
+
+            var loginRequest = new LoginRequest(authProvider.Credentials.Key!.GetString(), authProvider.Sign(time.ToString() + "websocket_login"), time, _subaccount);
             // If we don't get a response it's okay
             var result = new CallResult<bool>(true, null);
 
@@ -215,7 +218,7 @@ namespace FTX.Net
 
                 if(code != null && (int)code == 400)
                 {
-                    result = new CallResult<bool>(false, new ServerError((int)code, tokenData["msg"]?.ToString()));
+                    result = new CallResult<bool>(false, new ServerError((int)code, tokenData["msg"]?.ToString() ?? "Unknown error"));
                     return true;
                 }
 
@@ -304,7 +307,7 @@ namespace FTX.Net
         /// <inheritdoc />
         protected override async Task<bool> UnsubscribeAsync(SocketConnection connection, SocketSubscription subscriptionToUnsub)
         {
-            var ftxRequest = (SubscribeRequest)subscriptionToUnsub.Request;
+            var ftxRequest = (SubscribeRequest)subscriptionToUnsub.Request!;
             if (ftxRequest == null)
                 return false;
 

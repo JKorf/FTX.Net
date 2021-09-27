@@ -560,7 +560,7 @@ namespace FTX.Net
                 { "side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)) },
                 { "type", JsonConvert.SerializeObject(type, new OrderTypeConverter(false)) },
                 { "size", quantity.ToString(CultureInfo.InvariantCulture) },
-                { "price", price?.ToString(CultureInfo.InvariantCulture) } // Should still be send even when it's null
+                { "price", price?.ToString(CultureInfo.InvariantCulture)! } // Should still be send even when it's null
             };
 
             parameters.AddOptionalParameter("reduceOnly", reduceOnly);
@@ -912,7 +912,7 @@ namespace FTX.Net
             if (result)
                 return result.As(result.Data.Result);
 
-            return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
         }
 
         internal async Task<WebCallResult> SendFTXRequest(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
@@ -921,7 +921,7 @@ namespace FTX.Net
             if (result)
                 return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
 
-            return WebCallResult.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
+            return WebCallResult.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
         }
 
         internal CallResult<T> DeserializeInternal<T>(string data)
@@ -940,7 +940,7 @@ namespace FTX.Net
             if(error["error"] == null)
                 return new ServerError(error.ToString());
 
-            return new ServerError(error["error"].ToString());
+            return new ServerError(error["error"]!.ToString());
         }
 
         internal void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
@@ -974,6 +974,7 @@ namespace FTX.Net
             return baseAsset + "/" + quoteAsset;
         }
 
+#pragma warning disable 1066
         async Task<WebCallResult<IEnumerable<ICommonSymbol>>> IExchangeClient.GetSymbolsAsync()
         {
             var symbols = await GetSymbolsAsync().ConfigureAwait(false);
@@ -989,7 +990,7 @@ namespace FTX.Net
         {
             var klines = await GetKlinesAsync(symbol, KlineInterval.OneHour).ConfigureAwait(false);
             if (!klines)
-                return klines.As((ICommonTicker)null);
+                return klines.As((ICommonTicker)null!);
 
             return klines.As(GetTickerFromKlines(symbol, klines.Data));
         }
@@ -1077,6 +1078,7 @@ namespace FTX.Net
             var balances = await GetBalancesAsync().ConfigureAwait(false);
             return balances.As<IEnumerable<ICommonBalance>>(balances.Data);
         }
+#pragma warning restore 1066
 
         private KlineInterval GetKlineIntervalFromTimeSpan(TimeSpan timeSpan)
         {

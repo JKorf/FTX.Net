@@ -23,6 +23,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <returns></returns>
         Task<WebCallResult<FTXAppDetails>> GetAppAndPaymentsAsync(long appId, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
+#pragma warning disable 1570
         /// <summary>
         /// you can pre-register an order, specifying its size and currency, and track its status. When you supply an ID identifying the order to an FTX Pay popup, completion of the payment will also update the status of the order.
         /// To supply an ID, the link you should send payers to(or spawn in a popup for them) is: https://ftx.com/pay/request?id=APP_ID&orderId=ORDER_ID or https://ftx.com/pay/request?id=APP_ID&clientOrderId=CLIENT_ORDER_ID
@@ -35,6 +36,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="clientOrderId">ID for you to track the order with (must be unique to your FTX Pay app)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
+#pragma warning restore 1570
         Task<WebCallResult<FTXAppOrder>> CreateOrderAsync(long appId, string asset, decimal quantity, bool allowTip, string? notes = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
