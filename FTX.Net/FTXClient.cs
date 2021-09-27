@@ -943,27 +943,27 @@ namespace FTX.Net
             return new ServerError(error["error"]!.ToString());
         }
 
-        internal void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
+        internal static void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
         {
             parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampSecondsConverter()));
             parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampSecondsConverter()));
         }
 
-        private int GetResolutionFromKlineInterval(KlineInterval interval)
+        private static int GetResolutionFromKlineInterval(KlineInterval interval)
         {
-            switch (interval)
+            return interval switch
             {
-                case KlineInterval.FifteenSeconds: return 15;
-                case KlineInterval.OneMinute: return 60;
-                case KlineInterval.FiveMinutes: return 300;
-                case KlineInterval.FifteenMinutes: return 900;
-                case KlineInterval.OneHour: return 3600;
-                case KlineInterval.FourHours: return 14400;
-                case KlineInterval.OneDay: return 86400;
-                case KlineInterval.OneWeek: return 86400 * 7;
-                case KlineInterval.OneMonth: return 86400 * 30;
-                default: throw new Exception("Unknown kline interval");
-            }
+                KlineInterval.FifteenSeconds => 15,
+                KlineInterval.OneMinute => 60,
+                KlineInterval.FiveMinutes => 300,
+                KlineInterval.FifteenMinutes => 900,
+                KlineInterval.OneHour => 3600,
+                KlineInterval.FourHours => 14400,
+                KlineInterval.OneDay => 86400,
+                KlineInterval.OneWeek => 86400 * 7,
+                KlineInterval.OneMonth => 86400 * 30,
+                _ => throw new Exception("Unknown kline interval"),
+            };
         }
         #endregion
 
@@ -995,7 +995,7 @@ namespace FTX.Net
             return klines.As(GetTickerFromKlines(symbol, klines.Data));
         }
 
-        private ICommonTicker GetTickerFromKlines(string symbol, IEnumerable<FTXKline> klines)
+        private static ICommonTicker GetTickerFromKlines(string symbol, IEnumerable<FTXKline> klines)
         {
             var data = klines.OrderByDescending(d => d.StartTime).Take(24).ToList();
             if (!data.Any())
@@ -1080,7 +1080,7 @@ namespace FTX.Net
         }
 #pragma warning restore 1066
 
-        private KlineInterval GetKlineIntervalFromTimeSpan(TimeSpan timeSpan)
+        private static KlineInterval GetKlineIntervalFromTimeSpan(TimeSpan timeSpan)
         {
             if (timeSpan == TimeSpan.FromSeconds(15)) return KlineInterval.FifteenSeconds;
             if (timeSpan == TimeSpan.FromMinutes(1)) return KlineInterval.OneMinute;

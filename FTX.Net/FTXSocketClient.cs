@@ -24,7 +24,7 @@ namespace FTX.Net
         private static FTXSocketClientOptions _defaultOptions = new FTXSocketClientOptions();
         private static FTXSocketClientOptions DefaultOptions => _defaultOptions.Copy<FTXSocketClientOptions>();
 
-        private string? _subaccount;
+        private readonly string? _subaccount;
         #endregion
 
         #region ctor
