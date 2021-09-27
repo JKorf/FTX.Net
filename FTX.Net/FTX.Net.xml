@@ -54,6 +54,26 @@
             Incomplete
             </summary>
         </member>
+        <member name="T:FTX.Net.Enums.FutureType">
+            <summary>
+            Type of future
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.FutureType.Future">
+            <summary>
+            Future
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.FutureType.Perpetual">
+            <summary>
+            Perpetual
+            </summary>
+        </member>
+        <member name="F:FTX.Net.Enums.FutureType.Move">
+            <summary>
+            Move
+            </summary>
+        </member>
         <member name="T:FTX.Net.Enums.KlineInterval">
             <summary>
             Kline intervals
@@ -506,6 +526,65 @@
         <member name="M:FTX.Net.FTXClient.GetKlinesAsync(System.String,FTX.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Get klines for a symbol
+            </summary>
+            <param name="symbol">Symbol to get klines for</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetFuturesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of supported futures
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetFutureAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get info on a future
+            </summary>
+            <param name="future">Future name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetFutureStatsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get stats on a future
+            </summary>
+            <param name="future">Future name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get funding rates
+            </summary>
+            <param name="future">Future name</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetIndexWeightsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get index weights
+            </summary>
+            <param name="index">Index name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetExpiredFuturesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of expired futures
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXClient.GetIndexKlinesAsync(System.String,FTX.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get index klines
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="interval">Kline interval</param>
@@ -1063,6 +1142,65 @@
         <member name="M:FTX.Net.Interfaces.IFTXClient.GetKlinesAsync(System.String,FTX.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Get klines for a symbol
+            </summary>
+            <param name="symbol">Symbol to get trades for</param>
+            <param name="interval">Kline interval</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetFuturesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of supported futures
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetFutureAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get info on a future
+            </summary>
+            <param name="future">Future name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetFutureStatsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get stats on a future
+            </summary>
+            <param name="future">Future name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetFundingRatesAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get funding rates
+            </summary>
+            <param name="future">Future name</param>
+            <param name="startTime">Filter by start time</param>
+            <param name="endTime">Filter by end time</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetIndexWeightsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get index weights
+            </summary>
+            <param name="index">Index name</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetExpiredFuturesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of expired futures
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.Interfaces.IFTXClient.GetIndexKlinesAsync(System.String,FTX.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Get index klines
             </summary>
             <param name="symbol">Symbol to get trades for</param>
             <param name="interval">Kline interval</param>
@@ -2549,6 +2687,76 @@
             Status
             </summary>
         </member>
+        <member name="T:FTX.Net.Objects.FTXSymbolBase">
+            <summary>
+            Base symbol info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.Name">
+            <summary>
+            The name of the symbol
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.Change1Hour">
+            <summary>
+            Change in the price of the token over the past hour
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.Change24Hour">
+            <summary>
+            Change in the price of the token over the past day
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.ChangeBeginingOfDay">
+            <summary>
+            Change in price since 00:00 UTC
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.USDVolume24H">
+            <summary>
+            The volume in quote
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.Underlying">
+            <summary>
+            The underlying asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.Enabled">
+            <summary>
+            Whether the symbol is enabled or not
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.BestAsk">
+            <summary>
+            Best current ask price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.BestBid">
+            <summary>
+            Best current bid price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.LastPrice">
+            <summary>
+            Last trade price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.PostOnly">
+            <summary>
+            If the market is in post-only mode
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.PriceStep">
+            <summary>
+            Price step
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolBase.QuantityStep">
+            <summary>
+            Quantity step
+            </summary>
+        </member>
         <member name="T:FTX.Net.Objects.FTXTick">
             <summary>
             FTX tick
@@ -2602,6 +2810,66 @@
         <member name="P:FTX.Net.Objects.Futures.FTXFundingPayment.Rate">
             <summary>
             Rate
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Futures.FTXFundingRate">
+            <summary>
+            Funding rate info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingRate.Future">
+            <summary>
+            Future name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingRate.Rate">
+            <summary>
+            Funding rate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFundingRate.Time">
+            <summary>
+            Time
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Futures.FTXFutureStat">
+            <summary>
+            Future stat
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.Volume">
+            <summary>
+            Volume in last 24H
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.NextFundingRate">
+            <summary>
+            Upcoming funding rate
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.NextFundingTime">
+            <summary>
+            Upcoming funding time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.ExpirationPrice">
+            <summary>
+            Price to which the future expired 
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.PredictedExpirationPrice">
+            <summary>
+            Predited expiration price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.StrikePrice">
+            <summary>
+            Price of the underlying at the beginning of the expiration day
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Futures.FTXFutureStat.OpenInterest">
+            <summary>
+            Number of open contracts in this future
             </summary>
         </member>
         <member name="T:FTX.Net.Objects.Futures.FTXPosition">
@@ -4191,6 +4459,81 @@
             Tag
             </summary>
         </member>
+        <member name="T:FTX.Net.Objects.Spot.FTXFuture">
+            <summary>
+            Future info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Expired">
+            <summary>
+            Expired
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Expiry">
+            <summary>
+            Timestamp it expires
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Index">
+            <summary>
+            Index
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.ImfFactor">
+            <summary>
+            IMF factor
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.LowerBound">
+            <summary>
+            The lowest price the future can trade at
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Mark">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.OpenInterest">
+            <summary>
+            Open interest (in number of contracts)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.OpenInterestUsd">
+            <summary>
+            Open interest (in USD)
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Perpetual">
+            <summary>
+            Whether or not this is a perpetual contract
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.PositionLimitWeight">
+            <summary>
+            Position weight limit
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.UpperBound">
+            <summary>
+            The highest price the future can trade at
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.FTXFuture.Type">
+            <summary>
+            Future type
+            </summary>
+        </member>
         <member name="T:FTX.Net.Objects.Spot.FTXKline">
             <summary>
             Kline info
@@ -4771,11 +5114,6 @@
             Symbol information
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.Name">
-            <summary>
-            The name of the symbol
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.FTXSymbol.BaseCurrency">
             <summary>
             The base currency
@@ -4791,59 +5129,14 @@
             The volume in quote
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.USDVolume24H">
-            <summary>
-            The volume in quote
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.FTXSymbol.Type">
             <summary>
             The type of symbol
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.Underlying">
-            <summary>
-            The underlying asset
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.Enabled">
-            <summary>
-            Whether the symbol is enabled or not
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.BestAsk">
-            <summary>
-            Best current ask price
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.BestBid">
-            <summary>
-            Best current bid price
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.LastPrice">
-            <summary>
-            Last trade price
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.PostOnly">
-            <summary>
-            If the market is in post-only mode
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.PriceStep">
-            <summary>
-            Price step
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.FTXSymbol.MinProvideSize">
             <summary>
             Minimum maker order size (if >10 orders per hour fall below this size)
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.QuantityStep">
-            <summary>
-            Quantity step
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.FTXSymbol.Restricted">
@@ -4854,21 +5147,6 @@
         <member name="P:FTX.Net.Objects.FTXSymbol.HighLeverageFeeExempt">
             <summary>
             High leverage fee exempt
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.Change1Hour">
-            <summary>
-            Change in the price of the token over the past hour
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.Change24Hour">
-            <summary>
-            Change in the price of the token over the past day
-            </summary>
-        </member>
-        <member name="P:FTX.Net.Objects.FTXSymbol.ChangeBeginingOfDay">
-            <summary>
-            Change in price since 00:00 UTC
             </summary>
         </member>
         <member name="T:FTX.Net.Objects.Staking.FTXStake">

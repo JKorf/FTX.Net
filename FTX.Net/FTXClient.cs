@@ -195,7 +195,7 @@ namespace FTX.Net
         /// <summary>
         /// Get klines for a symbol
         /// </summary>
-        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="symbol">Symbol to get klines for</param>
         /// <param name="interval">Kline interval</param>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -207,6 +207,96 @@ namespace FTX.Net
             parameters.AddParameter("resolution", GetResolutionFromKlineInterval(interval));
             AddFilter(parameters, startTime, endTime);
             return await SendFTXRequest<IEnumerable<FTXKline>>(GetUri($"markets/{symbol}/candles"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Futures
+
+        /// <summary>
+        /// Get the list of supported futures
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<FTXFuture>>> GetFuturesAsync(CancellationToken ct = default)
+        {
+            return await SendFTXRequest<IEnumerable<FTXFuture>>(GetUri("futures"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get info on a future
+        /// </summary>
+        /// <param name="future">Future name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<FTXFuture>> GetFutureAsync(string future, CancellationToken ct = default)
+        {
+            return await SendFTXRequest<FTXFuture>(GetUri("futures/" + future), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get stats on a future
+        /// </summary>
+        /// <param name="future">Future name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<FTXFutureStat>> GetFutureStatsAsync(string future, CancellationToken ct = default)
+        {
+            return await SendFTXRequest<FTXFutureStat>(GetUri($"futures/{future}/stats"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get funding rates
+        /// </summary>
+        /// <param name="future">Future name</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<FTXFundingRate>>> GetFundingRatesAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            AddFilter(parameters, startTime, endTime);
+            parameters.AddOptionalParameter("future", future);
+            return await SendFTXRequest<IEnumerable<FTXFundingRate>>(GetUri($"funding_rates"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get index weights
+        /// </summary>
+        /// <param name="index">Index name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<Dictionary<string, decimal>>> GetIndexWeightsAsync(string index, CancellationToken ct = default)
+        {
+            return await SendFTXRequest<Dictionary<string, decimal>>(GetUri($"indexes/{index}/weights"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the list of expired futures
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<FTXFuture>>> GetExpiredFuturesAsync(CancellationToken ct = default)
+        {
+            return await SendFTXRequest<IEnumerable<FTXFuture>>(GetUri("expired_futures"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get index klines
+        /// </summary>
+        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="interval">Kline interval</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<IEnumerable<FTXKline>>> GetIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("resolution", GetResolutionFromKlineInterval(interval));
+            AddFilter(parameters, startTime, endTime);
+            return await SendFTXRequest<IEnumerable<FTXKline>>(GetUri($"indexes/{symbol}/candles"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         #endregion
@@ -855,8 +945,8 @@ namespace FTX.Net
 
         internal void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
         {
-            parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampConverter()));
-            parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampConverter()));
+            parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampSecondsConverter()));
+            parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampSecondsConverter()));
         }
 
         private int GetResolutionFromKlineInterval(KlineInterval interval)
@@ -918,7 +1008,7 @@ namespace FTX.Net
                 Symbol = symbol,
                 High = data.Max(d => d.High),
                 Low = data.Min(d => d.Low),
-                Volume = data.Sum(d => d.Volume)
+                Volume = data.Sum(d => d.Volume ?? 0)
             };
         }
 

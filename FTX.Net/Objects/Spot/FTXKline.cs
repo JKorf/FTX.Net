@@ -29,7 +29,7 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Volume
         /// </summary>
-        public decimal Volume { get; set; }
+        public decimal? Volume { get; set; }
         /// <summary>
         /// Start time
         /// </summary>
@@ -45,6 +45,6 @@ namespace FTX.Net.Objects.Spot
 
         DateTime ICommonKline.CommonOpenTime => StartTime;
 
-        decimal ICommonKline.CommonVolume => Volume;
+        decimal ICommonKline.CommonVolume => Volume ?? 0;
     }
 }

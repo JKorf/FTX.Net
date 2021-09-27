@@ -110,6 +110,65 @@ namespace FTX.Net.Interfaces
         Task<WebCallResult<IEnumerable<FTXKline>>> GetKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get the list of supported futures
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXFuture>>> GetFuturesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get info on a future
+        /// </summary>
+        /// <param name="future">Future name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXFuture>> GetFutureAsync(string future, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get stats on a future
+        /// </summary>
+        /// <param name="future">Future name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXFutureStat>> GetFutureStatsAsync(string future, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get funding rates
+        /// </summary>
+        /// <param name="future">Future name</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXFundingRate>>> GetFundingRatesAsync(string future, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get index weights
+        /// </summary>
+        /// <param name="index">Index name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<Dictionary<string, decimal>>> GetIndexWeightsAsync(string index, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the list of expired futures
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXFuture>>> GetExpiredFuturesAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get index klines
+        /// </summary>
+        /// <param name="symbol">Symbol to get trades for</param>
+        /// <param name="interval">Kline interval</param>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXKline>>> GetIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get account info
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
