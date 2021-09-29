@@ -96,6 +96,9 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 |`AffiliateCode`|Affiliate code which will be sent when placing orders|`jkorf-net`
 
 ## Release notes
+* Version 0.1.2 - 29 Sep 2021
+    * Updated CryptoExchange.Net
+
 * Version 0.1.1 - 27 Sep 2021
     * Fixed start/endtime filters
     * Added futures endpoints
