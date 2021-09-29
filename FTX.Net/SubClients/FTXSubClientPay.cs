@@ -35,7 +35,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<FTXAppDetails>> GetAppAndPaymentsAsync(long appId, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             parameters.AddOptionalParameter("limit", limit?.ToString(CultureInfo.InvariantCulture));
             var result = await _baseClient.SendFTXRequest<FTXAppDetails>(_baseClient.GetUri($"ftxpay/apps/{appId}/details"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
             if (!result)
@@ -83,7 +83,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXAppOrder>>> GetOrdersAsync(long appId, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXAppOrder>>(_baseClient.GetUri($"ftxpay/apps/{appId}/orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);     
         }
 

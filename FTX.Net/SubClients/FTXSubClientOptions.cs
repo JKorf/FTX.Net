@@ -187,7 +187,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXOptionTrade>>> GetOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionTrade>>(_baseClient.GetUri($"options/trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
@@ -202,7 +202,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXUserOptionTrade>>> GetUserOptionTradesAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXUserOptionTrade>>(_baseClient.GetUri($"options/fills"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
@@ -226,7 +226,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXOptionsHistoricalVolume>>> GetOptionsHistoricalVolumeAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsHistoricalVolume>>(_baseClient.GetUri($"options/historical_volumes/BTC"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
@@ -250,7 +250,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXOptionHistoricalOpenInterest>>> GetOptionHistoricalOpenInterestAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionHistoricalOpenInterest>>(_baseClient.GetUri($"options/historical_open_interest/BTC"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
     }

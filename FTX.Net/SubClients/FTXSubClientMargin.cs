@@ -34,7 +34,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXLend>>> GetLendingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXLend>>(_baseClient.GetUri("spot_margin/history"), HttpMethod.Get, ct, parameters, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
@@ -97,7 +97,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXUserLend>>> GetUserBorrowHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/borrow_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
@@ -112,7 +112,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult<IEnumerable<FTXUserLend>>> GetUserLendingHistoryAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            _baseClient.AddFilter(parameters, startTime, endTime);
+            FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/lending_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
