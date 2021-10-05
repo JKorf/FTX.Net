@@ -16,6 +16,14 @@ namespace FTX.Net.Objects.Futures
         /// </summary>
         public decimal Cost { get; set; }
         /// <summary>
+        /// Cumulative buy size
+        /// </summary>
+        public decimal CumulativeBuySize { get; set; }
+        /// <summary>
+        /// Cumulative sell size
+        /// </summary>
+        public decimal CumulativeSellSize { get; set; }
+        /// <summary>
         /// Average cost of this position after pnl was last realized: whenever unrealized pnl gets realized, this field gets set to mark price, unrealizedPnL is set to 0, and realizedPnl changes by the previous value for unrealizedPnl.
         /// </summary>
         public decimal? EntryPrice { get; set; }
@@ -54,6 +62,18 @@ namespace FTX.Net.Objects.Futures
         /// Realized profit and loss
         /// </summary>
         public decimal RealizedPnl { get; set; }
+        /// <summary>
+        /// Recent average open price
+        /// </summary>
+        public decimal RecentAverageOpenPrice { get; set; }
+        /// <summary>
+        /// Recent break even price
+        /// </summary>
+        public decimal RecentBreakEvenPrice { get; set; }
+        /// <summary>
+        /// Recent profit and loss
+        /// </summary>
+        public decimal RecentPnl { get; set; }
         /// <summary>
         /// Cumulative size of all open offers
         /// </summary>

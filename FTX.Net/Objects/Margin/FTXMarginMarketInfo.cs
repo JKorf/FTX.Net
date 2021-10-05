@@ -26,10 +26,10 @@ namespace FTX.Net.Objects.Margin
         /// <summary>
         /// Estimated hourly borrow rate for the next spot margin cycle
         /// </summary>
-        public decimal EstimatedRate { get; set; }
+        public decimal? EstimatedRate { get; set; }
         /// <summary>
         /// Hourly borrow rate in the previous spot margin cycle
         /// </summary>
-        public decimal PreviousRate { get; set; }
+        public decimal? PreviousRate { get; set; }
     }
 }
