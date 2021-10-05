@@ -243,7 +243,8 @@ namespace FTX.Net
             var market = data["market"];
             var type = data["type"];
 
-            if (channel?.ToString() != ftxRequest.Channel || market?.ToString() != ftxRequest.Market)
+            var matchesRequest = channel?.ToString() == ftxRequest.Channel && market?.ToString() == ftxRequest.Market;
+            if (!matchesRequest)
             {
                 // Error response don't contain channel/market so this message might still be for this subscription if the subscription resulted in an error
                 // We can only check this if the market is not null

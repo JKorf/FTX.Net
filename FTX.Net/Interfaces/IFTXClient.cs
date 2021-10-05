@@ -140,7 +140,7 @@ namespace FTX.Net.Interfaces
         /// <param name="endTime">Filter by end time</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXFundingRate>>> GetFundingRatesAsync(string future, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXFundingRate>>> GetFundingRatesAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get index weights
