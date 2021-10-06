@@ -55,6 +55,7 @@ namespace FTX.Net.SymbolOrderBooks
                     return subResult;
             }
 
+            Status = OrderBookStatus.Syncing;
             var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
             return setResult ? subResult : new CallResult<UpdateSubscription>(null, setResult.Error);
         }
