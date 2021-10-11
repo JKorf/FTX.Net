@@ -13,7 +13,9 @@ namespace FTX.Net.Converters
         {
             new KeyValuePair<TriggerOrderType, string>(TriggerOrderType.Stop, "stop"),
             new KeyValuePair<TriggerOrderType, string>(TriggerOrderType.TakeProfit, "takeProfit"),
-            new KeyValuePair<TriggerOrderType, string>(TriggerOrderType.TrailingStop, "trailingStop")
+            new KeyValuePair<TriggerOrderType, string>(TriggerOrderType.TrailingStop, "trailingStop"),
+            new KeyValuePair<TriggerOrderType, string>(TriggerOrderType.TakeProfit, "take_profit"),
+            new KeyValuePair<TriggerOrderType, string>(TriggerOrderType.TrailingStop, "trailing_stop")
         };
     }
 }
