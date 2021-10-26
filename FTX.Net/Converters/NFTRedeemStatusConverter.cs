@@ -16,7 +16,7 @@ namespace FTX.Net.Converters
             new KeyValuePair<NFTRedeemStatus, string>(NFTRedeemStatus.Processing, "processing"),
             new KeyValuePair<NFTRedeemStatus, string>(NFTRedeemStatus.Sent, "sent"),
             new KeyValuePair<NFTRedeemStatus, string>(NFTRedeemStatus.Completed, "complete"),
-            new KeyValuePair<NFTRedeemStatus, string>(NFTRedeemStatus.Cancelled, "cancelled"),
+            new KeyValuePair<NFTRedeemStatus, string>(NFTRedeemStatus.Canceled, "cancelled"),
             new KeyValuePair<NFTRedeemStatus, string>(NFTRedeemStatus.Failed, "failed"),
         };
     }

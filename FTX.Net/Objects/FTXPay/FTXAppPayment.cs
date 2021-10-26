@@ -15,17 +15,17 @@ namespace FTX.Net.Objects.FTXPay
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// Fee amount
+        /// Fee quantity
         /// </summary>
         [JsonProperty("feeSize")]
         public decimal Fee { get; set; }
         /// <summary>
-        /// Received amount
+        /// Received quantity
         /// </summary>
         [JsonProperty("netSize")]
         public decimal NetQuantity { get; set; }
         /// <summary>
-        /// Tipped amount
+        /// Tipped quantity
         /// </summary>
         [JsonProperty("tipSize")]
         public decimal TipQuantity { get; set; }
@@ -36,7 +36,8 @@ namespace FTX.Net.Objects.FTXPay
         /// <summary>
         /// Creation time
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// Payer-provided info for payment identification
         /// </summary>

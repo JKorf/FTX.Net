@@ -19,17 +19,19 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         public bool CanWithdraw { get; set; }
         /// <summary>
-        /// True if addresses for this coin have a tag
+        /// True if addresses for this asset have a tag
         /// </summary>
         public bool HasTag { get; set; }
         /// <summary>
-        /// Identifier
+        /// Name
         /// </summary>
-        public string Id { get; set; } = string.Empty;
+        [JsonProperty("id")]
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Full name
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        [JsonProperty("name")]
+        public string FullName { get; set; } = string.Empty;
         /// <summary>
         /// Bep2 asset
         /// </summary>

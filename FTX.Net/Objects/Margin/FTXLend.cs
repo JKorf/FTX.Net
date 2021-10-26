@@ -18,7 +18,8 @@ namespace FTX.Net.Objects.Margin
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Rate
         /// </summary>
@@ -36,7 +37,7 @@ namespace FTX.Net.Objects.Margin
     public class FTXUserLend: FTXLend
     {
         /// <summary>
-        /// Amount of coin you paid or got paid as interest on the borrow
+        /// Quantity of asset you paid or got paid as interest on the borrow
         /// </summary>
         public decimal Cost { get; set; }
     }

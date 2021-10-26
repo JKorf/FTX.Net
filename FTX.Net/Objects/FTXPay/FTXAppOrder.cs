@@ -17,7 +17,7 @@ namespace FTX.Net.Objects.FTXPay
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// The currency of the payment
+        /// The asset of the payment
         /// </summary>
         [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
@@ -26,7 +26,7 @@ namespace FTX.Net.Objects.FTXPay
         /// </summary>
         public string? Notes { get; set; }
         /// <summary>
-        /// Size of the desired payment
+        /// Quantity of the desired payment
         /// </summary>
         [JsonProperty("size")]
         public decimal Quantity { get; set; }

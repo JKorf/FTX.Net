@@ -1,0 +1,12 @@
+  {
+    "success": true,
+    "result": [
+      {
+        "issuer": "FTX",
+        "collection":"FTX Special"
+      }, {
+        "issuer": "FTX",
+        "collection": "FTX Swag"
+      }
+    ]
+  }

@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "result": {
+    "address": "0xb2EA1CC386A260c9Ae3ebda2cb7AEd212b034Ab4",
+    "coin": "ETH",
+    "fiat": false,
+    "id": 52382,
+    "isPrimetrust": false,
+    "lastUsedAt": "2020-10-08T06:11:03.072427+00:00",
+    "name": "MetaMask",
+    "tag": null,
+    "whitelisted": null,
+    "whitelistedAfter": null
+  }
+}

@@ -34,6 +34,7 @@ namespace FTX.Net.Objects.Spot.Socket
         /// Timestamp
         /// </summary>
         [JsonConverter(typeof(TimestampSecondsConverter))]
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
     }
 }

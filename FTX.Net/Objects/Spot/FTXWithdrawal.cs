@@ -46,11 +46,12 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Time
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonProperty("txid")]
         public string? TransactionId { get; set; }
         /// <summary>
         /// Notes

@@ -21,9 +21,10 @@ namespace FTX.Net.Objects.Options
         /// </summary>
         public FTXOption Option { get; set; } = default!;
         /// <summary>
-        /// Size
+        /// Quantity
         /// </summary>
-        public decimal Size { get; set; }
+        [JsonProperty("size")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Side 
         /// </summary>
@@ -32,7 +33,8 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Status
         /// </summary>
@@ -41,10 +43,29 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// When the request expires
         /// </summary>
-        public DateTime RequestExpiry { get; set; }
+        [JsonProperty("requestExpiry")]
+        public DateTime RequestExpiryTime { get; set; }
+        /// <summary>
+        /// When the request expires
+        /// </summary>
+        [JsonProperty("expiry")]
+        public DateTime? ExpiryTime { get; set; }
         /// <summary>
         /// Limit price
         /// </summary>
         public decimal? LimitPrice { get; set; }
+        /// <summary>
+        /// Limit price
+        /// </summary>
+        public decimal? Strike { get; set; }
+        /// <summary>
+        /// Type
+        /// </summary>
+        [JsonConverter(typeof(OptionTypeConverter))]
+        public OptionType Type { get; set; }
+        /// <summary>
+        /// Underlying type
+        /// </summary>
+        public string? Underlying { get; set; }
     }
 }

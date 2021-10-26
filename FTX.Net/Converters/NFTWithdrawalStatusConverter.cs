@@ -11,7 +11,7 @@ namespace FTX.Net.Converters
 
         protected override List<KeyValuePair<NFTWithdrawalStatus, string>> Mapping => new List<KeyValuePair<NFTWithdrawalStatus, string>>
         {
-            new KeyValuePair<NFTWithdrawalStatus, string>(NFTWithdrawalStatus.Cancelled, "cancelled"),
+            new KeyValuePair<NFTWithdrawalStatus, string>(NFTWithdrawalStatus.Canceled, "cancelled"),
             new KeyValuePair<NFTWithdrawalStatus, string>(NFTWithdrawalStatus.Completed, "completed"),
             new KeyValuePair<NFTWithdrawalStatus, string>(NFTWithdrawalStatus.Processing, "processing"),
             new KeyValuePair<NFTWithdrawalStatus, string>(NFTWithdrawalStatus.Requested, "requested"),

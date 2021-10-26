@@ -25,7 +25,8 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Timestamp it expires
         /// </summary>
-        public DateTime? Expiry { get; set; }
+        [JsonProperty("expiry")]
+        public DateTime? ExpiryTime { get; set; }
         /// <summary>
         /// Index
         /// </summary>
@@ -67,5 +68,22 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         [JsonConverter(typeof(FutureTypeConverter))]
         public FutureType Type { get; set; }
+
+        /// <summary>
+        /// Expiry description
+        /// </summary>
+        public string? ExpiryDescription { get; set; }
+        /// <summary>
+        /// Group
+        /// </summary>
+        public string? Group { get; set; }
+        /// <summary>
+        /// Margin price
+        /// </summary>
+        public decimal? MarginPrice { get; set; }
+        /// <summary>
+        /// Underlying description
+        /// </summary>
+        public string? UnderlyingDescription { get; set; }
     }
 }

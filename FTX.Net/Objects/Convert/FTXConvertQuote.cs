@@ -1,4 +1,5 @@
-﻿using FTX.Net.Converters;
+﻿using CryptoExchange.Net.Converters;
+using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 using System;
@@ -33,7 +34,7 @@ namespace FTX.Net.Objects.Convert
         [JsonProperty("toCoin")]
         public string ToAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Cost of accepting the quote in units of fromCoin
+        /// Cost of accepting the quote in units of FromAsset
         /// </summary>
         public decimal Cost { get; set; }
         /// <summary>
@@ -43,17 +44,17 @@ namespace FTX.Net.Objects.Convert
         /// <summary>
         /// If the quote is already accepted
         /// </summary>
-        public decimal Filled { get; set; }
+        public bool Filled { get; set; }
         /// <summary>
         /// Id
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// Price in units of quoteCoin
+        /// Price in units of QuoteAsset
         /// </summary>
         public decimal Price { get; set; }
         /// <summary>
-        /// Proceeds of accepting the quote in units of toCoin
+        /// Proceeds of accepting the quote in units of ToAsset
         /// </summary>
         public decimal Proceeds { get; set; }
         /// <summary>
@@ -61,5 +62,11 @@ namespace FTX.Net.Objects.Convert
         /// </summary>
         [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide Side { get; set; }
+        /// <summary>
+        /// Expiry time
+        /// </summary>
+        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonProperty("expiry")]
+        public DateTime? ExpiryTime { get; set; }
     }
 }

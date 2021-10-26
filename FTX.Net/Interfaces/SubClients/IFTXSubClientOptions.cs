@@ -26,7 +26,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetUserQuoteRequestsAsync(string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXUserQuoteRequest>>> GetUserQuoteRequestsAsync(string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Create quote request
@@ -44,7 +44,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXUserQuoteRequest>> CreateQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXQuoteRequest>> CreateQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel a quote request

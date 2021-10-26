@@ -18,8 +18,8 @@ namespace FTX.Net.Enums
         /// </summary>
         Confirmed,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled
+        Canceled
     }
 }

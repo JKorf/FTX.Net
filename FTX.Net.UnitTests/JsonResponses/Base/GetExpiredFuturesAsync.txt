@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "result": [
+    {
+      "ask": null,
+      "bid": null,
+      "description": "Bitcoin March 2020 Futures",
+      "enabled": false,
+      "expired": true,
+      "expiry": "2020-03-27T03:00:00+00:00",
+      "expiryDescription": "March 2020",
+      "group": "quarterly",
+      "imfFactor": 0.002,
+      "index": 6807.943073426,
+      "last": 6804.75,
+      "lowerBound": 6467.75,
+      "marginPrice": 6801.1226609324885,
+      "mark": 6801.1226609324885,
+      "moveStart": null,
+      "name": "BTC-0327",
+      "perpetual": false,
+      "positionLimitWeight": 2.0,
+      "postOnly": false,
+      "priceIncrement": 0.5,
+      "sizeIncrement": 0.0001,
+      "type": "future",
+      "underlying": "BTC",
+      "underlyingDescription": "Bitcoin",
+      "upperBound": 7152.75
+    }
+  ]
+}

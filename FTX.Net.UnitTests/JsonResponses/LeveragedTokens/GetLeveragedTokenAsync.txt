@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "result": 
+    {
+      "name": "HEDGE",
+      "description": "1X Short Bitcoin Token",
+      "underlying": "BTC-PERP",
+      "leverage": -1.0,
+      "outstanding": 22155.41968804,
+      "pricePerShare": 110.87560713849138,
+      "positionPerShare": -0.001966859604267557,
+      "positionsPerShare": {"BTC-PERP": -0.001966859604267557},
+      "basket": {"BTC-PERP": -0.001966859604267557, "USD": 221.74748303105358},
+      "targetComponents": ["BTC-PERP"],
+      "underlyingMark": 56370.0,
+      "totalNav": 2456495.60931952,
+      "totalCollateral": 2465646.6953195203,
+      "contractAddress": "0x1FA3bc860bF823d792f04F662f3AA3a500a68814",
+      "currentLeverage": -0.9999663474588733,
+      "change1h": -0.008438973233561787,
+      "change24h": 0.014631456489264717,
+      "changeBod": -0.0017092321513513995
+     }
+  
+}

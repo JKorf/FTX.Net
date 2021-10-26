@@ -28,6 +28,7 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// Expiry time
         /// </summary>
-        public DateTime Expiry { get; set; }
+        [JsonProperty("expiry")]
+        public DateTime ExpiryTime { get; set; }
     }
 }

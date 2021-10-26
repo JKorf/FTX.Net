@@ -23,7 +23,8 @@ namespace FTX.Net.Objects.NFT
         /// <summary>
         /// Timstamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Notes
         /// </summary>

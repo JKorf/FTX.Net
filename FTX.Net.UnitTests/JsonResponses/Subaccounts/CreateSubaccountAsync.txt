@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "result": {
+    "nickname": "sub2",
+    "deletable": true,
+    "editable": true,
+  }
+}

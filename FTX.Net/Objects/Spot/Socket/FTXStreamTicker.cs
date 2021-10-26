@@ -11,7 +11,7 @@ namespace FTX.Net.Objects.SocketObjects
         /// Best ask price
         /// </summary>
         [JsonProperty("ask")]
-        public decimal? BestAsk { get; set; }
+        public decimal? BestAskPrice { get; set; }
         /// <summary>
         /// Best bid quantity
         /// </summary>
@@ -21,7 +21,7 @@ namespace FTX.Net.Objects.SocketObjects
         /// Best bid price
         /// </summary>
         [JsonProperty("bid")]
-        public decimal? BestBid { get; set; }
+        public decimal? BestBidPrice { get; set; }
         /// <summary>
         /// Best ask quantity
         /// </summary>
@@ -31,6 +31,6 @@ namespace FTX.Net.Objects.SocketObjects
         /// Last trade price
         /// </summary>
         [JsonProperty("last")]
-        public decimal? LastTrade { get; set; }
+        public decimal? LastPrice { get; set; }
     }
 }

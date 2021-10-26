@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,15 +17,18 @@ namespace FTX.Net.Objects.Subaccounts
         /// <summary>
         /// Asset transfered
         /// </summary>
+        [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Quantity transfered
         /// </summary>
+        [JsonProperty("size")]
         public decimal Quantity { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Notes
         /// </summary>

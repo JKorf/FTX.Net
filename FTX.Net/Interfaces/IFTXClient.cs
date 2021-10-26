@@ -368,7 +368,7 @@ namespace FTX.Net.Interfaces
             CancellationToken ct = default);
 
         /// <summary>
-        /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
+        /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
         /// </summary>
         /// <param name="orderId">Id of order to modify</param>
         /// <param name="price">New price of the order</param>
@@ -380,7 +380,7 @@ namespace FTX.Net.Interfaces
         Task<WebCallResult<FTXOrder>> ModifyOrderAsync(long orderId, decimal? price = null, decimal? quantity = null, string? clientOrderId = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Modify a trigger order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
+        /// Modify a trigger order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="quantity">New quantity</param>
@@ -393,7 +393,7 @@ namespace FTX.Net.Interfaces
         Task<WebCallResult<FTXTriggerOrder>> ModifyTriggerOrderAsync(long orderId, decimal? quantity = null, decimal ? triggerPrice = null, decimal? orderPrice = null, decimal? trailingValue = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
-        /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be cancelled gets filled and its replacement still gets placed.
+        /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
         /// </summary>
         /// <param name="clientOrderId">Client order id of order to modify</param>
         /// <param name="price">New price of the order</param>
@@ -429,7 +429,7 @@ namespace FTX.Net.Interfaces
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggers(long orderId, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<FTXTriggerOrderTrigger>>> GetTriggerOrderTriggersAsync(long orderId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of open orders

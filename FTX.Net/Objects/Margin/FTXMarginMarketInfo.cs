@@ -16,11 +16,11 @@ namespace FTX.Net.Objects.Margin
         [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Amount of coin currently borrowed
+        /// Quantity of asset currently borrowed
         /// </summary>
         public decimal Borrowed { get; set; }
         /// <summary>
-        /// Amount of coin that can be spent buying the other coin in the supplied market, including what's borrowable with margin
+        /// Quantity of asset that can be spent buying the other asset in the supplied market, including what's borrowable with margin
         /// </summary>
         public decimal Free { get; set; }
         /// <summary>

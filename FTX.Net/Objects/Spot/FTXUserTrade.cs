@@ -14,7 +14,7 @@ namespace FTX.Net.Objects.Spot
     public class FTXUserTrade: ICommonTrade
     {
         /// <summary>
-        /// Fill id
+        /// Trade id
         /// </summary>
         public long Id { get; set; }
         /// <summary>
@@ -31,9 +31,10 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         public decimal FeeRate { get; set; }
         /// <summary>
-        /// Fee currency
+        /// Fee asset
         /// </summary>
-        public string FeeCurrency { get; set; } = string.Empty;
+        [JsonProperty("feeCurrency")]
+        public string FeeAsset { get; set; } = string.Empty;
         /// <summary>
         /// Future
         /// </summary>
@@ -44,13 +45,15 @@ namespace FTX.Net.Objects.Spot
         [JsonConverter(typeof(LiquidityTypeConverter))]
         public LiquidityType Liquidity { get; set; }
         /// <summary>
-        /// Base currency
+        /// Base asset
         /// </summary>
-        public string? BaseCurrency { get; set; }
+        [JsonProperty("baseCurrency")]
+        public string? BaseAsset { get; set; }
         /// <summary>
-        /// Quote currency
+        /// Quote asset
         /// </summary>
-        public string? QuoteCurrency { get; set; }
+        [JsonProperty("quoteCurrency")]
+        public string? QuoteAsset { get; set; }
         /// <summary>
         /// Order id
         /// </summary>
@@ -76,7 +79,8 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Type
         /// </summary>
@@ -90,8 +94,8 @@ namespace FTX.Net.Objects.Spot
 
         decimal ICommonTrade.CommonFee => Fee;
 
-        string? ICommonTrade.CommonFeeAsset => FeeCurrency;
+        string? ICommonTrade.CommonFeeAsset => FeeAsset;
 
-        DateTime ICommonTrade.CommonTradeTime => Time;
+        DateTime ICommonTrade.CommonTradeTime => Timestamp;
     }
 }

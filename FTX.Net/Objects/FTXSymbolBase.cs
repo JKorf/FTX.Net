@@ -43,12 +43,12 @@ namespace FTX.Net.Objects
         /// Best current ask price
         /// </summary>
         [JsonProperty("ask")]
-        public decimal? BestAsk { get; set; }
+        public decimal? BestAskPrice { get; set; }
         /// <summary>
         /// Best current bid price
         /// </summary>
         [JsonProperty("bid")]
-        public decimal? BestBid { get; set; }
+        public decimal? BestBidPrice { get; set; }
         /// <summary>
         /// Last trade price
         /// </summary>

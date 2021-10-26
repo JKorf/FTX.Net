@@ -31,6 +31,7 @@ namespace FTX.Net.Objects.Staking
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
     }
 }

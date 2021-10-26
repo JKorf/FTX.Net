@@ -3,8 +3,6 @@ using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FTX.Net.Objects.Spot
 {
@@ -38,12 +36,13 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
 
         decimal ICommonRecentTrade.CommonPrice => Price;
 
         decimal ICommonRecentTrade.CommonQuantity => Quantity;
 
-        DateTime ICommonRecentTrade.CommonTradeTime => Time;
+        DateTime ICommonRecentTrade.CommonTradeTime => Timestamp;
     }
 }

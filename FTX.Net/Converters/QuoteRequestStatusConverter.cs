@@ -11,7 +11,7 @@ namespace FTX.Net.Converters
 
         protected override List<KeyValuePair<QuoteRequestStatus, string>> Mapping => new List<KeyValuePair<QuoteRequestStatus, string>>
         {
-            new KeyValuePair<QuoteRequestStatus, string>(QuoteRequestStatus.Cancelled, "cancelled"),
+            new KeyValuePair<QuoteRequestStatus, string>(QuoteRequestStatus.Canceled, "cancelled"),
             new KeyValuePair<QuoteRequestStatus, string>(QuoteRequestStatus.Open, "open"),
             new KeyValuePair<QuoteRequestStatus, string>(QuoteRequestStatus.Filled, "filled"),
         };

@@ -11,13 +11,15 @@ namespace FTX.Net.Objects
     public class FTXSymbol: FTXSymbolBase, ICommonSymbol
     {
         /// <summary>
-        /// The base currency
+        /// The base asset
         /// </summary>
-        public string? BaseCurrency { get; set; }
+        [JsonProperty("baseCurrency")]
+        public string? BaseAsset { get; set; }
         /// <summary>
-        /// The quote currency
+        /// The quote asset
         /// </summary>
-        public string? QuoteCurrency { get; set; }
+        [JsonProperty("quoteCurrency")]
+        public string? QuoteAsset { get; set; }
         /// <summary>
         /// The volume in quote
         /// </summary>
@@ -29,7 +31,7 @@ namespace FTX.Net.Objects
         public SymbolType Type { get; set; }
         
         /// <summary>
-        /// Minimum maker order size (if >10 orders per hour fall below this size)
+        /// Minimum maker order quantity (if >10 orders per hour fall below this size)
         /// </summary>
         public decimal MinProvideSize { get; set; }
        
@@ -41,9 +43,14 @@ namespace FTX.Net.Objects
         /// High leverage fee exempt
         /// </summary>
         public bool HighLeverageFeeExempt { get; set; }
+        /// <summary>
+        /// The current price
+        /// </summary>
+        [JsonProperty("price")]
+        public decimal? CurrentPrice { get; set; }
 
         string ICommonSymbol.CommonName => Name;
 
-        decimal ICommonSymbol.CommonMinimumTradeSize => MinProvideSize;
+        decimal ICommonSymbol.CommonMinimumTradeQuantity => MinProvideSize;
     }
 }

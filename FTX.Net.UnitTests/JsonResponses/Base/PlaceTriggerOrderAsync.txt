@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "result": {
+    "createdAt": "2019-03-05T09:56:55.728933+00:00",
+    "future": "XRP-PERP",
+    "id": 9596912,
+    "market": "XRP-PERP",
+    "triggerPrice": 0.306525,
+    "orderId": null,
+    "side": "sell",
+    "size": 31431,
+    "status": "open",
+    "type": "stop",
+    "orderPrice": null,
+    "error": null,
+    "triggeredAt": null,
+    "reduceOnly": false,
+    "orderType": "market",
+    "retryUntilFilled": false,
+  }
+}

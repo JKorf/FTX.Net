@@ -22,43 +22,25 @@ namespace FTX.Net.SubClients
             _baseClient = baseClient;
         }
 
-        /// <summary>
-        /// Get list of stakes for the user
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXStake>>> GetStakesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<IEnumerable<FTXStake>>(_baseClient.GetUri("staking/stakes"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get list of unstake requests for the user
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXUnstakeRequest>>> GetUnstakeRequestsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<IEnumerable<FTXUnstakeRequest>>(_baseClient.GetUri("staking/unstake_requests"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get list of stake balances
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXStakeBalance>>> GetStakeBalancesAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<IEnumerable<FTXStakeBalance>>(_baseClient.GetUri("staking/balances"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Create a new unstake request
-        /// </summary>
-        /// <param name="asset">Asset</param>
-        /// <param name="quantity">Quantity to unstake</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<FTXUnstakeRequest>> RequestUnstakeAsync(string asset, decimal quantity, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
@@ -67,36 +49,21 @@ namespace FTX.Net.SubClients
             return await _baseClient.SendFTXRequest<FTXUnstakeRequest>(_baseClient.GetUri("staking/unstake_requests"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Cancel an unstake request
-        /// </summary>
-        /// <param name="requestId">Id of request to unstake</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        public async Task<WebCallResult<FTXUnstakeRequest>> CancelUnstakeRequestAsync(long requestId, CancellationToken ct = default)
+        /// <inheritdoc />
+        public async Task<WebCallResult<string[]>> CancelUnstakeRequestAsync(long requestId, CancellationToken ct = default)
         {
             // Doesn't seem to work?
-            return await _baseClient.SendFTXRequest<FTXUnstakeRequest>(_baseClient.GetUri("staking/unstake_requests/" + requestId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<string[]>(_baseClient.GetUri("staking/unstake_requests/" + requestId), HttpMethod.Delete, ct, signed: true).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Get list of staking rewards
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXStakeReward>>> GetStakingRewardsAsync(CancellationToken ct = default)
         {
             return await _baseClient.SendFTXRequest<IEnumerable<FTXStakeReward>>(_baseClient.GetUri("staking/staking_rewards"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
 
-        /// <summary>
-        /// Create a new stake request
-        /// </summary>
-        /// <param name="asset">Asset to stake</param>
-        /// <param name="quantity">Quantity to stake</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
+        /// <inheritdoc />
         public async Task<WebCallResult<FTXStake>> StakeAsync(string asset, decimal quantity, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();

@@ -15,11 +15,11 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         public bool BackstopProvider { get; set; }
         /// <summary>
-        /// Amount of collateral
+        /// Quantity of collateral
         /// </summary>
         public decimal Collateral { get; set; }
         /// <summary>
-        /// Amount of free collateral
+        /// Quantity of free collateral
         /// </summary>
         public decimal FreeCollateral { get; set; }
         /// <summary>

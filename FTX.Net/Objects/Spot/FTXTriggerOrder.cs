@@ -2,8 +2,6 @@
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace FTX.Net.Objects.Spot
@@ -17,11 +15,18 @@ namespace FTX.Net.Objects.Spot
         /// The order type
         /// </summary>
         [JsonConverter(typeof(OrderTypeConverter))]
-        public override OrderType OrderType { get; set; }
+        [JsonProperty("orderType")]
+        public override OrderType Type { get; set; }
+        /// <summary>
+        /// The order type
+        /// </summary>
+        [JsonConverter(typeof(OrderTypeConverter))]
+        public OrderStatus OrderStatus { get; set; }
         /// <summary>
         /// The price of the order
         /// </summary>
-        public override decimal? OrderPrice { get; set; }
+        [JsonProperty("orderPrice")]
+        public override decimal? Price { get; set; }
 
         /// <summary>
         /// Id of the order
@@ -35,7 +40,8 @@ namespace FTX.Net.Objects.Spot
         /// The trigger type
         /// </summary>
         [JsonConverter(typeof(TriggerOrderTypeConverter))]
-        public TriggerOrderType Type { get; set; }
+        [JsonProperty("type")]
+        public TriggerOrderType TriggerType { get; set; }
         /// <summary>
         /// Status of the trigger order
         /// </summary>
@@ -48,7 +54,8 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Time at which the order was triggered
         /// </summary>
-        public DateTime? TriggeredAt { get; set; }
+        [JsonProperty("triggeredAt")]
+        public DateTime? TriggerTime { get; set; }
         /// <summary>
         /// Whether or not to keep re-triggering until filled
         /// </summary>
@@ -62,11 +69,12 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         public decimal? TrailValue { get; set; }
         /// <summary>
-        /// Time at which the order was cancelled
+        /// Time at which the order was canceled
         /// </summary>
-        public DateTime? CancelledAt { get; set; }
+        [JsonProperty("cancelledAt")]
+        public DateTime? CancelTime { get; set; }
         /// <summary>
-        /// Cancellation reason
+        /// Cancelation reason
         /// </summary>
         public string? CancelReason { get; set; }
     }

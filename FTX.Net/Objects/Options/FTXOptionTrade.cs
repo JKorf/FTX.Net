@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,9 +15,10 @@ namespace FTX.Net.Objects.Options
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// Size of trade
+        /// Quantity of trade
         /// </summary>
-        public decimal Size { get; set; }
+        [JsonProperty("size")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Price of trade
         /// </summary>
@@ -28,6 +30,7 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
     }
 }

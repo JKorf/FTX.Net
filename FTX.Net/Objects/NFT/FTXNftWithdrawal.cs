@@ -32,7 +32,7 @@ namespace FTX.Net.Objects.NFT
         /// <summary>
         /// Transaction id
         /// </summary>
-        [JsonProperty("txId")]
+        [JsonProperty("txid")]
         public string TransactionId { get; set; } = string.Empty;
         /// <summary>
         /// Fee
@@ -46,7 +46,8 @@ namespace FTX.Net.Objects.NFT
         /// <summary>
         /// Time
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Notes
         /// </summary>

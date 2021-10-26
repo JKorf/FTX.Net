@@ -28,7 +28,8 @@ namespace FTX.Net.Objects.NFT
         /// <summary>
         /// NFT Creation time
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Sent time
         /// </summary>

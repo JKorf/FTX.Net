@@ -20,7 +20,8 @@ namespace FTX.Net.Objects.Staking
         /// <summary>
         /// Creation time
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// Id
         /// </summary>
@@ -39,6 +40,6 @@ namespace FTX.Net.Objects.Staking
         /// Unlock at
         /// </summary>
         [JsonProperty("unlockAt")]
-        public DateTime UnlockAt { get; set; }
+        public DateTime UnlockTime { get; set; }
     }
 }

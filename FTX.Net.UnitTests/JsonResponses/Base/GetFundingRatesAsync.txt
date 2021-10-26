@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "result": [
+    {
+      "future": "BTC-PERP",
+      "rate": 0.0025,
+      "time": "2019-06-02T08:00:00+00:00"
+    }
+  ]
+}

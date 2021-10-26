@@ -47,7 +47,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="requestId">Id of request to unstake</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXUnstakeRequest>> CancelUnstakeRequestAsync(long requestId, CancellationToken ct = default);
+        Task<WebCallResult<string[]>> CancelUnstakeRequestAsync(long requestId, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of staking rewards

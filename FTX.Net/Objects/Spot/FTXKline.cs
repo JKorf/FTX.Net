@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.ExchangeInterfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,37 +14,42 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Close price
         /// </summary>
-        public decimal Close { get; set; }
+        [JsonProperty("close")]
+        public decimal ClosePrice{ get; set; }
         /// <summary>
         /// Open price
         /// </summary>
-        public decimal Open { get; set; }
+        [JsonProperty("open")]
+        public decimal OpenPrice { get; set; }
         /// <summary>
         /// High price
         /// </summary>
-        public decimal High { get; set; }
+        [JsonProperty("high")]
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// Low price
         /// </summary>
-        public decimal Low { get; set; }
+        [JsonProperty("low")]
+        public decimal LowPrice { get; set; }
         /// <summary>
         /// Volume
         /// </summary>
         public decimal? Volume { get; set; }
         /// <summary>
-        /// Start time
+        /// Open time
         /// </summary>
-        public DateTime StartTime { get; set; }
+        [JsonProperty("startTime")]
+        public DateTime OpenTime { get; set; }
 
-        decimal ICommonKline.CommonHigh => High;
+        decimal ICommonKline.CommonHighPrice => HighPrice;
 
-        decimal ICommonKline.CommonLow => Low;
+        decimal ICommonKline.CommonLowPrice => LowPrice;
 
-        decimal ICommonKline.CommonOpen => Open;
+        decimal ICommonKline.CommonOpenPrice => OpenPrice;
 
-        decimal ICommonKline.CommonClose => Close;
+        decimal ICommonKline.CommonClosePrice => ClosePrice;
 
-        DateTime ICommonKline.CommonOpenTime => StartTime;
+        DateTime ICommonKline.CommonOpenTime => OpenTime;
 
         decimal ICommonKline.CommonVolume => Volume ?? 0;
     }

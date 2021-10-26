@@ -12,17 +12,19 @@ namespace FTX.Net.Objects.Futures
     public class FTXPosition
     {
         /// <summary>
-        /// Amount that was paid to enter this position, equal to size * entry_price. Positive if long, negative if short.
+        /// Quantity that was paid to enter this position, equal to quantiy * entry_price. Positive if long, negative if short.
         /// </summary>
         public decimal Cost { get; set; }
         /// <summary>
         /// Cumulative buy size
         /// </summary>
-        public decimal? CumulativeBuySize { get; set; }
+        [JsonProperty("cumulativeBuySize")]
+        public decimal CumulativeBuyQuantity { get; set; }
         /// <summary>
         /// Cumulative sell size
         /// </summary>
-        public decimal? CumulativeSellSize { get; set; }
+        [JsonProperty("cumulativeSellSize")]
+        public decimal CumulativeSellQuantity { get; set; }
         /// <summary>
         /// Average cost of this position after pnl was last realized: whenever unrealized pnl gets realized, this field gets set to mark price, unrealizedPnL is set to 0, and realizedPnl changes by the previous value for unrealizedPnl.
         /// </summary>

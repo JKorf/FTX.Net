@@ -24,6 +24,7 @@ namespace FTX.Net.Objects.LeveragedTokens
         /// <summary>
         /// Time of the rebalance
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
     }
 }

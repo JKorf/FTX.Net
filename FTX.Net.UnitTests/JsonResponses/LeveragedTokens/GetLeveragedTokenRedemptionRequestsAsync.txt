@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "result": [
+    {
+      "id": 123,
+      "token": "HEDGE",
+      "size": 10,
+      "pending": false,
+      "price": 1234,
+      "proceeds": 12340,
+      "fee": 12.34,
+      "requestedAt": "2019-03-05T09:56:55.728933+00:00",
+      "fulfilledAt": "2019-03-05T09:56:55.728933+00:00"
+    }
+  ]
+}

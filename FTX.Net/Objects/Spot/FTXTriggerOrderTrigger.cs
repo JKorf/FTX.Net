@@ -13,17 +13,18 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
-        /// Size of the order
+        /// Quantity of the order
         /// </summary>
         [JsonProperty("orderSize")]
-        public decimal OrderQuantity { get; set; }
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Filled order
         /// </summary>
         [JsonProperty("filledSize")]
-        public decimal FilledQuantity { get; set; }
+        public decimal QuantityFilled { get; set; }
         /// <summary>
         /// Order id, null if failed to place
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace FTX.Net.Objects.Futures
 {
@@ -18,6 +19,7 @@ namespace FTX.Net.Objects.Futures
         /// <summary>
         /// Time
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
     }
 }

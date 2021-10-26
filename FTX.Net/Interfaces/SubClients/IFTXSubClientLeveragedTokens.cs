@@ -50,7 +50,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXLeveragedTokenCreationRequest>>> RequestLeveragedTokenCreationAsync(string tokenName, decimal size, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXLeveragedTokenCreationRequest>> RequestLeveragedTokenCreationAsync(string tokenName, decimal size, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get redemption requests
@@ -68,7 +68,7 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXLeveragedTokenRedeemRequest>>> RequestLeveragedTokenRedemptionAsync(string tokenName, decimal size, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXLeveragedTokenRedeemRequest>> RequestLeveragedTokenRedemptionAsync(string tokenName, decimal size, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         ///Provides information about the most recent rebalance of each ETF.

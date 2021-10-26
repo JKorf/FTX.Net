@@ -1,0 +1,4 @@
+{
+  "success": true,
+  "result": "Order queued for cancelation"
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -32,6 +33,7 @@ namespace FTX.Net.Objects.LeveragedTokens
         /// <summary>
         /// Time the request was submitted
         /// </summary>
-        public DateTime RequestedAt { get; set; }
+        [JsonProperty("requestedAt")]
+        public DateTime RequestTime { get; set; }
     }
 }

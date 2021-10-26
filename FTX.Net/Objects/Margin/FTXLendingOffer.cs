@@ -20,7 +20,7 @@ namespace FTX.Net.Objects.Margin
         /// </summary>
         public decimal Rate { get; set; }
         /// <summary>
-        /// Amount you will lend, if matched
+        /// Quantity you will lend, if matched
         /// </summary>
         [JsonProperty("size")]
         public decimal Quantity { get; set; }

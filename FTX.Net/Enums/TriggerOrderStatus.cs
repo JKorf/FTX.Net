@@ -11,9 +11,9 @@ namespace FTX.Net.Enums
         /// </summary>
         Open,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled,
+        Canceled,
         /// <summary>
         /// Triggered
         /// </summary>

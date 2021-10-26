@@ -32,10 +32,12 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// Expiry
         /// </summary>
-        public DateTime? QuoteExpiry { get; set; }
+        [JsonProperty("quoteExpiry")]
+        public DateTime? QuoteExpiryTime { get; set; }
         /// <summary>
         /// When the quote was created
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime CreateTime { get; set; }
     }
 }

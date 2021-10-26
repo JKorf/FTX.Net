@@ -64,15 +64,15 @@ namespace FTX.Net.SymbolOrderBooks
         {
             if (update.Data.Action == "partial")
             {
-                SetInitialOrderBook(update.Data.Time.Ticks, update.Data.Bids, update.Data.Asks);
+                SetInitialOrderBook(update.Data.Timestamp.Ticks, update.Data.Bids, update.Data.Asks);
                 if(!_grouping.HasValue)
-                    AddChecksum((int)update.Data.Checksum); // ?
+                    AddChecksum((int)update.Data.Checksum);
             }
             else
             {
-                UpdateOrderBook(update.Data.Time.Ticks, update.Data.Bids, update.Data.Asks);
+                UpdateOrderBook(update.Data.Timestamp.Ticks, update.Data.Bids, update.Data.Asks);
                 if(!_grouping.HasValue)
-                    AddChecksum((int)update.Data.Checksum); // ?
+                    AddChecksum((int)update.Data.Checksum);
             }
         }
 

@@ -1,0 +1,13 @@
+
+{
+  "success": true,
+  "result": [
+    {
+      "coin": "USDT",
+      "free": 4321.2,
+      "total": 4340.2,
+      "spotBorrow": 0,
+      "availableWithoutBorrow": 2320.2
+    }
+  ]
+}

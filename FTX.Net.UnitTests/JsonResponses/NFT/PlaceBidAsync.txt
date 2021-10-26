@@ -1,0 +1,25 @@
+  {
+    "success": true,
+    "result": {
+        "id": 123456,
+        "name": "Rare NFT",
+        "description": "Rare art",
+        "issuer": "FTX",
+        "collection": "FTX rare art",
+        "series": "Art for charity",
+        "solMintAddress": "8Jntdo3RMxQyGvuRkRjFA3aJ",
+        "ethContractAddress": "0x014Dc156cA770baC5475186834ecd2f624C990K",
+        "imageUrl": "https://www.static.ftx.com/art.jpg",
+        "videoUrl": "https://www.static.ftx.com/art.mp4",
+        "attributes": null,
+        "redeemable": true,
+        "redeemed": false,
+        "offerPrice": 1000.00,
+        "auction": {
+          "bestBid": 120.00,
+          "minNextBid": 125.00,
+          "endTime": "2021-06-11T07:23:24.106062+00:00",
+          "bids": 10
+        }
+      }
+  }

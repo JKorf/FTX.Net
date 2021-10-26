@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "result": [
+    {
+      "address": "0xb2EA1CC386A260c9Ae3ebda2cb7AEd212b034Ab4",
+      "coin": "ETH",
+      "fiat": false,
+      "id": 31189,
+      "isPrimetrust": false,
+      "lastUsedAt": "2020-09-21T15:38:11.795763+00:00",
+      "name": "MetaMask 1",
+      "tag": null,
+      "whitelisted": true,
+      "whitelistedAfter": "2020-08-26T09:41:53.959256+00:00"
+    },
+    {
+      "address": "0xE4Ba8791E0fdbdc50024898A384FecFD90e69553",
+      "coin": "ETH",
+      "fiat": false,
+      "id": 46725,
+      "isPrimetrust": false,
+      "lastUsedAt": "2020-09-21T09:16:46.918175+00:00",
+      "name": "Ledger Nano S",
+      "tag": null,
+      "whitelisted": true,
+      "whitelistedAfter": "2020-09-21T09:16:16.829467+00:00"
+    }
+  ]
+}

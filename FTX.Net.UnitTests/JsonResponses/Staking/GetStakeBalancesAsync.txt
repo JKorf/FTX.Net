@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "result": [
+    {   "coin": "SRM",
+        "lifetimeRewards": 1.98e-06,
+        "scheduledToUnstake": 0.1,
+        "staked": 0.0},
+    {   "coin": "MSRM",
+        "lifetimeRewards": 0,
+        "scheduledToUnstake": 0,
+        "staked": 0.0},
+    {   "coin": "MSRM_LOCKED",
+        "lifetimeRewards": 0,
+        "scheduledToUnstake": 0,
+        "staked": 0.0},
+    {   "coin": "SRM_LOCKED",
+        "lifetimeRewards": 1.98e-06,
+        "scheduledToUnstake": 0,
+        "staked": 0.0,
+    }
+      ]
+}

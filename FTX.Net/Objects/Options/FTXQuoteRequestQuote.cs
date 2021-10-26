@@ -31,7 +31,8 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// Quote expiry
         /// </summary>
-        public DateTime? QuoteExpiry { get; set; }
+        [JsonProperty("quoteExpiry")]
+        public DateTime? QuoteExpiryTime { get; set; }
         /// <summary>
         /// Quoter side
         /// </summary>
@@ -47,9 +48,10 @@ namespace FTX.Net.Objects.Options
         [JsonConverter(typeof(OrderSideConverter))]
         public OrderSide RequestSide { get; set; }
         /// <summary>
-        /// Size
+        /// Quantity
         /// </summary>
-        public decimal Size { get; set; }
+        [JsonProperty("size")]
+        public decimal Quantity { get; set; }
         /// <summary>
         /// Status
         /// </summary>
@@ -58,6 +60,7 @@ namespace FTX.Net.Objects.Options
         /// <summary>
         /// Creation time
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime CreateTime { get; set; }
     }
 }

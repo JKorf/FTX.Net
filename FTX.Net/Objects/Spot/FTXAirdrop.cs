@@ -29,7 +29,8 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Time
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Status
         /// </summary>

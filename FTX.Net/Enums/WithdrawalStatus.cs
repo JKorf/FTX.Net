@@ -22,8 +22,8 @@ namespace FTX.Net.Enums
         /// </summary>
         Complete,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled
+        Canceled
     }
 }

@@ -14,9 +14,9 @@ namespace FTX.Net.Enums
         /// </summary>
         Pending,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled,
+        Canceled,
         /// <summary>
         /// Processed
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,13 +19,14 @@ namespace FTX.Net.Objects.Futures
         /// </summary>
         public long Id { get; set; }
         /// <summary>
-        /// Amount payed
+        /// Quantity payed
         /// </summary>
         public decimal Payment { get; set; }
         /// <summary>
         /// Timestamp
         /// </summary>
-        public DateTime Time { get; set; }
+        [JsonProperty("time")]
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Rate
         /// </summary>

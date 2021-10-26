@@ -14,15 +14,16 @@ namespace FTX.Net.Objects
         [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Amount free
+        /// Quantity free
         /// </summary>
-        public decimal Free { get; set; }
+        [JsonProperty("free")]
+        public decimal Available { get; set; }
         /// <summary>
-        /// Amount borrowed with spot margin
+        /// Quantity borrowed with spot margin
         /// </summary>
         public decimal SpotBorrow { get; set; }
         /// <summary>
-        /// Total amount
+        /// Total Quantity
         /// </summary>
         public decimal Total { get; set; }
         /// <summary>
@@ -30,13 +31,13 @@ namespace FTX.Net.Objects
         /// </summary>
         public decimal UsdValue { get; set; }
         /// <summary>
-        /// Amount available without borrowing
+        /// Quantity available without borrowing
         /// </summary>
         public decimal AvailableWithoutBorrow { get; set; }
 
         string ICommonBalance.CommonAsset => Asset;
 
-        decimal ICommonBalance.CommonAvailable => Free;
+        decimal ICommonBalance.CommonAvailable => Available;
 
         decimal ICommonBalance.CommonTotal => Total;
     }

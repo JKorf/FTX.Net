@@ -53,7 +53,8 @@ namespace FTX.Net.Objects.FTXPay
         /// <summary>
         /// Time the app was created
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// Total value of all fetched payments
         /// </summary>

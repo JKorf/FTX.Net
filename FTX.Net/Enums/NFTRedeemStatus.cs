@@ -30,9 +30,9 @@ namespace FTX.Net.Enums
         /// </summary>
         Completed,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled,
+        Canceled,
         /// <summary>
         /// Failed
         /// </summary>

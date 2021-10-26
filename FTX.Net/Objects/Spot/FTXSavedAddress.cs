@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,8 +15,13 @@ namespace FTX.Net.Objects.Spot
         /// </summary>
         public string Address { get; set; } = string.Empty;
         /// <summary>
+        /// The name
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
         /// The asset
         /// </summary>
+        [JsonProperty("coin")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
         /// Is fiat
@@ -32,7 +38,8 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Last used time
         /// </summary>
-        public DateTime LastUsedAt { get; set; }
+        [JsonProperty("lastUsedAt")]
+        public DateTime LastUseTime { get; set; }
         /// <summary>
         /// Address tag
         /// </summary>
@@ -44,6 +51,7 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Time the address was whitelisted
         /// </summary>
-        public DateTime? WhitelistedAfter { get; set; }
+        [JsonProperty("whitelistedAfter")]
+        public DateTime? WhitelistedAfterTime { get; set; }
     }
 }

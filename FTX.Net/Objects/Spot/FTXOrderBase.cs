@@ -13,13 +13,14 @@ namespace FTX.Net.Objects.Spot
     public abstract class FTXOrderBase
     {
         /// <summary>
-        /// Id
+        /// Order id
         /// </summary>
         public long Id { get; set; }
         /// <summary>
         /// When the order was created
         /// </summary>
-        public DateTime CreatedAt { get; set; }
+        [JsonProperty("createdAt")]
+        public DateTime CreateTime { get; set; }
 
         /// <summary>
         /// The future the order is for
@@ -33,11 +34,11 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// The price of the order
         /// </summary>
-        public abstract decimal? OrderPrice { get; set; }
+        public abstract decimal? Price { get; set; }
         /// <summary>
         /// The order type
         /// </summary>
-        public abstract OrderType OrderType { get; set; }
+        public abstract OrderType Type { get; set; }
         /// <summary>
         /// The side
         /// </summary>
@@ -65,6 +66,6 @@ namespace FTX.Net.Objects.Spot
         /// Filled quantity
         /// </summary>
         [JsonProperty("filledSize")]
-        public decimal? FilledQuantity { get; set; }
+        public decimal? QuantityFilled { get; set; }
     }
 }

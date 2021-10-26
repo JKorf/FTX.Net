@@ -12,7 +12,7 @@ namespace FTX.Net.Converters
         protected override List<KeyValuePair<TriggerOrderStatus, string>> Mapping => new List<KeyValuePair<TriggerOrderStatus, string>>
         {
             new KeyValuePair<TriggerOrderStatus, string>(TriggerOrderStatus.Open, "open"),
-            new KeyValuePair<TriggerOrderStatus, string>(TriggerOrderStatus.Cancelled, "cancelled"),
+            new KeyValuePair<TriggerOrderStatus, string>(TriggerOrderStatus.Canceled, "cancelled"),
             new KeyValuePair<TriggerOrderStatus, string>(TriggerOrderStatus.Triggered, "triggered")
         };
     }

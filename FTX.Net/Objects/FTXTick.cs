@@ -13,11 +13,11 @@ namespace FTX.Net.Objects
         /// <summary>
         /// High price
         /// </summary>
-        public decimal High { get; set; }
+        public decimal HighPrice { get; set; }
         /// <summary>
         /// Low price
         /// </summary>
-        public decimal Low { get; set; }
+        public decimal LowPrice { get; set; }
         /// <summary>
         /// Volume
         /// </summary>
@@ -29,9 +29,9 @@ namespace FTX.Net.Objects
 
         string ICommonTicker.CommonSymbol => Symbol;
 
-        decimal ICommonTicker.CommonHigh => High;
+        decimal ICommonTicker.CommonHighPrice => HighPrice;
 
-        decimal ICommonTicker.CommonLow => Low;
+        decimal ICommonTicker.CommonLowPrice => LowPrice;
 
         decimal ICommonTicker.CommonVolume => Volume;
     }

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "result": {
+    "volume": 1000.23,
+    "nextFundingRate": 0.00025,
+    "nextFundingTime": "2019-03-29T03:00:00+00:00",
+    "expirationPrice": 3992.1,
+    "predictedExpirationPrice": 3993.6,
+    "strikePrice": 8182.35,
+    "openInterest": 21124.583
+  }
+}
