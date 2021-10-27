@@ -650,25 +650,25 @@
             </summary>
             <param name="newDefaultOptions"></param>
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.SocketObjects.FTXStreamTicker}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.SocketObjects.FTXStreamTicker}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{FTX.Net.Objects.Spot.FTXTrade}}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{FTX.Net.Objects.Spot.FTXTrade}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToGroupedOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToGroupedOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.FTXOrder}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.FTXOrder}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.FTXSocketClient.SubscribeToFTXPayUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}})">
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToFTXPayUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:FTX.Net.FTXSocketClient.AuthenticateSocketAsync(CryptoExchange.Net.Sockets.SocketConnection)">
@@ -1210,59 +1210,66 @@
             <param name="apiKey">The api key</param>
             <param name="apiSecret">The api secret</param>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.SocketObjects.FTXStreamTicker}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.SocketObjects.FTXStreamTicker}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to ticker updates for a symbol
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{FTX.Net.Objects.Spot.FTXTrade}}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{FTX.Net.Objects.Spot.FTXTrade}}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to trade updates for a symbol
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to order book updates for a symbol
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToGroupedOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToGroupedOrderBookUpdatesAsync(System.String,System.Int32,System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to order book updates for a symbol
             </summary>
             <param name="symbol">Symbol for the order book</param>
             <param name="grouping">Grouping of the data</param>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.FTXOrder}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToOrderUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.FTXOrder}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to order updates
             </summary>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToUserTradeUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to trade updates
             </summary>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToFTXPayUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}})">
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToFTXPayUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{FTX.Net.Objects.Spot.FTXUserTrade}},System.Threading.CancellationToken)">
             <summary>
             Subscribes to FTX-pay updates
             </summary>
             <param name="handler">The handler for the data</param>
-            <returns></returns>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
         <member name="T:FTX.Net.Interfaces.SubClients.IFTXSubClientConvert">
             <summary>
@@ -2535,12 +2542,12 @@
         </member>
         <member name="P:FTX.Net.Objects.Futures.FTXPosition.CumulativeBuyQuantity">
             <summary>
-            Cumulative buy size
+            Cumulative buy quantity
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Futures.FTXPosition.CumulativeSellQuantity">
             <summary>
-            Cumulative sell size
+            Cumulative sell quantity
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Futures.FTXPosition.EntryPrice">
