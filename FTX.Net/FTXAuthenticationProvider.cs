@@ -32,18 +32,20 @@ namespace FTX.Net
             if (Credentials.Key == null)
                 throw new ArgumentException("No valid API credentials provided. Key/Secret needed.");
 
+            var requestUri = new Uri(uri);
+            var ftxPrefix = GetFTXHeaderPrefix(requestUri);
             var timestamp = (long)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
 
-            result.Add("FTX-KEY", Credentials.Key.GetString());
-            result.Add("FTX-TS", timestamp.ToString());
-            var requestUri = new Uri(uri);
+            result.Add($"{ftxPrefix}-KEY", Credentials.Key.GetString());
+            result.Add($"{ftxPrefix}-TS", timestamp.ToString());
+
             var toSign = timestamp + method.ToString() + requestUri.PathAndQuery;
-            if(parameterPosition == HttpMethodParameterPosition.InBody)
+            if (parameterPosition == HttpMethodParameterPosition.InBody)
             {
                 toSign += JsonConvert.SerializeObject(parameters.OrderBy(p => p.Key).ToDictionary(p => p.Key, p => p.Value));
             }
 
-            result.Add("FTX-SIGN", ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant());
+            result.Add($"{ftxPrefix}-SIGN", ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant());
 
 
             return result;
@@ -52,6 +54,18 @@ namespace FTX.Net
         public override string Sign(string toSign)
         {
             return ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant();
+        }
+
+        private string GetFTXHeaderPrefix(Uri requestUri)
+        {
+            var headerKeyPrefix = "FTX";
+            var isFtxUs = requestUri.Host.EndsWith(".us", StringComparison.OrdinalIgnoreCase);
+            if (isFtxUs)
+            {
+                headerKeyPrefix += "US";
+            }
+
+            return headerKeyPrefix;
         }
     }
 }

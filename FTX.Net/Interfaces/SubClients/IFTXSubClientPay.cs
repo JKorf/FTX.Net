@@ -32,12 +32,12 @@ namespace FTX.Net.Interfaces.SubClients
         /// <param name="asset">The currency of the payment</param>
         /// <param name="notes">Notes about this order that are private to the merchant</param>
         /// <param name="quantity">Size of the desired payment</param>
-        /// <param name="allowTip">Whether or not tips are allowed for the payment</param>
+        /// <param name="allowTips">Whether or not tips are allowed for the payment</param>
         /// <param name="clientOrderId">ID for you to track the order with (must be unique to your FTX Pay app)</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
 #pragma warning restore 1570
-        Task<WebCallResult<FTXAppOrder>> CreateOrderAsync(long appId, string asset, decimal quantity, bool allowTip, string? notes = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXAppOrder>> CreateOrderAsync(long appId, string asset, decimal quantity, bool allowTips, string? notes = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get orders for an app
