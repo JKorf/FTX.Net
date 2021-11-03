@@ -2619,7 +2619,7 @@
             Size of the desired payment
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.AllowTip">
+        <member name="P:FTX.Net.Objects.FTXPay.FTXAppOrder.AllowTips">
             <summary>
             Whether or not tips are allowed for the payment
             </summary>

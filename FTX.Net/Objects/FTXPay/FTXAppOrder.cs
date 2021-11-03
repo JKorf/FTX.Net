@@ -33,7 +33,7 @@ namespace FTX.Net.Objects.FTXPay
         /// <summary>
         /// Whether or not tips are allowed for the payment
         /// </summary>
-        public bool AllowTip { get; set; }
+        public bool AllowTips { get; set; }
         /// <summary>
         /// ID for you to track the order with (must be unique to your FTX Pay app)
         /// </summary>
