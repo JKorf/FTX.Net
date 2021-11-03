@@ -1,6 +1,7 @@
 ﻿using CryptoExchange.Net.Objects;
 using System.Net.Http;
 using FTX.Net.Interfaces;
+using System;
 
 namespace FTX.Net.Objects
 {
@@ -9,6 +10,16 @@ namespace FTX.Net.Objects
     /// </summary>
     public class FTXClientOptions : RestClientOptions
     {
+        /// <summary>
+        /// Whether or not to automatically sync the local time with the server time
+        /// </summary>
+        public bool AutoTimestamp { get; set; } = true;
+
+        /// <summary>
+        /// Interval for refreshing the auto timestamp calculation
+        /// </summary>
+        public TimeSpan AutoTimestampRecalculationInterval { get; set; } = TimeSpan.FromHours(3);
+
         /// <summary>
         /// Affiliate code which will be sent when placing orders
         /// </summary>

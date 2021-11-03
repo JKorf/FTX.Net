@@ -42,6 +42,7 @@ namespace FTX.Net
         private static FTXClientOptions DefaultOptions => _defaultOptions.Copy<FTXClientOptions>();
 
         private readonly string _affiliateCode;
+        private FTXClientOptions _options;
 
         /// <summary>
         /// Convert endpoints
@@ -88,11 +89,13 @@ namespace FTX.Net
         /// Create a new instance of FTXClient using provided options
         /// </summary>
         /// <param name="options">The options to use for this client</param>
-        public FTXClient(FTXClientOptions options) : base("FTX", options, options.ApiCredentials == null ? null : new FTXAuthenticationProvider(options.ApiCredentials))
+        public FTXClient(FTXClientOptions options) : base("FTX", options, options.ApiCredentials == null ? null
+            : new FTXAuthenticationProvider(options.ApiCredentials))
         {
             if (options == null)
                 throw new ArgumentException("Cant pass null options, use empty constructor for default");
 
+            _options = options;
             _affiliateCode = options.AffiliateCode;
             if (!string.IsNullOrEmpty(options.SubaccountName)) 
             {
@@ -139,6 +142,16 @@ namespace FTX.Net
                 { SubaccountHeaderName, WebUtility.UrlEncode(subaccountName) }
             };
 
+
+        /// <summary>
+        /// Get the server time
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
+        {
+            return await SendFTXRequest<DateTime>(new Uri("https://otc.ftx.com/api/time"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
 
         #region Markets
 
@@ -906,8 +919,12 @@ namespace FTX.Net
         #endregion
 
         #region private
-        internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null) where T : class
+
+        internal async Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, bool checkResult = true, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
         {
+            if (signed)
+                await FTXTimestampProvider.UpdateTimeAsync(this, log, _options).ConfigureAwait(false);
+
             var result = await SendRequestAsync<FTXResult<T>>(uri, method, cancellationToken, parameters, signed, checkResult, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
             if (result)
                 return result.As(result.Data.Result);

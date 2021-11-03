@@ -489,6 +489,13 @@
             </summary>
             <param name="newDefaultOptions"></param>
         </member>
+        <member name="M:FTX.Net.FTXClient.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the server time
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:FTX.Net.FTXClient.GetSymbolsAsync(System.Threading.CancellationToken)">
             <summary>
             Get the list of supported symbols
@@ -2401,6 +2408,21 @@
         <member name="T:FTX.Net.Objects.FTXClientOptions">
             <summary>
             Options for the FTX client
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXClientOptions.AutoTimestamp">
+            <summary>
+            Whether or not to automatically sync the local time with the server time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXClientOptions.AutoTimestampRecalculationInterval">
+            <summary>
+            Interval for refreshing the auto timestamp calculation
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.FTXClientOptions.TimestampOffset">
+            <summary>
+            A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.FTXClientOptions.AffiliateCode">
