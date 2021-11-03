@@ -282,7 +282,7 @@ namespace FTX.Net
 
             var unsub = new UnsubscribeRequest(ftxRequest.Channel, ftxRequest.Market);
             var result = false;
-            await connection.SendAndWaitAsync(unsub, ResponseTimeout, data =>
+            await connection.SendAndWaitAsync(unsub, ClientOptions.SocketResponseTimeout, data =>
             {
                 if (data.Type != JTokenType.Object)
                     return false;
