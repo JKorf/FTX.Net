@@ -45,7 +45,7 @@ namespace FTX.Net.SubClients
         /// <returns></returns>
         public async Task<WebCallResult<IEnumerable<FTXBorrowRate>>> GetBorrowRatesAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXBorrowRate>>(_baseClient.GetUri("spot_margin/borrow_rates"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXBorrowRate>>(_baseClient.GetUri("spot_margin/borrow_rates"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
         /// <summary>

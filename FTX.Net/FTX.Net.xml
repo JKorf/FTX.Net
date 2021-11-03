@@ -2420,11 +2420,6 @@
             Interval for refreshing the auto timestamp calculation
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.FTXClientOptions.TimestampOffset">
-            <summary>
-            A manual offset for the timestamp. Should only be used if AutoTimestamp and regular time synchronization on the OS is not reliable enough
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.FTXClientOptions.AffiliateCode">
             <summary>
             Affiliate code which will be sent when placing orders
