@@ -10,12 +10,12 @@ using FTX.Net.Objects.SocketObjects;
 using FTX.Net.Objects.Spot;
 using FTX.Net.Objects.Spot.Socket;
 
-namespace FTX.Net.Interfaces
+namespace FTX.Net.Interfaces.Clients.Socket
 {
     /// <summary>
     /// FTX socket client 
     /// </summary>
-    public interface IFTXSocketClient: ISocketClient
+    public interface IFTXSocketClientSpot : ISocketClient
     {
         /// <summary>
         /// Set the API key and secret

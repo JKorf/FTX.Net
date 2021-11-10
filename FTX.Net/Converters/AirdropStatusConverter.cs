@@ -13,6 +13,7 @@ namespace FTX.Net.Converters
         {
             new KeyValuePair<AirdropStatus, string>(AirdropStatus.Pending, "pending"),
             new KeyValuePair<AirdropStatus, string>(AirdropStatus.Confirmed, "confirmed"),
+            new KeyValuePair<AirdropStatus, string>(AirdropStatus.Complete, "complete"),
         };
     }
 }

@@ -6,12 +6,12 @@ using CryptoExchange.Net.Objects;
 using FTX.Net.Enums;
 using FTX.Net.Objects.Options;
 
-namespace FTX.Net.Interfaces.SubClients
+namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
     /// Option endpoints
     /// </summary>
-    public interface IFTXSubClientOptions
+    public interface IFTXClientOptions
     {
         /// <summary>
         /// Get list of quote requests

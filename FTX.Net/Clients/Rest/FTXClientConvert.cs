@@ -6,18 +6,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// Convert endpoints
     /// </summary>
-    public class FTXSubClientConvert : IFTXSubClientConvert
+    public class FTXClientConvert : IFTXClientConvert
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientConvert(FTXClient baseClient)
+        internal FTXClientConvert(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }

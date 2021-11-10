@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.Convert;
 
-namespace FTX.Net.Interfaces.SubClients
+namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
     /// Convert endpoints
     /// </summary>
-    public interface IFTXSubClientConvert
+    public interface IFTXClientConvert
     {
         /// <summary>
         /// Create a new quote request

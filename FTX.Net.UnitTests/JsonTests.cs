@@ -1,4 +1,4 @@
-﻿using FTX.Net.Interfaces;
+﻿using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects;
 using FTX.Net.Testing;
 using NUnit.Framework;
@@ -11,12 +11,34 @@ namespace FTX.Net.UnitTests
     public class JsonTests
     {
         private JsonToObjectComparer<IFTXClient> _comparer = new JsonToObjectComparer<IFTXClient>((json) => TestHelpers.CreateResponseClient(json, new FTXClientOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), OutputOriginalData = true }, System.Net.HttpStatusCode.OK));
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, OutputOriginalData = true }, System.Net.HttpStatusCode.OK));
 
         [Test]
-        public async Task ValidateBaseCalls()
+        public async Task ValidateAccountCalls()
         {   
-            await _comparer.ProcessSubject("Base", c => c,
+            await _comparer.ProcessSubject("Account", c => c.Account,
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                }
+                );
+        }
+
+        [Test]
+        public async Task ValidateTradingCalls()
+        {
+            await _comparer.ProcessSubject("Trading", c => c.Trading,
+                useNestedJsonPropertyForAllCompare: new List<string> { "result" },
+                ignoreProperties: new Dictionary<string, List<string>>
+                {
+                }
+                );
+        }
+
+        [Test]
+        public async Task ValidateExchangeDataCalls()
+        {
+            await _comparer.ProcessSubject("ExchangeData", c => c.ExchangeData,
                 useNestedJsonPropertyForAllCompare: new List<string> { "result" },
                 ignoreProperties: new Dictionary<string, List<string>>
                 {

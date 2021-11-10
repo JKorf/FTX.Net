@@ -7,18 +7,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// FTX Pay endpoints
     /// </summary>
-    public class FTXSubClientPay : IFTXSubClientPay
+    public class FTXClientPay : IFTXClientPay
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientPay(FTXClient baseClient)
+        internal FTXClientPay(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }
@@ -56,7 +57,7 @@ namespace FTX.Net.SubClients
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXAppOrder>>(_baseClient.GetUri($"ftxpay/apps/{appId}/orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);     
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXAppOrder>>(_baseClient.GetUri($"ftxpay/apps/{appId}/orders"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

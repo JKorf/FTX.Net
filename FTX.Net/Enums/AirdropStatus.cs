@@ -16,6 +16,10 @@ namespace FTX.Net.Enums
         /// <summary>
         /// Confirmed
         /// </summary>
-        Confirmed
+        Confirmed,
+        /// <summary>
+        /// Complete
+        /// </summary>
+        Complete
     }
 }

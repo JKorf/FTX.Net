@@ -9,18 +9,19 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// NFT endpoints
     /// </summary>
-    public class FTXSubClientNft : IFTXSubClientNft
+    public class FTXClientNFT : IFTXClientNft
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientNft(FTXClient baseClient)
+        internal FTXClientNFT(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }
@@ -34,7 +35,7 @@ namespace FTX.Net.SubClients
         /// <inheritdoc />
         public async Task<WebCallResult<FTXNft>> GetNftAsync(long nftId, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/nft/" + nftId ), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/nft/" + nftId), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -183,7 +184,7 @@ namespace FTX.Net.SubClients
         public async Task<WebCallResult> EditGallerySettingsAsync(bool isPublic, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            parameters.AddParameter("public", isPublic);            
+            parameters.AddParameter("public", isPublic);
             return await _baseClient.SendFTXRequest(_baseClient.GetUri($"nft/gallery_settings"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
     }

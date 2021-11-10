@@ -14,11 +14,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections;
 using Newtonsoft.Json;
-using FTX.Net.Interfaces;
 using CryptoExchange.Net;
-using FTX.Net;
 using FTX.Net.Objects;
 using CryptoExchange.Net.Authentication;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
 namespace FTX.Net.Testing
 {

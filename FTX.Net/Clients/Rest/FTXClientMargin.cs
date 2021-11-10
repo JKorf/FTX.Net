@@ -7,18 +7,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// Spot margin endpoints
     /// </summary>
-    public class FTXSubClientMargin : IFTXSubClientMargin
+    public class FTXClientMargin : IFTXClientMargin
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientMargin(FTXClient baseClient)
+        internal FTXClientMargin(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }

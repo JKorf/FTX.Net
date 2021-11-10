@@ -11,17 +11,18 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// Options endpoints
     /// </summary>
-    public class FTXSubClientOptions : IFTXSubClientOptions
+    public class FTXClientOptions : IFTXClientOptions
     {
         private readonly FTXClient _baseClient;
-        internal FTXSubClientOptions(FTXClient baseClient)
+        internal FTXClientOptions(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }

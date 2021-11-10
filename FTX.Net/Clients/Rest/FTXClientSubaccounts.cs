@@ -7,18 +7,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// Sub account endpoints
     /// </summary>
-    public class FTXSubClientSubaccounts : IFTXSubClientSubaccounts
+    public class FTXClientSubaccounts : IFTXClientSubaccounts
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientSubaccounts(FTXClient baseClient)
+        internal FTXClientSubaccounts(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }

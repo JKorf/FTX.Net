@@ -20,7 +20,7 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// The order type
         /// </summary>
-        [JsonConverter(typeof(OrderTypeConverter))]
+        [JsonConverter(typeof(OrderStatusConverter))]
         public OrderStatus OrderStatus { get; set; }
         /// <summary>
         /// The price of the order

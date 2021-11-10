@@ -10,21 +10,18 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces;
 using CryptoExchange.Net.Authentication;
 using System.Threading;
+using FTX.Net.Interfaces.Clients.Socket;
 
-namespace FTX.Net
+namespace FTX.Net.Clients.Socket
 {
     /// <summary>
     /// Client for interacting with the FTX websocket API
     /// </summary>
-    public class FTXSocketClient : SocketClient, IFTXSocketClient
+    public class FTXSocketClient : SocketClient, IFTXSocketClientSpot
     {
         #region fields
-        private static FTXSocketClientOptions _defaultOptions = new FTXSocketClientOptions();
-        private static FTXSocketClientOptions DefaultOptions => _defaultOptions.Copy<FTXSocketClientOptions>();
-
         private readonly string? _subaccount;
         #endregion
 
@@ -32,7 +29,7 @@ namespace FTX.Net
         /// <summary>
         /// Create a new instance of FTXSocketClient using the default options
         /// </summary>
-        public FTXSocketClient() : this(DefaultOptions)
+        public FTXSocketClient() : this(FTXSocketClientOptions.Default)
         {
         }
 
@@ -70,7 +67,7 @@ namespace FTX.Net
         /// <param name="newDefaultOptions"></param>
         public static void SetDefaultOptions(FTXSocketClientOptions newDefaultOptions)
         {
-            _defaultOptions = newDefaultOptions;
+            FTXSocketClientOptions.Default = newDefaultOptions;
         }
 
         /// <inheritdoc />
@@ -184,7 +181,7 @@ namespace FTX.Net
 
                 var code = tokenData["code"];
 
-                if(code != null && (int)code == 400)
+                if (code != null && (int)code == 400)
                 {
                     result = new CallResult<bool>(false, new ServerError((int)code, tokenData["msg"]?.ToString() ?? "Unknown error"));
                     return true;
@@ -216,10 +213,10 @@ namespace FTX.Net
             {
                 // Error response don't contain channel/market so this message might still be for this subscription if the subscription resulted in an error
                 // We can only check this if the market is not null
-                if(type?.ToString() == "error" && ftxRequest.Market != null)
+                if (type?.ToString() == "error" && ftxRequest.Market != null)
                 {
                     var message = data["msg"];
-                    if(message != null && message.ToString().ToLowerInvariant().Contains(ftxRequest.Market.ToLowerInvariant()))
+                    if (message != null && message.ToString().ToLowerInvariant().Contains(ftxRequest.Market.ToLowerInvariant()))
                     {
                         // It is an error and the error message contains the market we sent, assuming its for this request
                         var code = data["code"];
@@ -232,13 +229,13 @@ namespace FTX.Net
                 return false;
             }
 
-            if(type == null)
+            if (type == null)
             {
                 log.Write(LogLevel.Warning, "Received subscribe response without type. Data received: " + data);
                 return true;
             }
 
-            if(type.ToString() == "subscribed")
+            if (type.ToString() == "subscribed")
             {
                 callResult = new CallResult<object>(null, null);
                 return true;

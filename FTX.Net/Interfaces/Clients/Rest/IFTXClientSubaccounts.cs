@@ -5,12 +5,12 @@ using CryptoExchange.Net.Objects;
 using FTX.Net.Objects;
 using FTX.Net.Objects.Subaccounts;
 
-namespace FTX.Net.Interfaces.SubClients
+namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
     /// Subaccount endpoints
     /// </summary>
-    public interface IFTXSubClientSubaccounts
+    public interface IFTXClientSubaccounts
     {
         /// <summary>
         /// Get list of sub accounts

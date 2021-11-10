@@ -1,7 +1,7 @@
 ﻿using CryptoExchange.Net.Objects;
 using System.Net.Http;
-using FTX.Net.Interfaces;
 using System;
+using FTX.Net.Interfaces.Clients.Socket;
 
 namespace FTX.Net.Objects
 {
@@ -10,6 +10,14 @@ namespace FTX.Net.Objects
     /// </summary>
     public class FTXClientOptions : RestClientOptions
     {
+        /// <summary>
+        /// Default options for the spot client
+        /// </summary>
+        public static FTXClientOptions Default { get; set; } = new FTXClientOptions()
+        {
+            BaseAddress = "https://ftx.com/api"
+        };
+
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
         /// </summary>
@@ -31,47 +39,30 @@ namespace FTX.Net.Objects
         public string? SubaccountName { get; set; }
 
         /// <summary>
-        /// Create new client options
+        /// Ctor
         /// </summary>
-        public FTXClientOptions(): base("https://ftx.com/api")
+        public FTXClientOptions()
         {
+            if (Default == null)
+                return;
+
+            Copy(this, Default);
         }
 
         /// <summary>
-        /// Create new client options
+        /// Copy the values of the def to the input
         /// </summary>
-        /// <param name="httpClient">HttpClient to use for requests from this client</param>
-        public FTXClientOptions(HttpClient httpClient) : base(httpClient, "https://ftx.com/api")
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="def"></param>
+        public new void Copy<T>(T input, T def) where T : FTXClientOptions
         {
-        }
+            base.Copy(input, def);
 
-        /// <summary>
-        /// Create new client options
-        /// </summary>
-        /// <param name="apiAddress">Custom API address to use</param>
-        public FTXClientOptions(string apiAddress) : base(apiAddress)
-        {
-        }
-
-        /// <summary>
-        /// Create new client options
-        /// </summary>
-        /// <param name="httpClient">HttpClient to use for requests from this client</param>
-        /// <param name="apiAddress">Custom API address to use</param>
-        public FTXClientOptions(string apiAddress, HttpClient httpClient) : base(httpClient, apiAddress)
-        {
-        }
-
-        /// <summary>
-        /// Copy
-        /// </summary>
-        /// <returns></returns>
-        public FTXClientOptions Copy()
-        {
-            var copy = Copy<FTXClientOptions>();
-            copy.AffiliateCode = AffiliateCode;
-            copy.SubaccountName = SubaccountName;
-            return copy;
+            input.AffiliateCode = def.AffiliateCode;
+            input.AutoTimestamp = def.AutoTimestamp;
+            input.AutoTimestampRecalculationInterval = def.AutoTimestampRecalculationInterval;
+            input.SubaccountName = def.SubaccountName;
         }
     }
 
@@ -81,36 +72,41 @@ namespace FTX.Net.Objects
     public class FTXSocketClientOptions: SocketClientOptions
     {
         /// <summary>
+        /// Default options for the spot client
+        /// </summary>
+        public static FTXSocketClientOptions Default { get; set; } = new FTXSocketClientOptions()
+        {
+            BaseAddress = "wss://ftx.com/ws/",
+            SocketSubscriptionsCombineTarget = 10
+        };
+
+        /// <summary>
         /// Bind this client to a subaccount. All private subscriptions (orders/fills etc) will be for the bound subaccount instead of the main account.
         /// </summary>
         public string? SubaccountName { get; set; }
 
         /// <summary>
-        /// Create new client options
+        /// Ctor
         /// </summary>
-        public FTXSocketClientOptions() : this(null)
-        { 
+        public FTXSocketClientOptions()
+        {
+            if (Default == null)
+                return;
+
+            Copy(this, Default);
         }
 
         /// <summary>
-        /// Create new client options
+        /// Copy the values of the def to the input
         /// </summary>
-        /// <param name="subaccountName">Name of the subaccount to subscribe private endpoints for. Null for master account</param>
-        public FTXSocketClientOptions(string? subaccountName = null) : base("wss://ftx.com/ws/")
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <param name="def"></param>
+        public new void Copy<T>(T input, T def) where T : FTXSocketClientOptions
         {
-            SubaccountName = subaccountName;
-            SocketSubscriptionsCombineTarget = 10;
-        }
+            base.Copy(input, def);
 
-        /// <summary>
-        /// Copy
-        /// </summary>
-        /// <returns></returns>
-        public FTXSocketClientOptions Copy()
-        {
-            var copy = Copy<FTXSocketClientOptions>();
-            copy.SubaccountName = SubaccountName;
-            return copy;
+            input.SubaccountName = def.SubaccountName;
         }
     }
 
@@ -127,14 +123,14 @@ namespace FTX.Net.Objects
         /// <summary>
         /// Client to use for connecting
         /// </summary>
-        public IFTXSocketClient? Client { get; set; }
+        public IFTXSocketClientSpot? Client { get; set; }
 
         /// <summary>
         /// Create new book options
         /// </summary>
         /// <param name="grouping">Grouping of the order book entries</param>
         /// <param name="client">Client to use for connecting</param>
-        public FTXSymbolOrderBookOptions(IFTXSocketClient? client = null, int? grouping = null): base("FTX", false, false)
+        public FTXSymbolOrderBookOptions(IFTXSocketClientSpot? client = null, int? grouping = null)
         {
             Client = client;
             Grouping = grouping;

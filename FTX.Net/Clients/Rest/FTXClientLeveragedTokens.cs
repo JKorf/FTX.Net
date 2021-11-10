@@ -6,18 +6,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.SubClients;
+using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Interfaces.Clients.Rest;
 
-namespace FTX.Net.SubClients
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// Leveraged token endpoints
     /// </summary>
-    public class FTXSubClientLeveragedTokens : IFTXSubClientLeveragedTokens
+    public class FTXClientLeveragedTokens : IFTXClientLeveragedTokens
     {
         private readonly FTXClient _baseClient;
 
-        internal FTXSubClientLeveragedTokens(FTXClient baseClient)
+        internal FTXClientLeveragedTokens(FTXClient baseClient)
         {
             _baseClient = baseClient;
         }
@@ -73,7 +74,7 @@ namespace FTX.Net.SubClients
         {
             // This call returns internal data with additional quotes which make direct deserialization fail. So first get the string value and then deserialize that
             //return await _baseClient.SendFTXRequest<Dictionary<string, FTXETFRebalanceEntry>>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
-            
+
             var data = await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
 
             if (!data)

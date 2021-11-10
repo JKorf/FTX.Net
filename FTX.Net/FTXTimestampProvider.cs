@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net.Logging;
+using FTX.Net.Clients.Rest.Spot;
 using FTX.Net.Interfaces;
 using FTX.Net.Objects;
 using Microsoft.Extensions.Logging;
@@ -30,7 +31,7 @@ namespace FTX.Net
                 }
 
                 var localTime = DateTime.UtcNow;
-                var result = await client.GetServerTimeAsync().ConfigureAwait(false);
+                var result = await client.ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
                 if (!result)
                 {
                     _semaphore.Release();
@@ -41,7 +42,7 @@ namespace FTX.Net
                 {
                     // If this was the first request make another one to calculate the offset since the first one can be slower
                     localTime = DateTime.UtcNow;
-                    result = await client.GetServerTimeAsync().ConfigureAwait(false);
+                    result = await client.ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
                     if (!result)
                     {
                         _semaphore.Release();
