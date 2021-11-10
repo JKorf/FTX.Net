@@ -29,7 +29,7 @@ namespace FTX.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">Symbol the book is for</param>
         /// <param name="options">Options for the book</param>
-        public FTXSymbolOrderBook(string symbol, FTXSymbolOrderBookOptions? options = null) : base("FTX[Spot]", symbol, options ?? new FTXSymbolOrderBookOptions())
+        public FTXSymbolOrderBook(string symbol, FTXSymbolOrderBookOptions? options = null) : base("FTX", symbol, options ?? new FTXSymbolOrderBookOptions())
         {
             strictLevels = false;
             sequencesAreConsecutive = false;
