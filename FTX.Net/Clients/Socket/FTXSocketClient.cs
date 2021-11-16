@@ -2,9 +2,6 @@
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using FTX.Net.Objects;
-using FTX.Net.Objects.SocketObjects;
-using FTX.Net.Objects.Spot;
-using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,13 +10,16 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Authentication;
 using System.Threading;
 using FTX.Net.Interfaces.Clients.Socket;
+using FTX.Net.Objects.Internal;
+using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Socket;
 
 namespace FTX.Net.Clients.Socket
 {
     /// <summary>
     /// Client for interacting with the FTX websocket API
     /// </summary>
-    public class FTXSocketClient : SocketClient, IFTXSocketClientSpot
+    public class FTXSocketClient : SocketClient, IFTXSocketClient
     {
         #region fields
         private readonly string? _subaccount;

@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
-using FTX.Net.Clients.Rest.Spot;
 using FTX.Net.Clients.Socket;
 using NUnit.Framework;
 using System;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using FTX.Net.Clients.Rest;
 
 namespace FTX.Net.UnitTests
 {

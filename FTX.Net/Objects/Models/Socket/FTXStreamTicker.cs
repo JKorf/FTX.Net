@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FTX.Net.Objects.SocketObjects
+namespace FTX.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Stream tick

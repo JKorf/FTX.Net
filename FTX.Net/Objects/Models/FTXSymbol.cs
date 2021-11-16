@@ -3,7 +3,7 @@ using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 
-namespace FTX.Net.Objects
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Symbol information

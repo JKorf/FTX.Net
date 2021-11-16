@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FTX.Net.Objects.SocketObjects
+namespace FTX.Net.Objects.Internal
 {
     internal class SocketRequest
     {

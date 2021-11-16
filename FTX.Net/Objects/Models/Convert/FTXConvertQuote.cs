@@ -1,12 +1,10 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using System;
+using CryptoExchange.Net.Converters;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Convert
+namespace FTX.Net.Objects.Models.Convert
 {
     /// <summary>
     /// Convert quote

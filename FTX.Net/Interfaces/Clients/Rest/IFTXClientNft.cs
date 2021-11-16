@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Objects.NFT;
+using FTX.Net.Objects.Models.NFT;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {

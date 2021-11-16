@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Staking
+namespace FTX.Net.Objects.Models.Staking
 {
     /// <summary>
     /// Stake balance

@@ -1,10 +1,7 @@
 ﻿using FTX.Net.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Futures
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Position info

@@ -15,10 +15,10 @@ using System.Threading.Tasks;
 using System.Collections;
 using Newtonsoft.Json;
 using CryptoExchange.Net;
-using FTX.Net.Objects;
 using CryptoExchange.Net.Authentication;
-using FTX.Net.Clients.Rest.Spot;
+using FTX.Net.Clients.Rest;
 using FTX.Net.Interfaces.Clients.Rest;
+using FTXClientOptions = FTX.Net.Objects.FTXClientOptions;
 
 namespace FTX.Net.Testing
 {

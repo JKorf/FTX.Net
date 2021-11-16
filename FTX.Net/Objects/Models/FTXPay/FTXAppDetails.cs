@@ -1,9 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json;
 
-namespace FTX.Net.Objects.FTXPay
+namespace FTX.Net.Objects.Models.FTXPay
 {
     /// <summary>
     /// App details

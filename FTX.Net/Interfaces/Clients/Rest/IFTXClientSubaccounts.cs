@@ -3,7 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Subaccounts;
+using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Subaccounts;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {

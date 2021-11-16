@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FTX.Net.Objects.Futures
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Future stat

@@ -1,12 +1,11 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using System;
+using System.Collections.Generic;
+using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Interfaces;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Spot
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Order book

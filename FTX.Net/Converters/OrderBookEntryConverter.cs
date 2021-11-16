@@ -1,10 +1,10 @@
-﻿using FTX.Net.Objects.Spot;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using FTX.Net.Objects.Models;
 
 namespace FTX.Net.Converters
 {

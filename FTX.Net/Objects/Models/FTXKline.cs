@@ -1,10 +1,8 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
+﻿using System;
+using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Spot
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Kline info

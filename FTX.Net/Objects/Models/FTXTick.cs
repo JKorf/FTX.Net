@@ -1,9 +1,6 @@
 ﻿using CryptoExchange.Net.ExchangeInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// FTX tick

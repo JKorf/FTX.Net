@@ -4,6 +4,7 @@ using FTX.Net.Testing;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CryptoExchange.Net.Interfaces;
 
 namespace FTX.Net.UnitTests
 {
@@ -11,7 +12,7 @@ namespace FTX.Net.UnitTests
     public class JsonTests
     {
         private JsonToObjectComparer<IFTXClient> _comparer = new JsonToObjectComparer<IFTXClient>((json) => TestHelpers.CreateResponseClient(json, new FTXClientOptions()
-        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, OutputOriginalData = true }, System.Net.HttpStatusCode.OK));
+        { ApiCredentials = new CryptoExchange.Net.Authentication.ApiCredentials("123", "123"), AutoTimestamp = false, OutputOriginalData = true, RateLimiters = new List<IRateLimiter>() }, System.Net.HttpStatusCode.OK));
 
         [Test]
         public async Task ValidateAccountCalls()

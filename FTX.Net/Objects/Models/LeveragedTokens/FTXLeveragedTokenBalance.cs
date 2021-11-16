@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Objects.LeveragedTokens
+﻿namespace FTX.Net.Objects.Models.LeveragedTokens
 {
     /// <summary>
     /// Balance info

@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Options
+namespace FTX.Net.Objects.Models.Options
 {
     /// <summary>
     /// 24 hours options volume

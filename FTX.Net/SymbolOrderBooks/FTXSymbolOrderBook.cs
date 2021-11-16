@@ -3,15 +3,15 @@ using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
 using Force.Crc32;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Globalization;
 using System.Text;
-using FTX.Net.Objects.Spot;
 using FTX.Net.Interfaces.Clients.Socket;
 using FTX.Net.Clients.Socket;
+using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Socket;
 
 namespace FTX.Net.SymbolOrderBooks
 {
@@ -20,7 +20,7 @@ namespace FTX.Net.SymbolOrderBooks
     /// </summary>
     public class FTXSymbolOrderBook : SymbolOrderBook
     {
-        private readonly IFTXSocketClientSpot _socketClient;
+        private readonly IFTXSocketClient _socketClient;
         private readonly bool _socketOwner;
         private readonly int? _grouping;
 

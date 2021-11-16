@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Enums;
-using FTX.Net.Objects.Options;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {

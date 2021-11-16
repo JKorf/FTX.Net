@@ -1,10 +1,7 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Clients.Rest.Spot;
 using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Futures;
-using FTX.Net.Objects.Spot;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Objects.Models;
 
 namespace FTX.Net.Clients.Rest
 {

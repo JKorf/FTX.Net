@@ -1,11 +1,9 @@
-﻿using FTX.Net.Converters;
+﻿using System;
+using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.NFT
+namespace FTX.Net.Objects.Models.NFT
 {
     /// <summary>
     /// Deposit info

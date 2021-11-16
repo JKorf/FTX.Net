@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace FTX.Net.Objects.NFT
+namespace FTX.Net.Objects.Models.NFT
 {
     /// <summary>
     /// NFT trade info

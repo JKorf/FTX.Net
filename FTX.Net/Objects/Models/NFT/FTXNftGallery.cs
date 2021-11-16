@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.NFT
+namespace FTX.Net.Objects.Models.NFT
 {
     /// <summary>
     /// Gallery info

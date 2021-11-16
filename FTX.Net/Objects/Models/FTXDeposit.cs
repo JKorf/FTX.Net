@@ -1,9 +1,9 @@
-﻿using FTX.Net.Converters;
+﻿using System;
+using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
-using System;
 
-namespace FTX.Net.Objects.Spot
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Deposit info

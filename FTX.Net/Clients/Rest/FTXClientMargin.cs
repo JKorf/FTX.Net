@@ -1,14 +1,13 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Objects.Margin;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Clients.Rest.Spot;
 using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Objects.Models.Margin;
 
 namespace FTX.Net.Clients.Rest
 {

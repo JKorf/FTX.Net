@@ -1,7 +1,7 @@
 ﻿using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
-namespace FTX.Net.Objects
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Balance info

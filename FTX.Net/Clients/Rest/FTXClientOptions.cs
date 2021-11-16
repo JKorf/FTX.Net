@@ -3,7 +3,6 @@ using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
-using FTX.Net.Objects.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,8 +10,8 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Clients.Rest.Spot;
 using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Clients.Rest
 {

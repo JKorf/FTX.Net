@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Objects.Staking;
+using FTX.Net.Objects.Models.Staking;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {

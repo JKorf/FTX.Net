@@ -1,27 +1,23 @@
-﻿using CryptoExchange.Net;
-using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using FTX.Net.Converters;
-using FTX.Net.Enums;
-using FTX.Net.Objects;
-using FTX.Net.Objects.Futures;
-using FTX.Net.Objects.Spot;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Net;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Converters;
+using CryptoExchange.Net.ExchangeInterfaces;
+using CryptoExchange.Net.Objects;
+using FTX.Net.Enums;
 using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Objects.Internal;
+using FTX.Net.Objects.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace FTX.Net.Clients.Rest.Spot
+namespace FTX.Net.Clients.Rest
 {
     /// <summary>
     /// Client for interacting with the FTX API
@@ -277,7 +273,7 @@ namespace FTX.Net.Clients.Rest.Spot
         async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetClosedOrdersAsync(string? symbol = null)
         {
             var trades = await Trading.GetOrdersAsync(symbol).ConfigureAwait(false);
-            return trades.As<IEnumerable<ICommonOrder>>(trades.Data.Where(o => o.Status == OrderStatus.Closed));
+            return trades.As<IEnumerable<ICommonOrder>>(trades.Data.Where<FTXOrder>(o => o.Status == OrderStatus.Closed));
         }
 
         async Task<WebCallResult<ICommonOrderId>> IExchangeClient.CancelOrderAsync(string orderId, string? symbol = null)

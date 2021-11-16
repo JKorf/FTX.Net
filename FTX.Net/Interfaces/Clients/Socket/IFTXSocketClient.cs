@@ -6,16 +6,15 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using FTX.Net.Objects;
-using FTX.Net.Objects.SocketObjects;
-using FTX.Net.Objects.Spot;
-using FTX.Net.Objects.Spot.Socket;
+using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Socket;
 
 namespace FTX.Net.Interfaces.Clients.Socket
 {
     /// <summary>
     /// FTX socket client 
     /// </summary>
-    public interface IFTXSocketClientSpot : ISocketClient
+    public interface IFTXSocketClient : ISocketClient
     {
         /// <summary>
         /// Set the API key and secret

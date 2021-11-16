@@ -1,7 +1,5 @@
 ﻿using CryptoExchange.Net.Logging;
-using FTX.Net.Clients.Rest.Spot;
 using FTX.Net.Interfaces;
-using FTX.Net.Objects;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,6 +8,8 @@ using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FTX.Net.Clients.Rest;
+using FTXClientOptions = FTX.Net.Objects.FTXClientOptions;
 
 namespace FTX.Net
 {

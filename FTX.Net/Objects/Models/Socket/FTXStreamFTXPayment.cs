@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FTX.Net.Objects.Models.FTXPay;
 
-namespace FTX.Net.Objects.FTXPay.Socket
+namespace FTX.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Payment update

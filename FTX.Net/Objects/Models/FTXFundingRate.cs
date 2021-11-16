@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace FTX.Net.Objects.Futures
+namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// Funding rate info

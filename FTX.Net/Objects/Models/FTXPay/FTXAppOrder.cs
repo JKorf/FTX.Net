@@ -1,11 +1,8 @@
 ﻿using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.FTXPay
+namespace FTX.Net.Objects.Models.FTXPay
 {
     /// <summary>
     /// App order

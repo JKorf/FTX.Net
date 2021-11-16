@@ -1,11 +1,10 @@
-﻿using CryptoExchange.Net.Converters;
+﻿using System;
+using System.Collections.Generic;
+using CryptoExchange.Net.Converters;
 using FTX.Net.Converters;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FTX.Net.Objects.Spot.Socket
+namespace FTX.Net.Objects.Models.Socket
 {
     /// <summary>
     /// Stream order book update

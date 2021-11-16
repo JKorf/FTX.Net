@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Objects.Subaccounts
+﻿namespace FTX.Net.Objects.Models.Subaccounts
 {
     /// <summary>
     /// Sub account info

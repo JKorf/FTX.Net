@@ -1,4 +1,4 @@
-﻿namespace FTX.Net.Objects
+﻿namespace FTX.Net.Objects.Internal
 {
     internal class FTXResult
     {
