@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System;
 using FTX.Net.Interfaces.Clients.Socket;
+using CryptoExchange.Net.Interfaces;
+using System.Collections.Generic;
 
 namespace FTX.Net.Objects
 {
