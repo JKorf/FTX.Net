@@ -10,9 +10,9 @@ namespace FTX.Net.Interfaces.Clients.Rest
 {
     public interface IFTXClientTrading
     {
-
         /// <summary>
         /// Place a new order
+        /// <para><a href="https://docs.ftx.com/#place-order" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to place on</param>
         /// <param name="side">The side of the order</param>
@@ -31,6 +31,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Place a new trigger order
+        /// <para><a href="https://docs.ftx.com/#place-trigger-order" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to place on</param>
         /// <param name="side">The side of the order</param>
@@ -65,6 +66,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
+        /// <para><a href="https://docs.ftx.com/#modify-order" /></para>
         /// </summary>
         /// <param name="orderId">Id of order to modify</param>
         /// <param name="price">New price of the order</param>
@@ -77,6 +79,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Modify a trigger order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
+        /// <para><a href="https://docs.ftx.com/#modify-trigger-order" /></para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="quantity">New quantity</param>
@@ -90,6 +93,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
+        /// <para><a href="https://docs.ftx.com/#modify-order-by-client-id" /></para>
         /// </summary>
         /// <param name="clientOrderId">Client order id of order to modify</param>
         /// <param name="price">New price of the order</param>
@@ -102,6 +106,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get the status of an order
+        /// <para><a href="https://docs.ftx.com/#get-order-status" /></para>
         /// </summary>
         /// <param name="orderId">Id of the order</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -111,6 +116,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get the status of an order
+        /// <para><a href="https://docs.ftx.com/#get-order-status-by-client-id" /></para>
         /// </summary>
         /// <param name="clientOrderId">Client order id of the order</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -120,6 +126,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get a list triggers for a trigger order
+        /// <para><a href="https://docs.ftx.com/#get-trigger-order-triggers" /></para>
         /// </summary>
         /// <param name="orderId">Id of the trigger order</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -129,6 +136,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get a list of open orders
+        /// <para><a href="https://docs.ftx.com/#get-open-orders" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -138,6 +146,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get a list of open trigger orders
+        /// <para><a href="https://docs.ftx.com/#get-open-trigger-orders" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="type">Filter by type</param>
@@ -148,6 +157,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of orders
+        /// <para><a href="https://docs.ftx.com/#get-order-history" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="startTime">Filter by start time</param>
@@ -159,6 +169,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of trigger orders
+        /// <para><a href="https://docs.ftx.com/#get-trigger-order-history" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="side">Filter by side</param>
@@ -173,6 +184,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel an order
+        /// <para><a href="https://docs.ftx.com/#cancel-order" /></para>
         /// </summary>
         /// <param name="orderId">Id of the order</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -182,6 +194,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel a trigger order
+        /// <para><a href="https://docs.ftx.com/#cancel-open-trigger-order" /></para>
         /// </summary>
         /// <param name="orderId">Id of the order</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -191,6 +204,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel an order
+        /// <para><a href="https://docs.ftx.com/#cancel-order-by-client-id" /></para>
         /// </summary>
         /// <param name="clientOrderId">Client order id of the order</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -200,6 +214,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel all orders matching the parameters
+        /// <para><a href="https://docs.ftx.com/#cancel-all-orders" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="side">Filter by side</param>
@@ -212,6 +227,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of trades based on the input parameters
+        /// <para><a href="https://docs.ftx.com/#fills" /></para>
         /// </summary>
         /// <param name="symbol">Filter by symbol</param>
         /// <param name="orderId">Filter by order id</param>

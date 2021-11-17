@@ -12,6 +12,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get account info
+        /// <para><a href="https://docs.ftx.com/#get-account-information" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -20,6 +21,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get positions
+        /// <para><a href="https://docs.ftx.com/#get-positions" /></para>
         /// </summary>
         /// <param name="showAveragePrice"></param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -29,6 +31,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Change account leverage
+        /// <para><a href="https://docs.ftx.com/#change-account-leverage" /></para>
         /// </summary>
         /// <param name="leverage">Desired acccount-wide leverage setting</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -38,6 +41,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get a list of balances
+        /// <para><a href="https://docs.ftx.com/#get-balances" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -46,6 +50,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get a list of balances, including master and subaccounts
+        /// <para><a href="https://docs.ftx.com/#get-balances-of-all-accounts" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -53,6 +58,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get deposit address for an asset
+        /// <para><a href="https://docs.ftx.com/#get-deposit-address" /></para>
         /// </summary>
         /// <param name="asset">Asset to get address for</param>
         /// <param name="network">The network to use</param>
@@ -63,6 +69,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get deposit history
+        /// <para><a href="https://docs.ftx.com/#get-deposit-history" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -73,6 +80,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get withdrawal history
+        /// <para><a href="https://docs.ftx.com/#get-withdrawal-history" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -83,6 +91,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Submit a withdraw request
+        /// <para><a href="https://docs.ftx.com/#request-withdrawal" /></para>
         /// </summary>
         /// <param name="asset">Asset to withdraw</param>
         /// <param name="quantity">Quantity to withdraw</param>
@@ -98,6 +107,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get airdrops
+        /// <para><a href="https://docs.ftx.com/#get-airdrops" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -108,6 +118,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get withdrawal fees
+        /// <para><a href="https://docs.ftx.com/#get-withdrawal-fees" /></para>
         /// </summary>
         /// <param name="asset">Asset</param>
         /// <param name="quantity">Quantity</param>
@@ -120,6 +131,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get saved addresses
+        /// <para><a href="https://docs.ftx.com/#get-saved-addresses" /></para>
         /// </summary>
         /// <param name="asset">Filter by asset</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -129,6 +141,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Create a saved address
+        /// <para><a href="https://docs.ftx.com/#create-saved-addresses" /></para>
         /// </summary>
         /// <param name="asset">Asset the address is for</param>
         /// <param name="address">The address</param>
@@ -143,6 +156,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Delete a saved address
+        /// <para><a href="https://docs.ftx.com/#delete-saved-addresses" /></para>
         /// </summary>
         /// <param name="savedAddressId">Id of the saved address to delete</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -152,6 +166,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of funding payments
+        /// <para><a href="https://docs.ftx.com/#funding-payments" /></para>
         /// </summary>
         /// <param name="future">Filter by future</param>
         /// <param name="startTime">Filter by start time</param>

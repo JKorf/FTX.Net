@@ -13,6 +13,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
     {
         /// <summary>
         /// Get list of stakes for the user
+        /// <para><a href="https://docs.ftx.com/#get-stakes" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -20,6 +21,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of unstake requests for the user
+        /// <para><a href="https://docs.ftx.com/#unstake-request" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -27,6 +29,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of stake balances
+        /// <para><a href="https://docs.ftx.com/#get-stake-balances" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -34,6 +37,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Create a new unstake request
+        /// <para><a href="https://docs.ftx.com/#unstake-request-2" /></para>
         /// </summary>
         /// <param name="asset">Asset</param>
         /// <param name="quantity">Quantity to unstake</param>
@@ -43,6 +47,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel an unstake request
+        /// <para><a href="https://docs.ftx.com/#cancel-unstake-request" /></para>
         /// </summary>
         /// <param name="requestId">Id of request to unstake</param>
         /// <param name="ct">Cancellation token</param>
@@ -51,6 +56,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of staking rewards
+        /// <para><a href="https://docs.ftx.com/#get-staking-rewards" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -58,6 +64,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Create a new stake request
+        /// <para><a href="https://docs.ftx.com/#stake-request" /></para>
         /// </summary>
         /// <param name="asset">Asset to stake</param>
         /// <param name="quantity">Quantity to stake</param>

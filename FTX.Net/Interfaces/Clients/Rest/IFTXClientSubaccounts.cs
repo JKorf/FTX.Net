@@ -14,6 +14,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
     {
         /// <summary>
         /// Get list of sub accounts
+        /// <para><a href="https://docs.ftx.com/#get-all-subaccounts" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -21,6 +22,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Create a new sub client
+        /// <para><a href="https://docs.ftx.com/#create-subaccount" /></para>
         /// </summary>
         /// <param name="nickname">Name of the subaccount</param>
         /// <param name="ct">Cancellation token</param>
@@ -29,6 +31,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Change the name of a sub account
+        /// <para><a href="https://docs.ftx.com/#change-subaccount-name" /></para>
         /// </summary>
         /// <param name="oldName">Old name</param>
         /// <param name="newName">New name</param>
@@ -38,6 +41,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Delete a subaccount
+        /// <para><a href="https://docs.ftx.com/#delete-subaccount" /></para>
         /// </summary>
         /// <param name="nickname">Nickname of account to delete</param>
         /// <param name="ct">Cancellation token</param>
@@ -46,6 +50,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get subaccount balances
+        /// <para><a href="https://docs.ftx.com/#get-subaccount-balances" /></para>
         /// </summary>
         /// <param name="nickname">Nickname to get</param>
         /// <param name="ct">Cancellation token</param>
@@ -54,6 +59,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Transfer funds between subaccounts
+        /// <para><a href="https://docs.ftx.com/#transfer-between-subaccounts" /></para>
         /// </summary>
         /// <param name="source">Name of the source subaccount. Use 'main' for the main account</param>
         /// <param name="destination">Name of the destination subaccount. Use 'main' for the main account</param>

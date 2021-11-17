@@ -14,6 +14,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
     {
         /// <summary>
         /// Get lending history
+        /// <para><a href="https://docs.ftx.com/#get-lending-history" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -24,6 +25,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get borrow rates
+        /// <para><a href="https://docs.ftx.com/#get-borrow-rates" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -31,6 +33,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get lending rates
+        /// <para><a href="https://docs.ftx.com/#get-lending-rates" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -38,6 +41,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get daily borrowed amount
+        /// <para><a href="https://docs.ftx.com/#get-daily-borrowed-amounts" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -45,6 +49,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get symbol info
+        /// <para><a href="https://docs.ftx.com/#get-market-info" /></para>
         /// </summary>
         /// <param name="symbol">Symbol to get info on</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -54,6 +59,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get user borrow history
+        /// <para><a href="https://docs.ftx.com/#get-my-borrow-history" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -64,6 +70,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get user lending history
+        /// <para><a href="https://docs.ftx.com/#get-my-lending-history" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -74,6 +81,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get lending offers
+        /// <para><a href="https://docs.ftx.com/#get-lending-offers" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -82,6 +90,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get lending info
+        /// <para><a href="https://docs.ftx.com/#get-lending-info" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -90,6 +99,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Submit a lending offer
+        /// <para><a href="https://docs.ftx.com/#submit-lending-offer" /></para>
         /// </summary>
         /// <param name="asset">Asset</param>
         /// <param name="quantity">Quantity</param>

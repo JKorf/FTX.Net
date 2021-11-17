@@ -15,6 +15,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
     {
         /// <summary>
         /// Get list of quote requests
+        /// <para><a href="https://docs.ftx.com/#list-quote-requests" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -22,6 +23,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get list of quote requests for the user
+        /// <para><a href="https://docs.ftx.com/#your-quote-requests" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -30,6 +32,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Create quote request
+        /// <para><a href="https://docs.ftx.com/#create-quote-request" /></para>
         /// </summary>
         /// <param name="underlying">Underlying</param>
         /// <param name="type">Type</param>
@@ -48,6 +51,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel a quote request
+        /// <para><a href="https://docs.ftx.com/#cancel-quote-request" /></para>
         /// </summary>
         /// <param name="requestId">Request id to cancel</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -57,6 +61,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get quotes for your quote request
+        /// <para><a href="https://docs.ftx.com/#get-quotes-for-your-quote-request" /></para>
         /// </summary>
         /// <param name="requestId">Request id</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -66,6 +71,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Create quote
+        /// <para><a href="https://docs.ftx.com/#create-quote" /></para>
         /// </summary>
         /// <param name="requestId">Request id</param>
         /// <param name="price">Price of the quote</param>
@@ -76,6 +82,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get quotes for user
+        /// <para><a href="https://docs.ftx.com/#get-my-quotes" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -84,6 +91,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Cancel a quote
+        /// <para><a href="https://docs.ftx.com/#cancel-quote" /></para>
         /// </summary>
         /// <param name="quoteId">Quote id</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -93,6 +101,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Accept options quote
+        /// <para><a href="https://docs.ftx.com/#accept-options-quote" /></para>
         /// </summary>
         /// <param name="quoteId">Quote id</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -102,6 +111,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get account options info
+        /// <para><a href="https://docs.ftx.com/#get-account-options-info" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -110,6 +120,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get options positions
+        /// <para><a href="https://docs.ftx.com/#get-options-positions" /></para>
         /// </summary>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
@@ -118,6 +129,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get public options positions
+        /// <para><a href="https://docs.ftx.com/#get-public-options-trades" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -127,6 +139,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get options fills
+        /// <para><a href="https://docs.ftx.com/#get-options-fills" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -137,6 +150,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get 24H option volume
+        /// <para><a href="https://docs.ftx.com/#get-24h-option-volume" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -144,6 +158,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get historical option volume
+        /// <para><a href="https://docs.ftx.com/#get-option-open-interest" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>
@@ -153,6 +168,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get open interest
+        /// <para><a href="https://docs.ftx.com/#get-option-open-interest" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
@@ -160,6 +176,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get open interest history
+        /// <para><a href="https://docs.ftx.com/#get-option-open-interest-3" /></para>
         /// </summary>
         /// <param name="startTime">Filter by start time</param>
         /// <param name="endTime">Filter by end time</param>

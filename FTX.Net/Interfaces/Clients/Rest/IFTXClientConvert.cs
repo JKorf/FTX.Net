@@ -13,6 +13,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
     {
         /// <summary>
         /// Create a new quote request
+        /// <para><a href="https://docs.ftx.com/#request-quote" /></para>
         /// </summary>
         /// <param name="fromAsset">From asset</param>
         /// <param name="toAsset">To asset</param>
@@ -24,6 +25,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Get quote status
+        /// <para><a href="https://docs.ftx.com/#get-quote-status" /></para>
         /// </summary>
         /// <param name="quoteId">Quote id</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -33,6 +35,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
 
         /// <summary>
         /// Accept a convert quote
+        /// <para><a href="https://docs.ftx.com/#accept-quote" /></para>
         /// </summary>
         /// <param name="quoteId">Id of quote to accept</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
