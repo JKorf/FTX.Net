@@ -3,13 +3,11 @@ using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
 using FTX.Net.Interfaces.Clients.Rest;
-using FTX.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
@@ -18,7 +16,7 @@ namespace FTX.Net.Clients.Rest
 {
     public class FTXClientTrading : IFTXClientTrading
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
         internal FTXClientTrading(FTXClient baseClient)
         {

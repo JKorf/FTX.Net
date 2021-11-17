@@ -6,7 +6,6 @@ using FTX.Net.Objects;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Globalization;
 using System.Text;
 using FTX.Net.Interfaces.Clients.Socket;
 using FTX.Net.Clients.Socket;

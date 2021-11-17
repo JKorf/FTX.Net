@@ -92,7 +92,7 @@ namespace FTX.Net.Objects.Models
 
         decimal ICommonTrade.CommonFee => Fee;
 
-        string? ICommonTrade.CommonFeeAsset => FeeAsset;
+        string ICommonTrade.CommonFeeAsset => FeeAsset;
 
         DateTime ICommonTrade.CommonTradeTime => Timestamp;
     }

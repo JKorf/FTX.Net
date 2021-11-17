@@ -37,9 +37,9 @@ namespace FTX.Net
             var timestamp = FTXTimestampProvider.GetTimestamp();
 
             result.Add($"{ftxPrefix}-KEY", Credentials.Key.GetString());
-            result.Add($"{ftxPrefix}-TS", timestamp.ToString());
+            result.Add($"{ftxPrefix}-TS", timestamp);
 
-            var toSign = timestamp + method.ToString() + requestUri.PathAndQuery;
+            var toSign = timestamp + method + requestUri.PathAndQuery;
             if (parameterPosition == HttpMethodParameterPosition.InBody)
             {
                 toSign += JsonConvert.SerializeObject(parameters.OrderBy(p => p.Key).ToDictionary(p => p.Key, p => p.Value));

@@ -1,11 +1,7 @@
 ﻿using CryptoExchange.Net.Logging;
-using FTX.Net.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Clients.Rest;
@@ -18,7 +14,7 @@ namespace FTX.Net
         internal static double CalculatedTimeOffset;
         internal static DateTime LastSync;
 
-        private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
         internal static async Task UpdateTimeAsync(FTXClient client, Log log, FTXClientOptions options)
         {

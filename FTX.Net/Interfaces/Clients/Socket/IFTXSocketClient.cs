@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
-using FTX.Net.Objects;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Socket;
 

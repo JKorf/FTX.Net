@@ -1,12 +1,10 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Interfaces.Clients.Rest;
-using FTX.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
@@ -15,7 +13,7 @@ namespace FTX.Net.Clients.Rest
 {
     public class FTXClientAccount : IFTXClientAccount
     {
-        private FTXClient _baseClient;
+        private readonly FTXClient _baseClient;
 
         internal FTXClientAccount(FTXClient baseClient)
         {

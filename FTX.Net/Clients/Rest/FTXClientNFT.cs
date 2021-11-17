@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Interfaces.Clients.Rest;
@@ -49,7 +48,7 @@ namespace FTX.Net.Clients.Rest
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftTradeAll>>(_baseClient.GetUri($"nft/all_trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftTradeAll>>(_baseClient.GetUri("nft/all_trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -61,13 +60,13 @@ namespace FTX.Net.Clients.Rest
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXNftCollection>>> GetNftCollectionsAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftCollection>>(_baseClient.GetUri($"nft/collections"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftCollection>>(_baseClient.GetUri("nft/collections"), HttpMethod.Get, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXNft>>> GetNftBalancesAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNft>>(_baseClient.GetUri($"nft/balances"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNft>>(_baseClient.GetUri("nft/balances"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -76,7 +75,7 @@ namespace FTX.Net.Clients.Rest
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
             parameters.AddParameter("price", price.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri($"nft/offer"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/offer"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -85,7 +84,7 @@ namespace FTX.Net.Clients.Rest
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
             parameters.AddParameter("price", price.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri($"nft/buy"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/buy"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -96,7 +95,7 @@ namespace FTX.Net.Clients.Rest
             parameters.AddParameter("duration", Math.Floor(duration.TotalSeconds));
             parameters.AddParameter("initialPrice", initialPrice.ToString(CultureInfo.InvariantCulture));
             parameters.AddParameter("reservationPrice", reservationPrice.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri($"nft/auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -105,7 +104,7 @@ namespace FTX.Net.Clients.Rest
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
             parameters.AddParameter("reservationPrice", reservationPrice.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri($"nft/edit_auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/edit_auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -113,14 +112,14 @@ namespace FTX.Net.Clients.Rest
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri($"nft/cancel_auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/cancel_auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXNft>>> GetBidsAsync(CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNft>>(_baseClient.GetUri($"nft/bids"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNft>>(_baseClient.GetUri("nft/bids"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -129,7 +128,7 @@ namespace FTX.Net.Clients.Rest
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("nftId", nftId);
             parameters.AddParameter("price", price.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri($"nft/edit_auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNft>(_baseClient.GetUri("nft/edit_auction"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -137,7 +136,7 @@ namespace FTX.Net.Clients.Rest
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftDeposit>>(_baseClient.GetUri($"nft/deposits"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftDeposit>>(_baseClient.GetUri("nft/deposits"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -145,7 +144,7 @@ namespace FTX.Net.Clients.Rest
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftWithdrawal>>(_baseClient.GetUri($"nft/withdrawals"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftWithdrawal>>(_baseClient.GetUri("nft/withdrawals"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -153,7 +152,7 @@ namespace FTX.Net.Clients.Rest
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftUserTrade>>(_baseClient.GetUri($"nft/fills"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXNftUserTrade>>(_baseClient.GetUri("nft/fills"), HttpMethod.Get, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -163,19 +162,19 @@ namespace FTX.Net.Clients.Rest
             parameters.AddParameter("nftId", nftId);
             parameters.AddParameter("address", address);
             parameters.AddOptionalParameter("notes", notes);
-            return await _baseClient.SendFTXRequest<FTXNftRedeem>(_baseClient.GetUri($"nft/redeem"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNftRedeem>(_baseClient.GetUri("nft/redeem"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<FTXNftGallery>> GetNftGalleryAsync(long galleryId, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXNftGallery>(_baseClient.GetUri($"nft/gallery/" + galleryId), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNftGallery>(_baseClient.GetUri("nft/gallery/" + galleryId), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<FTXNftGallerySettings>> GetGallerySettingsAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXNftGallerySettings>(_baseClient.GetUri($"nft/gallery_settings"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXNftGallerySettings>(_baseClient.GetUri("nft/gallery_settings"), HttpMethod.Get, ct, signed: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -183,7 +182,7 @@ namespace FTX.Net.Clients.Rest
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("public", isPublic);
-            return await _baseClient.SendFTXRequest(_baseClient.GetUri($"nft/gallery_settings"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri("nft/gallery_settings"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Objects;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
@@ -69,7 +68,7 @@ namespace FTX.Net.Clients.Rest
             parameters.AddParameter("destination", destination);
             parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
             parameters.AddParameter("coin", asset);
-            return await _baseClient.SendFTXRequest<FTXSubaccountTransfer>(_baseClient.GetUri($"subaccounts/transfer"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXSubaccountTransfer>(_baseClient.GetUri("subaccounts/transfer"), HttpMethod.Post, ct, parameters, signed: true).ConfigureAwait(false);
         }
     }
 }
