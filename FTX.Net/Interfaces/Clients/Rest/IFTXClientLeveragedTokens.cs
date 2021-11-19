@@ -7,7 +7,7 @@ using FTX.Net.Objects.Models.LeveragedTokens;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// Leveraged tokens endpoints
+    /// FTX leveraged tokens endpoints
     /// </summary>
     public interface IFTXClientLeveragedTokens
     {

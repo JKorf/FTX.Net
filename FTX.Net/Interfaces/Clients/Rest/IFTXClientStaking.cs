@@ -7,7 +7,7 @@ using FTX.Net.Objects.Models.Staking;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// Staking endpoints
+    /// FTX staking endpoints
     /// </summary>
     public interface IFTXClientStaking
     {

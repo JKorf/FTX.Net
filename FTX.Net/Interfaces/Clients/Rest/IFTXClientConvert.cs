@@ -7,7 +7,7 @@ using FTX.Net.Objects.Models.Convert;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// Convert endpoints
+    /// FTX convert endpoints
     /// </summary>
     public interface IFTXClientConvert
     {

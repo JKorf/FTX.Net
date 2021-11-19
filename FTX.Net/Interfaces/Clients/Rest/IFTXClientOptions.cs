@@ -9,7 +9,7 @@ using FTX.Net.Objects.Models.Options;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// Option endpoints
+    /// FTX options endpoints
     /// </summary>
     public interface IFTXClientOptions
     {

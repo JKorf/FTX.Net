@@ -8,7 +8,7 @@ using FTX.Net.Objects.Models.Subaccounts;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// Subaccount endpoints
+    /// FTX subaccount endpoints
     /// </summary>
     public interface IFTXClientSubaccounts
     {

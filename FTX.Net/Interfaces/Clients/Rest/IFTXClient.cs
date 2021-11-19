@@ -3,27 +3,27 @@
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// FTX client interface
+    /// Client for accessing the FTX API. 
     /// </summary>
     public interface IFTXClient : IRestClient
     {
         /// <summary>
-        /// Convert endpoints
+        /// Endpoints related to account settings, info or actions
         /// </summary>
         IFTXClientAccount Account { get; }
 
         /// <summary>
-        /// Convert endpoints
+        /// Endpoints related to retrieving market and system data
         /// </summary>
         IFTXClientExchangeData ExchangeData { get; }
 
         /// <summary>
-        /// Convert endpoints
+        /// Endpoints related to orders and trades
         /// </summary>
         IFTXClientTrading Trading { get; }
 
         /// <summary>
-        /// Convert endpoints
+        /// Convert
         /// </summary>
         IFTXClientConvert Convert { get; }
 

@@ -7,9 +7,11 @@ using FTX.Net.Objects.Models;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {
+    /// <summary>
+    /// FTX account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+    /// </summary>
     public interface IFTXClientAccount
     {
-
         /// <summary>
         /// Get account info
         /// <para><a href="https://docs.ftx.com/#get-account-information" /></para>

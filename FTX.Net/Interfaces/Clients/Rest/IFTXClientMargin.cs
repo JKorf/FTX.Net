@@ -8,7 +8,7 @@ using FTX.Net.Objects.Models.Margin;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// Margin endpoints
+    /// FTX margin endpoints
     /// </summary>
     public interface IFTXClientMargin
     {

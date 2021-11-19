@@ -8,6 +8,9 @@ using FTX.Net.Objects.Models;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {
+    /// <summary>
+    /// FTX trading endpoints, placing and mananging orders.
+    /// </summary>
     public interface IFTXClientTrading
     {
         /// <summary>
@@ -46,21 +49,15 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<FTXTriggerOrder>> PlaceTriggerOrderAsync(
-            // Basic params
             string symbol,
             OrderSide side,
             TriggerOrderType type,
             decimal quantity,
             bool? reduceOnly = null,
             bool? retryUntilFilled = null,
-
-            // Stop loss / take profit params
             decimal? triggerPrice = null,
             decimal? orderPrice = null,
-
-            // Trailing stop params
             decimal? trailValue = null,
-
             string? subaccountName = null,
             CancellationToken ct = default);
 

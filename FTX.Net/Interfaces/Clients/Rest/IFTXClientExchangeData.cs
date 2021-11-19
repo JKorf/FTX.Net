@@ -8,6 +8,9 @@ using FTX.Net.Objects.Models;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {
+    /// <summary>
+    /// FTX exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+    /// </summary>
     public interface IFTXClientExchangeData
     {
         /// <summary>

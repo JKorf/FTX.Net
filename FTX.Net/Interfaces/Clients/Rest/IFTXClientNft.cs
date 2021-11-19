@@ -8,7 +8,7 @@ using FTX.Net.Objects.Models.NFT;
 namespace FTX.Net.Interfaces.Clients.Rest
 {
     /// <summary>
-    /// NFT endpoints
+    /// FTX NFT endpoints
     /// </summary>
     public interface IFTXClientNft
     {
