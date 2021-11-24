@@ -155,7 +155,7 @@ namespace FTX.Net.Clients.Rest
 
         internal Uri GetUri(string path)
         {
-            return new Uri(ClientOptions.BaseAddress + path);
+            return new Uri(ClientOptions.BaseAddress.AppendPath(path));
         }
 
         /// <inheritdoc />
