@@ -32,7 +32,7 @@ namespace FTX.Net.Objects.Models.Socket
         /// <summary>
         /// Timestamp
         /// </summary>
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("time")]
         public DateTime Timestamp { get; set; }
     }

@@ -63,7 +63,7 @@ namespace FTX.Net.Objects.Models.Convert
         /// <summary>
         /// Expiry time
         /// </summary>
-        [JsonConverter(typeof(TimestampSecondsConverter))]
+        [JsonConverter(typeof(DateTimeConverter))]
         [JsonProperty("expiry")]
         public DateTime? ExpiryTime { get; set; }
     }

@@ -169,8 +169,8 @@ namespace FTX.Net.Clients.Rest
 
         internal static void AddFilter(Dictionary<string, object> parameters, DateTime? startTime, DateTime? endTime)
         {
-            parameters.AddOptionalParameter("start_time", startTime == null ? null : JsonConvert.SerializeObject(startTime, new TimestampSecondsConverter()));
-            parameters.AddOptionalParameter("end_time", endTime == null ? null : JsonConvert.SerializeObject(endTime, new TimestampSecondsConverter()));
+            parameters.AddOptionalParameter("start_time", DateTimeConverter.ConvertToSeconds(startTime));
+            parameters.AddOptionalParameter("end_time", DateTimeConverter.ConvertToSeconds(endTime));
         }
 
         

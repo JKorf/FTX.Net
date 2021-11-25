@@ -45,12 +45,12 @@ namespace FTX.Net.Clients.Rest
             parameters.AddParameter("underlying", underlying);
             parameters.AddParameter("type", JsonConvert.SerializeObject(type, new OptionTypeConverter(false)));
             parameters.AddParameter("strike", strike.ToString(CultureInfo.InvariantCulture));
-            parameters.AddParameter("expiry", JsonConvert.SerializeObject(expiry, new TimestampConverter()));
+            parameters.AddParameter("expiry",  DateTimeConverter.ConvertToMilliseconds(expiry)!);
             parameters.AddParameter("side", JsonConvert.SerializeObject(side, new OrderSideConverter(false)));
             parameters.AddParameter("size", size.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("limitPrice", limitPrice?.ToString(CultureInfo.InvariantCulture));
             parameters.AddOptionalParameter("hideLimitPrice", hideLimitPrice);
-            parameters.AddOptionalParameter("requestExpiry", requestExpiry.HasValue ? JsonConvert.SerializeObject(expiry, new TimestampConverter()) : null);
+            parameters.AddOptionalParameter("requestExpiry", DateTimeConverter.ConvertToMilliseconds(requestExpiry));
             parameters.AddOptionalParameter("counterPartyId", counterPartyId);
             return await _baseClient.SendFTXRequest<FTXQuoteRequest>(_baseClient.GetUri("options/requests"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
