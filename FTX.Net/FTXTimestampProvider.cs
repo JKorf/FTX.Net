@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Clients.Rest;
 using FTXClientOptions = FTX.Net.Objects.FTXClientOptions;
+using CryptoExchange.Net.Converters;
 
 namespace FTX.Net
 {
@@ -68,12 +69,7 @@ namespace FTX.Net
 
         internal static string GetTimestamp()
         {
-            return ToUnixTimestamp(DateTime.UtcNow.AddMilliseconds(CalculatedTimeOffset)).ToString(CultureInfo.InvariantCulture);
-        }
-
-        private static long ToUnixTimestamp(DateTime time)
-        {
-            return (long)(time - new DateTime(1970, 1, 1)).TotalMilliseconds;
+            return DateTimeConverter.ConvertToMilliseconds(DateTime.UtcNow.AddMilliseconds(CalculatedTimeOffset))!.Value.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
