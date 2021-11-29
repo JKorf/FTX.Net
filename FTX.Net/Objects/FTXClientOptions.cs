@@ -14,7 +14,10 @@ namespace FTX.Net.Objects
         /// </summary>
         public static FTXClientOptions Default { get; set; } = new FTXClientOptions()
         {
-            BaseAddress = "https://ftx.com/api"
+            OptionsMarket = new RestSubClientOptions
+            {
+                BaseAddress = "https://ftx.com/api"
+            }
         };
 
         /// <summary>
@@ -36,6 +39,8 @@ namespace FTX.Net.Objects
         /// Bind this client to a subaccount. All requests send from this account will be associated with the provided sub account
         /// </summary>
         public string? SubaccountName { get; set; }
+
+        public RestSubClientOptions OptionsMarket { get; set; }
 
         /// <summary>
         /// Ctor
@@ -62,6 +67,9 @@ namespace FTX.Net.Objects
             input.AutoTimestamp = def.AutoTimestamp;
             input.AutoTimestampRecalculationInterval = def.AutoTimestampRecalculationInterval;
             input.SubaccountName = def.SubaccountName;
+
+            input.OptionsMarket = new RestSubClientOptions();
+            def.OptionsMarket.Copy(input.OptionsMarket, def.OptionsMarket);
         }
     }
 
@@ -75,7 +83,10 @@ namespace FTX.Net.Objects
         /// </summary>
         public static FTXSocketClientOptions Default { get; set; } = new FTXSocketClientOptions()
         {
-            BaseAddress = "wss://ftx.com/ws/",
+            OptionsMarket = new SocketSubClientOptions
+            {
+                BaseAddress = "wss://ftx.com/ws/",
+            },
             SocketSubscriptionsCombineTarget = 10
         };
 
@@ -83,6 +94,9 @@ namespace FTX.Net.Objects
         /// Bind this client to a subaccount. All private subscriptions (orders/fills etc) will be for the bound subaccount instead of the main account.
         /// </summary>
         public string? SubaccountName { get; set; }
+
+        public SocketSubClientOptions OptionsMarket { get; set; }
+
 
         /// <summary>
         /// Ctor
@@ -106,6 +120,9 @@ namespace FTX.Net.Objects
             base.Copy(input, def);
 
             input.SubaccountName = def.SubaccountName;
+
+            input.OptionsMarket = new SocketSubClientOptions();
+            def.OptionsMarket.Copy(input.OptionsMarket, def.OptionsMarket);
         }
     }
 

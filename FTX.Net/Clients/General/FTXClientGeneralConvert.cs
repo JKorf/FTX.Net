@@ -1,0 +1,49 @@
+﻿using CryptoExchange.Net;
+using CryptoExchange.Net.Objects;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Objects.Models.Convert;
+using FTX.Net.Clients.General;
+
+namespace FTX.Net.Clients.Rest
+{
+    /// <summary>
+    /// Convert endpoints
+    /// </summary>
+    public class FTXClientGeneralConvert : IFTXClientGeneralConvert
+    {
+        private readonly FTXClientGeneral _baseClient;
+
+        internal FTXClientGeneralConvert(FTXClientGeneral baseClient)
+        {
+            _baseClient = baseClient;
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<FTXConvertQuoteResult>> CreateQuoteRequestAsync(string fromAsset, string toAsset, decimal quantity, string? subaccountName = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            parameters.AddParameter("fromCoin", fromAsset);
+            parameters.AddParameter("toCoin", toAsset);
+            parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
+
+            return await _baseClient.SendFTXRequest<FTXConvertQuoteResult>(_baseClient.GetUri("otc/quotes"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXConvertQuote>>> GetQuoteStatusAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXConvertQuote>>(_baseClient.GetUri("otc/quotes/" + quoteId), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> AcceptQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri("otc/quotes"), HttpMethod.Post, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+        }
+    }
+}
