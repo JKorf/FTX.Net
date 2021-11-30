@@ -83,7 +83,7 @@ namespace FTX.Net.Objects
         /// </summary>
         public static FTXSocketClientOptions Default { get; set; } = new FTXSocketClientOptions()
         {
-            OptionsMarket = new SocketSubClientOptions
+            OptionsMarket = new SubClientOptions
             {
                 BaseAddress = "wss://ftx.com/ws/",
             },
@@ -95,7 +95,7 @@ namespace FTX.Net.Objects
         /// </summary>
         public string? SubaccountName { get; set; }
 
-        public SocketSubClientOptions OptionsMarket { get; set; }
+        public SubClientOptions OptionsMarket { get; set; }
 
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace FTX.Net.Objects
 
             input.SubaccountName = def.SubaccountName;
 
-            input.OptionsMarket = new SocketSubClientOptions();
+            input.OptionsMarket = new SubClientOptions();
             def.OptionsMarket.Copy(input.OptionsMarket, def.OptionsMarket);
         }
     }

@@ -13,7 +13,7 @@ namespace FTX.Net.Interfaces.Clients.Socket
     /// <summary>
     /// FTX socket client 
     /// </summary>
-    public interface IFTXSocketClientMarket
+    public interface IFTXSocketClientMarket: IDisposable
     {
         /// <summary>
         /// Subscribes to ticker updates for a symbol

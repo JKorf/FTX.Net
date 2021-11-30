@@ -114,9 +114,15 @@ namespace FTX.Net.Clients.Rest
             parameters.AddOptionalParameter("end_time", DateTimeConverter.ConvertToSeconds(endTime));
         }
 
-        
+
         #endregion
 
+        public override void Dispose()
+        {
+            Market.Dispose();
+            General.Dispose();
+            base.Dispose();
+        }
         #endregion
     }
 }

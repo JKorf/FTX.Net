@@ -211,5 +211,11 @@ namespace FTX.Net.Clients.Socket
             }).ConfigureAwait(false);
             return result;
         }
+
+        public override void Dispose()
+        {
+            Market.Dispose();
+            base.Dispose();
+        }
     }
 }

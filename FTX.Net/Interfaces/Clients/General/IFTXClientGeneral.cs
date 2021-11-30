@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTX.Net.Interfaces.Clients.General
 {
-    public interface IFTXClientGeneral
+    public interface IFTXClientGeneral: IDisposable
     {
         /// <summary>
         /// Convert

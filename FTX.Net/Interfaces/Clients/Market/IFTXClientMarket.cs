@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FTX.Net.Interfaces.Clients.Market
 {
-    public interface IFTXClientMarket
+    public interface IFTXClientMarket: IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions
