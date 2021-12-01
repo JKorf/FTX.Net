@@ -20,15 +20,15 @@ namespace FTX.Net.Clients.Socket
     /// <summary>
     /// Client for interacting with the FTX websocket API
     /// </summary>
-    public class FTXSocketClient : SocketClient, IFTXSocketClient
+    public class FTXSocketClient : BaseSocketClient, IFTXSocketClient
     {
         #region fields
         private readonly string? _subaccount;
         #endregion
 
-        #region SubClients
+        #region Api clients
 
-        public IFTXSocketClientMarket Market { get; }
+        public IFTXSocketClientMarket Streams { get; }
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace FTX.Net.Clients.Socket
 
             _subaccount = options.SubaccountName;
 
-            Market = new FTXSocketClientMarket(log, this, options);
+            Streams = new FTXSocketClientMarket(log, this, options);
 
             SendPeriodic(TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
 
@@ -60,13 +60,13 @@ namespace FTX.Net.Clients.Socket
         }
         #endregion
 
-        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketSubClient subClient, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
+        internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketApiClient apiClient, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
         {
-            return SubscribeAsync(subClient, request, identifier, authenticated, dataHandler, ct);
+            return SubscribeAsync(apiClient, request, identifier, authenticated, dataHandler, ct);
         }
 
-        internal Task<CallResult<T>> QueryInternalAsync<T>(SocketSubClient subClient, object request, bool authenticated)
-            => QueryAsync<T>(subClient, request, authenticated);
+        internal Task<CallResult<T>> QueryInternalAsync<T>(SocketApiClient apiClient, object request, bool authenticated)
+            => QueryAsync<T>(apiClient, request, authenticated);
 
         internal CallResult<T> DeserializeInternal<T>(JToken obj, JsonSerializer? serializer = null, int? requestId = null)
             => Deserialize<T>(obj, serializer, requestId);
@@ -85,10 +85,10 @@ namespace FTX.Net.Clients.Socket
         protected override async Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)
         {
             var time = (long)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
-            if (socketConnection.SubClient.AuthenticationProvider == null)
+            if (socketConnection.ApiClient.AuthenticationProvider == null)
                 return new CallResult<bool>(false, new NoApiCredentialsError());
 
-            var loginRequest = new LoginRequest(socketConnection.SubClient.AuthenticationProvider.Credentials.Key!.GetString(), socketConnection.SubClient.AuthenticationProvider.Sign(time.ToString() + "websocket_login"), time, _subaccount);
+            var loginRequest = new LoginRequest(socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString(), socketConnection.ApiClient.AuthenticationProvider.Sign(time.ToString() + "websocket_login"), time, _subaccount);
             // If we don't get a response it's okay
             var result = new CallResult<bool>(true, null);
 
@@ -214,7 +214,7 @@ namespace FTX.Net.Clients.Socket
 
         public override void Dispose()
         {
-            Market.Dispose();
+            Streams.Dispose();
             base.Dispose();
         }
     }

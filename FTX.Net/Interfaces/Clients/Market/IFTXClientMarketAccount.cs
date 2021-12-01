@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {
@@ -177,6 +178,24 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<FTXFundingPayment>>> GetFundingPaymentsAsync(string? future = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get account options info
+        /// <para><a href="https://docs.ftx.com/#get-account-options-info" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXOptionsAccountInfo>> GetOptionsAccountInfoAsync(string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get options positions
+        /// <para><a href="https://docs.ftx.com/#get-options-positions" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(string? subaccountName = null, CancellationToken ct = default);
 
     }
 }

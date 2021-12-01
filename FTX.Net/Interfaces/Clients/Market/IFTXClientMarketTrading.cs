@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {
@@ -235,6 +236,105 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<FTXUserTrade>>> GetUserTradesAsync(string? symbol = null, long? orderId = null, bool? ascendingOrder = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get list of quote requests for the user
+        /// <para><a href="https://docs.ftx.com/#your-quote-requests" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXUserQuoteRequest>>> GetOptionsUserQuoteRequestsAsync(string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Create quote request
+        /// <para><a href="https://docs.ftx.com/#create-quote-request" /></para>
+        /// </summary>
+        /// <param name="underlying">Underlying</param>
+        /// <param name="type">Type</param>
+        /// <param name="strike">Strike</param>
+        /// <param name="expiry">Must be in the future and at 03:00 UTC.</param>
+        /// <param name="side">Side</param>
+        /// <param name="size">Size</param>
+        /// <param name="limitPrice">Limit price</param>
+        /// <param name="hideLimitPrice">Whether or not to hide your limit price from potential quoters, default true</param>
+        /// <param name="requestExpiry">Request expiry</param>
+        /// <param name="counterPartyId">When specified, makes the request private to the specified counterparty</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXQuoteRequest>> CreateOptionsQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel a quote request
+        /// <para><a href="https://docs.ftx.com/#cancel-quote-request" /></para>
+        /// </summary>
+        /// <param name="requestId">Request id to cancel</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXUserQuoteRequest>> CancelOptionsQuoteRequestAsync(long requestId, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get quotes for your quote request
+        /// <para><a href="https://docs.ftx.com/#get-quotes-for-your-quote-request" /></para>
+        /// </summary>
+        /// <param name="requestId">Request id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetOptionsQuotesForQuoteRequestAsync(long requestId, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Create quote
+        /// <para><a href="https://docs.ftx.com/#create-quote" /></para>
+        /// </summary>
+        /// <param name="requestId">Request id</param>
+        /// <param name="price">Price of the quote</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXUserQuoteRequest>> CreateOptionsQuoteAsync(long requestId, decimal price, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get quotes for user
+        /// <para><a href="https://docs.ftx.com/#get-my-quotes" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXQuoteRequestQuote>>> GetOptionsUserQuotesAsync(string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Cancel a quote
+        /// <para><a href="https://docs.ftx.com/#cancel-quote" /></para>
+        /// </summary>
+        /// <param name="quoteId">Quote id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXQuoteRequestQuote>> CancelOptionsQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Accept options quote
+        /// <para><a href="https://docs.ftx.com/#accept-options-quote" /></para>
+        /// </summary>
+        /// <param name="quoteId">Quote id</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXQuoteRequestQuote>> AcceptOptionsQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get options fills
+        /// <para><a href="https://docs.ftx.com/#get-options-fills" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXUserOptionTrade>>> GetOptionsUserTradesAsync(DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
 
     }
 }

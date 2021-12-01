@@ -15,6 +15,6 @@ namespace FTX.Net.Interfaces.Clients.Socket
     /// </summary>
     public interface IFTXSocketClient : ISocketClient
     {
-        public IFTXSocketClientMarket Market { get; }
+        public IFTXSocketClientMarket Streams { get; }
     }
 }

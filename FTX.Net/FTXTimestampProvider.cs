@@ -28,7 +28,7 @@ namespace FTX.Net
                 }
 
                 var localTime = DateTime.UtcNow;
-                var result = await client.Market.ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
+                var result = await client.TradeApi.ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
                 if (!result)
                 {
                     _semaphore.Release();
@@ -39,7 +39,7 @@ namespace FTX.Net
                 {
                     // If this was the first request make another one to calculate the offset since the first one can be slower
                     localTime = DateTime.UtcNow;
-                    result = await client.Market.ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
+                    result = await client.TradeApi.ExchangeData.GetServerTimeAsync().ConfigureAwait(false);
                     if (!result)
                     {
                         _semaphore.Release();

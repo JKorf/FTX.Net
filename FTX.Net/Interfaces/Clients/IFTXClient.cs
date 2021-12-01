@@ -9,7 +9,7 @@ namespace FTX.Net.Interfaces.Clients.Rest
     /// </summary>
     public interface IFTXClient : IRestClient
     {
-        public IFTXClientGeneral General { get; }
-        public IFTXClientMarket Market { get; }
+        public IFTXClientGeneral GeneralApi { get; }
+        public IFTXClientMarket TradeApi { get; }
     }
 }

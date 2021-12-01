@@ -20,7 +20,7 @@ namespace FTX.Net.Clients.Socket
     /// <summary>
     /// Client for interacting with the FTX websocket API
     /// </summary>
-    public class FTXSocketClientMarket : SocketSubClient, IFTXSocketClientMarket
+    public class FTXSocketClientMarket : SocketApiClient, IFTXSocketClientMarket
     {
         #region fields
         private readonly Log _log;
@@ -32,11 +32,14 @@ namespace FTX.Net.Clients.Socket
         /// Create a new instance of FTXSocketClient using the default options
         /// </summary>
         public FTXSocketClientMarket(Log log, FTXSocketClient baseClient, FTXSocketClientOptions options) 
-            :base(options.OptionsMarket, options.OptionsMarket.ApiCredentials == null ? null: new FTXAuthenticationProvider(options.OptionsMarket.ApiCredentials)) 
+            :base(options, options.StreamOptions) 
         {
             _log = log;
             _baseClient = baseClient;
         }
+
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new FTXAuthenticationProvider(credentials);
 
         #endregion
 

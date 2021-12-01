@@ -1,24 +1,20 @@
 ﻿using CryptoExchange.Net.Objects;
 using System;
 using FTX.Net.Interfaces.Clients.Socket;
+using CryptoExchange.Net.Interfaces;
+using System.Collections.Generic;
 
 namespace FTX.Net.Objects
 {
     /// <summary>
     /// Options for the FTX client
     /// </summary>
-    public class FTXClientOptions : RestClientOptions
+    public class FTXClientOptions : BaseRestClientOptions
     {
         /// <summary>
         /// Default options for the spot client
         /// </summary>
-        public static FTXClientOptions Default { get; set; } = new FTXClientOptions()
-        {
-            OptionsMarket = new RestSubClientOptions
-            {
-                BaseAddress = "https://ftx.com/api"
-            }
-        };
+        public static FTXClientOptions Default { get; set; } = new FTXClientOptions();
 
         /// <summary>
         /// Whether or not to automatically sync the local time with the server time
@@ -40,7 +36,12 @@ namespace FTX.Net.Objects
         /// </summary>
         public string? SubaccountName { get; set; }
 
-        public RestSubClientOptions OptionsMarket { get; set; }
+        private RestApiClientOptions _apiOptions = new RestApiClientOptions("https://ftx.com/api");
+        public RestApiClientOptions ApiOptions
+        {
+            get => _apiOptions;
+            set => _apiOptions.Copy(_apiOptions, value);
+        }
 
         /// <summary>
         /// Ctor
@@ -67,26 +68,20 @@ namespace FTX.Net.Objects
             input.AutoTimestamp = def.AutoTimestamp;
             input.AutoTimestampRecalculationInterval = def.AutoTimestampRecalculationInterval;
             input.SubaccountName = def.SubaccountName;
-
-            input.OptionsMarket = new RestSubClientOptions();
-            def.OptionsMarket.Copy(input.OptionsMarket, def.OptionsMarket);
+            input.ApiOptions = new RestApiClientOptions(def.ApiOptions);
         }
     }
 
     /// <summary>
     /// Options for the FTX socket client
     /// </summary>
-    public class FTXSocketClientOptions: SocketClientOptions
+    public class FTXSocketClientOptions: BaseSocketClientOptions
     {
         /// <summary>
         /// Default options for the spot client
         /// </summary>
         public static FTXSocketClientOptions Default { get; set; } = new FTXSocketClientOptions()
         {
-            OptionsMarket = new SubClientOptions
-            {
-                BaseAddress = "wss://ftx.com/ws/",
-            },
             SocketSubscriptionsCombineTarget = 10
         };
 
@@ -95,7 +90,12 @@ namespace FTX.Net.Objects
         /// </summary>
         public string? SubaccountName { get; set; }
 
-        public SubClientOptions OptionsMarket { get; set; }
+        private ApiClientOptions _streamOptions = new RestApiClientOptions("wss://ftx.com/ws/");
+        public ApiClientOptions StreamOptions
+        {
+            get => _streamOptions;
+            set => _streamOptions.Copy(_streamOptions, value);
+        }
 
 
         /// <summary>
@@ -120,9 +120,7 @@ namespace FTX.Net.Objects
             base.Copy(input, def);
 
             input.SubaccountName = def.SubaccountName;
-
-            input.OptionsMarket = new SubClientOptions();
-            def.OptionsMarket.Copy(input.OptionsMarket, def.OptionsMarket);
+            input.StreamOptions = new ApiClientOptions(def.StreamOptions);
         }
     }
 

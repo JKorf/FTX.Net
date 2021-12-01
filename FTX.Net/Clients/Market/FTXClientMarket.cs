@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Clients.Rest;
@@ -18,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.Clients.Market
 {
-    public class FTXClientMarket: RestSubClient, IFTXClientMarket, IExchangeClient
+    public class FTXClientMarket: RestApiClient, IFTXClientMarket, IExchangeClient
     {
         private readonly FTXClient _baseClient;
 
@@ -35,14 +36,10 @@ namespace FTX.Net.Clients.Market
         public IFTXClientMarketExchangeData ExchangeData { get; }
         /// <inheritdoc />
         public IFTXClientMarketTrading Trading { get; }
-        /// <inheritdoc />
-        public IFTXClientMarketOptions Options { get; }
-        /// <inheritdoc />
-        public IFTXClientMarketLeveragedTokens LeveragedTokens { get; }
 
 
         public FTXClientMarket(FTXClient baseClient, FTXClientOptions options)
-            : base(options.OptionsMarket, options.OptionsMarket.ApiCredentials == null ? null: new FTXAuthenticationProvider(options.OptionsMarket.ApiCredentials))
+            : base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
 
@@ -51,9 +48,10 @@ namespace FTX.Net.Clients.Market
             Account = new FTXClientMarketAccount(this);
             ExchangeData = new FTXClientMarketExchangeData(this);
             Trading = new FTXClientMarketTrading(this);
-            Options = new FTXClientMarketOptions(this);
-            LeveragedTokens = new FTXClientMarketLeveragedTokens(this);
         }
+
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new FTXAuthenticationProvider(credentials);
 
         #region common interface
         /// <inheritdoc />

@@ -21,15 +21,5 @@ namespace FTX.Net.Interfaces.Clients.Market
         /// Endpoints related to orders and trades
         /// </summary>
         IFTXClientMarketTrading Trading { get; }
-
-        /// <summary>
-        /// Options endpoints
-        /// </summary>
-        IFTXClientMarketOptions Options { get; }
-
-        /// <summary>
-        /// Leveraged token endpoints
-        /// </summary>
-        IFTXClientMarketLeveragedTokens LeveragedTokens { get; }
     }
 }

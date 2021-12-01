@@ -27,12 +27,12 @@ namespace FTX.Net.Clients.Rest
     /// <summary>
     /// Client for interacting with the FTX API
     /// </summary>
-    public class FTXClient : RestClient, IFTXClient
+    public class FTXClient : BaseRestClient, IFTXClient
     {
         private const string SubaccountHeaderName = "FTX-SUBACCOUNT";
 
-        public IFTXClientGeneral General { get; }
-        public IFTXClientMarket Market { get; }
+        public IFTXClientGeneral GeneralApi { get; }
+        public IFTXClientMarket TradeApi { get; }
 
         #region constructor/destructor
         /// <summary>
@@ -60,8 +60,8 @@ namespace FTX.Net.Clients.Rest
             }
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
 
-            General = new FTXClientGeneral(this, options);
-            Market = new FTXClientMarket(this, options);
+            GeneralApi = new FTXClientGeneral(this, options);
+            TradeApi = new FTXClientMarket(this, options);
         }
         #endregion
 
@@ -73,21 +73,21 @@ namespace FTX.Net.Clients.Rest
 
         #region private
 
-        internal async Task<WebCallResult<T>> SendFTXRequest<T>(RestSubClient subClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
+        internal async Task<WebCallResult<T>> SendFTXRequest<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
         {
             if (signed)
                 await FTXTimestampProvider.UpdateTimeAsync(this, log, (FTXClientOptions)ClientOptions).ConfigureAwait(false);
 
-            var result = await SendRequestAsync<FTXResult<T>>(subClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
+            var result = await SendRequestAsync<FTXResult<T>>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
             if (result)
                 return result.As(result.Data.Result);
 
             return WebCallResult<T>.CreateErrorResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error!);
         }
 
-        internal async Task<WebCallResult> SendFTXRequest(RestSubClient subClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
+        internal async Task<WebCallResult> SendFTXRequest(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
         {
-            var result = await SendRequestAsync<FTXResult>(subClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
+            var result = await SendRequestAsync<FTXResult>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
             if (result)
                 return new WebCallResult(result.ResponseStatusCode, result.ResponseHeaders, result.Error);
 
@@ -119,8 +119,8 @@ namespace FTX.Net.Clients.Rest
 
         public override void Dispose()
         {
-            Market.Dispose();
-            General.Dispose();
+            TradeApi.Dispose();
+            GeneralApi.Dispose();
             base.Dispose();
         }
         #endregion

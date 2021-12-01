@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Clients.Rest;
 using FTX.Net.Interfaces.Clients.General;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.Clients.General
 {
-    public class FTXClientGeneral: RestSubClient, IFTXClientGeneral
+    public class FTXClientGeneral: RestApiClient, IFTXClientGeneral
     {
         private readonly FTXClient _baseClient;
 
@@ -32,7 +33,7 @@ namespace FTX.Net.Clients.General
         public IFTXClientGeneralSubaccounts Subaccounts { get; }
 
         public FTXClientGeneral(FTXClient baseClient, FTXClientOptions options) :
-            base(options.OptionsMarket, options.OptionsMarket.ApiCredentials == null ? null : new FTXAuthenticationProvider(options.OptionsMarket.ApiCredentials))
+            base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
 
@@ -43,6 +44,9 @@ namespace FTX.Net.Clients.General
             FTXPay = new FTXClientGeneralPay(this);
             Subaccounts = new FTXClientGeneralSubaccounts(this);
         }
+
+        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+            => new FTXAuthenticationProvider(credentials);
 
         internal Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
          => _baseClient.SendFTXRequest<T>(this, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders);

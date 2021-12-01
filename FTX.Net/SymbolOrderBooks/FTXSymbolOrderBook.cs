@@ -47,13 +47,13 @@ namespace FTX.Net.SymbolOrderBooks
             CallResult<UpdateSubscription> subResult;
             if (_grouping.HasValue)
             {
-                subResult = await _socketClient.Market.SubscribeToGroupedOrderBookUpdatesAsync(Symbol, _grouping.Value, DataHandler).ConfigureAwait(false);
+                subResult = await _socketClient.Streams.SubscribeToGroupedOrderBookUpdatesAsync(Symbol, _grouping.Value, DataHandler).ConfigureAwait(false);
                 if (!subResult)
                     return subResult;
             }
             else
             {
-                subResult = await _socketClient.Market.SubscribeToOrderBookUpdatesAsync(Symbol, DataHandler).ConfigureAwait(false);
+                subResult = await _socketClient.Streams.SubscribeToOrderBookUpdatesAsync(Symbol, DataHandler).ConfigureAwait(false);
                 if (!subResult)
                     return subResult;
             }

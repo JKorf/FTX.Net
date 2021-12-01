@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Interfaces.Clients.Rest
 {
@@ -145,5 +146,58 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<FTXKline>>> GetIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get list of quote requests
+        /// <para><a href="https://docs.ftx.com/#list-quote-requests" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetOptionsQuoteRequestsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get public options positions
+        /// <para><a href="https://docs.ftx.com/#get-public-options-trades" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXOptionTrade>>> GetOptionsTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get 24H option volume
+        /// <para><a href="https://docs.ftx.com/#get-24h-option-volume" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXOptionsVolume>> GetOptionsVolumeAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get historical option volume
+        /// <para><a href="https://docs.ftx.com/#get-option-open-interest" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXOptionsHistoricalVolume>>> GetOptionsHistoricalVolumeAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get open interest
+        /// <para><a href="https://docs.ftx.com/#get-option-open-interest" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXOptionOpenInterest>> GetOptionsOpenInterestAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get open interest history
+        /// <para><a href="https://docs.ftx.com/#get-option-open-interest-3" /></para>
+        /// </summary>
+        /// <param name="startTime">Filter by start time</param>
+        /// <param name="endTime">Filter by end time</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXOptionHistoricalOpenInterest>>> GetOptionsHistoricalOpenInterestAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
     }
 }

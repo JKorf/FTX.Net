@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
 using FTX.Net.Clients.Market;
+using FTX.Net.Objects.Models.LeveragedTokens;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Clients.Rest
 {
@@ -118,6 +120,88 @@ namespace FTX.Net.Clients.Rest
             FTXClient.AddFilter(parameters, startTime, endTime);
             return await _baseClient.SendFTXRequest<IEnumerable<FTXKline>>(_baseClient.GetUri($"indexes/{symbol}/candles"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
         }
+
+        #region Leveraged tokens
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXLeveragedToken>>> GetLeveragedTokensAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLeveragedToken>>(_baseClient.GetUri("lt/tokens"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<FTXLeveragedToken>> GetLeveragedTokenAsync(string tokenName, CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<FTXLeveragedToken>(_baseClient.GetUri("lt/" + tokenName), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<Dictionary<string, FTXETFRebalanceEntry>>> GetETFRebalanceInfoAsync(string? subaccountName = null, CancellationToken ct = default)
+        {
+            // This call returns internal data with additional quotes which make direct deserialization fail. So first get the string value and then deserialize that
+            //return await _baseClient.SendFTXRequest<Dictionary<string, FTXETFRebalanceEntry>>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+
+            var data = await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+
+            if (!data)
+                return data.As<Dictionary<string, FTXETFRebalanceEntry>>(null);
+
+            var deserializeResult = _baseClient.DeserializeInternal<Dictionary<string, FTXETFRebalanceEntry>>(data.Data);
+            if (!deserializeResult)
+                return data.As<Dictionary<string, FTXETFRebalanceEntry>>(null);
+
+            return data.As(deserializeResult.Data);
+        }
+
+        #endregion
+
+        #region Options
+
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXQuoteRequest>>> GetOptionsQuoteRequestsAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXQuoteRequest>>(_baseClient.GetUri("options/requests"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXOptionTrade>>> GetOptionsTradesAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            FTXClient.AddFilter(parameters, startTime, endTime);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionTrade>>(_baseClient.GetUri("options/trades"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<FTXOptionsVolume>> GetOptionsVolumeAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<FTXOptionsVolume>(_baseClient.GetUri("stats/24h_options_volume"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXOptionsHistoricalVolume>>> GetOptionsHistoricalVolumeAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            FTXClient.AddFilter(parameters, startTime, endTime);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsHistoricalVolume>>(_baseClient.GetUri("options/historical_volumes/BTC"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<FTXOptionOpenInterest>> GetOptionsOpenInterestAsync(CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<FTXOptionOpenInterest>(_baseClient.GetUri("options/open_interest/BTC"), HttpMethod.Get, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXOptionHistoricalOpenInterest>>> GetOptionsHistoricalOpenInterestAsync(DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default)
+        {
+            var parameters = new Dictionary<string, object>();
+            FTXClient.AddFilter(parameters, startTime, endTime);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionHistoricalOpenInterest>>(_baseClient.GetUri("options/historical_open_interest/BTC"), HttpMethod.Get, ct, parameters).ConfigureAwait(false);
+        }
+
+        #endregion
 
         private static int GetResolutionFromKlineInterval(KlineInterval interval)
         {

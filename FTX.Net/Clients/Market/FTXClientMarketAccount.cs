@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
 using FTX.Net.Clients.Market;
+using FTX.Net.Objects.Models.LeveragedTokens;
+using FTX.Net.Objects.Models.Options;
 
 namespace FTX.Net.Clients.Rest
 {
@@ -148,5 +150,31 @@ namespace FTX.Net.Clients.Rest
             parameters.AddOptionalParameter("leverage", leverage.ToString(CultureInfo.InvariantCulture));
             return await _baseClient.SendFTXRequest(_baseClient.GetUri("account/leverage"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
+
+        #region Leveraged tokens
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenBalance>>> GetLeveragedTokenBalancesAsync(string? subaccountName = null, CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLeveragedTokenBalance>>(_baseClient.GetUri("lt/balances"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region Options
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<FTXOptionsAccountInfo>> GetOptionsAccountInfoAsync(string? subaccountName = null, CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<FTXOptionsAccountInfo>(_baseClient.GetUri("options/account_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(string? subaccountName = null, CancellationToken ct = default)
+        {
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsPosition>>(_baseClient.GetUri("options/positions"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+        }
+
+        #endregion
     }
 }
