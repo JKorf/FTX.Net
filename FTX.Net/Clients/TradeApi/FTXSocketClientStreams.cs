@@ -9,18 +9,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Authentication;
 using System.Threading;
-using FTX.Net.Interfaces.Clients.Socket;
 using FTX.Net.Objects.Internal;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Socket;
 using CryptoExchange.Net.Logging;
+using FTX.Net.Interfaces.Clients.TradeApi;
 
-namespace FTX.Net.Clients.Socket
+namespace FTX.Net.Clients.TradeApi
 {
     /// <summary>
     /// Client for interacting with the FTX websocket API
     /// </summary>
-    public class FTXSocketClientMarket : SocketApiClient, IFTXSocketClientMarket
+    public class FTXSocketClientStreams : SocketApiClient, IFTXSocketClientStreams
     {
         #region fields
         private readonly Log _log;
@@ -31,8 +31,8 @@ namespace FTX.Net.Clients.Socket
         /// <summary>
         /// Create a new instance of FTXSocketClient using the default options
         /// </summary>
-        public FTXSocketClientMarket(Log log, FTXSocketClient baseClient, FTXSocketClientOptions options) 
-            :base(options, options.StreamOptions) 
+        public FTXSocketClientStreams(Log log, FTXSocketClient baseClient, FTXSocketClientOptions options)
+            : base(options, options.StreamOptions)
         {
             _log = log;
             _baseClient = baseClient;

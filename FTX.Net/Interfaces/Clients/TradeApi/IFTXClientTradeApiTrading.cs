@@ -6,13 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Options;
+using FTX.Net.Objects.Models.LeveragedTokens;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.TradeApi
 {
     /// <summary>
     /// FTX trading endpoints, placing and mananging orders.
     /// </summary>
-    public interface IFTXClientMarketTrading
+    public interface IFTXClientTradeApiTrading
     {
         /// <summary>
         /// Place a new order
@@ -236,6 +237,46 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<FTXUserTrade>>> GetUserTradesAsync(string? symbol = null, long? orderId = null, bool? ascendingOrder = null, DateTime? startTime = null, DateTime? endTime = null, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get creation requests
+        /// <para><a href="https://docs.ftx.com/#list-leveraged-token-creation-requests" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXLeveragedTokenCreationRequest>>> GetLeveragedTokenCreationRequestsAsync(string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Request leveraged token creation
+        /// <para><a href="https://docs.ftx.com/#request-leveraged-token-creation" /></para>
+        /// </summary>
+        /// <param name="tokenName">Name of the token</param>
+        /// <param name="size">Number of tokens to create</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXLeveragedTokenCreationRequest>> RequestLeveragedTokenCreationAsync(string tokenName, decimal size, string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get redemption requests
+        /// <para><a href="https://docs.ftx.com/#list-leveraged-token-redemption-requests" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXLeveragedTokenRedemption>>> GetLeveragedTokenRedemptionRequestsAsync(string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Request leveraged token redemption
+        /// <para><a href="https://docs.ftx.com/#request-leveraged-token-redemption" /></para>
+        /// </summary>
+        /// <param name="tokenName">Name of the token</param>
+        /// <param name="size">Number of tokens to create</param>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXLeveragedTokenRedeemRequest>> RequestLeveragedTokenRedemptionAsync(string tokenName, decimal size, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of quote requests for the user

@@ -5,13 +5,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Options;
+using FTX.Net.Objects.Models.LeveragedTokens;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.TradeApi
 {
     /// <summary>
     /// FTX account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
     /// </summary>
-    public interface IFTXClientMarketAccount
+    public interface IFTXClientTradeApiAccount
     {
         /// <summary>
         /// Get account info
@@ -196,6 +197,15 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(string? subaccountName = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get token balances
+        /// <para><a href="https://docs.ftx.com/#get-leveraged-token-balances" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXLeveragedTokenBalance>>> GetLeveragedTokenBalancesAsync(string? subaccountName = null, CancellationToken ct = default);
 
     }
 }

@@ -6,13 +6,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Options;
+using FTX.Net.Objects.Models.LeveragedTokens;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.TradeApi
 {
     /// <summary>
     /// FTX exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
     /// </summary>
-    public interface IFTXClientMarketExchangeData
+    public interface IFTXClientTradeApiExchangeData
     {
         /// <summary>
         /// Get the server time
@@ -145,6 +146,32 @@ namespace FTX.Net.Interfaces.Clients.Rest
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult<IEnumerable<FTXKline>>> GetIndexKlinesAsync(string symbol, KlineInterval interval, DateTime? startTime = null, DateTime? endTime = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get list of leveraged tokens
+        /// <para><a href="https://docs.ftx.com/#list-leveraged-tokens" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<FTXLeveragedToken>>> GetLeveragedTokensAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get info on a token
+        /// <para><a href="https://docs.ftx.com/#get-token-info" /></para>
+        /// </summary>
+        /// <param name="tokenName">Name of the token</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<FTXLeveragedToken>> GetLeveragedTokenAsync(string tokenName, CancellationToken ct = default);
+
+        /// <summary>
+        /// Provides information about the most recent rebalance of each ETF.
+        /// <para><a href="https://docs.ftx.com/#request-etf-rebalance-info" /></para>
+        /// </summary>
+        /// <param name="subaccountName">Subaccount name to execute this request for</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<Dictionary<string, FTXETFRebalanceEntry>>> GetETFRebalanceInfoAsync(string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get list of quote requests

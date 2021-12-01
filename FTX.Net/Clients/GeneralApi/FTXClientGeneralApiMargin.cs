@@ -6,20 +6,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects.Models.Margin;
-using FTX.Net.Clients.General;
+using FTX.Net.Interfaces.Clients.GeneralApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.GeneralApi
 {
     /// <summary>
     /// Spot margin endpoints
     /// </summary>
-    public class FTXClientGeneralMargin : IFTXClientGeneralMargin
+    public class FTXClientGeneralApiMargin : IFTXClientGeneralApiMargin
     {
-        private readonly FTXClientGeneral _baseClient;
+        private readonly FTXClientGeneralApi _baseClient;
 
-        internal FTXClientGeneralMargin(FTXClientGeneral baseClient)
+        internal FTXClientGeneralApiMargin(FTXClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

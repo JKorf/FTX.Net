@@ -5,17 +5,15 @@ using FTX.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using CryptoExchange.Net.Authentication;
 using System.Threading;
-using FTX.Net.Interfaces.Clients.Socket;
 using FTX.Net.Objects.Internal;
-using FTX.Net.Objects.Models;
-using FTX.Net.Objects.Models.Socket;
 using Newtonsoft.Json;
+using FTX.Net.Interfaces.Clients;
+using FTX.Net.Interfaces.Clients.TradeApi;
+using FTX.Net.Clients.TradeApi;
 
-namespace FTX.Net.Clients.Socket
+namespace FTX.Net.Clients
 {
     /// <summary>
     /// Client for interacting with the FTX websocket API
@@ -28,7 +26,7 @@ namespace FTX.Net.Clients.Socket
 
         #region Api clients
 
-        public IFTXSocketClientMarket Streams { get; }
+        public IFTXSocketClientStreams Streams { get; }
 
         #endregion
 
@@ -51,7 +49,7 @@ namespace FTX.Net.Clients.Socket
 
             _subaccount = options.SubaccountName;
 
-            Streams = new FTXSocketClientMarket(log, this, options);
+            Streams = new FTXSocketClientStreams(log, this, options);
 
             SendPeriodic(TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
 

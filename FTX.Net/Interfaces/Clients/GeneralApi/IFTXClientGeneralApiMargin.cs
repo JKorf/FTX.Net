@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.Models.Margin;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// FTX margin endpoints
     /// </summary>
-    public interface IFTXClientGeneralMargin
+    public interface IFTXClientGeneralApiMargin
     {
         /// <summary>
         /// Get lending history

@@ -16,9 +16,9 @@ using System.Collections;
 using Newtonsoft.Json;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
-using FTX.Net.Clients.Rest;
-using FTX.Net.Interfaces.Clients.Rest;
 using FTXClientOptions = FTX.Net.Objects.FTXClientOptions;
+using FTX.Net.Interfaces.Clients;
+using FTX.Net.Clients;
 
 namespace FTX.Net.Testing
 {

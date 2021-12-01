@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Sockets;
-using FTX.Net.Objects.Models;
-using FTX.Net.Objects.Models.Socket;
+﻿using CryptoExchange.Net.Interfaces;
+using FTX.Net.Interfaces.Clients.TradeApi;
 
-namespace FTX.Net.Interfaces.Clients.Socket
+namespace FTX.Net.Interfaces.Clients
 {
     /// <summary>
     /// FTX socket client 
     /// </summary>
     public interface IFTXSocketClient : ISocketClient
     {
-        public IFTXSocketClientMarket Streams { get; }
+        public IFTXSocketClientStreams Streams { get; }
     }
 }

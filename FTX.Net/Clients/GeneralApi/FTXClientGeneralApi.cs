@@ -1,48 +1,45 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Clients.Rest;
-using FTX.Net.Interfaces.Clients.General;
-using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Interfaces.Clients.GeneralApi;
 using FTX.Net.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FTX.Net.Clients.General
+namespace FTX.Net.Clients.GeneralApi
 {
-    public class FTXClientGeneral: RestApiClient, IFTXClientGeneral
+    public class FTXClientGeneralApi : RestApiClient, IFTXClientGeneralApi
     {
         private readonly FTXClient _baseClient;
 
         /// <inheritdoc />
-        public IFTXClientGeneralConvert Convert { get; }
+        public IFTXClientGeneralApiConvert Convert { get; }
         /// <inheritdoc />
-        public IFTXClientGeneralStaking Staking { get; }
+        public IFTXClientGeneralApiStaking Staking { get; }
         /// <inheritdoc />
-        public IFTXClientGeneralMargin Margin { get; }
+        public IFTXClientGeneralApiMargin Margin { get; }
         /// <inheritdoc />
-        public IFTXClientGeneralNft NFT { get; }
+        public IFTXClientGeneralApiNft NFT { get; }
         /// <inheritdoc />
-        public IFTXClientGeneralPay FTXPay { get; }
+        public IFTXClientGeneralApiPay FTXPay { get; }
         /// <inheritdoc />
-        public IFTXClientGeneralSubaccounts Subaccounts { get; }
+        public IFTXClientGeneralApiSubaccounts Subaccounts { get; }
 
-        public FTXClientGeneral(FTXClient baseClient, FTXClientOptions options) :
+        public FTXClientGeneralApi(FTXClient baseClient, FTXClientOptions options) :
             base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
 
-            Convert = new FTXClientGeneralConvert(this);
-            Margin = new FTXClientGeneralMargin(this);
-            Staking = new FTXClientGeneralStaking(this);
-            NFT = new FTXClientGeneralNFT(this);
-            FTXPay = new FTXClientGeneralPay(this);
-            Subaccounts = new FTXClientGeneralSubaccounts(this);
+            Convert = new FTXClientGeneralApiConvert(this);
+            Margin = new FTXClientGeneralApiMargin(this);
+            Staking = new FTXClientGeneralApiStaking(this);
+            NFT = new FTXClientGeneralApiNFT(this);
+            FTXPay = new FTXClientGeneralApiPay(this);
+            Subaccounts = new FTXClientGeneralApiSubaccounts(this);
         }
 
         public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)

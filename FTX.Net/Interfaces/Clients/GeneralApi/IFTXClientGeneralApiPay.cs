@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.Models.FTXPay;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// FTX pay endpoints
     /// </summary>
-    public interface IFTXClientGeneralPay
+    public interface IFTXClientGeneralApiPay
     {
         /// <summary>
         /// Get the details of an FTXPay app, along with a list of payments to that app. Note that UserId is the id of this app specific to your account as a merchant.

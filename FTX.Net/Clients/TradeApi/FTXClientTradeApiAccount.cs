@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Interfaces.Clients.Rest;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,17 +7,17 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
-using FTX.Net.Clients.Market;
 using FTX.Net.Objects.Models.LeveragedTokens;
 using FTX.Net.Objects.Models.Options;
+using FTX.Net.Interfaces.Clients.TradeApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.TradeApi
 {
-    public class FTXClientMarketAccount : IFTXClientMarketAccount
+    public class FTXClientTradeApiAccount : IFTXClientTradeApiAccount
     {
-        private readonly FTXClientMarket _baseClient;
+        private readonly FTXClientTradeApi _baseClient;
 
-        internal FTXClientMarketAccount(FTXClientMarket baseClient)
+        internal FTXClientTradeApiAccount(FTXClientTradeApi baseClient)
         {
             _baseClient = baseClient;
         }

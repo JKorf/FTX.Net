@@ -5,21 +5,20 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Subaccounts;
-using FTX.Net.Clients.General;
+using FTX.Net.Interfaces.Clients.GeneralApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.GeneralApi
 {
     /// <summary>
     /// Sub account endpoints
     /// </summary>
-    public class FTXClientGeneralSubaccounts : IFTXClientGeneralSubaccounts
+    public class FTXClientGeneralApiSubaccounts : IFTXClientGeneralApiSubaccounts
     {
-        private readonly FTXClientGeneral _baseClient;
+        private readonly FTXClientGeneralApi _baseClient;
 
-        internal FTXClientGeneralSubaccounts(FTXClientGeneral baseClient)
+        internal FTXClientGeneralApiSubaccounts(FTXClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

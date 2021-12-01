@@ -5,20 +5,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects.Models.Staking;
-using FTX.Net.Clients.General;
+using FTX.Net.Interfaces.Clients.GeneralApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.GeneralApi
 {
     /// <summary>
     /// Staking endpoints
     /// </summary>
-    public class FTXClientGeneralStaking : IFTXClientGeneralStaking
+    public class FTXClientGeneralApiStaking : IFTXClientGeneralApiStaking
     {
-        private readonly FTXClientGeneral _baseClient;
+        private readonly FTXClientGeneralApi _baseClient;
 
-        internal FTXClientGeneralStaking(FTXClientGeneral baseClient)
+        internal FTXClientGeneralApiStaking(FTXClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

@@ -1,8 +1,6 @@
 ﻿using CryptoExchange.Net.Objects;
 using System;
-using FTX.Net.Interfaces.Clients.Socket;
-using CryptoExchange.Net.Interfaces;
-using System.Collections.Generic;
+using FTX.Net.Interfaces.Clients;
 
 namespace FTX.Net.Objects
 {

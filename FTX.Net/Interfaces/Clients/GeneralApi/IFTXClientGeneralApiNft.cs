@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.Models.NFT;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// FTX NFT endpoints
     /// </summary>
-    public interface IFTXClientGeneralNft
+    public interface IFTXClientGeneralApiNft
     {
         /// <summary>
         /// Get list of NFTs

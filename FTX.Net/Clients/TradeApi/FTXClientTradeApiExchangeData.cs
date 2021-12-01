@@ -1,24 +1,23 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Enums;
-using FTX.Net.Interfaces.Clients.Rest;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
-using FTX.Net.Clients.Market;
 using FTX.Net.Objects.Models.LeveragedTokens;
 using FTX.Net.Objects.Models.Options;
+using FTX.Net.Interfaces.Clients.TradeApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.TradeApi
 {
-    public class FTXClientMarketExchangeData : IFTXClientMarketExchangeData
+    public class FTXClientTradeApiExchangeData : IFTXClientTradeApiExchangeData
     {
-        private readonly FTXClientMarket _baseClient;
+        private readonly FTXClientTradeApi _baseClient;
 
-        internal FTXClientMarketExchangeData(FTXClientMarket baseClient)
+        internal FTXClientTradeApiExchangeData(FTXClientTradeApi baseClient)
         {
             _baseClient = baseClient;
         }

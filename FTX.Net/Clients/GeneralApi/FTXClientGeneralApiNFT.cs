@@ -6,20 +6,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects.Models.NFT;
-using FTX.Net.Clients.General;
+using FTX.Net.Interfaces.Clients.GeneralApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.GeneralApi
 {
     /// <summary>
     /// NFT endpoints
     /// </summary>
-    public class FTXClientGeneralNFT : IFTXClientGeneralNft
+    public class FTXClientGeneralApiNFT : IFTXClientGeneralApiNft
     {
-        private readonly FTXClientGeneral _baseClient;
+        private readonly FTXClientGeneralApi _baseClient;
 
-        internal FTXClientGeneralNFT(FTXClientGeneral baseClient)
+        internal FTXClientGeneralApiNFT(FTXClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

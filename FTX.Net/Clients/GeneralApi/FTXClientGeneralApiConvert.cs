@@ -5,20 +5,19 @@ using System.Globalization;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces.Clients.Rest;
 using FTX.Net.Objects.Models.Convert;
-using FTX.Net.Clients.General;
+using FTX.Net.Interfaces.Clients.GeneralApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.GeneralApi
 {
     /// <summary>
     /// Convert endpoints
     /// </summary>
-    public class FTXClientGeneralConvert : IFTXClientGeneralConvert
+    public class FTXClientGeneralApiConvert : IFTXClientGeneralApiConvert
     {
-        private readonly FTXClientGeneral _baseClient;
+        private readonly FTXClientGeneralApi _baseClient;
 
-        internal FTXClientGeneralConvert(FTXClientGeneral baseClient)
+        internal FTXClientGeneralApiConvert(FTXClientGeneralApi baseClient)
         {
             _baseClient = baseClient;
         }

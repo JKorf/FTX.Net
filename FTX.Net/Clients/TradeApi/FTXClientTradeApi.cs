@@ -2,10 +2,8 @@
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Clients.Rest;
 using FTX.Net.Enums;
-using FTX.Net.Interfaces.Clients.Market;
-using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Interfaces.Clients.TradeApi;
 using FTX.Net.Objects;
 using FTX.Net.Objects.Models;
 using Newtonsoft.Json;
@@ -13,13 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FTX.Net.Clients.Market
+namespace FTX.Net.Clients.TradeApi
 {
-    public class FTXClientMarket: RestApiClient, IFTXClientMarket, IExchangeClient
+    public class FTXClientTradeApi : RestApiClient, IFTXClientTradeApi, IExchangeClient
     {
         private readonly FTXClient _baseClient;
 
@@ -31,23 +28,23 @@ namespace FTX.Net.Clients.Market
         public event Action<ICommonOrderId>? OnOrderCanceled;
 
         /// <inheritdoc />
-        public IFTXClientMarketAccount Account { get; }
+        public IFTXClientTradeApiAccount Account { get; }
         /// <inheritdoc />
-        public IFTXClientMarketExchangeData ExchangeData { get; }
+        public IFTXClientTradeApiExchangeData ExchangeData { get; }
         /// <inheritdoc />
-        public IFTXClientMarketTrading Trading { get; }
+        public IFTXClientTradeApiTrading Trading { get; }
 
 
-        public FTXClientMarket(FTXClient baseClient, FTXClientOptions options)
+        public FTXClientTradeApi(FTXClient baseClient, FTXClientOptions options)
             : base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
 
             ClientOptions = options;
 
-            Account = new FTXClientMarketAccount(this);
-            ExchangeData = new FTXClientMarketExchangeData(this);
-            Trading = new FTXClientMarketTrading(this);
+            Account = new FTXClientTradeApiAccount(this);
+            ExchangeData = new FTXClientTradeApiExchangeData(this);
+            Trading = new FTXClientTradeApiTrading(this);
         }
 
         public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
@@ -150,7 +147,7 @@ namespace FTX.Net.Clients.Market
         async Task<WebCallResult<IEnumerable<ICommonOrder>>> IExchangeClient.GetClosedOrdersAsync(string? symbol = null)
         {
             var trades = await Trading.GetOrdersAsync(symbol).ConfigureAwait(false);
-            return trades.As<IEnumerable<ICommonOrder>>(trades.Data.Where<FTXOrder>(o => o.Status == OrderStatus.Closed));
+            return trades.As<IEnumerable<ICommonOrder>>(trades.Data.Where(o => o.Status == OrderStatus.Closed));
         }
 
         async Task<WebCallResult<ICommonOrderId>> IExchangeClient.CancelOrderAsync(string orderId, string? symbol = null)
@@ -180,7 +177,7 @@ namespace FTX.Net.Clients.Market
 
             throw new ArgumentException("Unsupported timespan for FTX Klines, check supported intervals using FTX.Net.Enums.KlineInterval");
         }
-        
+
         internal void InvokeOrderPlaced(ICommonOrderId id)
         {
             OnOrderPlaced?.Invoke(id);

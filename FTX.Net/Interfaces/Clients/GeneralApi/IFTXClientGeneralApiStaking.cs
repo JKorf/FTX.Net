@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Objects.Models.Staking;
 
-namespace FTX.Net.Interfaces.Clients.Rest
+namespace FTX.Net.Interfaces.Clients.GeneralApi
 {
     /// <summary>
     /// FTX staking endpoints
     /// </summary>
-    public interface IFTXClientGeneralStaking
+    public interface IFTXClientGeneralApiStaking
     {
         /// <summary>
         /// Get list of stakes for the user

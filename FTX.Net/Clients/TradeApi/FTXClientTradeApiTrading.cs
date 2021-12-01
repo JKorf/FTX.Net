@@ -2,7 +2,6 @@
 using CryptoExchange.Net.Objects;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
-using FTX.Net.Interfaces.Clients.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,18 +10,18 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using FTX.Net.Objects.Models;
-using FTX.Net.Clients.Market;
 using FTX.Net.Objects.Models.LeveragedTokens;
 using FTX.Net.Objects.Models.Options;
 using CryptoExchange.Net.Converters;
+using FTX.Net.Interfaces.Clients.TradeApi;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients.TradeApi
 {
-    public class FTXClientMarketTrading : IFTXClientMarketTrading
+    public class FTXClientTradeApiTrading : IFTXClientTradeApiTrading
     {
-        private readonly FTXClientMarket _baseClient;
+        private readonly FTXClientTradeApi _baseClient;
 
-        internal FTXClientMarketTrading(FTXClientMarket baseClient)
+        internal FTXClientTradeApiTrading(FTXClientTradeApi baseClient)
         {
             _baseClient = baseClient;
         }

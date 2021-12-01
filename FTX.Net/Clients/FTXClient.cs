@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net;
-using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Converters;
-using CryptoExchange.Net.ExchangeInterfaces;
 using CryptoExchange.Net.Objects;
-using FTX.Net.Clients.General;
-using FTX.Net.Clients.Market;
-using FTX.Net.Enums;
-using FTX.Net.Interfaces.Clients.General;
-using FTX.Net.Interfaces.Clients.Market;
-using FTX.Net.Interfaces.Clients.Rest;
+using FTX.Net.Clients.GeneralApi;
+using FTX.Net.Clients.TradeApi;
+using FTX.Net.Interfaces.Clients;
+using FTX.Net.Interfaces.Clients.GeneralApi;
+using FTX.Net.Interfaces.Clients.TradeApi;
 using FTX.Net.Objects;
 using FTX.Net.Objects.Internal;
-using FTX.Net.Objects.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace FTX.Net.Clients.Rest
+namespace FTX.Net.Clients
 {
     /// <summary>
     /// Client for interacting with the FTX API
@@ -31,14 +26,14 @@ namespace FTX.Net.Clients.Rest
     {
         private const string SubaccountHeaderName = "FTX-SUBACCOUNT";
 
-        public IFTXClientGeneral GeneralApi { get; }
-        public IFTXClientMarket TradeApi { get; }
+        public IFTXClientGeneralApi GeneralApi { get; }
+        public IFTXClientTradeApi TradeApi { get; }
 
         #region constructor/destructor
         /// <summary>
         /// Create a new instance of FTXClient using the default options
         /// </summary>
-        public FTXClient() : this(Objects.FTXClientOptions.Default)
+        public FTXClient() : this(FTXClientOptions.Default)
         {
         }
 
@@ -60,8 +55,8 @@ namespace FTX.Net.Clients.Rest
             }
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
 
-            GeneralApi = new FTXClientGeneral(this, options);
-            TradeApi = new FTXClientMarket(this, options);
+            GeneralApi = new FTXClientGeneralApi(this, options);
+            TradeApi = new FTXClientTradeApi(this, options);
         }
         #endregion
 

@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Socket;
 
-namespace FTX.Net.Interfaces.Clients.Socket
+namespace FTX.Net.Interfaces.Clients.TradeApi
 {
     /// <summary>
     /// FTX socket client 
     /// </summary>
-    public interface IFTXSocketClientMarket: IDisposable
+    public interface IFTXSocketClientStreams : IDisposable
     {
         /// <summary>
         /// Subscribes to ticker updates for a symbol

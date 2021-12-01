@@ -4,9 +4,9 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using FTX.Net.Clients.Rest;
 using FTXClientOptions = FTX.Net.Objects.FTXClientOptions;
 using CryptoExchange.Net.Converters;
+using FTX.Net.Clients;
 
 namespace FTX.Net
 {

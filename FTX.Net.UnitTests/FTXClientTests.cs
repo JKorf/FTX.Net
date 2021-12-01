@@ -1,6 +1,5 @@
 ﻿using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets;
-using FTX.Net.Clients.Socket;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FTX.Net.Clients.Rest;
+using FTX.Net.Clients;
 
 namespace FTX.Net.UnitTests
 {
@@ -20,7 +19,7 @@ namespace FTX.Net.UnitTests
         public void CheckRestInterfaces()
         {
             var assembly = Assembly.GetAssembly(typeof(FTXClient));
-            var ignore = new string[] { "IFTXClient" };
+            var ignore = new string[] { "IFTXClient", "IFTXClientTradeApi", "IFTXClientGeneralApi" };
             var clientInterfaces = assembly.GetTypes().Where(t => t.Name.StartsWith("IFTXClient") && !ignore.Contains(t.Name));
 
             foreach (var clientInterface in clientInterfaces)
@@ -30,7 +29,7 @@ namespace FTX.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod);
+                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");
@@ -50,7 +49,7 @@ namespace FTX.Net.UnitTests
                 foreach (var method in implementation.GetMethods().Where(m => m.ReturnType.IsAssignableTo(typeof(Task<CallResult<UpdateSubscription>>))))
                 {
                     var interfaceMethod = clientInterface.GetMethod(method.Name, method.GetParameters().Select(p => p.ParameterType).ToArray());
-                    Assert.NotNull(interfaceMethod);
+                    Assert.NotNull(interfaceMethod, $"Missing interface for method {method.Name} in {implementation.Name} implementing interface {clientInterface.Name}");
                     methods++;
                 }
                 Debug.WriteLine($"{clientInterface.Name} {methods} methods validated");

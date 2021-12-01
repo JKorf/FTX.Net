@@ -7,10 +7,10 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Text;
-using FTX.Net.Interfaces.Clients.Socket;
-using FTX.Net.Clients.Socket;
 using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Socket;
+using FTX.Net.Interfaces.Clients;
+using FTX.Net.Clients;
 
 namespace FTX.Net.SymbolOrderBooks
 {

@@ -1,10 +1,10 @@
-﻿using FTX.Net.Interfaces.Clients.Rest;
-using FTX.Net.Objects;
+﻿using FTX.Net.Objects;
 using FTX.Net.Testing;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Interfaces;
+using FTX.Net.Interfaces.Clients;
 
 namespace FTX.Net.UnitTests
 {
