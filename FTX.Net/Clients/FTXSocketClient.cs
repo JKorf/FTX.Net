@@ -15,9 +15,7 @@ using FTX.Net.Clients.TradeApi;
 
 namespace FTX.Net.Clients
 {
-    /// <summary>
-    /// Client for interacting with the FTX websocket API
-    /// </summary>
+    /// <inheritdoc cref="IFTXSocketClient" />
     public class FTXSocketClient : BaseSocketClient, IFTXSocketClient
     {
         #region fields
@@ -26,6 +24,7 @@ namespace FTX.Net.Clients
 
         #region Api clients
 
+        /// <inheritdoc />
         public IFTXSocketClientStreams Streams { get; }
 
         #endregion
@@ -57,6 +56,15 @@ namespace FTX.Net.Clients
             AddGenericHandler("InfoHandler", InfoHandler);
         }
         #endregion
+
+        /// <summary>
+        /// Set the default options to be used when creating new clients
+        /// </summary>
+        /// <param name="options">Options to use as default</param>
+        public static void SetDefaultOptions(FTXSocketClientOptions options)
+        {
+            FTXSocketClientOptions.Default = options;
+        }
 
         internal Task<CallResult<UpdateSubscription>> SubscribeInternalAsync<T>(SocketApiClient apiClient, object? request, string? identifier, bool authenticated, Action<DataEvent<T>> dataHandler, CancellationToken ct)
         {
@@ -162,7 +170,7 @@ namespace FTX.Net.Clients
         }
 
         /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, object request)
+        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
         {
             var ftxRequest = (SubscribeRequest)request;
             var channel = message["channel"];
@@ -172,7 +180,7 @@ namespace FTX.Net.Clients
         }
 
         /// <inheritdoc />
-        protected override bool MessageMatchesHandler(JToken message, string identifier)
+        protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
         {
             var type = message["type"];
             if (type == null)
@@ -210,6 +218,7 @@ namespace FTX.Net.Clients
             return result;
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             Streams.Dispose();

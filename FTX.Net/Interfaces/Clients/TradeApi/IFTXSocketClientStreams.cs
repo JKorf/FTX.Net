@@ -10,7 +10,7 @@ using FTX.Net.Objects.Models.Socket;
 namespace FTX.Net.Interfaces.Clients.TradeApi
 {
     /// <summary>
-    /// FTX socket client 
+    /// FTX streams
     /// </summary>
     public interface IFTXSocketClientStreams : IDisposable
     {

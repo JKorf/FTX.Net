@@ -43,16 +43,20 @@ namespace FTX.Net.UnitTests
            List<string> takeFirstItemForCompare = null)
         {
             var methods = typeof(K).GetMethods();
+            var unusedJsonFiles = new List<string>();
             var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
             var skippedMethods = new List<string>();
+            var path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, "JsonResponses", folderPrefix);
+            unusedJsonFiles = Directory.GetFiles(path).ToList();
 
             foreach (var method in callResultMethods)
             {
-                var path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
                 FileStream file = null;
                 try
                 {
-                    file = File.OpenRead(Path.Combine(path, $"JsonResponses", folderPrefix, $"{method.Name}.txt"));
+                    var filePath = Path.Combine(path, $"{method.Name}.txt");
+                    file = File.OpenRead(filePath);
+                    unusedJsonFiles.Remove(filePath);
                 }
                 catch (FileNotFoundException)
                 {
@@ -201,6 +205,11 @@ namespace FTX.Net.UnitTests
                 Debug.WriteLine($"Successfully validated {method.Name}");
             }
 
+            if (unusedJsonFiles.Any())
+                Debug.WriteLine("Unused json files:");
+            foreach (var file in unusedJsonFiles)
+                Debug.WriteLine(Path.GetFileName(file));
+            Debug.WriteLine("");
             if (skippedMethods.Any())
                 Debug.WriteLine("Skipped methods:");
             foreach (var method in skippedMethods)
@@ -229,7 +238,7 @@ namespace FTX.Net.UnitTests
                 CheckPropertyValue(method, prop.Value, propertyValue, property.Name, prop.Name, property, ignoreProperties);
         }
 
-        private static void CheckPropertyValue(string method, JToken propValue, object propertyValue, string? propertyName = null, string? propName = null, PropertyInfo info = null, Dictionary<string, List<string>> ignoreProperties = null)
+        private static void CheckPropertyValue(string method, JToken propValue, object propertyValue, string propertyName = null, string propName = null, PropertyInfo info = null, Dictionary<string, List<string>> ignoreProperties = null)
         {
             if (propertyValue == default && propValue.Type != JTokenType.Null && !string.IsNullOrEmpty(propValue.ToString()))
             {
@@ -382,7 +391,7 @@ namespace FTX.Net.UnitTests
                         throw new Exception($"{method}: {property} not equal: {jsonValue.Value<bool>()} vs {(bool)objectValue}");
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw;
             }

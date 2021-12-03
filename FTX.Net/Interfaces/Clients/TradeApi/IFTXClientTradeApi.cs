@@ -2,6 +2,9 @@
 
 namespace FTX.Net.Interfaces.Clients.TradeApi
 {
+    /// <summary>
+    /// Trade endpoints
+    /// </summary>
     public interface IFTXClientTradeApi : IDisposable
     {
         /// <summary>

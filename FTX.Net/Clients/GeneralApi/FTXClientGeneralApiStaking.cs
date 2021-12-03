@@ -10,9 +10,7 @@ using FTX.Net.Interfaces.Clients.GeneralApi;
 
 namespace FTX.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Staking endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class FTXClientGeneralApiStaking : IFTXClientGeneralApiStaking
     {
         private readonly FTXClientGeneralApi _baseClient;

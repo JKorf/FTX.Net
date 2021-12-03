@@ -11,9 +11,7 @@ using FTX.Net.Interfaces.Clients.GeneralApi;
 
 namespace FTX.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// NFT endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class FTXClientGeneralApiNFT : IFTXClientGeneralApiNft
     {
         private readonly FTXClientGeneralApi _baseClient;

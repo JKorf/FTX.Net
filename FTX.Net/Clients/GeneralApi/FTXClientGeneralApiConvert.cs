@@ -10,9 +10,7 @@ using FTX.Net.Interfaces.Clients.GeneralApi;
 
 namespace FTX.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Convert endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class FTXClientGeneralApiConvert : IFTXClientGeneralApiConvert
     {
         private readonly FTXClientGeneralApi _baseClient;

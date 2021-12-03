@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.Clients.TradeApi
 {
+    /// <inheritdoc cref="IFTXClientTradeApi" />
     public class FTXClientTradeApi : RestApiClient, IFTXClientTradeApi, IExchangeClient
     {
         private readonly FTXClient _baseClient;
@@ -34,8 +35,7 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public IFTXClientTradeApiTrading Trading { get; }
 
-
-        public FTXClientTradeApi(FTXClient baseClient, FTXClientOptions options)
+        internal FTXClientTradeApi(FTXClient baseClient, FTXClientOptions options)
             : base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
@@ -47,7 +47,8 @@ namespace FTX.Net.Clients.TradeApi
             Trading = new FTXClientTradeApiTrading(this);
         }
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new FTXAuthenticationProvider(credentials);
 
         #region common interface

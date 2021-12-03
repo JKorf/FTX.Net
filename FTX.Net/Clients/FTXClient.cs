@@ -19,14 +19,14 @@ using Newtonsoft.Json.Linq;
 
 namespace FTX.Net.Clients
 {
-    /// <summary>
-    /// Client for interacting with the FTX API
-    /// </summary>
+    /// <inheritdoc cref="IFTXClient" />
     public class FTXClient : BaseRestClient, IFTXClient
     {
         private const string SubaccountHeaderName = "FTX-SUBACCOUNT";
 
+        /// <inheritdoc />
         public IFTXClientGeneralApi GeneralApi { get; }
+        /// <inheritdoc />
         public IFTXClientTradeApi TradeApi { get; }
 
         #region constructor/destructor
@@ -59,6 +59,15 @@ namespace FTX.Net.Clients
             TradeApi = new FTXClientTradeApi(this, options);
         }
         #endregion
+
+        /// <summary>
+        /// Set the default options to be used when creating new clients
+        /// </summary>
+        /// <param name="options">Options to use as default</param>
+        public static void SetDefaultOptions(FTXClientOptions options)
+        {
+            FTXClientOptions.Default = options;
+        }
 
         #region methods
         internal static Dictionary<string, string>? GetSubaccountHeader(string? subaccountName) => subaccountName == null ? null : new Dictionary<string, string>
@@ -112,6 +121,7 @@ namespace FTX.Net.Clients
 
         #endregion
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             TradeApi.Dispose();

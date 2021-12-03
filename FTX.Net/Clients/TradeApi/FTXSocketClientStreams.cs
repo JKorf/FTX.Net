@@ -17,9 +17,7 @@ using FTX.Net.Interfaces.Clients.TradeApi;
 
 namespace FTX.Net.Clients.TradeApi
 {
-    /// <summary>
-    /// Client for interacting with the FTX websocket API
-    /// </summary>
+    /// <inheritdoc cref="IFTXSocketClientStreams" />
     public class FTXSocketClientStreams : SocketApiClient, IFTXSocketClientStreams
     {
         #region fields
@@ -28,17 +26,16 @@ namespace FTX.Net.Clients.TradeApi
         #endregion
 
         #region ctor
-        /// <summary>
-        /// Create a new instance of FTXSocketClient using the default options
-        /// </summary>
-        public FTXSocketClientStreams(Log log, FTXSocketClient baseClient, FTXSocketClientOptions options)
+        
+        internal FTXSocketClientStreams(Log log, FTXSocketClient baseClient, FTXSocketClientOptions options)
             : base(options, options.StreamOptions)
         {
             _log = log;
             _baseClient = baseClient;
         }
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new FTXAuthenticationProvider(credentials);
 
         #endregion

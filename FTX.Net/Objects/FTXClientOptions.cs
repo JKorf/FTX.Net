@@ -35,6 +35,9 @@ namespace FTX.Net.Objects
         public string? SubaccountName { get; set; }
 
         private RestApiClientOptions _apiOptions = new RestApiClientOptions("https://ftx.com/api");
+        /// <summary>
+        /// Api options
+        /// </summary>
         public RestApiClientOptions ApiOptions
         {
             get => _apiOptions;
@@ -89,12 +92,14 @@ namespace FTX.Net.Objects
         public string? SubaccountName { get; set; }
 
         private ApiClientOptions _streamOptions = new RestApiClientOptions("wss://ftx.com/ws/");
+        /// <summary>
+        /// Stream options
+        /// </summary>
         public ApiClientOptions StreamOptions
         {
             get => _streamOptions;
             set => _streamOptions.Copy(_streamOptions, value);
         }
-
 
         /// <summary>
         /// Ctor

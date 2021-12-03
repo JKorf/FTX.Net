@@ -11,9 +11,7 @@ using FTX.Net.Interfaces.Clients.GeneralApi;
 
 namespace FTX.Net.Clients.GeneralApi
 {
-    /// <summary>
-    /// Sub account endpoints
-    /// </summary>
+    /// <inheritdoc />
     public class FTXClientGeneralApiSubaccounts : IFTXClientGeneralApiSubaccounts
     {
         private readonly FTXClientGeneralApi _baseClient;

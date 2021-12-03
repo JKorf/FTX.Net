@@ -13,6 +13,7 @@ using FTX.Net.Interfaces.Clients.TradeApi;
 
 namespace FTX.Net.Clients.TradeApi
 {
+    /// <inheritdoc />
     public class FTXClientTradeApiExchangeData : IFTXClientTradeApiExchangeData
     {
         private readonly FTXClientTradeApi _baseClient;

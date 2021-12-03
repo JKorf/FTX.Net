@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace FTX.Net.Clients.GeneralApi
 {
+    /// <inheritdoc />
     public class FTXClientGeneralApi : RestApiClient, IFTXClientGeneralApi
     {
         private readonly FTXClient _baseClient;
@@ -29,7 +30,7 @@ namespace FTX.Net.Clients.GeneralApi
         /// <inheritdoc />
         public IFTXClientGeneralApiSubaccounts Subaccounts { get; }
 
-        public FTXClientGeneralApi(FTXClient baseClient, FTXClientOptions options) :
+        internal FTXClientGeneralApi(FTXClient baseClient, FTXClientOptions options) :
             base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
@@ -42,7 +43,8 @@ namespace FTX.Net.Clients.GeneralApi
             Subaccounts = new FTXClientGeneralApiSubaccounts(this);
         }
 
-        public override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        /// <inheritdoc />
+        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new FTXAuthenticationProvider(credentials);
 
         internal Task<WebCallResult<T>> SendFTXRequest<T>(Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
