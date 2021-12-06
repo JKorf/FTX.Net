@@ -13,6 +13,7 @@ namespace FTX.Net
 {
     internal class FTXAuthenticationProvider : AuthenticationProvider
     {
+        private readonly object _lock = new object();
         private readonly HMACSHA256 _encryptor;
 
         public FTXAuthenticationProvider(ApiCredentials credentials) : base(credentials)
@@ -45,7 +46,8 @@ namespace FTX.Net
                 toSign += JsonConvert.SerializeObject(parameters.OrderBy(p => p.Key).ToDictionary(p => p.Key, p => p.Value));
             }
 
-            result.Add($"{ftxPrefix}-SIGN", ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant());
+            lock(_lock)
+                result.Add($"{ftxPrefix}-SIGN", ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant());
 
 
             return result;
@@ -53,7 +55,8 @@ namespace FTX.Net
 
         public override string Sign(string toSign)
         {
-            return ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant();
+            lock(_lock)
+                return ByteToString(_encryptor.ComputeHash(Encoding.ASCII.GetBytes(toSign))).ToLowerInvariant();
         }
 
         private string GetFTXHeaderPrefix(Uri requestUri)

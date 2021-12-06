@@ -50,7 +50,7 @@ namespace FTX.Net.Clients
 
             Streams = new FTXSocketClientStreams(log, this, options);
 
-            SendPeriodic(TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
+            SendPeriodic("Ping", TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
 
             AddGenericHandler("PongHandler", (a) => { });
             AddGenericHandler("InfoHandler", InfoHandler);
