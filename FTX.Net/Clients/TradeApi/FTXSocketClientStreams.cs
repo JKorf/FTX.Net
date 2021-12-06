@@ -47,6 +47,27 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolsUpdatesAsync(Action<DataEvent<Dictionary<string, FTXStreamSymbol>>> handler, CancellationToken ct = default)
+        {
+            var innerHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var actualData = data.Data["data"];
+                if (actualData == null)
+                    return;
+
+                var deserializeResult = _baseClient.DeserializeInternal<Dictionary<string, FTXStreamSymbol>>(actualData);
+                if (!deserializeResult)
+                {
+                    _log.Write(LogLevel.Warning, "Failed to deserialize stream data: " + deserializeResult.Error);
+                    return;
+                }
+
+                handler?.Invoke(data.As(deserializeResult.Data));
+            });
+            return await SubscribeAsync(new SubscribeRequest("markets", null), false, innerHandler, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<FTXTrade>>> handler, CancellationToken ct = default)
         {
             return await SubscribeAsync(new SubscribeRequest("trades", symbol), false, handler, ct).ConfigureAwait(false);

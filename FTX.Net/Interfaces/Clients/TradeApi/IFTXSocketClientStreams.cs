@@ -24,6 +24,14 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<FTXStreamTicker>> handler, CancellationToken ct = default);
 
         /// <summary>
+        /// Subscribes to symbol updates
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <param name="ct">Cancellation token for closing this subscription</param>
+        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolsUpdatesAsync(Action<DataEvent<Dictionary<string, FTXStreamSymbol>>> handler, CancellationToken ct = default);
+
+        /// <summary>
         /// Subscribes to trade updates for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
