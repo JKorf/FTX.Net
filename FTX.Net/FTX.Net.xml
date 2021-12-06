@@ -1601,6 +1601,13 @@
             <param name="handler">The handler for the data</param>
             <returns></returns>
         </member>
+        <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToSymbolsUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.Dictionary{System.String,FTX.Net.Objects.Spot.Socket.FTXStreamSymbol}}})">
+            <summary>
+            Subscribes to symbol updates
+            </summary>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
         <member name="M:FTX.Net.Interfaces.IFTXSocketClient.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.IEnumerable{FTX.Net.Objects.Spot.FTXTrade}}})">
             <summary>
             Subscribes to trade updates for a symbol
