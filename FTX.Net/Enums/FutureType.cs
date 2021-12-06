@@ -16,6 +16,10 @@
         /// <summary>
         /// Move
         /// </summary>
-        Move
+        Move,
+        /// <summary>
+        /// Prediction
+        /// </summary>
+        Prediction
     }
 }

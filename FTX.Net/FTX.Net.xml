@@ -74,6 +74,11 @@
             Move
             </summary>
         </member>
+        <member name="F:FTX.Net.Enums.FutureType.Prediction">
+            <summary>
+            Prediction
+            </summary>
+        </member>
         <member name="T:FTX.Net.Enums.KlineInterval">
             <summary>
             Kline intervals
@@ -993,6 +998,13 @@
             Subscribes to ticker updates for a symbol
             </summary>
             <param name="symbol">The symbol to subscribe to</param>
+            <param name="handler">The handler for the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTX.Net.FTXSocketClient.SubscribeToSymbolsUpdatesAsync(System.Action{CryptoExchange.Net.Sockets.DataEvent{System.Collections.Generic.Dictionary{System.String,FTX.Net.Objects.Spot.Socket.FTXStreamSymbol}}})">
+            <summary>
+            Subscribes to symbol updates
+            </summary>
             <param name="handler">The handler for the data</param>
             <returns></returns>
         </member>
@@ -5074,6 +5086,141 @@
         <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamOrderBook.Time">
             <summary>
             Timestamp
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol">
+            <summary>
+            Symbol update
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.Name">
+            <summary>
+            Symbol name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.Enabled">
+            <summary>
+            Enabled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.PriceIncrement">
+            <summary>
+            Price increment
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.QuantityIncrement">
+            <summary>
+            Quantity increment
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.Type">
+            <summary>
+            Symbol type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.Underlying">
+            <summary>
+            Underlying
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.Restricted">
+            <summary>
+            Restricted
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamSymbol.Future">
+            <summary>
+            Future
+            </summary>
+        </member>
+        <member name="T:FTX.Net.Objects.Spot.Socket.FTXStreamFuture">
+            <summary>
+            Future info
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Underlying">
+            <summary>
+            Underlying
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Type">
+            <summary>
+            Future type
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Expiry">
+            <summary>
+            Expiry date
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Perpetual">
+            <summary>
+            Is perpetual
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Expired">
+            <summary>
+            Has expired
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Enabled">
+            <summary>
+            Is enabled
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.PostOnly">
+            <summary>
+            Is post only
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.ImfFactor">
+            <summary>
+            IMF factor
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.UnderlyingDescription">
+            <summary>
+            Underlying description
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.ExpiryDescription">
+            <summary>
+            Expiry description
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.MoveStart">
+            <summary>
+            Move start
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.PositionLimitWeight">
+            <summary>
+            Position limit weight
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Spot.Socket.FTXStreamFuture.Group">
+            <summary>
+            Group
             </summary>
         </member>
         <member name="T:FTX.Net.Objects.FTXBalance">

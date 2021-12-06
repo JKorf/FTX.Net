@@ -32,6 +32,13 @@ namespace FTX.Net.Interfaces
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<FTXStreamTicker>> handler);
 
         /// <summary>
+        /// Subscribes to symbol updates
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolsUpdatesAsync(Action<DataEvent<Dictionary<string, FTXStreamSymbol>>> handler);
+
+        /// <summary>
         /// Subscribes to trade updates for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>

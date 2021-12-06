@@ -84,6 +84,31 @@ namespace FTX.Net
         }
 
         /// <summary>
+        /// Subscribes to symbol updates
+        /// </summary>
+        /// <param name="handler">The handler for the data</param>
+        /// <returns></returns>
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolsUpdatesAsync(Action<DataEvent<Dictionary<string, FTXStreamSymbol>>> handler)
+        {
+            var innerHandler = new Action<DataEvent<JToken>>(data =>
+            {
+                var actualData = data.Data["data"];
+                if (actualData == null)
+                    return;
+
+                var deserializeResult = Deserialize<Dictionary<string, FTXStreamSymbol>>(actualData);
+                if (!deserializeResult)
+                {
+                    log.Write(LogLevel.Warning, "Failed to deserialize stream data: " + deserializeResult.Error);
+                    return;
+                }
+
+                handler?.Invoke(data.As(deserializeResult.Data));
+            });
+            return await SubscribeAsync(new SubscribeRequest("markets", null), false, innerHandler).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// Subscribes to trade updates for a symbol
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
