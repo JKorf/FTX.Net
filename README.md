@@ -102,6 +102,9 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 Yes. Switch by changing the BaseAddress in the client options.
 
 ## Release notes
+* Version 1.0.0-alpha1 - 07 Dec 2021
+    * Initial version new CryptoExchange.Net. More documentation coming soon
+
 * Version 0.1.8 - 03 Nov 2021
     * Fix for ftx.us authentication
     * Added AutoTimestamp option to prevent authentication issues because of clock drift
