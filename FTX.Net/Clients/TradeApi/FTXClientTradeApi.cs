@@ -1,6 +1,7 @@
 ﻿using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.ExchangeInterfaces;
+using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Enums;
 using FTX.Net.Interfaces.Clients.TradeApi;
@@ -20,6 +21,9 @@ namespace FTX.Net.Clients.TradeApi
     public class FTXClientTradeApi : RestApiClient, IFTXClientTradeApi, IExchangeClient
     {
         private readonly FTXClient _baseClient;
+        private readonly Log _log;
+
+        internal static TimeSyncState TimeSyncState = new TimeSyncState();
 
         internal FTXClientOptions ClientOptions;
 
@@ -35,11 +39,11 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public IFTXClientTradeApiTrading Trading { get; }
 
-        internal FTXClientTradeApi(FTXClient baseClient, FTXClientOptions options)
+        internal FTXClientTradeApi(Log log, FTXClient baseClient, FTXClientOptions options)
             : base(options, options.ApiOptions)
         {
             _baseClient = baseClient;
-
+            _log = log;
             ClientOptions = options;
 
             Account = new FTXClientTradeApiAccount(this);
@@ -206,5 +210,17 @@ namespace FTX.Net.Clients.TradeApi
         {
             return new Uri(BaseAddress.AppendPath(path));
         }
+
+        /// <inheritdoc />
+        protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
+            => ExchangeData.GetServerTimeAsync();
+
+        /// <inheritdoc />
+        protected override TimeSyncInfo GetTimeSyncInfo()
+            => new TimeSyncInfo(_log, ClientOptions.ApiOptions.AutoTimestamp, TimeSyncState);
+
+        /// <inheritdoc />
+        public override TimeSpan GetTimeOffset()
+            => TimeSyncState.TimeOffset;
     }
 }

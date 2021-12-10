@@ -55,8 +55,8 @@ namespace FTX.Net.Clients
             }
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
 
-            GeneralApi = new FTXClientGeneralApi(this, options);
-            TradeApi = new FTXClientTradeApi(this, options);
+            GeneralApi = new FTXClientGeneralApi(log, this, options);
+            TradeApi = new FTXClientTradeApi(log, this, options);
         }
         #endregion
 
@@ -79,9 +79,6 @@ namespace FTX.Net.Clients
 
         internal async Task<WebCallResult<T>> SendFTXRequest<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
         {
-            if (signed)
-                await FTXTimestampProvider.UpdateTimeAsync(this, log, (FTXClientOptions)ClientOptions).ConfigureAwait(false);
-
             var result = await SendRequestAsync<FTXResult<T>>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
             if (result)
                 return result.As(result.Data.Result);
