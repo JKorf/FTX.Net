@@ -16,6 +16,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
     {
         /// <summary>
         /// Subscribes to ticker updates for a symbol
+        /// <para><a href="https://docs.ftx.com/#ticker" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="handler">The handler for the data</param>
@@ -25,6 +26,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to symbol updates
+        /// <para><a href="https://docs.ftx.com/#markets-2" /></para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -33,6 +35,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to trade updates for a symbol
+        /// <para><a href="https://docs.ftx.com/#trades" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="handler">The handler for the data</param>
@@ -42,6 +45,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to order book updates for a symbol
+        /// <para><a href="https://docs.ftx.com/#orderbooks" /></para>
         /// </summary>
         /// <param name="symbol">The symbol to subscribe to</param>
         /// <param name="handler">The handler for the data</param>
@@ -51,6 +55,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to order book updates for a symbol
+        /// <para><a href="https://docs.ftx.com/#grouped-orderbooks" /></para>
         /// </summary>
         /// <param name="symbol">Symbol for the order book</param>
         /// <param name="grouping">Grouping of the data</param>
@@ -61,6 +66,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to order updates
+        /// <para><a href="https://docs.ftx.com/#orders-2" /></para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -69,6 +75,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to trade updates
+        /// <para><a href="https://docs.ftx.com/#fills-2" /></para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -77,6 +84,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
 
         /// <summary>
         /// Subscribes to FTX-pay updates
+        /// <para><a href="https://docs.ftx.com/#ftx-pay" /></para>
         /// </summary>
         /// <param name="handler">The handler for the data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
