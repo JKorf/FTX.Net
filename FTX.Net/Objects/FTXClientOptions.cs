@@ -141,16 +141,5 @@ namespace FTX.Net.Objects
         /// Client to use for connecting
         /// </summary>
         public IFTXSocketClient? Client { get; set; }
-
-        /// <summary>
-        /// Create new book options
-        /// </summary>
-        /// <param name="grouping">Grouping of the order book entries</param>
-        /// <param name="client">Client to use for connecting</param>
-        public FTXSymbolOrderBookOptions(IFTXSocketClient? client = null, int? grouping = null)
-        {
-            Client = client;
-            Grouping = grouping;
-        }
     }
 }
