@@ -55,8 +55,8 @@ namespace FTX.Net.Clients
             }
             ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
 
-            GeneralApi = new FTXClientGeneralApi(log, this, options);
-            TradeApi = new FTXClientTradeApi(log, this, options);
+            GeneralApi = AddApiClient(new FTXClientGeneralApi(log, this, options));
+            TradeApi = AddApiClient(new FTXClientTradeApi(log, this, options));
         }
         #endregion
 
@@ -118,13 +118,6 @@ namespace FTX.Net.Clients
 
         #endregion
 
-        /// <inheritdoc />
-        public override void Dispose()
-        {
-            TradeApi.Dispose();
-            GeneralApi.Dispose();
-            base.Dispose();
-        }
         #endregion
     }
 }

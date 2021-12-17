@@ -48,7 +48,7 @@ namespace FTX.Net.Clients
 
             _subaccount = options.SubaccountName;
 
-            Streams = new FTXSocketClientStreams(log, this, options);
+            Streams = AddApiClient(new FTXSocketClientStreams(log, this, options));
 
             SendPeriodic("Ping", TimeSpan.FromSeconds(15), (connection) => new SocketRequest("ping"));
 
@@ -216,13 +216,6 @@ namespace FTX.Net.Clients
                 return result;
             }).ConfigureAwait(false);
             return result;
-        }
-
-        /// <inheritdoc />
-        public override void Dispose()
-        {
-            Streams.Dispose();
-            base.Dispose();
         }
     }
 }
