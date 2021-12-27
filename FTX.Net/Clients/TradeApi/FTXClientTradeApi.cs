@@ -33,6 +33,9 @@ namespace FTX.Net.Clients.TradeApi
         public event Action<ICommonOrderId>? OnOrderCanceled;
 
         /// <inheritdoc />
+        public string ExchangeName => "FTX";
+
+        /// <inheritdoc />
         public IFTXClientTradeApiAccount Account { get; }
         /// <inheritdoc />
         public IFTXClientTradeApiExchangeData ExchangeData { get; }
@@ -222,5 +225,8 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
             => TimeSyncState.TimeOffset;
+
+        /// <inheritdoc />
+        public IExchangeClient AsExchangeClient() => this;
     }
 }
