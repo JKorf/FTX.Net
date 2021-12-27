@@ -102,6 +102,9 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 Yes. Switch by changing the BaseAddress in the client options.
 
 ## Release notes
+* Version 1.0.0-alpha3 - 27 Dec 2021
+    * Updated CryptoExchange.Net
+
 * Version 1.0.0-alpha2 - 21 Dec 2021
     * Update to new CryptoExchange.Net version
 
