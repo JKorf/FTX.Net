@@ -1,5 +1,4 @@
 ﻿using System;
-using CryptoExchange.Net.ExchangeInterfaces;
 using Newtonsoft.Json;
 
 namespace FTX.Net.Objects.Models
@@ -7,7 +6,7 @@ namespace FTX.Net.Objects.Models
     /// <summary>
     /// Kline info
     /// </summary>
-    public class FTXKline: ICommonKline
+    public class FTXKline
     {
         /// <summary>
         /// Close price
@@ -38,17 +37,5 @@ namespace FTX.Net.Objects.Models
         /// </summary>
         [JsonProperty("startTime")]
         public DateTime OpenTime { get; set; }
-
-        decimal ICommonKline.CommonHighPrice => HighPrice;
-
-        decimal ICommonKline.CommonLowPrice => LowPrice;
-
-        decimal ICommonKline.CommonOpenPrice => OpenPrice;
-
-        decimal ICommonKline.CommonClosePrice => ClosePrice;
-
-        DateTime ICommonKline.CommonOpenTime => OpenTime;
-
-        decimal ICommonKline.CommonVolume => Volume ?? 0;
     }
 }

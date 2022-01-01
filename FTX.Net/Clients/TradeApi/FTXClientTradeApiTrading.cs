@@ -14,6 +14,7 @@ using FTX.Net.Objects.Models.LeveragedTokens;
 using FTX.Net.Objects.Models.Options;
 using CryptoExchange.Net.Converters;
 using FTX.Net.Interfaces.Clients.TradeApi;
+using CryptoExchange.Net.ComonObjects;
 
 namespace FTX.Net.Clients.TradeApi
 {
@@ -28,7 +29,7 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<FTXOrder>> PlaceOrderAsync(string symbol, OrderSide side, OrderType type, decimal quantity, decimal? price = null, bool? reduceOnly = null, bool? immediateOrCancel = null, bool? postOnly = null, string? clientOrderId = null, bool? rejectOnPriceBand = null, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> PlaceOrderAsync(string symbol, Enums.OrderSide side, Enums.OrderType type, decimal quantity, decimal? price = null, bool? reduceOnly = null, bool? immediateOrCancel = null, bool? postOnly = null, string? clientOrderId = null, bool? rejectOnPriceBand = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>()
             {
@@ -48,7 +49,7 @@ namespace FTX.Net.Clients.TradeApi
 
             var result = await _baseClient.SendFTXRequest<FTXOrder>(_baseClient.GetUri("orders"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
             if (result)
-                _baseClient.InvokeOrderPlaced(result.Data);
+                _baseClient.InvokeOrderPlaced(new OrderId { SourceObject = result.Data, Id = result.Data.Id.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -56,7 +57,7 @@ namespace FTX.Net.Clients.TradeApi
         public async Task<WebCallResult<FTXTriggerOrder>> PlaceTriggerOrderAsync(
             // Basic params
             string symbol,
-            OrderSide side,
+            Enums.OrderSide side,
             TriggerOrderType type,
             decimal quantity,
             bool? reduceOnly = null,
@@ -172,7 +173,7 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetTriggerOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, OrderSide? side = null, TriggerOrderType? type = null, OrderType? orderType = null, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<FTXTriggerOrder>>> GetTriggerOrdersAsync(string? symbol = null, DateTime? startTime = null, DateTime? endTime = null, Enums.OrderSide? side = null, TriggerOrderType? type = null, Enums.OrderType? orderType = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
@@ -188,7 +189,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var result = await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("orders/" + orderId), HttpMethod.Delete, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
             if (result)
-                _baseClient.InvokeOrderCanceled(new FTXOrder() { Id = orderId });
+                _baseClient.InvokeOrderCanceled(new OrderId { SourceObject = result.Data, Id = orderId.ToString(CultureInfo.InvariantCulture) });
             return result;
         }
 
@@ -205,7 +206,7 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<string>> CancelAllOrdersAsync(string? symbol = null, OrderSide? side = null, bool? conditionalOrdersOnly = null, bool? limitOrdersOnly = null, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<string>> CancelAllOrdersAsync(string? symbol = null, Enums.OrderSide? side = null, bool? conditionalOrdersOnly = null, bool? limitOrdersOnly = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("market", symbol);
@@ -271,7 +272,7 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<FTXQuoteRequest>> CreateOptionsQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXQuoteRequest>> CreateOptionsQuoteRequestAsync(string underlying, OptionType type, decimal strike, DateTime expiry, Enums.OrderSide side, decimal size, decimal? limitPrice = null, bool? hideLimitPrice = null, DateTime? requestExpiry = null, long? counterPartyId = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("underlying", underlying);

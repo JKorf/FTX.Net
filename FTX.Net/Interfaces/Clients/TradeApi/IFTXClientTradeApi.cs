@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
+﻿using CryptoExchange.Net.Interfaces;
 using System;
 
 namespace FTX.Net.Interfaces.Clients.TradeApi
@@ -24,9 +24,15 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         IFTXClientTradeApiTrading Trading { get; }
 
         /// <summary>
-        /// Get the IExchangeClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+        /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
-        IExchangeClient AsExchangeClient();
+        public ISpotClient ComonSpotClient { get; }
+
+        /// <summary>
+        /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+        /// </summary>
+        /// <returns></returns>
+        public IFuturesClient ComonFuturesClient { get; }
     }
 }

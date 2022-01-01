@@ -1,5 +1,4 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
-using FTX.Net.Converters;
+﻿using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
 
@@ -8,7 +7,7 @@ namespace FTX.Net.Objects.Models
     /// <summary>
     /// Symbol information
     /// </summary>
-    public class FTXSymbol: FTXSymbolBase, ICommonSymbol
+    public class FTXSymbol: FTXSymbolBase
     {
         /// <summary>
         /// The base asset
@@ -48,9 +47,5 @@ namespace FTX.Net.Objects.Models
         /// </summary>
         [JsonProperty("price")]
         public decimal? CurrentPrice { get; set; }
-
-        string ICommonSymbol.CommonName => Name;
-
-        decimal ICommonSymbol.CommonMinimumTradeQuantity => MinProvideSize;
     }
 }

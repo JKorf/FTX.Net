@@ -1,11 +1,9 @@
-﻿using CryptoExchange.Net.ExchangeInterfaces;
-
-namespace FTX.Net.Objects.Models
+﻿namespace FTX.Net.Objects.Models
 {
     /// <summary>
     /// FTX tick
     /// </summary>
-    public class FTXTick: ICommonTicker
+    public class FTXTick
     {
         /// <summary>
         /// High price
@@ -23,13 +21,5 @@ namespace FTX.Net.Objects.Models
         /// Symbol
         /// </summary>
         public string Symbol { get; set; } = string.Empty;
-
-        string ICommonTicker.CommonSymbol => Symbol;
-
-        decimal ICommonTicker.CommonHighPrice => HighPrice;
-
-        decimal ICommonTicker.CommonLowPrice => LowPrice;
-
-        decimal ICommonTicker.CommonVolume => Volume;
     }
 }

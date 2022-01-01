@@ -1,5 +1,4 @@
 ﻿using System;
-using CryptoExchange.Net.ExchangeInterfaces;
 using FTX.Net.Converters;
 using FTX.Net.Enums;
 using Newtonsoft.Json;
@@ -9,7 +8,7 @@ namespace FTX.Net.Objects.Models
     /// <summary>
     /// Order info
     /// </summary>
-    public class FTXOrder: FTXOrderBase, ICommonOrderId, ICommonOrder
+    public class FTXOrder: FTXOrderBase
     {
         /// <summary>
         /// The order type
@@ -48,38 +47,5 @@ namespace FTX.Net.Objects.Models
         /// </summary>
         [JsonProperty("clientId")]
         public string? ClientOrderId { get; set; }
-
-        string ICommonOrder.CommonSymbol => Symbol;
-
-        decimal ICommonOrder.CommonPrice => Price ?? 0;
-
-        decimal ICommonOrder.CommonQuantity => Quantity;
-
-        IExchangeClient.OrderStatus ICommonOrder.CommonStatus
-        {
-            get
-            {
-                if (Status == OrderStatus.New)
-                    return IExchangeClient.OrderStatus.Active;
-                
-                if (Status == OrderStatus.Open)
-                    return IExchangeClient.OrderStatus.Active;
-
-                if (QuantityRemaining > 0)
-                    return IExchangeClient.OrderStatus.Canceled;
-
-                return IExchangeClient.OrderStatus.Filled;
-            }
-        }
-
-        bool ICommonOrder.IsActive => Status == OrderStatus.New || Status == OrderStatus.Open;
-
-        IExchangeClient.OrderSide ICommonOrder.CommonSide => Side == OrderSide.Buy ? IExchangeClient.OrderSide.Buy : IExchangeClient.OrderSide.Sell;
-
-        IExchangeClient.OrderType ICommonOrder.CommonType => Type == OrderType.Limit ? IExchangeClient.OrderType.Limit : IExchangeClient.OrderType.Market;
-
-        DateTime ICommonOrder.CommonOrderTime => CreateTime;
-
-        string ICommonOrderId.CommonId => Id.ToString();
     }
 }
