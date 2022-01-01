@@ -102,6 +102,9 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 Yes. Switch by changing the BaseAddress in the client options.
 
 ## Release notes
+* Version 1.0.0-alpha4 - 01 Jan 2022
+    * New comon implementation, added AddFTX extension method
+
 * Version 1.0.0-alpha3 - 27 Dec 2021
     * Updated CryptoExchange.Net
 
