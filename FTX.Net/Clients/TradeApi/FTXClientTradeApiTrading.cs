@@ -14,7 +14,7 @@ using FTX.Net.Objects.Models.LeveragedTokens;
 using FTX.Net.Objects.Models.Options;
 using CryptoExchange.Net.Converters;
 using FTX.Net.Interfaces.Clients.TradeApi;
-using CryptoExchange.Net.ComonObjects;
+using CryptoExchange.Net.CommonObjects;
 
 namespace FTX.Net.Clients.TradeApi
 {
