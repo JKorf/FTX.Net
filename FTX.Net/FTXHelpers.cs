@@ -18,8 +18,12 @@ namespace FTX.Net
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="defaultOptionsCallback">Set default options for the client</param>
+        /// <param name="socketClientLifeTime">The lifetime of the IFTXSocketClient for the service collection. Defaults to Scoped.</param>
         /// <returns></returns>
-        public static IServiceCollection AddFTX(this IServiceCollection services, Action<FTXClientOptions, FTXSocketClientOptions>? defaultOptionsCallback = null)
+        public static IServiceCollection AddFTX(
+            this IServiceCollection services, 
+            Action<FTXClientOptions, FTXSocketClientOptions>? defaultOptionsCallback = null,
+            ServiceLifetime? socketClientLifeTime = null)
         {
             if (defaultOptionsCallback != null)
             {
@@ -31,8 +35,12 @@ namespace FTX.Net
                 FTXSocketClient.SetDefaultOptions(socketOptions);
             }
 
-            return services.AddTransient<IFTXClient, FTXClient>()
-                           .AddScoped<IFTXSocketClient, FTXSocketClient>();
+            services.AddTransient<IFTXClient, FTXClient>();
+            if (socketClientLifeTime == null)
+                services.AddScoped<IFTXSocketClient, FTXSocketClient>();
+            else
+                services.Add(new ServiceDescriptor(typeof(IFTXSocketClient), typeof(FTXSocketClient), socketClientLifeTime.Value));
+            return services;
         }
 
         /// <summary>
