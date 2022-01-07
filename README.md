@@ -102,6 +102,10 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 Yes. Switch by changing the BaseAddress in the client options.
 
 ## Release notes
+* Version 1.0.0-alpha6 - 07 Jan 2022
+    * Updated CrytpoExchange.Net
+    * Added optional parameter for socket client lifetime in AddFTX
+
 * Version 1.0.0-alpha5 - 03 Jan 2022
     * Updated CryptoExchange.Net
 
