@@ -159,10 +159,18 @@ namespace FTX.Net.Clients
                 return true;
             }
 
-            if (type.ToString() == "subscribed")
+            var typeString = type.ToString();
+            if (typeString == "subscribed")
             {
                 callResult = new CallResult<object>(null, null);
                 return true;
+            }
+
+            if (typeString == "update")
+            {
+                // Sometimes the socket will send data for a suscription before it confirms the subscription request..
+                // We'll ignore this update as data should only be processed after we've had a subscription response
+                return false;
             }
 
             callResult = new CallResult<object>(null, new ServerError("Unexpected subscribe request answer: " + type));
