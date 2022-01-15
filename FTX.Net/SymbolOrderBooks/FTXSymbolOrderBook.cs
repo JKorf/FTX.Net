@@ -60,7 +60,7 @@ namespace FTX.Net.SymbolOrderBooks
 
             Status = OrderBookStatus.Syncing;
             var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
-            return setResult ? subResult : new CallResult<UpdateSubscription>(null, setResult.Error);
+            return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
         private void DataHandler(DataEvent<FTXStreamOrderBook> update)

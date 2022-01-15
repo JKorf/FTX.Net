@@ -54,7 +54,7 @@ namespace FTX.Net.Clients.GeneralApi
             parameters.AddParameter("market", symbol);
             var result = await _baseClient.SendFTXRequest<IEnumerable<FTXMarginMarketInfo>>(_baseClient.GetUri("spot_margin/market_info"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
             if (result && result.Data == null)
-                return new WebCallResult<IEnumerable<FTXMarginMarketInfo>>(result.ResponseStatusCode, result.ResponseHeaders, null, new ServerError("No data returned"));
+                return result.AsError<IEnumerable<FTXMarginMarketInfo>>(new ServerError("No data returned"));
 
             return result;
         }

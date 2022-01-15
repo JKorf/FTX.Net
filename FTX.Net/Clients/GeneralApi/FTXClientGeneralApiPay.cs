@@ -32,7 +32,7 @@ namespace FTX.Net.Clients.GeneralApi
                 return result;
 
             if (!result.Data.Exists)
-                return WebCallResult<FTXAppDetails>.CreateErrorResult(new ServerError("App not found"));
+                return result.AsError<FTXAppDetails>(new ServerError("App not found"));
 
             return result;
         }

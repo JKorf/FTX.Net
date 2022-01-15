@@ -92,11 +92,11 @@ namespace FTX.Net.Clients
         {
             var time = (long)Math.Floor((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
             if (socketConnection.ApiClient.AuthenticationProvider == null)
-                return new CallResult<bool>(false, new NoApiCredentialsError());
+                return new CallResult<bool>(new NoApiCredentialsError());
 
             var loginRequest = new LoginRequest(socketConnection.ApiClient.AuthenticationProvider.Credentials.Key!.GetString(), socketConnection.ApiClient.AuthenticationProvider.Sign(time.ToString() + "websocket_login"), time, _subaccount);
             // If we don't get a response it's okay
-            var result = new CallResult<bool>(true, null);
+            var result = new CallResult<bool>(true);
 
             await socketConnection.SendAndWaitAsync(loginRequest, TimeSpan.FromSeconds(1), tokenData =>
             {
@@ -107,7 +107,7 @@ namespace FTX.Net.Clients
 
                 if (code != null && (int)code == 400)
                 {
-                    result = new CallResult<bool>(false, new ServerError((int)code, tokenData["msg"]?.ToString() ?? "Unknown error"));
+                    result = new CallResult<bool>(new ServerError((int)code, tokenData["msg"]?.ToString() ?? "Unknown error"));
                     return true;
                 }
 
@@ -145,7 +145,7 @@ namespace FTX.Net.Clients
                         // It is an error and the error message contains the market we sent, assuming its for this request
                         var code = data["code"];
                         var errorCode = code == null ? 0 : (int)code;
-                        callResult = new CallResult<object>(null, new ServerError(errorCode, message.ToString()));
+                        callResult = new CallResult<object>(new ServerError(errorCode, message.ToString()));
                         return true;
                     }
                 }
@@ -162,7 +162,7 @@ namespace FTX.Net.Clients
             var typeString = type.ToString();
             if (typeString == "subscribed")
             {
-                callResult = new CallResult<object>(null, null);
+                callResult = new CallResult<object>(new object());
                 return true;
             }
 
@@ -173,7 +173,7 @@ namespace FTX.Net.Clients
                 return false;
             }
 
-            callResult = new CallResult<object>(null, new ServerError("Unexpected subscribe request answer: " + type));
+            callResult = new CallResult<object>(new ServerError("Unexpected subscribe request answer: " + type));
             return true;
         }
 
