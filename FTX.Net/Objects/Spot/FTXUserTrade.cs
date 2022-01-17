@@ -54,11 +54,11 @@ namespace FTX.Net.Objects.Spot
         /// <summary>
         /// Order id
         /// </summary>
-        public long OrderId { get; set; }
+        public long? OrderId { get; set; }
         /// <summary>
         /// Trade id
         /// </summary>
-        public long TradeId { get; set; }
+        public long? TradeId { get; set; }
         /// <summary>
         /// Order price
         /// </summary>
