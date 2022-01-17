@@ -27,12 +27,12 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
-        public ISpotClient ComonSpotClient { get; }
+        public ISpotClient CommonSpotClient { get; }
 
         /// <summary>
         /// Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
         /// </summary>
         /// <returns></returns>
-        public IFuturesClient ComonFuturesClient { get; }
+        public IFuturesClient CommonFuturesClient { get; }
     }
 }

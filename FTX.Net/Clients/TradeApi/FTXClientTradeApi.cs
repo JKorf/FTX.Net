@@ -432,9 +432,9 @@ namespace FTX.Net.Clients.TradeApi
             => TimeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public ISpotClient ComonSpotClient => this;
+        public ISpotClient CommonSpotClient => this;
 
         /// <inheritdoc />
-        public IFuturesClient ComonFuturesClient => this;
+        public IFuturesClient CommonFuturesClient => this;
     }
 }
