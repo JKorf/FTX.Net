@@ -102,6 +102,9 @@ For the basic client options see also the CryptoExchange.Net [docs](https://gith
 Yes. Switch by changing the BaseAddress in the client options.
 
 ## Release notes
+* Version 0.1.10 - 17 Jan 2022
+    * Fixed deserialization of UserTrade model when OrderId/TradeId is null
+
 * Version 0.1.9 - 06 Dec 2021
     * Added SubscribeToSymbolsUpdatesAsync websocket subscription
 
