@@ -46,7 +46,7 @@ var ftxClient = new FTXClient(new FTXClientOptions
 ```
 
 ### Client structure
-Version 1 adds the `TradeApi` and `GeneralApi` Api clients under the `FTXClient`, and a topic underneath that. This is done to keep the same client structure as other exchange implementations, more info on this [here](https://github.com/Jkorf/CryptoExchange.Net/wiki/Clients).
+Version 1 adds the `TradeApi` and `GeneralApi` Api clients under the `FTXClient`, and a topic underneath that. This is done to keep the same client structure as other exchange implementations, more info on this [here](https://jkorf.github.io/CryptoExchange.Net/Clients.html).
 In the `FTXSocketClient` a `Streams` Api client is added. This means all calls will have changed, though most will only need to add `TradeApi.[Topic].XXX`/`Streams.XXX`:
 
 *V0*
