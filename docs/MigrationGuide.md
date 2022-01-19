@@ -23,17 +23,17 @@ There are a few namespace changes:
 ### Client options
 The `BaseAddress` and rate limiting options are now under the `SpotApiOptions`.  
 *V0*
-````C#
+```csharp
 var ftxClient = new FTXClient(new FTXClientOptions
 {
 	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
 	BaseAddress = "ADDRESS",
 	RateLimitingBehaviour = RateLimitingBehaviour.Fail
 });
-````
+```
 
 *V1*
-````C#
+```csharp
 var ftxClient = new FTXClient(new FTXClientOptions
 {
 	ApiCredentials = new ApiCredentials("API-KEY", "API-SECRET"),
@@ -43,14 +43,14 @@ var ftxClient = new FTXClient(new FTXClientOptions
 		RateLimitingBehaviour = RateLimitingBehaviour.Fail
 	}
 });
-````
+```
 
 ### Client structure
 Version 1 adds the `TradeApi` and `GeneralApi` Api clients under the `FTXClient`, and a topic underneath that. This is done to keep the same client structure as other exchange implementations, more info on this [here](https://github.com/Jkorf/CryptoExchange.Net/wiki/Clients).
 In the `FTXSocketClient` a `Streams` Api client is added. This means all calls will have changed, though most will only need to add `TradeApi.[Topic].XXX`/`Streams.XXX`:
 
 *V0*
-````C#
+```csharp
 var balances = await ftxClient.GetBalancesAsync();
 var withdrawals = await ftxClient.GetWithdrawalHistoryAsync();
 
@@ -61,10 +61,10 @@ var order = await ftxClient.PlaceOrderAsync();
 var trades = await ftxClient.GetUserTradesAsync();
 
 var sub = ftxSocketClient.SubscribeToTickerUpdatesAsync("BTC/USD", DataHandler);
-````
+```
 
 *V1*  
-````C#
+```csharp
 var balances = await ftxClient.TradeApi.Account.GetBalancesAsync();
 var withdrawals = await ftxClient.TradeApi.Account.GetWithdrawalHistoryAsync();
 
@@ -75,7 +75,7 @@ var order = await ftxClient.TradeApi.Trading.PlaceOrderAsync();
 var trades = await ftxClient.TradeApi.Trading.GetUserTradesAsync();
 
 var sub = ftxSocketClient.Streams.SubscribeToTickerUpdatesAsync("BTC/USD", DataHandler);
-````
+```
 
 ### Definitions
 Some names have been changed to a common definition. This includes where the name is part of a bigger name  
