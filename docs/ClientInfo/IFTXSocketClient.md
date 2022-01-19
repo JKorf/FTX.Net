@@ -8,4 +8,4 @@ has_children: true
   
 ***
 *Streams*  
-**[IFTXSocketClientStreams](Api/IFTXSocketClientStreams.html) Streams { get; }**  
+**[IFTXSocketClientStreams](TradeApi/IFTXSocketClientStreams.html) Streams { get; }**  
