@@ -19,7 +19,7 @@ parent: Socket API documentation
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToFTXPayUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToFTXPayUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -44,7 +44,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToFTXPayUpdatesAsync(Action<DataEv
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToGroupedOrderBookUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToGroupedOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -71,7 +71,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToGroupedOrderBookUpdatesAsync(str
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToOrderBookUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -97,7 +97,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string sym
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToOrderUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToOrderUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -122,7 +122,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToOrderUpdatesAsync(Action<DataEve
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToSymbolsUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToSymbolsUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -147,7 +147,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToSymbolsUpdatesAsync(Action<DataE
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToTickerUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToTickerUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -173,7 +173,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToTradeUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToTradeUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
@@ -199,7 +199,7 @@ Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol,
 
 ```csharp  
 var client = new FTXSocketClient();  
-var result = await client.TradeStreams.Streams.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
+var result = await client.Streams.SubscribeToUserTradeUpdatesAsync(/* parameters */);  
 ```  
 
 ```csharp  
