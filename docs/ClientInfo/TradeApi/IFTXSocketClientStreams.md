@@ -2,7 +2,7 @@
 title: IFTXSocketClientStreams
 has_children: true
 parent: IFTXSocketClientTradeStreams
-grand_parent: IFTXSocketClient
+grand_parent: Socket API documentation
 ---
 *[generated documentation]*  
 `FTXSocketClient > TradeStreams > Streams`  

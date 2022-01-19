@@ -2,7 +2,7 @@
 title: IFTXClientGeneralApiNft
 has_children: false
 parent: IFTXClientGeneralApi
-grand_parent: IFTXClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `FTXClient > GeneralApi > Nft`  

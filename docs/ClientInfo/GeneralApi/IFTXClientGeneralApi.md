@@ -1,7 +1,7 @@
 ---
 title: IFTXClientGeneralApi
 has_children: true
-parent: IFTXClient
+parent: Rest API documentation
 ---
 *[generated documentation]*  
 `FTXClient > GeneralApi`  

@@ -2,7 +2,7 @@
 title: IFTXClientTradeApiAccount
 has_children: false
 parent: IFTXClientTradeApi
-grand_parent: IFTXClient
+grand_parent: Rest API documentation
 ---
 *[generated documentation]*  
 `FTXClient > TradeApi > Account`  

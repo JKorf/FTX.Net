@@ -1,11 +1,19 @@
+---
+title: Migrate V0 to V1
+nav_order: 4
+---
+
+## Migrate from version V0.x.x to V1.x.x
+
 There are a decent amount of breaking changes when moving from version 6.x.x to version 7.x.x. Although the interface has changed, the available endpoints/information have not, so there should be no need to completely rewrite your program.
 Most endpoints are now available under a slightly different name or path, and most data models have remained the same, barring a few renames.
 In this document most changes will be described. If you have any other questions or issues when updating, feel free to open an issue.
 
-Changes related to `IExchangeClient`, options and client structure are also (partially) covered in the [CryptoExchange.Net Migration Guide](https://github.com/JKorf/CryptoExchange.Net/wiki/Migration-Guide)
+Changes related to `IExchangeClient`, options and client structure are also (partially) covered in the [CryptoExchange.Net Migration Guide](https://jkorf.github.io/CryptoExchange.Net/Migration%20Guide.html)
 
 ### Namespaces
-There are a few namespace changes:  
+There are a few namespace changes: 
+ 
 |Type|Old|New|
 |----|---|---|
 |Clients|`FTX.Net`|`FTX.Net.Clients`  |
@@ -71,6 +79,7 @@ var sub = ftxSocketClient.Streams.SubscribeToTickerUpdatesAsync("BTC/USD", DataH
 
 ### Definitions
 Some names have been changed to a common definition. This includes where the name is part of a bigger name  
+
 |Old|New||
 |----|---|---|
 |`asset.Id`|`asset.Name`||

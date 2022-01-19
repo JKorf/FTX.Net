@@ -1,8 +1,9 @@
 ---
-title: IFTXClient
+title: Rest API documentation
 has_children: true
 ---
 *[generated documentation]*  
+### FTXClient  
 *Client for accessing the FTX API.*
   
 ***
