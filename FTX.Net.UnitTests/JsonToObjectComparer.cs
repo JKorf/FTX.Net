@@ -42,6 +42,9 @@ namespace FTX.Net.UnitTests
            Dictionary<string, List<string>> ignoreProperties = null,
            List<string> takeFirstItemForCompare = null)
         {
+            var listener = new EnumValueTraceListener();
+            Trace.Listeners.Add(listener);
+
             var methods = typeof(K).GetMethods();
             var unusedJsonFiles = new List<string>();
             var callResultMethods = methods.Where(m => m.Name.EndsWith("Async")).ToList();
@@ -108,6 +111,8 @@ namespace FTX.Net.UnitTests
                 Debug.WriteLine("Skipped methods:");
             foreach (var method in skippedMethods)
                 Debug.WriteLine(method);
+
+            Trace.Listeners.Remove(listener);
         }
 
         public static void ProcessData(string method,

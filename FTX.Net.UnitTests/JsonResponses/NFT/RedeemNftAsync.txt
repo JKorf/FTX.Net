@@ -27,7 +27,7 @@
         "time": "2021-06-11T07:23:24.106062+00:00",
         "notes": null,
         "address": "0x014Dc156cA770baC5475186834ecd2f624C990K",
-        "status": "redeemed",
+        "status": "pending_review",
         "supportTicketId": 1014
       }
   }
