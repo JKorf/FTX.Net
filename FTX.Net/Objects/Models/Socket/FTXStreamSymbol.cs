@@ -19,6 +19,14 @@ namespace FTX.Net.Objects.Models.Socket
         /// </summary>
         public bool Enabled { get; set; }
         /// <summary>
+        /// Is post only
+        /// </summary>
+        public bool PostOnly { get; set; }
+        /// <summary>
+        /// High leverage fee exempt
+        /// </summary>
+        public bool HighLeverageFeeExempt { get; set; }
+        /// <summary>
         /// Price increment
         /// </summary>
         public decimal PriceIncrement { get; set; }

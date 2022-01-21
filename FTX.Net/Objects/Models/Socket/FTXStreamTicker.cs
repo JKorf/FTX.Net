@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using CryptoExchange.Net.Converters;
+using Newtonsoft.Json;
 
 namespace FTX.Net.Objects.Models.Socket
 {
@@ -32,5 +34,10 @@ namespace FTX.Net.Objects.Models.Socket
         /// </summary>
         [JsonProperty("last")]
         public decimal? LastPrice { get; set; }
+        /// <summary>
+        /// Data timestamp
+        /// </summary>
+        [JsonProperty("time"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime Timestamp { get; set; }
     }
 }
