@@ -191,15 +191,15 @@ namespace FTX.Net.Clients.TradeApi
                 }));
         }
 
-        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CryptoExchange.Net.CommonObjects.OrderSide side, CryptoExchange.Net.CommonObjects.OrderType type, decimal quantity, decimal? price, int? leverage, string? accountId)
+        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
 
             var order = await Trading.PlaceOrderAsync(
                 symbol,
-                side == CryptoExchange.Net.CommonObjects.OrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
-                type == CryptoExchange.Net.CommonObjects.OrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
+                side == CommonOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
+                type == CommonOrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
                 quantity,
                 price
                 ).ConfigureAwait(false);
@@ -213,15 +213,15 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CryptoExchange.Net.CommonObjects.OrderSide side, CryptoExchange.Net.CommonObjects.OrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price = null, string? accountId = null)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
 
             var order = await Trading.PlaceOrderAsync(
                 symbol,
-                side == CryptoExchange.Net.CommonObjects.OrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
-                type == CryptoExchange.Net.CommonObjects.OrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
+                side == CommonOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
+                type == CommonOrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
                 quantity,
                 price
                 ).ConfigureAwait(false);
@@ -249,7 +249,7 @@ namespace FTX.Net.Clients.TradeApi
                 Quantity = p.Quantity,
                 UnrealizedPnl = p.UnrealizedPnl,
                 LiquidationPrice = p.EstimatedLiquidationPrice,
-                Side = p.Side == Enums.OrderSide.Sell ? PositionSide.Short: PositionSide.Long,
+                Side = p.Side == OrderSide.Sell ? CommonPositionSide.Short: CommonPositionSide.Long,
                 MaintananceMargin = p.MaintenanceMarginRequirement,
                 RealizedPnl = p.RealizedPnl
             }));
@@ -273,9 +273,9 @@ namespace FTX.Net.Clients.TradeApi
                 QuantityFilled = order.Data.QuantityFilled,
                 Timestamp = order.Data.CreateTime,
                 Symbol = order.Data.Symbol,
-                Side = order.Data.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy: CryptoExchange.Net.CommonObjects.OrderSide.Sell,
-                Status = (order.Data.Status == Enums.OrderStatus.Open || order.Data.Status == Enums.OrderStatus.New) ? CryptoExchange.Net.CommonObjects.OrderStatus.Active: order.Data.QuantityRemaining > 0 ? CryptoExchange.Net.CommonObjects.OrderStatus.Canceled: CryptoExchange.Net.CommonObjects.OrderStatus.Filled,
-                Type = order.Data.Type == Enums.OrderType.Market ? CryptoExchange.Net.CommonObjects.OrderType.Market: CryptoExchange.Net.CommonObjects.OrderType.Limit
+                Side = order.Data.Side == Enums.OrderSide.Buy ? CommonOrderSide.Buy: CommonOrderSide.Sell,
+                Status = (order.Data.Status == Enums.OrderStatus.Open || order.Data.Status == Enums.OrderStatus.New) ? CommonOrderStatus.Active: order.Data.QuantityRemaining > 0 ? CommonOrderStatus.Canceled: CommonOrderStatus.Filled,
+                Type = order.Data.Type == Enums.OrderType.Market ? CommonOrderType.Market: CommonOrderType.Limit
             });
         }
 
@@ -317,9 +317,9 @@ namespace FTX.Net.Clients.TradeApi
                 QuantityFilled = t.QuantityFilled,
                 Timestamp = t.CreateTime,
                 Symbol = t.Symbol,
-                Side = t.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
-                Status = (t.Status == Enums.OrderStatus.Open || t.Status == Enums.OrderStatus.New) ? CryptoExchange.Net.CommonObjects.OrderStatus.Active : t.QuantityRemaining > 0 ? CryptoExchange.Net.CommonObjects.OrderStatus.Canceled : CryptoExchange.Net.CommonObjects.OrderStatus.Filled,
-                Type = t.Type == Enums.OrderType.Market ? CryptoExchange.Net.CommonObjects.OrderType.Market : CryptoExchange.Net.CommonObjects.OrderType.Limit
+                Side = t.Side == Enums.OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
+                Status = (t.Status == Enums.OrderStatus.Open || t.Status == Enums.OrderStatus.New) ? CommonOrderStatus.Active : t.QuantityRemaining > 0 ? CommonOrderStatus.Canceled : CommonOrderStatus.Filled,
+                Type = t.Type == Enums.OrderType.Market ? CommonOrderType.Market : CommonOrderType.Limit
             }));
         }
 
@@ -338,9 +338,9 @@ namespace FTX.Net.Clients.TradeApi
                 QuantityFilled = t.QuantityFilled,
                 Timestamp = t.CreateTime,
                 Symbol = t.Symbol,
-                Side = t.Side == Enums.OrderSide.Buy ? CryptoExchange.Net.CommonObjects.OrderSide.Buy : CryptoExchange.Net.CommonObjects.OrderSide.Sell,
-                Status = (t.Status == Enums.OrderStatus.Open || t.Status == Enums.OrderStatus.New) ? CryptoExchange.Net.CommonObjects.OrderStatus.Active : t.QuantityRemaining > 0 ? CryptoExchange.Net.CommonObjects.OrderStatus.Canceled : CryptoExchange.Net.CommonObjects.OrderStatus.Filled,
-                Type = t.Type == Enums.OrderType.Market ? CryptoExchange.Net.CommonObjects.OrderType.Market : CryptoExchange.Net.CommonObjects.OrderType.Limit
+                Side = t.Side == Enums.OrderSide.Buy ? CommonOrderSide.Buy : CommonOrderSide.Sell,
+                Status = (t.Status == Enums.OrderStatus.Open || t.Status == Enums.OrderStatus.New) ? CommonOrderStatus.Active : t.QuantityRemaining > 0 ? CommonOrderStatus.Canceled : CommonOrderStatus.Filled,
+                Type = t.Type == Enums.OrderType.Market ? CommonOrderType.Market : CommonOrderType.Limit
             }));
         }
 
