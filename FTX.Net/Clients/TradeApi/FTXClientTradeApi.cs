@@ -67,10 +67,9 @@ namespace FTX.Net.Clients.TradeApi
             return baseAsset + "/" + quoteAsset;
         }
 
-#pragma warning disable 1066
-        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync()
+        async Task<WebCallResult<IEnumerable<Symbol>>> IBaseRestClient.GetSymbolsAsync(CancellationToken ct)
         {
-            var symbols = await ExchangeData.GetSymbolsAsync().ConfigureAwait(false);
+            var symbols = await ExchangeData.GetSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!symbols)
                 return symbols.As<IEnumerable<Symbol>>(null);
 
@@ -84,9 +83,9 @@ namespace FTX.Net.Clients.TradeApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync()
+        async Task<WebCallResult<IEnumerable<Ticker>>> IBaseRestClient.GetTickersAsync(CancellationToken ct)
         {
-            var symbols = await ExchangeData.GetSymbolsAsync().ConfigureAwait(false);
+            var symbols = await ExchangeData.GetSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!symbols)
                 return symbols.As<IEnumerable<Ticker>>(null);
 
@@ -99,12 +98,12 @@ namespace FTX.Net.Clients.TradeApi
             }));
         }
 
-        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol)
+        async Task<WebCallResult<Ticker>> IBaseRestClient.GetTickerAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.GetTickerAsync), nameof(symbol));
 
-            var klines = await ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneHour).ConfigureAwait(false);
+            var klines = await ExchangeData.GetKlinesAsync(symbol, KlineInterval.OneHour, ct: ct).ConfigureAwait(false);
             if (!klines)
                 return klines.As<Ticker>(null);
 
@@ -132,12 +131,12 @@ namespace FTX.Net.Clients.TradeApi
             };
         }
 
-        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime = null, DateTime? endTime = null, int? limit = null)
+        async Task<WebCallResult<IEnumerable<Kline>>> IBaseRestClient.GetKlinesAsync(string symbol, TimeSpan timespan, DateTime? startTime, DateTime? endTime, int? limit, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.GetKlinesAsync), nameof(symbol));
 
-            var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimeSpan(timespan), startTime, endTime).ConfigureAwait(false);
+            var klines = await ExchangeData.GetKlinesAsync(symbol, GetKlineIntervalFromTimeSpan(timespan), startTime, endTime, ct: ct).ConfigureAwait(false);
             if (!klines)
                 return klines.As<IEnumerable<Kline>>(null);
 
@@ -154,12 +153,12 @@ namespace FTX.Net.Clients.TradeApi
                 }));
         }
 
-        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol)
+        async Task<WebCallResult<OrderBook>> IBaseRestClient.GetOrderBookAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.GetOrderBookAsync), nameof(symbol));
 
-            var book = await ExchangeData.GetOrderBookAsync(symbol, 100).ConfigureAwait(false);
+            var book = await ExchangeData.GetOrderBookAsync(symbol, 100, ct: ct).ConfigureAwait(false);
             if (!book)
                 return book.As<OrderBook>(null);
 
@@ -171,12 +170,12 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol)
+        async Task<WebCallResult<IEnumerable<Trade>>> IBaseRestClient.GetRecentTradesAsync(string symbol, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.GetRecentTradesAsync), nameof(symbol));
 
-            var trades = await ExchangeData.GetTradeHistoryAsync(symbol).ConfigureAwait(false);
+            var trades = await ExchangeData.GetTradeHistoryAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!trades)
                 return trades.As<IEnumerable<Trade>>(null);
 
@@ -191,7 +190,7 @@ namespace FTX.Net.Clients.TradeApi
                 }));
         }
 
-        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId)
+        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -201,7 +200,7 @@ namespace FTX.Net.Clients.TradeApi
                 side == CommonOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 type == CommonOrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
                 quantity,
-                price
+                price, ct: ct
                 ).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
@@ -213,7 +212,7 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price = null, string? accountId = null)
+        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -223,7 +222,7 @@ namespace FTX.Net.Clients.TradeApi
                 side == CommonOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 type == CommonOrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
                 quantity,
-                price
+                price, ct: ct
                 ).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
@@ -235,9 +234,9 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Position>>> IFuturesClient.GetPositionsAsync()
+        async Task<WebCallResult<IEnumerable<Position>>> IFuturesClient.GetPositionsAsync(CancellationToken ct)
         {
-            var positions = await Account.GetPositionsAsync().ConfigureAwait(false);
+            var positions = await Account.GetPositionsAsync(ct: ct).ConfigureAwait(false);
             if (!positions)
                 return positions.As<IEnumerable<Position>>(null);
 
@@ -255,12 +254,12 @@ namespace FTX.Net.Clients.TradeApi
             }));
         }
 
-        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<Order>> IBaseRestClient.GetOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for CoinEx {nameof(ISpotClient.GetOrderAsync)}", nameof(orderId));
 
-            var order = await Trading.GetOrderAsync(id).ConfigureAwait(false);
+            var order = await Trading.GetOrderAsync(id, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.As<Order>(null);
 
@@ -279,12 +278,12 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<IEnumerable<UserTrade>>> IBaseRestClient.GetOrderTradesAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for CoinEx {nameof(ISpotClient.GetOrderTradesAsync)}", nameof(orderId));
 
-            var trades = await Trading.GetUserTradesAsync(orderId: id).ConfigureAwait(false);
+            var trades = await Trading.GetUserTradesAsync(orderId: id, ct: ct).ConfigureAwait(false);
             if (!trades)
                 return trades.As<IEnumerable<UserTrade>>(null);
 
@@ -302,9 +301,9 @@ namespace FTX.Net.Clients.TradeApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol = null)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetOpenOrdersAsync(string? symbol, CancellationToken ct)
         {
-            var orders = await Trading.GetOpenOrdersAsync(symbol).ConfigureAwait(false);
+            var orders = await Trading.GetOpenOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.As<IEnumerable<Order>>(null);
 
@@ -323,9 +322,9 @@ namespace FTX.Net.Clients.TradeApi
             }));
         }
 
-        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol = null)
+        async Task<WebCallResult<IEnumerable<Order>>> IBaseRestClient.GetClosedOrdersAsync(string? symbol, CancellationToken ct)
         {
-            var orders = await Trading.GetOrdersAsync(symbol).ConfigureAwait(false);
+            var orders = await Trading.GetOrdersAsync(symbol, ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.As<IEnumerable<Order>>(null);
 
@@ -344,12 +343,12 @@ namespace FTX.Net.Clients.TradeApi
             }));
         }
 
-        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol = null)
+        async Task<WebCallResult<OrderId>> IBaseRestClient.CancelOrderAsync(string orderId, string? symbol, CancellationToken ct)
         {
             if (!long.TryParse(orderId, out var id))
                 throw new ArgumentException($"Invalid order id for CoinEx {nameof(ISpotClient.CancelOrderAsync)}", nameof(orderId));
 
-            var order = await Trading.CancelOrderAsync(id).ConfigureAwait(false);
+            var order = await Trading.CancelOrderAsync(id, ct: ct).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
 
@@ -360,9 +359,9 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId = null)
+        async Task<WebCallResult<IEnumerable<Balance>>> IBaseRestClient.GetBalancesAsync(string? accountId, CancellationToken ct)
         {
-            var balances = await Account.GetBalancesAsync().ConfigureAwait(false);
+            var balances = await Account.GetBalancesAsync(ct: ct).ConfigureAwait(false);
             if (!balances)
                 return balances.As<IEnumerable<Balance>>(null);
 
@@ -374,7 +373,6 @@ namespace FTX.Net.Clients.TradeApi
                 Total = b.Total
             }));
         }
-#pragma warning restore 1066
 
         private static KlineInterval GetKlineIntervalFromTimeSpan(TimeSpan timeSpan)
         {

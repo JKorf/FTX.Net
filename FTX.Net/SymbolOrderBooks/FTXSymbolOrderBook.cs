@@ -11,6 +11,7 @@ using FTX.Net.Objects.Models;
 using FTX.Net.Objects.Models.Socket;
 using FTX.Net.Interfaces.Clients;
 using FTX.Net.Clients;
+using System.Threading;
 
 namespace FTX.Net.SymbolOrderBooks
 {
@@ -42,7 +43,7 @@ namespace FTX.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
+        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
         {
             CallResult<UpdateSubscription> subResult;
             if (_grouping.HasValue)
@@ -58,8 +59,17 @@ namespace FTX.Net.SymbolOrderBooks
                     return subResult;
             }
 
+            if (ct.IsCancellationRequested)
+            {
+                await subResult.Data.CloseAsync().ConfigureAwait(false);
+                return subResult.AsError<UpdateSubscription>(new CancellationRequestedError());
+            }
+
             Status = OrderBookStatus.Syncing;
-            var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
+            var setResult = await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
+            if (!setResult)
+                await subResult.Data.CloseAsync().ConfigureAwait(false);
+
             return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
@@ -111,9 +121,9 @@ namespace FTX.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<bool>> DoResyncAsync()
+        protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
-            return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
+            return await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
