@@ -291,7 +291,7 @@ namespace FTX.Net.Clients.TradeApi
             {
                 SourceObject = t,
                 Id = t.Id.ToString(CultureInfo.InvariantCulture),
-                OrderId = t.OrderId.ToString(CultureInfo.InvariantCulture),
+                OrderId = t.OrderId?.ToString(CultureInfo.InvariantCulture),
                 Price = t.Price,
                 Quantity = t.Quantity,
                 Symbol = t.Symbol,
