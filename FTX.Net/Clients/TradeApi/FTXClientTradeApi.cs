@@ -2,6 +2,7 @@
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.CommonObjects;
 using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.CommonClients;
 using CryptoExchange.Net.Logging;
 using CryptoExchange.Net.Objects;
 using FTX.Net.Enums;
@@ -190,7 +191,7 @@ namespace FTX.Net.Clients.TradeApi
                 }));
         }
 
-        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId, CancellationToken ct)
+        async Task<WebCallResult<OrderId>> IFuturesClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, int? leverage, string? accountId, string? clientOrderId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -200,7 +201,9 @@ namespace FTX.Net.Clients.TradeApi
                 side == CommonOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 type == CommonOrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
                 quantity,
-                price, ct: ct
+                price, 
+                clientOrderId: clientOrderId,
+                ct: ct
                 ).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
@@ -212,7 +215,7 @@ namespace FTX.Net.Clients.TradeApi
             });
         }
 
-        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, CancellationToken ct)
+        async Task<WebCallResult<OrderId>> ISpotClient.PlaceOrderAsync(string symbol, CommonOrderSide side, CommonOrderType type, decimal quantity, decimal? price, string? accountId, string? clientOrderId, CancellationToken ct)
         {
             if (string.IsNullOrEmpty(symbol))
                 throw new ArgumentException(nameof(symbol) + " required for FTX " + nameof(ISpotClient.PlaceOrderAsync), nameof(symbol));
@@ -222,7 +225,9 @@ namespace FTX.Net.Clients.TradeApi
                 side == CommonOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 type == CommonOrderType.Limit ? Enums.OrderType.Limit : Enums.OrderType.Market,
                 quantity,
-                price, ct: ct
+                price,
+                clientOrderId: clientOrderId, 
+                ct: ct
                 ).ConfigureAwait(false);
             if (!order)
                 return order.As<OrderId>(null);
