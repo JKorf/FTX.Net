@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Enums
+﻿namespace FTX.Net.Enums
 {
     /// <summary>
     /// Deposit status
@@ -18,8 +14,8 @@ namespace FTX.Net.Enums
         /// </summary>
         Confirmed,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled
+        Canceled
     }
 }

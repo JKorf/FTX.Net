@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "result": [
+    {
+      "createdAt": "2019-03-05T09:56:55.728933+00:00",
+      "error": null,
+      "future": "XRP-PERP",
+      "id": 50000,
+      "market": "XRP-PERP",
+      "orderId": 2800000,
+      "orderPrice": null,
+      "reduceOnly": false,
+      "side": "buy",
+      "size": 31431,
+      "status": "triggered",
+      "trailStart": null,
+      "trailValue": null,
+      "triggerPrice": 0.37,
+      "triggeredAt": "2019-03-06T03:26:53.268723+00:00",
+      "type": "stop",
+      "orderType": "market",
+      "filledSize": 31431,
+      "avgFillPrice": 0.3701,
+      "orderStatus": "closed",
+      "orderType": "market",
+      "filledSize": 0,
+      "avgFillPrice": null,
+      "retryUntilFilled": false
+    }
+  ],
+  "hasMoreData": false,
+}

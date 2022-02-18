@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "result": [
+    {
+      "token": "HEDGE",
+      "balance": 8.8
+    }
+  ]
+}

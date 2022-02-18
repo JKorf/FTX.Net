@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "result": {
+    "coin": "USDTBEAR",
+    "address": "0x83a127952d266A6eA306c40Ac62A4a70668FE3BE",
+    "tag": null,
+    "fee": 0,
+    "id": 1,
+    "size": 20.2,
+    "status": "requested",
+    "time": "2019-03-05T09:56:55.728933+00:00",
+    "txid": null
+  }
+}

@@ -1,0 +1,7 @@
+  {
+    "success": true,
+    "result": {
+      "id": 888789,
+      "public": true
+    }
+  }

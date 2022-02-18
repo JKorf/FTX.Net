@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Enums
+﻿namespace FTX.Net.Enums
 {
     /// <summary>
     /// Status of an airdrop
@@ -16,6 +12,10 @@ namespace FTX.Net.Enums
         /// <summary>
         /// Confirmed
         /// </summary>
-        Confirmed
+        Confirmed,
+        /// <summary>
+        /// Complete
+        /// </summary>
+        Complete
     }
 }

@@ -13,7 +13,7 @@ namespace FTX.Net.Converters
         {
             new KeyValuePair<NFTDepositStatus, string>(NFTDepositStatus.Confirmed, "confirmed"),
             new KeyValuePair<NFTDepositStatus, string>(NFTDepositStatus.Unconfirmed, "unconfirmed"),
-            new KeyValuePair<NFTDepositStatus, string>(NFTDepositStatus.Cancelled, "cancelled"),
+            new KeyValuePair<NFTDepositStatus, string>(NFTDepositStatus.Canceled, "cancelled"),
         };
     }
 }

@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "result": {
+    "method": "erc20",
+    "address": "0x83a127952d266A6eA306c40Ac62A4a70668FE3BE",
+    "fee": 0,
+    "congested": false
+  }
+}

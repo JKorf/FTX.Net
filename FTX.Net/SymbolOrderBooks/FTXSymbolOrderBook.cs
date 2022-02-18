@@ -3,14 +3,15 @@ using CryptoExchange.Net.OrderBook;
 using CryptoExchange.Net.Sockets;
 using Force.Crc32;
 using FTX.Net.Objects;
-using FTX.Net.Objects.Spot.Socket;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using FTX.Net.Interfaces;
 using System.Linq;
-using System.Globalization;
 using System.Text;
-using FTX.Net.Objects.Spot;
+using FTX.Net.Objects.Models;
+using FTX.Net.Objects.Models.Socket;
+using FTX.Net.Interfaces.Clients;
+using FTX.Net.Clients;
+using System.Threading;
 
 namespace FTX.Net.SymbolOrderBooks
 {
@@ -28,8 +29,11 @@ namespace FTX.Net.SymbolOrderBooks
         /// </summary>
         /// <param name="symbol">Symbol the book is for</param>
         /// <param name="options">Options for the book</param>
-        public FTXSymbolOrderBook(string symbol, FTXSymbolOrderBookOptions? options = null) : base(symbol, options ?? new FTXSymbolOrderBookOptions())
+        public FTXSymbolOrderBook(string symbol, FTXSymbolOrderBookOptions? options = null) : base("FTX", symbol, options ?? new FTXSymbolOrderBookOptions())
         {
+            strictLevels = false;
+            sequencesAreConsecutive = false;
+
             _socketClient = options?.Client ?? new FTXSocketClient(new FTXSocketClientOptions
             {
                 LogLevel = options?.LogLevel ?? LogLevel.Information
@@ -39,40 +43,49 @@ namespace FTX.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync()
+        protected override async Task<CallResult<UpdateSubscription>> DoStartAsync(CancellationToken ct)
         {
             CallResult<UpdateSubscription> subResult;
             if (_grouping.HasValue)
             {
-                subResult = await _socketClient.SubscribeToGroupedOrderBookUpdatesAsync(Symbol, _grouping.Value, DataHandler).ConfigureAwait(false);
+                subResult = await _socketClient.Streams.SubscribeToGroupedOrderBookUpdatesAsync(Symbol, _grouping.Value, DataHandler).ConfigureAwait(false);
                 if (!subResult)
                     return subResult;
             }
             else
             {
-                subResult = await _socketClient.SubscribeToOrderBookUpdatesAsync(Symbol, DataHandler).ConfigureAwait(false);
+                subResult = await _socketClient.Streams.SubscribeToOrderBookUpdatesAsync(Symbol, DataHandler).ConfigureAwait(false);
                 if (!subResult)
                     return subResult;
             }
 
+            if (ct.IsCancellationRequested)
+            {
+                await subResult.Data.CloseAsync().ConfigureAwait(false);
+                return subResult.AsError<UpdateSubscription>(new CancellationRequestedError());
+            }
+
             Status = OrderBookStatus.Syncing;
-            var setResult = await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
-            return setResult ? subResult : new CallResult<UpdateSubscription>(null, setResult.Error);
+            var setResult = await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
+            if (!setResult)
+                await subResult.Data.CloseAsync().ConfigureAwait(false);
+
+            return setResult ? subResult : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 
         private void DataHandler(DataEvent<FTXStreamOrderBook> update)
         {
             if (update.Data.Action == "partial")
             {
-                SetInitialOrderBook(update.Data.Time.Ticks, update.Data.Bids, update.Data.Asks);
+                SetInitialOrderBook(update.Data.Timestamp.Ticks, update.Data.Bids, update.Data.Asks);
                 if(!_grouping.HasValue)
-                    AddChecksum((int)update.Data.Checksum); // ?
+                    AddChecksum((int)update.Data.Checksum);
             }
             else
             {
-                UpdateOrderBook(update.Data.Time.Ticks, update.Data.Bids, update.Data.Asks);
+                UpdateOrderBook(update.Data.Timestamp.Ticks, update.Data.Bids, update.Data.Asks);
                 if(!_grouping.HasValue)
-                    AddChecksum((int)update.Data.Checksum); // ?
+                    AddChecksum((int)update.Data.Checksum);
             }
         }
 
@@ -108,9 +121,9 @@ namespace FTX.Net.SymbolOrderBooks
         }
 
         /// <inheritdoc />
-        protected override async Task<CallResult<bool>> DoResyncAsync()
+        protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
-            return await WaitForSetOrderBookAsync(10000).ConfigureAwait(false);
+            return await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "result": [
+    {
+      "coin": "USDTBEAR",
+      "free": 2320.2,
+      "spotBorrow": 0.0,
+      "total": 2340.2,
+      "usdValue": 2340.2,
+      "availableWithoutBorrow": 2320.2
+    }
+  ]
+}

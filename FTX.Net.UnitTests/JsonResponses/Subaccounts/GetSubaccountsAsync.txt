@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "result": [
+    {
+      "nickname": "sub1",
+      "deletable": true,
+      "editable": true,
+      "competition": true
+    }
+  ]
+}

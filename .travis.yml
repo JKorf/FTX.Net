@@ -4,3 +4,4 @@ solution: FTX.Net.sln
 dotnet: 5.0.103
 script:
  - dotnet build FTX.Net/FTX.Net.csproj --framework "netstandard2.1"
+ - dotnet test FTX.Net.UnitTests/FTX.Net.UnitTests.csproj

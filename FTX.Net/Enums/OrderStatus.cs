@@ -14,7 +14,7 @@
         /// </summary>
         Open,
         /// <summary>
-        /// Closed order, either cancelled or filled
+        /// Closed order, either canceled or filled
         /// </summary>
         Closed
     }

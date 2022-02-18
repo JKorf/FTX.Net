@@ -1,0 +1,29 @@
+
+{
+  "success": true,
+  "result": [
+    {
+      "name": "BTC-0628",
+      "baseCurrency": null,
+      "quoteCurrency": null,
+      "quoteVolume24h": 28914.76,
+      "change1h": 0.012,
+      "change24h": 0.0299,
+      "changeBod": 0.0156,
+      "highLeverageFeeExempt": false,
+      "minProvideSize": 0.001,
+      "type": "future",
+      "underlying": "BTC",
+      "enabled": true,
+      "ask": 3949.25,
+      "bid": 3949,
+      "last": 10579.52,
+      "postOnly": false,
+      "price": 10579.52,
+      "priceIncrement": 0.25,
+      "sizeIncrement": 0.0001,
+      "restricted": false,
+      "volumeUsd24h": 28914.76
+    }
+  ]
+}

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Enums
+﻿namespace FTX.Net.Enums
 {
     /// <summary>
     /// Request status
@@ -14,9 +10,9 @@ namespace FTX.Net.Enums
         /// </summary>
         Open,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled,
+        Canceled,
         /// <summary>
         /// Filled
         /// </summary>

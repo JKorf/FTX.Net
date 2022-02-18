@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FTX.Net.Enums
+﻿namespace FTX.Net.Enums
 {
     /// <summary>
     /// Redeem status
@@ -30,9 +26,9 @@ namespace FTX.Net.Enums
         /// </summary>
         Completed,
         /// <summary>
-        /// Cancelled
+        /// Canceled
         /// </summary>
-        Cancelled,
+        Canceled,
         /// <summary>
         /// Failed
         /// </summary>

@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "result": [
+    {
+      "coin": "TUSD",
+      "confirmations": 64,
+      "confirmedTime": "2019-03-05T09:56:55.728933+00:00",
+      "fee": 0,
+      "id": 1,
+      "sentTime": "2019-03-05T09:56:55.735929+00:00",
+      "size": 99.0,
+      "status": "confirmed",
+      "time": "2019-03-05T09:56:55.728933+00:00",
+      "txid": "0x8078356ae4b06a036d64747546c274af19581f1c78c510b60505798a7ffcaf1"
+    }
+  ]
+}

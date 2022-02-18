@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "result": {
+      "bid": 120.00,
+      "buyFee": 6.00,
+      "isBestBid": "False",
+      "owned": "False"
+    }
+  }

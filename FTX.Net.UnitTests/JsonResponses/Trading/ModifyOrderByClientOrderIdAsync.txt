@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "result": {
+    "createdAt": "2019-03-05T11:56:55.728933+00:00",
+    "filledSize": 0,
+    "future": "XRP-PERP",
+    "id": 9596932,
+    "market": "XRP-PERP",
+    "price": 0.326525,
+    "remainingSize": 31431,
+    "side": "sell",
+    "size": 31431,
+    "status": "open",
+    "type": "limit",
+    "reduceOnly": false,
+    "ioc": false,
+    "postOnly": false,
+    "clientId": null,
+  }
+}

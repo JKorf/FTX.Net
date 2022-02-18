@@ -13,7 +13,7 @@ namespace FTX.Net.Converters
         {
             new KeyValuePair<FutureType, string>(FutureType.Future, "future"),
             new KeyValuePair<FutureType, string>(FutureType.Perpetual, "perpetual"),
-            new KeyValuePair<FutureType, string>(FutureType.Move, "move"),
+            new KeyValuePair<FutureType, string>(FutureType.Move, "move"),           
             new KeyValuePair<FutureType, string>(FutureType.Prediction, "prediction"),
         };
     }
