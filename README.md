@@ -20,42 +20,20 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
-* Version 1.0.0-beta5 - 05 Feb 2022
-    * Updated CryptoExchange.Net, adding Cancellation token support for Common interface and SymbolOrderBook
+* Version 1.0.0 - 18 Feb 2022
+	* Added Github.io page for documentation: https://jkorf.github.io/FTX.Net/
+	* Added unit tests for parsing the returned JSON for each endpoint and subscription
+	* Added AddFTX extension method on IServiceCollection for easy dependency injection
+	* Added URL reference to API endpoint documentation for each endpoint
 
-* Version 1.0.0-beta4 - 31 Jan 2022
-    * Updated CryptoExchange.Net
+	* Refactored client structure to be consistent across exchange implementations
+	* Renamed various properties to be consistent across exchange implementations
 
-* Version 1.0.0-beta3 - 30 Jan 2022
-    * Fix for NullReference exception on failed request
+	* Cleaned up project structure
+	* Fixed various models
 
-* Version 1.0.0-beta2 - 24 Jan 2022
-    * Updated CryptoExchange.Net
-
-* Version 1.0.0-beta1 - 15 Jan 2022
-    * Updated CryptoExchange.Net
-
-* Version 1.0.0-alpha7 - 14 Jan 2022
-    * Fix for subscription failing when data is received before the subscription response
-
-* Version 1.0.0-alpha6 - 07 Jan 2022
-    * Updated CrytpoExchange.Net
-    * Added optional parameter for socket client lifetime in AddFTX
-
-* Version 1.0.0-alpha5 - 03 Jan 2022
-    * Updated CryptoExchange.Net
-
-* Version 1.0.0-alpha4 - 01 Jan 2022
-    * New comon implementation, added AddFTX extension method
-
-* Version 1.0.0-alpha3 - 27 Dec 2021
-    * Updated CryptoExchange.Net
-
-* Version 1.0.0-alpha2 - 21 Dec 2021
-    * Update to new CryptoExchange.Net version
-
-* Version 1.0.0-alpha1 - 07 Dec 2021
-    * Initial version new CryptoExchange.Net. More documentation coming soon
+	* Updated CryptoExchange.Net, see https://github.com/JKorf/CryptoExchange.Net#release-notes
+	* See https://jkorf.github.io/FTX.Net/MigrationGuide.html for additional notes for updating from V0 to V1
 
 * Version 0.1.8 - 03 Nov 2021
     * Fix for ftx.us authentication
