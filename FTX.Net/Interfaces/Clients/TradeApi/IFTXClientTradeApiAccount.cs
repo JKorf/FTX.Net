@@ -101,7 +101,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         /// <param name="quantity">Quantity to withdraw</param>
         /// <param name="address">Address to withdraw to</param>
         /// <param name="tag">Address tag</param>
-        /// <param name="network">Network to us</param>
+        /// <param name="network">Network to use</param>
         /// <param name="password">Withdrawal password if required</param>
         /// <param name="code">Two factor authentication code if required</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
