@@ -347,7 +347,7 @@
         <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiAccount.GetAirdropsAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiAccount.GetWithdrawalFeesAsync(System.String,System.Decimal,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiAccount.GetWithdrawalFeesAsync(System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiAccount.GetSavedAddressesAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -1722,7 +1722,7 @@
             <param name="quantity">Quantity to withdraw</param>
             <param name="address">Address to withdraw to</param>
             <param name="tag">Address tag</param>
-            <param name="network">Network to us</param>
+            <param name="network">Network to use</param>
             <param name="password">Withdrawal password if required</param>
             <param name="code">Two factor authentication code if required</param>
             <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -1740,7 +1740,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.Clients.TradeApi.IFTXClientTradeApiAccount.GetWithdrawalFeesAsync(System.String,System.Decimal,System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:FTX.Net.Interfaces.Clients.TradeApi.IFTXClientTradeApiAccount.GetWithdrawalFeesAsync(System.String,System.Decimal,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get withdrawal fees
             <para><a href="https://docs.ftx.com/#get-withdrawal-fees" /></para>
@@ -1749,6 +1749,7 @@
             <param name="quantity">Quantity</param>
             <param name="address">Address</param>
             <param name="tag">Tag</param>
+            <param name="network">Network to use</param>
             <param name="subaccountName">Subaccount name to execute this request for</param>
             <param name="ct">Cancellation token</param>
             <returns></returns>

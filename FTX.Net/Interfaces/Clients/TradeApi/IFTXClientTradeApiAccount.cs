@@ -101,7 +101,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         /// <param name="quantity">Quantity to withdraw</param>
         /// <param name="address">Address to withdraw to</param>
         /// <param name="tag">Address tag</param>
-        /// <param name="network">Network to us</param>
+        /// <param name="network">Network to use</param>
         /// <param name="password">Withdrawal password if required</param>
         /// <param name="code">Two factor authentication code if required</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
@@ -128,10 +128,11 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         /// <param name="quantity">Quantity</param>
         /// <param name="address">Address</param>
         /// <param name="tag">Tag</param>
+        /// <param name="network">Network to use</param>
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get saved addresses
