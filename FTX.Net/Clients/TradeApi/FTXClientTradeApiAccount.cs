@@ -82,13 +82,14 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = null, string? network = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("coin", asset);
             parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
             parameters.AddParameter("address", address);
             parameters.AddOptionalParameter("tag", tag);
+            parameters.AddOptionalParameter("method", network);
             return await _baseClient.SendFTXRequest<FTXWithdrawalFee>(_baseClient.GetUri("wallet/withdrawal_fee"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
