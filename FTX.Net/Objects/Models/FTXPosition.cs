@@ -16,12 +16,12 @@ namespace FTX.Net.Objects.Models
         /// Cumulative buy size
         /// </summary>
         [JsonProperty("cumulativeBuySize")]
-        public decimal CumulativeBuyQuantity { get; set; }
+        public decimal? CumulativeBuyQuantity { get; set; }
         /// <summary>
         /// Cumulative sell size
         /// </summary>
         [JsonProperty("cumulativeSellSize")]
-        public decimal CumulativeSellQuantity { get; set; }
+        public decimal? CumulativeSellQuantity { get; set; }
         /// <summary>
         /// Average cost of this position after pnl was last realized: whenever unrealized pnl gets realized, this field gets set to mark price, unrealizedPnL is set to 0, and realizedPnl changes by the previous value for unrealizedPnl.
         /// </summary>
