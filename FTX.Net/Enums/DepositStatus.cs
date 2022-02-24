@@ -16,6 +16,10 @@
         /// <summary>
         /// Canceled
         /// </summary>
-        Canceled
+        Canceled,
+        /// <summary>
+        /// Completed
+        /// </summary>
+        Completed
     }
 }
