@@ -615,6 +615,11 @@
             Canceled
             </summary>
         </member>
+        <member name="F:FTX.Net.Enums.DepositStatus.Completed">
+            <summary>
+            Completed
+            </summary>
+        </member>
         <member name="T:FTX.Net.Enums.FTXPayOrderStatus">
             <summary>
             FTXPay order status
@@ -2545,16 +2550,14 @@
         </member>
         <member name="M:FTX.Net.Objects.FTXClientOptions.#ctor">
             <summary>
-            Ctor
+            ctor
             </summary>
         </member>
-        <member name="M:FTX.Net.Objects.FTXClientOptions.Copy``1(``0,``0)">
+        <member name="M:FTX.Net.Objects.FTXClientOptions.#ctor(FTX.Net.Objects.FTXClientOptions)">
             <summary>
-            Copy the values of the def to the input
+            ctor
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="input"></param>
-            <param name="def"></param>
+            <param name="baseOn">Base the new options on other options</param>
         </member>
         <member name="T:FTX.Net.Objects.FTXSocketClientOptions">
             <summary>
@@ -2578,16 +2581,14 @@
         </member>
         <member name="M:FTX.Net.Objects.FTXSocketClientOptions.#ctor">
             <summary>
-            Ctor
+            ctor
             </summary>
         </member>
-        <member name="M:FTX.Net.Objects.FTXSocketClientOptions.Copy``1(``0,``0)">
+        <member name="M:FTX.Net.Objects.FTXSocketClientOptions.#ctor(FTX.Net.Objects.FTXSocketClientOptions)">
             <summary>
-            Copy the values of the def to the input
+            ctor
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="input"></param>
-            <param name="def"></param>
+            <param name="baseOn">Base the new options on other options</param>
         </member>
         <member name="T:FTX.Net.Objects.FTXSymbolOrderBookOptions">
             <summary>
@@ -5772,8 +5773,10 @@
         <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.Dispose">
-            <inheritdoc />
+        <member name="M:FTX.Net.SymbolOrderBooks.FTXSymbolOrderBook.Dispose(System.Boolean)">
+            <summary>
+            Dispose
+            </summary>
         </member>
     </members>
 </doc>

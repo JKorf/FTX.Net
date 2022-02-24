@@ -126,15 +126,15 @@ namespace FTX.Net.SymbolOrderBooks
             return await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
         }
 
-        /// <inheritdoc />
-        public override void Dispose()
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        protected override void Dispose(bool disposing)
         {
-            processBuffer.Clear();
-            asks.Clear();
-            bids.Clear();
-
-            if(_socketOwner)
+            if (_socketOwner)
                 _socketClient?.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

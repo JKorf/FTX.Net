@@ -34,42 +34,37 @@ namespace FTX.Net.Objects
         /// </summary>
         public string? SubaccountName { get; set; }
 
-        private readonly RestApiClientOptions _apiOptions = new RestApiClientOptions(FTXApiAddresses.Default.RestClientAddress);
+        private RestApiClientOptions _apiOptions = new RestApiClientOptions(FTXApiAddresses.Default.RestClientAddress);
         /// <summary>
         /// Api options
         /// </summary>
         public RestApiClientOptions ApiOptions
         {
             get => _apiOptions;
-            set => _apiOptions.Copy(_apiOptions, value);
+            set => _apiOptions = new RestApiClientOptions(_apiOptions, value);
         }
 
         /// <summary>
-        /// Ctor
+        /// ctor
         /// </summary>
-        public FTXClientOptions()
+        public FTXClientOptions() : this(Default)
         {
-            if (Default == null)
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn">Base the new options on other options</param>
+        internal FTXClientOptions(FTXClientOptions baseOn) : base(baseOn)
+        {
+            if (baseOn == null)
                 return;
 
-            Copy(this, Default);
-        }
-
-        /// <summary>
-        /// Copy the values of the def to the input
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="input"></param>
-        /// <param name="def"></param>
-        public new void Copy<T>(T input, T def) where T : FTXClientOptions
-        {
-            base.Copy(input, def);
-
-            input.AffiliateCode = def.AffiliateCode;
-            input.AutoTimestamp = def.AutoTimestamp;
-            input.AutoTimestampRecalculationInterval = def.AutoTimestampRecalculationInterval;
-            input.SubaccountName = def.SubaccountName;
-            input.ApiOptions = new RestApiClientOptions(def.ApiOptions);
+            AffiliateCode = baseOn.AffiliateCode;
+            AutoTimestamp = baseOn.AutoTimestamp;
+            AutoTimestampRecalculationInterval = baseOn.AutoTimestampRecalculationInterval;
+            SubaccountName = baseOn.SubaccountName;
+            _apiOptions = new RestApiClientOptions(baseOn.ApiOptions, null);
         }
     }
 
@@ -91,39 +86,34 @@ namespace FTX.Net.Objects
         /// </summary>
         public string? SubaccountName { get; set; }
 
-        private readonly ApiClientOptions _streamOptions = new RestApiClientOptions(FTXApiAddresses.Default.SocketClientAddress);
+        private ApiClientOptions _streamOptions = new RestApiClientOptions(FTXApiAddresses.Default.SocketClientAddress);
         /// <summary>
         /// Stream options
         /// </summary>
         public ApiClientOptions StreamOptions
         {
             get => _streamOptions;
-            set => _streamOptions.Copy(_streamOptions, value);
+            set => _streamOptions = new ApiClientOptions(_streamOptions, value);
         }
 
         /// <summary>
-        /// Ctor
+        /// ctor
         /// </summary>
-        public FTXSocketClientOptions()
+        public FTXSocketClientOptions() : this(Default)
         {
-            if (Default == null)
+        }
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="baseOn">Base the new options on other options</param>
+        internal FTXSocketClientOptions(FTXSocketClientOptions baseOn) : base(baseOn)
+        {
+            if (baseOn == null)
                 return;
 
-            Copy(this, Default);
-        }
-
-        /// <summary>
-        /// Copy the values of the def to the input
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="input"></param>
-        /// <param name="def"></param>
-        public new void Copy<T>(T input, T def) where T : FTXSocketClientOptions
-        {
-            base.Copy(input, def);
-
-            input.SubaccountName = def.SubaccountName;
-            input.StreamOptions = new ApiClientOptions(def.StreamOptions);
+            SubaccountName = baseOn.SubaccountName;
+            _streamOptions = new ApiClientOptions(baseOn.StreamOptions, null);
         }
     }
 

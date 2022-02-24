@@ -428,7 +428,7 @@ namespace FTX.Net.Clients.TradeApi
 
         /// <inheritdoc />
         protected override TimeSyncInfo GetTimeSyncInfo()
-            => new TimeSyncInfo(_log, ClientOptions.ApiOptions.AutoTimestamp, TimeSyncState);
+            => new TimeSyncInfo(_log, ClientOptions.ApiOptions.AutoTimestamp, ClientOptions.ApiOptions.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
         public override TimeSpan GetTimeOffset()
