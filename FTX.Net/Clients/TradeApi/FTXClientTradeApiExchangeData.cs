@@ -32,7 +32,7 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<DateTime>(new Uri("https://otc.ftx.com/api/time"), HttpMethod.Get, ct).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<DateTime>(new Uri("https://otc.ftx.com/api/time"), HttpMethod.Get, ct, ignoreRatelimit: true).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

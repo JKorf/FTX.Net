@@ -77,9 +77,11 @@ namespace FTX.Net.Clients
 
         #region private
 
-        internal async Task<WebCallResult<T>> SendFTXRequest<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null, int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null)
+        internal async Task<WebCallResult<T>> SendFTXRequest<T>(RestApiClient apiClient, Uri uri, HttpMethod method, CancellationToken cancellationToken,
+            Dictionary<string, object>? parameters = null, bool signed = false, HttpMethodParameterPosition? postPosition = null, ArrayParametersSerialization? arraySerialization = null,
+            int credits = 1, JsonSerializer? deserializer = null, Dictionary<string, string>? additionalHeaders = null, bool ignoreRatelimit = false)
         {
-            var result = await SendRequestAsync<FTXResult<T>>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders).ConfigureAwait(false);
+            var result = await SendRequestAsync<FTXResult<T>>(apiClient, uri, method, cancellationToken, parameters, signed, postPosition, arraySerialization, credits, deserializer, additionalHeaders, ignoreRatelimit: ignoreRatelimit).ConfigureAwait(false);
             return result.As(result? result.Data.Result: default!);
         }
 
