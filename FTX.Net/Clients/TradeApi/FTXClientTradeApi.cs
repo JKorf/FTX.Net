@@ -26,7 +26,7 @@ namespace FTX.Net.Clients.TradeApi
         private readonly FTXClient _baseClient;
         private readonly Log _log;
 
-        internal static TimeSyncState TimeSyncState = new TimeSyncState();
+        internal static TimeSyncState TimeSyncState = new TimeSyncState("Api");
 
         internal FTXClientOptions ClientOptions;
 
