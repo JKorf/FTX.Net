@@ -3,7 +3,7 @@ title: Home
 nav_order: 1
 ---
 
-![Build status](https://app.travis-ci.com/JKorf/FTX.Net.svg?token=2PbyJrjvDDpys8nuT4Xb&branch=main) ![Nuget version](https://img.shields.io/nuget/v/FTX.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/FTX.Net.svg)
+[![.NET](https://github.com/JKorf/FTX.Net/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JKorf/FTX.Net/actions/workflows/dotnet.yml) ![Nuget version](https://img.shields.io/nuget/v/FTX.net.svg)  ![Nuget downloads](https://img.shields.io/nuget/dt/FTX.Net.svg)
  
 This library is based on the CryptoExchange.Net base library. General usage/configuration information can be found in the [CryptoExchange.Net documentation](https://jkorf.github.io/CryptoExchange.Net)
 

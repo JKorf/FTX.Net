@@ -18,37 +18,37 @@ namespace FTX.Net.UnitTests
         [Test]
         public async Task ValidateTickerUpdateStreamJson()
         {
-            await TestFileToObject<FTXStreamTicker>(@"JsonResponses\Socket\TickerUpdate.txt");
+            await TestFileToObject<FTXStreamTicker>(@"JsonResponses/Socket/TickerUpdate.txt");
         }
 
         [Test]
         public async Task ValidateSymbolsUpdateStreamJson()
         {
-            await TestFileToObject<Dictionary<string, FTXStreamSymbol>>(@"JsonResponses\Socket\SymbolsUpdate.txt");
+            await TestFileToObject<Dictionary<string, FTXStreamSymbol>>(@"JsonResponses/Socket/SymbolsUpdate.txt");
         }
 
         [Test]
         public async Task ValidateTradeUpdateStreamJson()
         {
-            await TestFileToObject<IEnumerable<FTXTrade>>(@"JsonResponses\Socket\TradeUpdate.txt");
+            await TestFileToObject<IEnumerable<FTXTrade>>(@"JsonResponses/Socket/TradeUpdate.txt");
         }
 
         [Test]
         public async Task ValidateOrderBookUpdateStreamJson()
         {
-            await TestFileToObject<FTXStreamOrderBook>(@"JsonResponses\Socket\OrderBookUpdate.txt");
+            await TestFileToObject<FTXStreamOrderBook>(@"JsonResponses/Socket/OrderBookUpdate.txt");
         }
 
         [Test]
         public async Task ValidateUserTradeUpdateStreamJson()
         {
-            await TestFileToObject<FTXUserTrade>(@"JsonResponses\Socket\UserTradeUpdate.txt");
+            await TestFileToObject<FTXUserTrade>(@"JsonResponses/Socket/UserTradeUpdate.txt");
         }
 
         [Test]
         public async Task ValidateOrderUpdateStreamJson()
         {
-            await TestFileToObject<FTXOrder>(@"JsonResponses\Socket\OrderUpdate.txt");
+            await TestFileToObject<FTXOrder>(@"JsonResponses/Socket/OrderUpdate.txt");
         }
 
 
