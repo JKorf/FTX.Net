@@ -40,7 +40,7 @@ namespace FTX.Net.Clients.GeneralApi
         /// <inheritdoc />
         public async Task<WebCallResult> AcceptQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest(_baseClient.GetUri("otc/quotes"), HttpMethod.Post, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri($"otc/quotes/{quoteId}/accept"), HttpMethod.Post, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
     }
 }
