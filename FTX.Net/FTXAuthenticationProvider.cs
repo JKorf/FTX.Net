@@ -23,7 +23,7 @@ namespace FTX.Net
             if (!auth)
                 return;
 
-            uri = uri.SetParameters(uriParameters);
+            uri = uri.SetParameters(uriParameters, arraySerialization);
             var ftxPrefix = GetFTXHeaderPrefix(uri);
             var timestamp = GetMillisecondTimestamp(apiClient);
 
