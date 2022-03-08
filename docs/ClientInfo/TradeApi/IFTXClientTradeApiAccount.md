@@ -417,7 +417,7 @@ var result = await client.TradeApi.Account.GetWithdrawalFeesAsync(/* parameters 
 ```  
 
 ```csharp  
-Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = default, string? subaccountName = default, CancellationToken ct = default);  
+Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decimal quantity, string address, string? tag = default, string? network = default, string? subaccountName = default, CancellationToken ct = default);  
 ```  
 
 |Parameter|Description|
@@ -426,6 +426,7 @@ Task<WebCallResult<FTXWithdrawalFee>> GetWithdrawalFeesAsync(string asset, decim
 |quantity|Quantity|
 |address|Address|
 |_[Optional]_ tag|Tag|
+|_[Optional]_ network|Network to use|
 |_[Optional]_ subaccountName|Subaccount name to execute this request for|
 |_[Optional]_ ct|Cancellation token|
 
@@ -482,7 +483,7 @@ Task<WebCallResult<FTXWithdrawal>> WithdrawAsync(string asset, decimal quantity,
 |quantity|Quantity to withdraw|
 |address|Address to withdraw to|
 |_[Optional]_ tag|Address tag|
-|_[Optional]_ network|Network to us|
+|_[Optional]_ network|Network to use|
 |_[Optional]_ password|Withdrawal password if required|
 |_[Optional]_ code|Two factor authentication code if required|
 |_[Optional]_ subaccountName|Subaccount name to execute this request for|
