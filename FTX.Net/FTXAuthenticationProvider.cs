@@ -35,7 +35,7 @@ namespace FTX.Net
 
         public override string Sign(string toSign) => SignHMACSHA256(toSign).ToLowerInvariant();
 
-        private string GetFTXHeaderPrefix(Uri requestUri)
+        private static string GetFTXHeaderPrefix(Uri requestUri)
             => requestUri.Host.EndsWith(".us", StringComparison.OrdinalIgnoreCase) ? "FTXUS" : "FTX";
     }
 }
