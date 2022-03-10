@@ -47,6 +47,11 @@ namespace FTX.Net.Objects.Models
         [JsonProperty("time")]
         public DateTime Timestamp { get; set; }
         /// <summary>
+        /// Protocol used for the blockchain transfer
+        /// </summary>
+        [JsonProperty("method")]
+        public string? Network { get; set; }
+        /// <summary>
         /// Transaction id
         /// </summary>
         [JsonProperty("txid")]
