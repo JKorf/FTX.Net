@@ -56,6 +56,11 @@ namespace FTX.Net.Objects.Models
         [JsonProperty("confirmedTime")]
         public DateTime ConfirmTime { get; set; }
         /// <summary>
+        /// Protocol used for the blockchain transfer
+        /// </summary>
+        [JsonProperty("method")]
+        public string? Network { get; set; }
+        /// <summary>
         /// Transaction id
         /// </summary>
         [JsonProperty("txid")]
