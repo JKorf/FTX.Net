@@ -53,7 +53,6 @@ namespace FTX.Net.Clients
                     { SubaccountHeaderName, WebUtility.UrlEncode(options.SubaccountName) }
                 };
             }
-            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
 
             GeneralApi = AddApiClient(new FTXClientGeneralApi(log, this, options));
             TradeApi = AddApiClient(new FTXClientTradeApi(log, this, options));

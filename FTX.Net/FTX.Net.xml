@@ -3000,6 +3000,11 @@
             Confirm time
             </summary>
         </member>
+        <member name="P:FTX.Net.Objects.Models.FTXDeposit.Network">
+            <summary>
+            Protocol used for the blockchain transfer
+            </summary>
+        </member>
         <member name="P:FTX.Net.Objects.Models.FTXDeposit.TransactionId">
             <summary>
             Transaction id
@@ -4120,6 +4125,11 @@
         <member name="P:FTX.Net.Objects.Models.FTXWithdrawal.Timestamp">
             <summary>
             Time
+            </summary>
+        </member>
+        <member name="P:FTX.Net.Objects.Models.FTXWithdrawal.Network">
+            <summary>
+            Protocol used for the blockchain transfer
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Models.FTXWithdrawal.TransactionId">

@@ -47,6 +47,8 @@ namespace FTX.Net.Clients.GeneralApi
             NFT = new FTXClientGeneralApiNFT(this);
             FTXPay = new FTXClientGeneralApiPay(this);
             Subaccounts = new FTXClientGeneralApiSubaccounts(this);
+
+            ParameterPositions[HttpMethod.Delete] = HttpMethodParameterPosition.InBody;
         }
 
         /// <inheritdoc />
