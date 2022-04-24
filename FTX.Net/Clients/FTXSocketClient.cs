@@ -83,7 +83,7 @@ namespace FTX.Net.Clients
             if (code?.ToString() == "20001")
             {
                 log.Write(LogLevel.Information, $"Code {code} received. Reconnecting/Resubscribing socket.");
-                messageEvent.Connection.Socket.CloseAsync(); // Closing it via socket will automatically reconnect
+                _ = messageEvent.Connection.TriggerReconnectAsync(); // Closing it via socket will automatically reconnect
             }
         }
 

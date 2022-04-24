@@ -122,6 +122,12 @@ namespace FTX.Net.Objects
     /// </summary>
     public class FTXSymbolOrderBookOptions: OrderBookOptions
     {
+
+        /// <summary>
+        /// After how much time we should consider the connection dropped if no data is received for this time after the initial subscriptions
+        /// </summary>
+        public TimeSpan? InitialDataTimeout { get; set; }
+
         /// <summary>
         /// Grouping of the order book entries
         /// </summary>

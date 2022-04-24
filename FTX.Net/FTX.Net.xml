@@ -2595,6 +2595,11 @@
             Options the FTX symbol order book
             </summary>
         </member>
+        <member name="P:FTX.Net.Objects.FTXSymbolOrderBookOptions.InitialDataTimeout">
+            <summary>
+            After how much time we should consider the connection dropped if no data is received for this time after the initial subscriptions
+            </summary>
+        </member>
         <member name="P:FTX.Net.Objects.FTXSymbolOrderBookOptions.Grouping">
             <summary>
             Grouping of the order book entries

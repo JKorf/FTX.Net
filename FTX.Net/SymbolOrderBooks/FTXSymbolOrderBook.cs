@@ -12,6 +12,7 @@ using FTX.Net.Objects.Models.Socket;
 using FTX.Net.Interfaces.Clients;
 using FTX.Net.Clients;
 using System.Threading;
+using System;
 
 namespace FTX.Net.SymbolOrderBooks
 {
@@ -23,6 +24,7 @@ namespace FTX.Net.SymbolOrderBooks
         private readonly IFTXSocketClient _socketClient;
         private readonly bool _socketOwner;
         private readonly int? _grouping;
+        private readonly TimeSpan _initialDataTimeout;
 
         /// <summary>
         /// Create a new order book
@@ -33,6 +35,7 @@ namespace FTX.Net.SymbolOrderBooks
         {
             strictLevels = false;
             sequencesAreConsecutive = false;
+            _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
 
             _socketClient = options?.Client ?? new FTXSocketClient(new FTXSocketClientOptions
             {
@@ -66,7 +69,7 @@ namespace FTX.Net.SymbolOrderBooks
             }
 
             Status = OrderBookStatus.Syncing;
-            var setResult = await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
+            var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
             if (!setResult)
                 await subResult.Data.CloseAsync().ConfigureAwait(false);
 
@@ -123,7 +126,7 @@ namespace FTX.Net.SymbolOrderBooks
         /// <inheritdoc />
         protected override async Task<CallResult<bool>> DoResyncAsync(CancellationToken ct)
         {
-            return await WaitForSetOrderBookAsync(10000, ct).ConfigureAwait(false);
+            return await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
         }
 
         /// <summary>
