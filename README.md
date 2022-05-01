@@ -20,6 +20,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.0.8 - 01 May 2022
+    * Updated CryptoExchange.Net which fixed an timing related issue in the websocket reconnection logic
+    * Added seconds representation to KlineInterval enum
+    * Fixed Deposit deserialization when confirmationTime is null
+
 * Version 1.0.7 - 14 Apr 2022
     * Updated CryptoExchange.Net
 
