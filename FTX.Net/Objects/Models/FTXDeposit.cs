@@ -22,7 +22,7 @@ namespace FTX.Net.Objects.Models
         /// <summary>
         /// Time of confirmation
         /// </summary>
-        public DateTime ConfirmationTime { get; set; }
+        public DateTime? ConfirmationTime { get; set; }
         /// <summary>
         /// Fee
         /// </summary>

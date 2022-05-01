@@ -662,7 +662,7 @@
         </member>
         <member name="T:FTX.Net.Enums.KlineInterval">
             <summary>
-            Kline intervals
+            Kline intervals, int value represents the time in seconds
             </summary>
         </member>
         <member name="F:FTX.Net.Enums.KlineInterval.FifteenSeconds">
