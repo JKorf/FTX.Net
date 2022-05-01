@@ -19,6 +19,7 @@ using CryptoExchange.Net.Authentication;
 using FTXClientOptions = FTX.Net.Objects.FTXClientOptions;
 using FTX.Net.Interfaces.Clients;
 using FTX.Net.Clients;
+using FTX.Net.Enums;
 
 namespace FTX.Net.Testing
 {
@@ -150,6 +151,9 @@ namespace FTX.Net.Testing
 
             if (type == typeof(string))
                 return "STRING" + i;
+
+            if (type == typeof(KlineInterval))
+                return KlineInterval.FourHours;
 
             if (type == typeof(IEnumerable<string>))
                 return new[] { "string" + i };
