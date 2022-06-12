@@ -142,7 +142,7 @@ namespace FTX.Net.Clients.TradeApi
             // This call returns internal data with additional quotes which make direct deserialization fail. So first get the string value and then deserialize that
             //return await _baseClient.SendFTXRequest<Dictionary<string, FTXETFRebalanceEntry>>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
 
-            var data = await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            var data = await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("etfs/rebalance_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
 
             if (!data)
                 return data.As<Dictionary<string, FTXETFRebalanceEntry>>(null);

@@ -26,7 +26,7 @@ namespace FTX.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLend>>(_baseClient.GetUri("spot_margin/history"), HttpMethod.Get, ct, parameters, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLend>>(_baseClient.GetUri("spot_margin/history"), HttpMethod.Get, ct, parameters, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -52,7 +52,7 @@ namespace FTX.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddParameter("market", symbol);
-            var result = await _baseClient.SendFTXRequest<IEnumerable<FTXMarginMarketInfo>>(_baseClient.GetUri("spot_margin/market_info"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            var result = await _baseClient.SendFTXRequest<IEnumerable<FTXMarginMarketInfo>>(_baseClient.GetUri("spot_margin/market_info"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
             if (result && result.Data == null)
                 return result.AsError<IEnumerable<FTXMarginMarketInfo>>(new ServerError("No data returned"));
 
@@ -64,7 +64,7 @@ namespace FTX.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/borrow_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/borrow_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -72,19 +72,19 @@ namespace FTX.Net.Clients.GeneralApi
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/lending_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXUserLend>>(_baseClient.GetUri("spot_margin/lending_history"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXLendingOffer>>> GetLendingOffersAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingOffer>>(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingOffer>>(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXLendingInfo>>> GetLendingInfoAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingInfo>>(_baseClient.GetUri("spot_margin/lending_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLendingInfo>>(_baseClient.GetUri("spot_margin/lending_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -94,7 +94,7 @@ namespace FTX.Net.Clients.GeneralApi
             parameters.AddParameter("coin", asset);
             parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
             parameters.AddParameter("rate", rate.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri("spot_margin/offers"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
     }
 }

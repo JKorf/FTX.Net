@@ -28,19 +28,19 @@ namespace FTX.Net.Clients.GeneralApi
             parameters.AddParameter("toCoin", toAsset);
             parameters.AddParameter("size", quantity.ToString(CultureInfo.InvariantCulture));
 
-            return await _baseClient.SendFTXRequest<FTXConvertQuoteResult>(_baseClient.GetUri("otc/quotes"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXConvertQuoteResult>(_baseClient.GetUri("otc/quotes"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXConvertQuote>>> GetQuoteStatusAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXConvertQuote>>(_baseClient.GetUri("otc/quotes/" + quoteId), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXConvertQuote>>(_baseClient.GetUri("otc/quotes/" + quoteId), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult> AcceptQuoteAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest(_baseClient.GetUri($"otc/quotes/{quoteId}/accept"), HttpMethod.Post, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri($"otc/quotes/{quoteId}/accept"), HttpMethod.Post, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
     }
 }

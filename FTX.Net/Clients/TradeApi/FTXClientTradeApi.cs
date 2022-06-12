@@ -23,7 +23,7 @@ namespace FTX.Net.Clients.TradeApi
     /// <inheritdoc cref="IFTXClientTradeApi" />
     public class FTXClientTradeApi : RestApiClient, IFTXClientTradeApi, ISpotClient, IFuturesClient
     {
-        private readonly FTXClient _baseClient;
+        internal readonly FTXClient _baseClient;
         private readonly Log _log;
 
         internal static TimeSyncState TimeSyncState = new TimeSyncState("Api");

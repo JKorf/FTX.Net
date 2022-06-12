@@ -23,6 +23,7 @@ namespace FTX.Net.Clients
     public class FTXClient : BaseRestClient, IFTXClient
     {
         private const string SubaccountHeaderName = "FTX-SUBACCOUNT";
+        private const string SubaccountUSHeaderName = "FTXUS-SUBACCOUNT";
 
         /// <inheritdoc />
         public IFTXClientGeneralApi GeneralApi { get; }
@@ -50,7 +51,7 @@ namespace FTX.Net.Clients
             {
                 StandardRequestHeaders = new Dictionary<string, string>
                 {
-                    { SubaccountHeaderName, WebUtility.UrlEncode(options.SubaccountName) }
+                    { new Uri(options.ApiOptions.BaseAddress).Host.EndsWith(".us", StringComparison.OrdinalIgnoreCase) ? SubaccountUSHeaderName: SubaccountHeaderName, WebUtility.UrlEncode(options.SubaccountName) }
                 };
             }
 
@@ -69,9 +70,9 @@ namespace FTX.Net.Clients
         }
 
         #region methods
-        internal static Dictionary<string, string>? GetSubaccountHeader(string? subaccountName) => subaccountName == null ? null : new Dictionary<string, string>
+        internal Dictionary<string, string>? GetSubaccountHeader(string? subaccountName) => subaccountName == null ? null : new Dictionary<string, string>
             {
-                { SubaccountHeaderName, WebUtility.UrlEncode(subaccountName) }
+                { new Uri(((FTXClientOptions)ClientOptions).ApiOptions.BaseAddress).Host.EndsWith(".us", StringComparison.OrdinalIgnoreCase) ? SubaccountUSHeaderName: SubaccountHeaderName, WebUtility.UrlEncode(subaccountName) }
             };
 
         #region private

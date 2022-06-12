@@ -17,7 +17,7 @@ namespace FTX.Net.Clients.GeneralApi
     /// <inheritdoc />
     public class FTXClientGeneralApi : RestApiClient, IFTXClientGeneralApi
     {
-        private readonly FTXClient _baseClient;
+        internal readonly FTXClient _baseClient;
         private readonly FTXClientOptions _options;
         private readonly Log _log;
 

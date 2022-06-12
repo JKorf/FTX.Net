@@ -26,7 +26,7 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXBalance>>> GetBalancesAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXBalance>>(_baseClient.GetUri("wallet/balances"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXBalance>>(_baseClient.GetUri("wallet/balances"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("method", network);
-            return await _baseClient.SendFTXRequest<FTXDepositAddress>(_baseClient.GetUri("wallet/deposit_address/" + asset), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXDepositAddress>(_baseClient.GetUri("wallet/deposit_address/" + asset), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -48,7 +48,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXDeposit>>(_baseClient.GetUri("wallet/deposits"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXDeposit>>(_baseClient.GetUri("wallet/deposits"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXWithdrawal>>(_baseClient.GetUri("wallet/withdrawals"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXWithdrawal>>(_baseClient.GetUri("wallet/withdrawals"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -70,7 +70,7 @@ namespace FTX.Net.Clients.TradeApi
             parameters.AddOptionalParameter("method", network);
             parameters.AddOptionalParameter("password", password);
             parameters.AddOptionalParameter("code", code);
-            return await _baseClient.SendFTXRequest<FTXWithdrawal>(_baseClient.GetUri("wallet/withdrawals"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXWithdrawal>(_baseClient.GetUri("wallet/withdrawals"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -78,7 +78,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXAirdrop>>(_baseClient.GetUri("wallet/airdrops"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXAirdrop>>(_baseClient.GetUri("wallet/airdrops"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -90,7 +90,7 @@ namespace FTX.Net.Clients.TradeApi
             parameters.AddParameter("address", address);
             parameters.AddOptionalParameter("tag", tag);
             parameters.AddOptionalParameter("method", network);
-            return await _baseClient.SendFTXRequest<FTXWithdrawalFee>(_baseClient.GetUri("wallet/withdrawal_fee"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXWithdrawalFee>(_baseClient.GetUri("wallet/withdrawal_fee"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -98,7 +98,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("coin", asset);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXSavedAddress>>(_baseClient.GetUri("wallet/saved_addresses"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXSavedAddress>>(_baseClient.GetUri("wallet/saved_addresses"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -111,13 +111,13 @@ namespace FTX.Net.Clients.TradeApi
             parameters.AddParameter("isPrimeTrust", isPrimeTrust);
             parameters.AddOptionalParameter("tag", tag);
             parameters.AddOptionalParameter("code", code);
-            return await _baseClient.SendFTXRequest<FTXSavedAddress>(_baseClient.GetUri("wallet/saved_addresses"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXSavedAddress>(_baseClient.GetUri("wallet/saved_addresses"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<string>> DeleteSavedAddressAsync(long savedAddressId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("wallet/saved_addresses/" + savedAddressId), HttpMethod.Delete, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<string>(_baseClient.GetUri("wallet/saved_addresses/" + savedAddressId), HttpMethod.Delete, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
 
@@ -127,13 +127,13 @@ namespace FTX.Net.Clients.TradeApi
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("future", future);
             FTXClient.AddFilter(parameters, startTime, endTime);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXFundingPayment>>(_baseClient.GetUri("funding_payments"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXFundingPayment>>(_baseClient.GetUri("funding_payments"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<FTXAccountInfo>> GetAccountInfoAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXAccountInfo>(_baseClient.GetUri("account"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXAccountInfo>(_baseClient.GetUri("account"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -141,7 +141,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("showAvgPrice", showAveragePrice);
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXPosition>>(_baseClient.GetUri("positions"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXPosition>>(_baseClient.GetUri("positions"), HttpMethod.Get, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
@@ -149,7 +149,7 @@ namespace FTX.Net.Clients.TradeApi
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("leverage", leverage.ToString(CultureInfo.InvariantCulture));
-            return await _baseClient.SendFTXRequest(_baseClient.GetUri("account/leverage"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest(_baseClient.GetUri("account/leverage"), HttpMethod.Post, ct, parameters, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #region Leveraged tokens
@@ -157,7 +157,7 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXLeveragedTokenBalance>>> GetLeveragedTokenBalancesAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXLeveragedTokenBalance>>(_baseClient.GetUri("lt/balances"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXLeveragedTokenBalance>>(_baseClient.GetUri("lt/balances"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #endregion
@@ -167,13 +167,13 @@ namespace FTX.Net.Clients.TradeApi
         /// <inheritdoc />
         public async Task<WebCallResult<FTXOptionsAccountInfo>> GetOptionsAccountInfoAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<FTXOptionsAccountInfo>(_baseClient.GetUri("options/account_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXOptionsAccountInfo>(_baseClient.GetUri("options/account_info"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<WebCallResult<IEnumerable<FTXOptionsPosition>>> GetOptionsPositionsAsync(string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsPosition>>(_baseClient.GetUri("options/positions"), HttpMethod.Get, ct, signed: true, additionalHeaders: FTXClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<IEnumerable<FTXOptionsPosition>>(_baseClient.GetUri("options/positions"), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         #endregion
