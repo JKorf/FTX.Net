@@ -429,7 +429,7 @@ namespace FTX.Net.Clients.TradeApi
             => ExchangeData.GetServerTimeAsync();
 
         /// <inheritdoc />
-        protected override TimeSyncInfo GetTimeSyncInfo()
+        public override TimeSyncInfo GetTimeSyncInfo()
             => new TimeSyncInfo(_log, ClientOptions.ApiOptions.AutoTimestamp, ClientOptions.ApiOptions.TimestampRecalculationInterval, TimeSyncState);
 
         /// <inheritdoc />
