@@ -2995,11 +2995,6 @@
             Quantity of the deposit
             </summary>
         </member>
-        <member name="P:FTX.Net.Objects.Models.FTXDeposit.RequestedQuantity">
-            <summary>
-            Requested quantity
-            </summary>
-        </member>
         <member name="P:FTX.Net.Objects.Models.FTXDeposit.Status">
             <summary>
             Status of the deposit
