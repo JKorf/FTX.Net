@@ -17,10 +17,10 @@ namespace FTX.Net.Objects.Models
         [JsonProperty("orderType")]
         public override OrderType Type { get; set; }
         /// <summary>
-        /// The order type
+        /// The order status
         /// </summary>
         [JsonConverter(typeof(OrderStatusConverter))]
-        public OrderStatus OrderStatus { get; set; }
+        public OrderStatus? OrderStatus { get; set; }
         /// <summary>
         /// The price of the order
         /// </summary>

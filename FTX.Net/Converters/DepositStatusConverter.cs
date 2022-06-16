@@ -14,7 +14,7 @@ namespace FTX.Net.Converters
             new KeyValuePair<DepositStatus, string>(DepositStatus.Confirmed, "confirmed"),
             new KeyValuePair<DepositStatus, string>(DepositStatus.Unconfirmed, "unconfirmed"),
             new KeyValuePair<DepositStatus, string>(DepositStatus.Canceled, "cancelled"),
-            new KeyValuePair<DepositStatus, string>(DepositStatus.Completed, "completed"),
+            new KeyValuePair<DepositStatus, string>(DepositStatus.Completed, "complete"),
         };
     }
 }

@@ -14,6 +14,7 @@ namespace FTX.Net.Converters
             new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Requested, "requested"),
             new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Processing, "processing"),
             new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Complete, "complete"),
+            new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Sent, "sent"),
             new KeyValuePair<WithdrawalStatus, string>(WithdrawalStatus.Canceled, "cancelled"),
         };
     }

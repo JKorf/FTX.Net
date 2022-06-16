@@ -1000,6 +1000,11 @@
             Canceled
             </summary>
         </member>
+        <member name="F:FTX.Net.Enums.WithdrawalStatus.Sent">
+            <summary>
+            Sent
+            </summary>
+        </member>
         <member name="T:FTX.Net.FTXHelpers">
             <summary>
             FTX helpers
@@ -2990,6 +2995,11 @@
             Quantity of the deposit
             </summary>
         </member>
+        <member name="P:FTX.Net.Objects.Models.FTXDeposit.RequestedQuantity">
+            <summary>
+            Requested quantity
+            </summary>
+        </member>
         <member name="P:FTX.Net.Objects.Models.FTXDeposit.Status">
             <summary>
             Status of the deposit
@@ -3909,7 +3919,7 @@
         </member>
         <member name="P:FTX.Net.Objects.Models.FTXTriggerOrder.OrderStatus">
             <summary>
-            The order type
+            The order status
             </summary>
         </member>
         <member name="P:FTX.Net.Objects.Models.FTXTriggerOrder.Price">

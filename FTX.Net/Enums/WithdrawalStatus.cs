@@ -20,6 +20,10 @@
         /// <summary>
         /// Canceled
         /// </summary>
-        Canceled
+        Canceled,
+        /// <summary>
+        /// Sent
+        /// </summary>
+        Sent
     }
 }
