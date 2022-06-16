@@ -20,6 +20,11 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.0.13 - 16 Jun 2022
+    * Fixed TriggerOrder OrderStatus being nullable
+    * Fixed complete status parsing in DepositHistory
+    * Added missing Sent Withdrawal status
+
 * Version 1.0.12 - 12 Jun 2022
     * Fixed subaccount header not properly set for US api
     * Updated CrytpoExchange.Net
