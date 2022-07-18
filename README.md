@@ -20,6 +20,9 @@ Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/s
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). Feel free to join for discussion and/or questions around the CryptoExchange.Net and implementation libraries.
 
 ## Release notes
+* Version 1.0.16 - 18 Jul 2022
+    * Updated CryptoExchange.Net
+
 * Version 1.0.15 - 16 Jul 2022
     * Updated CryptoExchange.Net
 
