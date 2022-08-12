@@ -467,7 +467,7 @@
         <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiTrading.ModifyTriggerOrderAsync(System.Int64,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiTrading.ModifyOrderByClientOrderIdAsync(System.Int64,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiTrading.ModifyOrderByClientOrderIdAsync(System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:FTX.Net.Clients.TradeApi.FTXClientTradeApiTrading.GetOrderAsync(System.Int64,System.String,System.Threading.CancellationToken)">
@@ -2124,7 +2124,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:FTX.Net.Interfaces.Clients.TradeApi.IFTXClientTradeApiTrading.ModifyOrderByClientOrderIdAsync(System.Int64,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:FTX.Net.Interfaces.Clients.TradeApi.IFTXClientTradeApiTrading.ModifyOrderByClientOrderIdAsync(System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Modify an order. Will internally cancel the original order and place a new order with the new price/quantity. The new order will have a new order id. Note: there's a chance that the order meant to be canceled gets filled and its replacement still gets placed.
             <para><a href="https://docs.ftx.com/#modify-order-by-client-id" /></para>
