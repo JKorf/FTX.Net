@@ -1,6 +1,6 @@
 {
   "success": true,
-  "result": [
+  "result":
     {
       "baseCoin": "BTC",
       "cost": 0.05,
@@ -15,5 +15,4 @@
       "side": "sell",
       "toCoin": "USD"
     }
-  ]
 }

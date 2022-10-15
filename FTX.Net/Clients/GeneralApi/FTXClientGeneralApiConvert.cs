@@ -32,9 +32,9 @@ namespace FTX.Net.Clients.GeneralApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<FTXConvertQuote>>> GetQuoteStatusAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXConvertQuote>> GetQuoteStatusAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default)
         {
-            return await _baseClient.SendFTXRequest<IEnumerable<FTXConvertQuote>>(_baseClient.GetUri("otc/quotes/" + quoteId), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
+            return await _baseClient.SendFTXRequest<FTXConvertQuote>(_baseClient.GetUri("otc/quotes/" + quoteId), HttpMethod.Get, ct, signed: true, additionalHeaders: _baseClient._baseClient.GetSubaccountHeader(subaccountName)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />

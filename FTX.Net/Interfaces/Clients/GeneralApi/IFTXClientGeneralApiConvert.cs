@@ -31,7 +31,7 @@ namespace FTX.Net.Interfaces.Clients.GeneralApi
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<FTXConvertQuote>>> GetQuoteStatusAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXConvertQuote>> GetQuoteStatusAsync(long quoteId, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Accept a convert quote
