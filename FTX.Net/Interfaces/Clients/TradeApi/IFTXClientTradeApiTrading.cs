@@ -101,7 +101,7 @@ namespace FTX.Net.Interfaces.Clients.TradeApi
         /// <param name="subaccountName">Subaccount name to execute this request for</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, string? subaccountName = null, CancellationToken ct = default);
+        Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(string clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, string? subaccountName = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get the status of an order

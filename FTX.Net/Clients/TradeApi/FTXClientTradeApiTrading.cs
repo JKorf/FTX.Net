@@ -117,7 +117,7 @@ namespace FTX.Net.Clients.TradeApi
         }
 
         /// <inheritdoc />
-        public async Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(long clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, string? subaccountName = null, CancellationToken ct = default)
+        public async Task<WebCallResult<FTXOrder>> ModifyOrderByClientOrderIdAsync(string clientOrderId, decimal? price = null, decimal? quantity = null, string? newClientOrderId = null, string? subaccountName = null, CancellationToken ct = default)
         {
             var parameters = new Dictionary<string, object>();
             parameters.AddOptionalParameter("price", price?.ToString(CultureInfo.InvariantCulture));
